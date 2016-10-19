@@ -1,0 +1,41 @@
+link(href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet")
+
+md-toolbar
+  div.md-toolbar-tools.col-lg-12
+    div(layout-align="start center", flex="25")
+      md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
+    div(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
+      md-button about
+        div.selected(ng-show="$ctrl.isActive('/')")
+      md-button portfolio
+        div.selected(ng-show="$ctrl.isActive('/portfolio')")
+      md-button blog
+        div.selected(ng-show="$ctrl.isActive('/blog')")
+      md-button contact
+        div.selected(ng-show="$ctrl.isActive('/contact')")
+    div(hide-xs  layout="row" layout-align="center center",  flex="25", flex-sm="50", layout-align-gt-sm-="end center")
+      md-button.md-icon-button()
+        md-tooltip Linkedin
+        img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
+      md-button.md-icon-button()
+        md-tooltip Facebook
+        img(src="/assets/images/facebook.svg" style="width:24px;height:24px;")
+      md-button.md-icon-button()
+        md-tooltip CodePen
+        img(src="/assets/images/codepenio.svg" style="width:24px;height:24px;")
+      md-button.md-icon-button()
+        md-tooltip git
+        img(src="/assets/images/git.svg" style="width:24px;height:24px;")
+    md-menu(layout="row", hide-gt-sm, flex="25", layout-align="end center")
+      md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
+        i.fa.fa-bars(style="color:white; width:34px;height:34px;")
+      md-menu-content
+        md-menu-item
+          md-button about
+        md-menu-item
+          md-button portfolio
+        md-menu-item
+          md-button blog
+        md-menu-item
+          md-button contact

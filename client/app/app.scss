@@ -1,0 +1,39 @@
+$icon-font-path: '/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+$fa-font-path: '/assets/fonts/font-awesome/';
+@import '~font-awesome/scss/font-awesome';
+@import '~angular-material/angular-material.scss';
+@import '~angular-material/layouts/angular-material.layouts.scss';
+@import '~angular-material/layouts/angular-material.layout-attributes.scss';
+//@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+//@import '/assets/fonts/prometo/';
+// @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
+ @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic);
+
+/**
+ * App-wide Styles
+ */
+
+body{
+  font-family: prometo;
+}
+
+//overhide default beravior
+.md-button {
+    text-transform: none !important;/*For Lower case use lowercase*/
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+// Component styles are injected through gulp
+/* inject:scss */
+@import 'main/main';
+@import '../components/footer/footer';
+@import '../components/modal/modal';
+@import '../components/navbar/navbar';
+/* endinject */

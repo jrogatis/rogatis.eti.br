@@ -1,0 +1,99 @@
+div#Main {
+  div#MainText {
+    background-image: url("/assets/images/skydive3.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+    div p {
+      padding-top: 15%;
+      background: -webkit-linear-gradient(left, #000000, darkblue, #000000, darkblue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.0em;
+    }
+  }
+  div#latestWorkTitle {
+    padding-top: 20%;
+    p {
+      text-align: justify;
+    }
+  }
+  .lineDivider {
+    border-color: black;
+    border: 2px;
+    border-bottom-style: solid;
+  }
+}
+
+
+.grid {
+  border: 1px solid #cccccc;
+  box-shadow: 5px 5px 5px #888888;
+  list-style: none;
+  background: #f8f3f3;
+  -webkit-transition: all 0.6s ease-out;
+  position: absolute;
+  box-sizing: border-box;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  overflow: hidden;
+  border-radius: 5px;
+  .grid-img {
+    box-shadow: 5px 5px 5px #888888;
+    width: 100%;
+    vertical-align: middle;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px 10px;
+  }
+  div#textWork {
+    padding-top: 10px;
+    border-top: 1px;
+    border-style: solid;
+    border-color: antiquewhite;
+    p {
+      padding-top: 5px;
+    }
+  }
+  .ng-enter {
+    -webkit-transition: all ease 400ms;
+    transition: all ease 400ms;
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+    .ng-enter-active {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .ng-leave {
+    -webkit-transition: all ease 400ms;
+    transition: all ease 400ms;
+    .ng-leave-active {
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+      opacity: 0;
+    }
+  }
+}
+
+dynamic-grid {
+  position: relative;
+  display: none;
+}
+
+.dynamic-grid.angular-grid {
+  display: block;
+}
+
+.grid-img.img-loaded {
+  visibility: visible;
+  opacity: 1;
+}
+
