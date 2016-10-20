@@ -1,21 +1,36 @@
 div#Main {
   div#MainText {
-    background-image: url("/assets/images/skydive3.jpg");
+      @include respond-to(screen-xs) {
+        min-height: 0px;
+      }
+    background-image: url("/assets/images/skydive5.jpg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: top center;
     div p {
+      padding-left: 1%;
       padding-top: 15%;
       background: -webkit-linear-gradient(left, #000000, darkblue, #000000, darkblue);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 1.0em;
+      @include respond-to(screen-xs) {
+        font-size: 12px;
+      }
+      @include respond-to(screen-sm) {
+        font-size: 1.5em;
+      }
+      font-size: 2em;
     }
   }
   div#latestWorkTitle {
     padding-top: 20%;
-    p {
-      text-align: justify;
+    h1 {
+      font-size:25px;
+      text-align: center;
+
+      @include respond-to(screen-xs) {
+        font-size: 15px;
+      }
     }
   }
   .lineDivider {
@@ -24,7 +39,6 @@ div#Main {
     border-bottom-style: solid;
   }
 }
-
 
 .grid {
   border: 1px solid #cccccc;
@@ -51,11 +65,9 @@ div#Main {
   }
   div#textWork {
     padding-top: 10px;
-    border-top: 1px;
-    border-style: solid;
-    border-color: antiquewhite;
     p {
       padding-top: 5px;
+      text-align: justify;
     }
   }
   .ng-enter {
@@ -97,3 +109,27 @@ dynamic-grid {
   opacity: 1;
 }
 
+
+/* Extra small devices (phones, less than 768px) */
+
+@media (max-width:767px) {
+  p#mainIntroText {
+    font-size: 2px;
+  }
+}
+
+
+/* Small devices (tablets, 768px and up)
+@media (min-width:768px) {
+  body {font-size: 10px;}
+}
+
+/* Medium devices (desktops, 992px and up)
+@media (min-width:992px) {
+  body {font-size: 20px;}
+}
+
+/* Large devices (large desktops, 1200px and up)
+@media (min-width:1200px) {
+  body {font-size: 30px;}
+}*/

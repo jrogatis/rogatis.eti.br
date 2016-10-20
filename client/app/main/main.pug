@@ -2,8 +2,8 @@
 div#Main
   .container
     div#MainText.col-lg-12(layout="column" style="min-height: 80vh")
-      div.col-lg-offset-1(layout-align="center end")
-        p#mainIntroText(layout-gt-sm="style='font-size: 60px'" ).
+      div.col-lg-offset-1(layout-align="center end"  )
+        p#mainIntroText().
           Look at world <br>
           from new angles… <br>
           Soving  &lt; coding &gt; problems <br>
@@ -11,9 +11,9 @@ div#Main
           of view
       div#latestWorkTitle.col-lg-12(layout="row" layout-align="center center")
         div.col-lg-3.lineDivider
-        h3.col-lg-4 Some of My Latest Work
+        h1.col-lg-4 Some of My Latest Work
         div.col-lg-3.lineDivider
-  .container
+
     .col-lg-12
       ul.dynamic-grid(angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
        li.grid(data-ng-repeat="pic in $ctrl.listImportantProjects")

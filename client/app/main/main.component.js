@@ -3,6 +3,8 @@ const ngRoute = require('angular-route');
 import routing from './main.routes';
 //import ngResponsiveImage from 'ng-responsive-image';
 import angularGrid from 'angulargrid';
+//const ngFitText = require('ng-fittext');
+
 
 
 export class MainController {
