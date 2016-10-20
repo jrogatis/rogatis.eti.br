@@ -1,25 +1,9 @@
 
 div#MainContact
-  .container
-    div#MainText.col-lg-12(layout="column")
-      div.col-lg-offset-1(layout-align="center end"  )
-        p#mainIntroText().
-          Look at world <br>
-          from new angles… <br>
-          Soving  &lt; coding &gt; problems <br>
-          from a unusual point <br>
-          of view
-      div#latestWorkTitle.col-lg-12(layout="row" layout-align="center center")
-        div.col-lg-3.lineDivider
-        h1.col-lg-4 Some of My Latest Work
-        div.col-lg-3.lineDivider
-    .col-lg-12
-      ul.dynamic-grid(angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
-       li.grid(data-ng-repeat="pic in $ctrl.listImportantProjects")
-          img.grid-img(src="{{pic.url}}" data-actual-width = "250"  data-actual-height="250")
-          div#textWork.col-lg-12(layout="column")
-            h3.col-lg-offset-1 {{pic.title}}
-            p.col-lg-offset-1.
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+  .container(layout="row")
+    div#Contact.col-lg-4(layout="column")
+      div.col-lg-offset-1(layout-align="center end" )
+        h1 contact me
+
 
 
