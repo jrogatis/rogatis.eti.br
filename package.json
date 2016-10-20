@@ -37,7 +37,6 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.1.2",
     "morgan": "~1.7.0",
-    "ng-responsive-image": "^0.1.10",
     "pug": "2.0.0-beta4",
     "serve-favicon": "^2.3.0",
     "shrink-ray": "^0.1.3",

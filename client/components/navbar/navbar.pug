@@ -6,25 +6,25 @@ md-toolbar
     div(layout-align="start center", flex="25")
       md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
     div(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
-      md-button about
+      md-button(ng-href="/") about
         div.selected(ng-show="$ctrl.isActive('/')")
       md-button portfolio
         div.selected(ng-show="$ctrl.isActive('/portfolio')")
       md-button blog
         div.selected(ng-show="$ctrl.isActive('/blog')")
-      md-button contact
+      md-button(ng-href="/contact") contact
         div.selected(ng-show="$ctrl.isActive('/contact')")
     div(hide-xs  layout="row" layout-align="center center",  flex="25", flex-sm="50", layout-align-gt-sm-="end center")
-      md-button.md-icon-button()
+      md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis")
         md-tooltip Linkedin
         img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button()
+      md-button.md-icon-button(ng-href="http://www.facebook.com/jrogatis")
         md-tooltip Facebook
         img(src="/assets/images/facebook.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button()
+      md-button.md-icon-button(ng-href="http://codepen.io/jrogatis/")
         md-tooltip CodePen
         img(src="/assets/images/codepenio.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button()
+      md-button.md-icon-button(ng-href="https://github.com/jrogatis/")
         md-tooltip git
         img(src="/assets/images/git.svg" style="width:24px;height:24px;")
     md-menu(layout="row", hide-gt-sm, flex="25", layout-align="end center")
