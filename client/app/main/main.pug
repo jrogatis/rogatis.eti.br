@@ -1,7 +1,7 @@
 
 div#Main
   .container
-    div#MainText.col-lg-12(layout="column" style="min-height: 80vh")
+    div#MainText.col-lg-12(layout="column")
       div.col-lg-offset-1(layout-align="center end"  )
         p#mainIntroText().
           Look at world <br>
@@ -13,7 +13,6 @@ div#Main
         div.col-lg-3.lineDivider
         h1.col-lg-4 Some of My Latest Work
         div.col-lg-3.lineDivider
-
     .col-lg-12
       ul.dynamic-grid(angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
        li.grid(data-ng-repeat="pic in $ctrl.listImportantProjects")
