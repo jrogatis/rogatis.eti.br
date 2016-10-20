@@ -1,0 +1,39 @@
+div#contactMain {
+  div {
+      padding-top: 20px;
+    div#contact {
+        div#contactLinks {
+          padding-top: 5%;
+         div h3 {
+              @include respond-to(screen-xs) {
+              text-align: center;
+              font-size: 20px;
+            }
+          }
+          #facebook {
+            background-color: darkblue;
+          }
+          #linkedIn {
+            background-color: dodgerblue;
+          }
+        }
+      }
+    div#contactForm {
+      h1 {
+         @include respond-to(screen-xs) {
+          text-align: center;
+          font-size: 30px;
+        }
+      }
+      md-content div form{
+        div {
+          padding: 0px;
+          md-input-container{
+
+          }
+        }
+      }
+
+    }
+  }
+}

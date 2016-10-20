@@ -31,11 +31,11 @@ md-toolbar
       md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
         i.fa.fa-bars(style="color:white; width:34px;height:34px;")
       md-menu-content
-        md-menu-item
+        md-menu-item(ng-href="/")
           md-button about
-        md-menu-item
+        md-menu-item(ng-href="/portfolio")
           md-button portfolio
-        md-menu-item
+        md-menu-item(ng-href="/blog")
           md-button blog
         md-menu-item
-          md-button contact
+          md-button(ng-href="/contact") contact

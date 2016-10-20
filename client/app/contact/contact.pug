@@ -1,9 +1,47 @@
 
-div#MainContact
-  .container(layout="row")
-    div#Contact.col-lg-4(layout="column")
-      div.col-lg-offset-1(layout-align="center end" )
+div#contactMain
+  .container(layout-sm ="column" layout-gt-sm="row")
+    div#contact(layout="column", flex-gt-sm="35", flex="100")
         h1 contact me
-
-
+        div#contactLinks(flex-offset="5")
+          div(layout="row")
+            md-button#facebook.md-fab(aria-label="FaceBook", ng-href="http://facebook.com/jrogatis")
+              md-icon(md-svg-src="/assets/images/facebookContact.svg")
+            h3 Like me on Facebook
+          div(layout="row")
+            md-button#linkedIn.md-fab(aria-label="linkedIn")
+              md-icon(md-svg-src="/assets/images/linkedIn.svg")
+            h3 My linkedIn perhaps?
+    div#contactForm(layout="column",flex-gt-sm="65", flex="100")
+        h1 send me a message
+        md-content
+          div
+            form(name="emailForm")
+              div(layout-gt-xs="row")
+                md-input-container.md-block.md-icon-float(flex-gt-xs)
+                  label First
+                  md-icon
+                    ng-md-icon.name(icon="person" style="fill: blue" size="30")
+                  input(required name="firstName" ng-model="$ctrl.user.fistName")
+                  div(ng-messages="emailForm.firstName.$error" role="alert" multiple="")
+                    div(ng-message="required" class="my-message") You must supply your first name
+                md-input-container.md-block(flex-gt-xs)
+                  label Last
+                  input(name="lastName" required ng-model="$ctrl.user.lastName")
+                  div(ng-messages="emailForm.lastName.$error" role="alert" multiple="")
+                    div(ng-message="required" class="my-message") You must supply your last name
+              div(layout-gt-xs="row")
+                md-input-container.md-block.md-icon-float(flex-gt-xs)
+                  label email
+                  md-icon
+                    ng-md-icon.name(icon="email", style="fill: blue" size="30")
+                  input(name="email" required ng-model="$ctrl.user.email", type="email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" )
+                  div(ng-messages="emailForm.email.$error")
+                    div(ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']") ur email must be between 10 and 100 characters long and look like an e-mail address.
+              div
+                md-input-container.md-block(flex-gt-xs)
+                  label text
+                  textarea.md-select-on-focus(ng-model="$ctrl.user.message", md-maxlength="150", rows="5")
+                div
+                  md-button(type="submit") Submit
 
