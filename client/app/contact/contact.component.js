@@ -8,11 +8,12 @@ import ngAria from 'angular-aria';
 export class ContactController {
 
   /*@ngInject*/
-  constructor($http, $scope, $mdToast, $animate, socket) {
+  constructor($http, $scope, $mdToast, $animate, $mdDialog, socket) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.$mdToast = $mdToast;
+    this.$mdDialog = $mdDialog;
 
     $scope.toastPosition = {
       bottom: false,
@@ -59,13 +60,43 @@ export class ContactController {
   sendEmail() {
     console.log('sim', this.user);
     this.$http.post('/api/contactForm', this.user)
-      .then(res=>console.log(res));
-    this.$scope.emailForm.$setPristine()
-    this.$scope.emailForm.$setUntouched()
-    this.user = {};
+      .then( res => {
+        this.showDialog();
+        this.$scope.emailForm.$setPristine()
+        this.$scope.emailForm.$setUntouched()
+        this.user = {};
+      });
   };
 
+  showDialog() {
+    this.dialog = this.$mdDialog.show({
+      scope: this.$scope,
+      preserveScope: true,
+      controller: DialogController,
+      templateUrl: 'dialogEmailSend.tmpl.pug',
+      parent: angular.element(document.body),
+      clickOutsideToClose: false,
+      fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+  }
 }
+
+ function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+DialogController.$inject = ['$scope', '$mdDialog'];
+
 export default angular.module('rogatisEtiBrApp.contact', [ngRoute, ngMdIcons, ngMessages, ngAria])
   .config(routing)
   .component('contact', {
