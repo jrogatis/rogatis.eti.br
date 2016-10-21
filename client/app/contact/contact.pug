@@ -10,13 +10,13 @@ div#contactMain
             h3 Like me on Facebook
           div(layout="row")
             md-button#linkedIn.md-fab(aria-label="linkedIn")
-              md-icon(md-svg-src="/assets/images/linkedIn.svg")
+              md-icon(md-svg-src="/assets/images/linkedin.svg")
             h3 My linkedIn perhaps?
     div#contactForm(layout="column",flex-gt-sm="65", flex="100")
         h1 send me a message
         md-content
           div
-            form(name="emailForm")
+            form(name="emailForm", ng-submit="$ctrl.sendEmail(emailForm)")
               div(layout-gt-xs="row")
                 md-input-container.md-block.md-icon-float(flex-gt-xs)
                   label First
@@ -42,6 +42,6 @@ div#contactMain
                 md-input-container.md-block(flex-gt-xs)
                   label text
                   textarea.md-select-on-focus(ng-model="$ctrl.user.message", md-maxlength="150", rows="5")
-                div
-                  md-button(type="submit") Submit
+              div
+                md-button.btn-primary(type="submit") Submit
 

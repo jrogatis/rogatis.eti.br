@@ -7,7 +7,7 @@ var contactFormSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   message: String,
-  date: Date
+  date: { type: Date, default: Date.now }
 });
 
 export default mongoose.model('contactForm', contactFormSchema);

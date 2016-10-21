@@ -3,18 +3,17 @@ const ngRoute = require('angular-route');
 import routing from './contact.routes';
 import ngMdIcons from 'angular-material-icons';
 import ngMessages from 'angular-messages';
-
-
-
+import ngAria from 'angular-aria';
 
 export class ContactController {
 
   /*@ngInject*/
   constructor($http, $scope, $mdToast, $animate, socket) {
     this.$http = $http;
+    this.$scope = $scope;
     this.socket = socket;
     this.$mdToast = $mdToast;
-    this.user = {firstName: '', lastName: '', email: '', message: '' };
+
     $scope.toastPosition = {
       bottom: false,
       top: true,
@@ -57,8 +56,17 @@ export class ContactController {
 
   };
 
+  sendEmail() {
+    console.log('sim', this.user);
+    this.$http.post('/api/contactForm', this.user)
+      .then(res=>console.log(res));
+    this.$scope.emailForm.$setPristine()
+    this.$scope.emailForm.$setUntouched()
+    this.user = {};
+  };
+
 }
-export default angular.module('rogatisEtiBrApp.contact', [ngRoute, ngMdIcons, ngMessages])
+export default angular.module('rogatisEtiBrApp.contact', [ngRoute, ngMdIcons, ngMessages, ngAria])
   .config(routing)
   .component('contact', {
     template: require('./contact.pug'),
