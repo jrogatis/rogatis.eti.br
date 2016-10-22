@@ -4,8 +4,6 @@ import routing from './main.routes';
 import angularGrid from 'angulargrid';
 
 export class MainController {
-  awesomeThings = [];
-  newThing = '';
 
   /*@ngInject*/
   constructor($http, $scope, socket) {
@@ -13,7 +11,7 @@ export class MainController {
     this.socket = socket;
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('projects');
     });
   }
 
@@ -21,23 +19,11 @@ export class MainController {
     this.$http.get('/api/projects')
       .then(response => {
         this.listImportantProjects = response.data;
-        this.socket.syncUpdates('projects', this.awesomeThings);
+        this.socket.syncUpdates('projects', this.listImportantProjects);
       });
-  }
-
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
-      });
-      this.newThing = '';
-    }
-  }
-
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
   }
 }
+
 
 export default angular.module('rogatisEtiBrApp.main', [ngRoute, angularGrid])
   .config(routing)

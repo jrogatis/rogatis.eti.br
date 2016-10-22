@@ -54,7 +54,7 @@ function handleSendEmail(res, msg) {
   {
     to: msg.email,
     subject: 'Your contact with Jean', // REQUIRED.
-    otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+    message: msg.message,
   }, function (err) {
     if (err) {
       // handle error

@@ -9,11 +9,9 @@ div#Main
         h1(flex="50") Some of My Latest Work
         div.lineDivider(flex="20")
       ul.dynamic-grid(flex angular-grid="$ctrl.listImportantProjects" ag-grid-width="250" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
-       li.grid(flex data-ng-repeat="pic in $ctrl.listImportantProjects")
-          img.grid-img(src="{{pic.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-          div#textWork(flex layout="column")
-            h3(flex-offset="10") {{pic.title}}
-            p(flex-offset="10").col-lg-offset-1.
-              {{pic.desc}}
-
-
+        li.grid(flex data-ng-repeat="project in $ctrl.listImportantProjects")
+          a(ng-href="{{project.siteUrl}}", target="_blank")
+            img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
+            div#textWork(flex layout="column" flex-offset="5")
+              h3 {{project.title}}
+              p {{project.desc}}
