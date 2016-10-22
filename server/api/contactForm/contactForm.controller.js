@@ -47,10 +47,13 @@ function handleError(res, statusCode) {
 }
 
 function handleSendEmail(res, msg) {
-  console.log('no email', process.env)
-  app.mailer.send('email', {
+  app.mailer.send({
+    template: 'email',
+     bcc:'jrogatis@metaconexao.com.br'
+  },
+  {
     to: msg.email,
-    subject: 'Your contact for Jean', // REQUIRED.
+    subject: 'Your contact with Jean', // REQUIRED.
     otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
   }, function (err) {
     if (err) {
