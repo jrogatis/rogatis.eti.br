@@ -1,26 +1,20 @@
 div#Main {
   div#MainText {
-    background-image: url("/assets/images/skydive5.jpg");
+
+    min-height: 70vh;
+    background-image: url("/assets/images/skydive6.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size:contain;
     background-position: top center;
-    div p {
-      padding-left: 1%;
-      padding-top: 15%;
-      background: -webkit-linear-gradient(left, #000000, darkblue, #000000, darkblue);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      @include respond-to(screen-xs) {
-        font-size: 12px;
+    @include respond-to(screen-xs) {
+        min-height: 25vh;
       }
-      @include respond-to(screen-sm) {
-        font-size: 1.5em;
+    @include respond-to(screen-sm) {
+        min-height: 45vh;
       }
-      font-size: 2em;
-    }
+
   }
   div#latestWorkTitle {
-    padding-top: 20%;
     h1 {
       font-size: 25px;
       text-align: center;

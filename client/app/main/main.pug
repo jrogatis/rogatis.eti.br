@@ -1,25 +1,19 @@
 
 div#Main
   .container
-    div#MainText.col-lg-12(layout="column").animated.slideInLeft
-      div.col-lg-offset-1(layout-align="center end"  )
-        p#mainIntroText().
-          Look at world <br>
-          from new angles… <br>
-          Soving  &lt; coding &gt; problems <br>
-          from a unusual point <br>
-          of view
-      div#latestWorkTitle.col-lg-12(layout="row" layout-align="center center")
-        div.col-lg-3.lineDivider
-        h1.col-lg-4 Some of My Latest Work
-        div.col-lg-3.lineDivider
-    .col-lg-12.animated.slideInUp
-      ul.dynamic-grid(angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
-       li.grid(data-ng-repeat="pic in $ctrl.listImportantProjects")
+    div#MainText(flex="100", layout="column").animated.slideInLeft
+
+    div(flex).animated.slideInUp
+      div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
+        div.lineDivider(flex="20")
+        h1(flex="50") Some of My Latest Work
+        div.lineDivider(flex="20")
+      ul.dynamic-grid(flex angular-grid="$ctrl.listImportantProjects" ag-grid-width="250" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
+       li.grid(flex data-ng-repeat="pic in $ctrl.listImportantProjects")
           img.grid-img(src="{{pic.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-          div#textWork.col-lg-12(layout="column")
-            h3.col-lg-offset-1 {{pic.title}}
-            p.col-lg-offset-1.
+          div#textWork(flex layout="column")
+            h3(flex-offset="10") {{pic.title}}
+            p(flex-offset="10").col-lg-offset-1.
               {{pic.desc}}
 
 
