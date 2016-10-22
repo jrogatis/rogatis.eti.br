@@ -1,11 +1,7 @@
 import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './main.routes';
-//import ngResponsiveImage from 'ng-responsive-image';
 import angularGrid from 'angulargrid';
-//const ngFitText = require('ng-fittext');
-
-
 
 export class MainController {
   awesomeThings = [];
@@ -15,7 +11,6 @@ export class MainController {
   constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
-    this.listImportantProjects = [{title:'bla', url: "/assets/images/skydive3.jpg"}, {title:"bla1",  url: "/assets/images/skydive3.jpg"}, {title:"bla2",  url: "/assets/images/skydive3.jpg"}];
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
@@ -23,10 +18,10 @@ export class MainController {
   }
 
   $onInit() {
-    this.$http.get('/api/things')
+    this.$http.get('/api/projects')
       .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('thing', this.awesomeThings);
+        this.listImportantProjects = response.data;
+        this.socket.syncUpdates('projects', this.awesomeThings);
       });
   }
 

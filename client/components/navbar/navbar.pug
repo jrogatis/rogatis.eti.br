@@ -1,14 +1,11 @@
-link(href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet")
-
-md-toolbar
+md-toolbar.animated.fadeInDown
   div.md-toolbar-tools.col-lg-12
     div(layout-align="start center", flex="25")
       md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
     div(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
       md-button(ng-href="/") about
         div.selected(ng-show="$ctrl.isActive('/')")
-      md-button portfolio
+      md-button(ng-href="/portfolio") portfolio
         div.selected(ng-show="$ctrl.isActive('/portfolio')")
       md-button blog
         div.selected(ng-show="$ctrl.isActive('/blog')")
@@ -31,11 +28,11 @@ md-toolbar
       md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
         i.fa.fa-bars(style="color:white; width:34px;height:34px;")
       md-menu-content
-        md-menu-item(ng-href="/")
-          md-button about
-        md-menu-item(ng-href="/portfolio")
-          md-button portfolio
-        md-menu-item(ng-href="/blog")
-          md-button blog
+        md-menu-item
+          md-button(ng-href="/") about
+        md-menu-item
+          md-button(ng-href="/portfolio") portfolio
+        md-menu-item
+          md-button(ng-href="/blog") blog
         md-menu-item
           md-button(ng-href="/contact") contact

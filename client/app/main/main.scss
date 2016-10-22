@@ -22,9 +22,8 @@ div#Main {
   div#latestWorkTitle {
     padding-top: 20%;
     h1 {
-      font-size:25px;
+      font-size: 25px;
       text-align: center;
-
       @include respond-to(screen-xs) {
         font-size: 15px;
       }
@@ -65,29 +64,6 @@ div#Main {
     p {
       padding-top: 5px;
       text-align: justify;
-    }
-  }
-  .ng-enter {
-    -webkit-transition: all ease 400ms;
-    transition: all ease 400ms;
-    -webkit-transition-delay: 500ms;
-    transition-delay: 500ms;
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-    opacity: 0;
-    .ng-enter-active {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  .ng-leave {
-    -webkit-transition: all ease 400ms;
-    transition: all ease 400ms;
-    .ng-leave-active {
-      -webkit-transform: scale(0.5);
-      transform: scale(0.5);
-      opacity: 0;
     }
   }
 }

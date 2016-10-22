@@ -1,7 +1,7 @@
 
 div#Main
   .container
-    div#MainText.col-lg-12(layout="column")
+    div#MainText.col-lg-12(layout="column").animated.slideInLeft
       div.col-lg-offset-1(layout-align="center end"  )
         p#mainIntroText().
           Look at world <br>
@@ -13,13 +13,13 @@ div#Main
         div.col-lg-3.lineDivider
         h1.col-lg-4 Some of My Latest Work
         div.col-lg-3.lineDivider
-    .col-lg-12
+    .col-lg-12.animated.slideInUp
       ul.dynamic-grid(angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="false")
        li.grid(data-ng-repeat="pic in $ctrl.listImportantProjects")
-          img.grid-img(src="{{pic.url}}" data-actual-width = "250"  data-actual-height="250")
+          img.grid-img(src="{{pic.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
           div#textWork.col-lg-12(layout="column")
             h3.col-lg-offset-1 {{pic.title}}
             p.col-lg-offset-1.
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              {{pic.desc}}
 
 
