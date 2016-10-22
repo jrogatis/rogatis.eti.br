@@ -7,7 +7,8 @@ div#Main {
     background-size:contain;
     background-position: top center;
     @include respond-to(screen-xs) {
-        min-height: 25vh;
+       background-image: url("/assets/images/skydive7.jpg");
+      min-height: 70vh;
       }
     @include respond-to(screen-sm) {
         min-height: 45vh;
