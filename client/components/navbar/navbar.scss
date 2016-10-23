@@ -1,28 +1,29 @@
 /* slide in from the right */
 
-
-md-toolbar {
-
+div#navBar {
+  font-family: prometo, roboto, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2em;
+  border-color: transparent;
+  min-height: 2em;
+  background: rgba(57, 121, 196, 1);
+  background: -moz-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(57, 121, 196, 1)), color-stop(93%, rgba(18, 88, 185, 1)), color-stop(100%, rgba(18, 88, 185, 1)));
+  background: -webkit-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
+  background: -o-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
+  background: -ms-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
+  background: linear-gradient(to right, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
+  md-toolbar {
+  background-color: transparent;
   .md-toolbar-tools {
-    font-family: prometo, roboto, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2em;
-    border-color: transparent;
-    min-height: 2em;
-    background: rgba(57, 121, 196, 1);
-    background: -moz-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(57, 121, 196, 1)), color-stop(93%, rgba(18, 88, 185, 1)), color-stop(100%, rgba(18, 88, 185, 1)));
-    background: -webkit-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
-    background: -o-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
-    background: -ms-linear-gradient(left, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
-    background: linear-gradient(to right, rgba(57, 121, 196, 1) 0%, rgba(18, 88, 185, 1) 90%, rgba(18, 88, 185, 1) 100%);
     div#navbar-main li a {
       color: white;
       background-color: transparent;
     }
+    div#menuButtons{
     .md-button {
-      font-size: 0.6em;
+      font-size: 1em;
       .selected {
         border-style: solid;
         border-width: thin;
@@ -30,6 +31,7 @@ md-toolbar {
         max-height: 0.6px;
       }
     }
+    }
   }
 }
-
+}

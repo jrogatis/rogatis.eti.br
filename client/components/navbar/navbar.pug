@@ -1,38 +1,40 @@
-md-toolbar.animated.fadeInDown
-  div.md-toolbar-tools.col-lg-12
-    div(layout-align="start center", flex="25")
-      md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
-    div(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
-      md-button(ng-href="/") about
-        div.selected(ng-show="$ctrl.isActive('/')")
-      md-button(ng-href="/portfolio") portfolio
-        div.selected(ng-show="$ctrl.isActive('/portfolio')")
-      md-button(ng-href="/blog") blog
-        div.selected(ng-show="$ctrl.isActive('/blog')")
-      md-button(ng-href="/contact") contact
-        div.selected(ng-show="$ctrl.isActive('/contact')")
-    div(hide-xs  layout="row" layout-align="center center",  flex="25", flex-sm="50", layout-align-gt-sm-="end center")
-      md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
-        md-tooltip Linkedin
-        img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button(ng-href="http://www.facebook.com/jrogatis",  target="_blank")
-        md-tooltip Facebook
-        img(src="/assets/images/facebook.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button(ng-href="http://codepen.io/jrogatis/",  target="_blank")
-        md-tooltip CodePen
-        img(src="/assets/images/codepenio.svg" style="width:24px;height:24px;")
-      md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
-        md-tooltip git
-        img(src="/assets/images/git.svg" style="width:24px;height:24px;")
-    md-menu(layout="row", hide-gt-sm, flex="25", layout-align="end center")
-      md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
-        i.fa.fa-bars(style="color:white; width:34px;height:34px;")
-      md-menu-content
-        md-menu-item
+div#navBar
+  .container
+    md-toolbar.animated.fadeInDown(flex="100")
+      div.md-toolbar-tools(flex="100")
+        div(layout-align="start center", flex="25")
+          md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
+        div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
           md-button(ng-href="/") about
-        md-menu-item
+            div.selected(ng-show="$ctrl.isActive('/')")
           md-button(ng-href="/portfolio") portfolio
-        md-menu-item
+            div.selected(ng-show="$ctrl.isActive('/portfolio')")
           md-button(ng-href="/blog") blog
-        md-menu-item
+            div.selected(ng-show="$ctrl.isActive('/blog')")
           md-button(ng-href="/contact") contact
+            div.selected(ng-show="$ctrl.isActive('/contact')")
+        div(hide-xs  layout="row" layout-align="end center",  flex="25", flex-sm="50")
+          md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
+            md-tooltip Linkedin
+            img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
+          md-button.md-icon-button(ng-href="http://www.facebook.com/jrogatis",  target="_blank")
+            md-tooltip Facebook
+            img(src="/assets/images/facebook.svg" style="width:24px;height:24px;")
+          md-button.md-icon-button(ng-href="http://codepen.io/jrogatis/",  target="_blank")
+            md-tooltip CodePen
+            img(src="/assets/images/codepenio.svg" style="width:24px;height:24px;")
+          md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
+            md-tooltip git
+            img(src="/assets/images/git.svg" style="width:24px;height:24px;")
+        md-menu(hide-gt-sm, layout="row", flex="25", layout-align="end center")
+          md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
+            i.fa.fa-bars(style="color:white; font-size:30px")
+          md-menu-content
+            md-menu-item
+              md-button(ng-href="/") about
+            md-menu-item
+              md-button(ng-href="/portfolio") portfolio
+            md-menu-item
+              md-button(ng-href="/blog") blog
+            md-menu-item
+              md-button(ng-href="/contact") contact

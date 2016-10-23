@@ -1,9 +1,17 @@
 
 div#BlogMain
-  .container(layout-sm ="row" layout-gt-sm="column")
-    div#blogText(flex="65")
-    div#blogPicture(flex="35")
-      img(ng-src="/assets/images/anxiusbw.jpg")
+  .container(layout-sm ="columns" layout-gt-sm="row")
+    div#blogText(flex="65", layout-align="center center").animated.slideInLeft
+      h1 my weekly code anxiety
+      div#posts
+        ul
+          li(ng-repeat="post in $ctrl.listPosts")
+            h3 {{post.title}}
+            p.
+              {{post.text}}
+    div#blogPicture(flex="35").animated.slideInRight
+
+
 
 
 
