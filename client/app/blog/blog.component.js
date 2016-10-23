@@ -1,12 +1,11 @@
 import angular from 'angular';
 const ngRoute = require('angular-route');
-import routing from './portfolio.routes';
+import routing from './blog.routes';
 import ngMdIcons from 'angular-material-icons';
 import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
-import angularGrid from 'angulargrid';
 
-export class PortfolioController {
+export class BlogController {
 
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket) {
@@ -17,18 +16,18 @@ export class PortfolioController {
   }
 
   $onInit() {
-    this.$http.get('/api/projects')
+    this.$http.get('/api/posts')
       .then(response => {
-        this.listProjects = response.data;
-        this.socket.syncUpdates('projects', this.listProjects);
+        this.listPosts = response.data;
+        this.socket.syncUpdates('posts', this.listPosts);
       });
   }
 }
 
-export default angular.module('rogatisEtiBrApp.portfolio', [ngRoute, ngMdIcons, ngMessages, ngAria, angularGrid])
+export default angular.module('rogatisEtiBrApp.blog', [ngRoute, ngMdIcons, ngMessages, ngAria])
   .config(routing)
-  .component('portfolio', {
-    template: require('./portfolio.pug'),
-    controller: PortfolioController
+  .component('blog', {
+    template: require('./blog.pug'),
+    controller: BlogController
   })
   .name;

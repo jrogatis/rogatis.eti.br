@@ -4,17 +4,16 @@
  * POST    /api/ContactForm              ->  create
 
  */
-
 'use strict';
-import jsonpatch from 'fast-json-patch';
 import ContactForm from './contactForm.model';
 import express from 'express';
 import mailer from 'express-mailer';
+import path from 'path';
 
 var app = express();
 
 mailer.extend(app, {
-  from: 'jrogatis@gmail.com',
+  from: 'Jean Philip de Rogatis <jrogatis@gmail.com>',
   host: 'smtp.gmail.com', // hostname
   secureConnection: true, // use SSL
   port: 465, // port for secure SMTP
@@ -25,50 +24,42 @@ mailer.extend(app, {
   }
 });
 
-app.set('views', __dirname + '/');
+app.set('views', `${ __dirname}/` );//path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-
-function handleEntityNotFound(res) {
-  return function (entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if(entity) {
+      return res.status(statusCode).json(entity);
     }
-    return entity;
+    return null;
   };
 }
 
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function (err) {
-    res.status(statusCode).send(err);
-  };
-}
-
-function handleSendEmail(res, msg) {
+function handleSendEmail(res) {
+  console.log('path', __dirname);
   app.mailer.send({
     template: 'email',
-     bcc:'jrogatis@metaconexao.com.br'
+    bcc: 'jrogatis@metaconexao.com.br'
   },
-  {
-    to: msg.email,
-    subject: 'Your contact with Jean', // REQUIRED.
-    message: msg.message,
-  }, function (err) {
-    if (err) {
-      // handle error
-      console.log(err);
-      res.send('There was an error sending the email');
-      return;
-    }
-    res.send('Email Sent');
-  });
+    {
+      to: res.email,
+      subject: 'Your contact with Jean', // REQUIRED.
+      message: res.message
+    }, err => {
+      if(err) {
+        // handle error
+        console.log(err);
+        res.send('There was an error sending the email');
+        return;
+      }
+     res.send('Email Sent');
+    });
 }
 
 // Creates a new ContactForm in the DB
 export function create(req, res) {
   return ContactForm.create(req.body)
-    .then(handleSendEmail(res, req.body))
-
+    .then(handleSendEmail(res));
 }

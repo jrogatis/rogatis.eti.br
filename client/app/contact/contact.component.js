@@ -17,13 +17,13 @@ export class ContactController {
 
   sendEmail() {
     this.$http.post('/api/contactForm', this.user)
-      .then( res => {
+      .then(res => {
         this.showDialog();
-        this.$scope.emailForm.$setPristine()
-        this.$scope.emailForm.$setUntouched()
+        this.$scope.emailForm.$setPristine();
+        this.$scope.emailForm.$setUntouched();
         this.user = {};
-      });
-  };
+    });
+  }
 
   showDialog() {
     this.dialog = this.$mdDialog.show({
@@ -34,23 +34,23 @@ export class ContactController {
       parent: angular.element(document.body),
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
+    });
   }
 }
 
-  function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
-      $mdDialog.hide();
-    };
+function DialogController($scope, $mdDialog) {
+  $scope.hide = function () {
+    $mdDialog.hide();
+  };
 
-    $scope.cancel = function() {
-      $mdDialog.cancel();
-    };
+  $scope.cancel = function () {
+    $mdDialog.cancel();
+  };
 
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }
+  $scope.answer = function (answer) {
+    $mdDialog.hide(answer);
+  };
+}
 
 DialogController.$inject = ['$scope', '$mdDialog'];
 

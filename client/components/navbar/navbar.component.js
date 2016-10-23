@@ -3,7 +3,7 @@
 
 import angular from 'angular';
 import angularAria from 'angular-aria';
-import  ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
 import angularMessages from 'angular-messages';
 
@@ -21,7 +21,7 @@ export class NavbarComponent {
   }
 }
 
-export default angular.module('directives.navbar',[angularAria, ngAnimate, angularMaterial, angularMessages])
+export default angular.module('directives.navbar', [angularAria, ngAnimate, angularMaterial, angularMessages])
   .component('navbar', {
     template: require('./navbar.pug'),
     controller: NavbarComponent
