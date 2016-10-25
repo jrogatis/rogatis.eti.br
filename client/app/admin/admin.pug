@@ -1,0 +1,28 @@
+link(rel='stylesheet' href='/node_modules/textangular/dist/textAngular.css')
+script(src='/bower_components/textAngular/dist/textAngular-sanitize.min.js')
+script(src='/bower_components/textAngular/dist/textAngular-rangy.min.js')
+div#Admin(style="min-height:60vh")
+  .container(layout="column" flex = "100")
+    h1 Admin Console
+    h3 Dear You.. Take your time and write interesting things!!!
+    div(layout="row")
+      div#postsLists(flex="25")
+        h3 list of posts
+        md-list
+          md-list-item(ng-repeat="post in $ctrl.listPosts", ng-click="$ctrl.loadForEdition($index)")
+            .md-list-item-text
+              h4 {{post.title}}
+            md-divider
+      div#editForm(layout="column" flex-offset="5", flex="75")
+        md-input-container
+          label Title
+          input(ng-model="$ctrl.post.title")
+        md-input-container
+          label Snipet
+          textarea(ng-model="$ctrl.post.snipet")
+        md-content
+          text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
+          md-button(ng-click="$ctrl.handleSave()") save
+
+
+

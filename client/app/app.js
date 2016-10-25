@@ -22,6 +22,7 @@ import main from './main/main.component';
 import contact from './contact/contact.component';
 import portfolio from './portfolio/portfolio.component';
 import blog from './blog/blog.component';
+import admin from './admin/admin.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -29,7 +30,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute,
-    uiBootstrap, navbar, footer, main, contact, portfolio, blog, constants, socket, util
+    uiBootstrap, navbar, footer, main, contact, portfolio, blog, admin,  constants, socket, util
   ])
   .config(routeConfig);
 
