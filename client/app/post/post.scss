@@ -1,29 +1,9 @@
-div#BlogMain {
+div#PostMain {
   div {
-    div#blogText {
-      h1 {
-        text-align: center;
-      }
-      div#posts {
-        md-list {
-          md-list-item {
-            div{
-              md-card{
-                background-color: #fcfaf8;
-              }
-            }
-          }
-        }
-      }
+    div#Text{
+      font-size: 1,2em;
+      padding-left: 10%;
+      padding-right: 10%;
     }
   }
-  div#blogPicture {
-    margin-top: 20px;
-    background-image: url("/assets/images/anxiusbw.jpg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top center;
-    min-height: 70vh;
-  }
 }
-

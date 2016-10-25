@@ -1,26 +1,11 @@
 
-div#BlogMain
-  .container(layout-sm ="columns" layout-gt-sm="row")
-    div#blogText(flex="65", layout-align="center center")
-      h1 my weekly code anxiety
-      div#posts
-        md-list(flex)
-          md-list-item(layout="column" layout-gt-sm="row" ng-repeat="post in $ctrl.listPosts")
-            div(flex-xs flex-gt-xs="60" layout="column").animated.slideInUp
-              md-card
-                md-card-title
-                  md-card-title-media.md-padding
-                    div.md-media-lg.card-media
-                      img(ng-src="{{post.postImage}}")
-
-                  md-card-title-text
-                    span.md-headline {{post.title}}
-                    span.md-subhead {{post.snipet}}
-                       a(ng-href="") more ...
+div#PostMain
+  .container(layout="column" layout-align="center center" flex)
+    h1 {{$ctrl.post.title}}
+    div#Text.md-padding( ng-bind-html="$ctrl.post.text")
 
 
 
-    div#blogPicture(flex="35").animated.slideInRight
 
 
 

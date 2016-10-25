@@ -53,3 +53,5 @@ export default angular.module('rogatisEtiBrApp.admin', [ngRoute, textAngular])
     controller: AdminController
   })
   .name;
+
+

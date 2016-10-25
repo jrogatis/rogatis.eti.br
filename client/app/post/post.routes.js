@@ -3,7 +3,7 @@
 export default function routes($routeProvider) {
   'ngInject';
 
-  $routeProvider.when('/blog', {
-    template: '<blog></blog>'
+  $routeProvider.when('/post/:postId', {
+    template: '<post></post>'
   });
 }
