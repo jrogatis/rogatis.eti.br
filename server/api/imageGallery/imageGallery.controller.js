@@ -140,13 +140,23 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-
-// Deletes a Posts from the DB
+// Deletes a image from the s3
 export function destroy(req, res) {
-  return Posts.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  console.log(req.params.id);
+  let paramsToDelete = {
+     Bucket: 'rogatis',
+    Key: req.params.id
+    }
+  s3.deleteObject(paramsToDelete).promise()
+    .then(result => {
+      console.log(result);
+      return res.status(200);
+    })
+     .catch(err => {
+      console.log(err);
+      handleError(res)
+    })
+
 }
 
 

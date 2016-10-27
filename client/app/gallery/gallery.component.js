@@ -12,19 +12,30 @@ import ngFileUpload from 'ng-file-upload';
 export class GalleryController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, Upload) {
+  constructor($http, $scope, $animate, $mdDialog, socket, Upload, angularGridInstance) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
-    console.log('no init');
     this.Upload = Upload;
     this.file;
     this.determinateValue;
     this.activated = false;
+    this.angularGridInstance = angularGridInstance;
+  }
+
+  deleteImage(imageName) {
+    this.$http.delete(`/api/imageGallery/${imageName}`)
+      .then(this.loadImages());
+     this.angularGridInstance.gallery.refresh();
+    console.log(imageName);
   }
 
   $onInit() {
+    this.loadImages();
+  }
+
+  loadImages() {
     this.$http.get('/api/imageGallery')
       .then(response => {
         this.listImages = response.data;
@@ -52,11 +63,13 @@ export class GalleryController {
             file: files
           }).progress( evt => {
            this.determinateValue =parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+            //console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
           }).success((data, status, headers, config) => {
             // file is uploaded successfully
-             this.determinateValue = 0;
-            console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+            this.determinateValue = 0;
+            this.loadImages();
+            this.angularGridInstance.gallery.refresh();
+            //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
           }).error(err => {
                 console.log('erroooo', err)
           });

@@ -7,7 +7,6 @@ import routing from './account.routes';
 import login from './login';
 import settings from './settings';
 import signup from './signup';
-//import oauthButtons from '../../components/oauth-buttons';
 
 export default angular.module('rogatisEtiBrApp.account', [ngRoute, login, settings,
     signup
