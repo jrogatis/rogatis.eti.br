@@ -15,7 +15,8 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import {
   routeConfig
 } from './app.config';
-
+import _Auth from '../components/auth/auth.module';
+import account from './account';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
@@ -24,15 +25,16 @@ import portfolio from './portfolio/portfolio.component';
 import blog from './blog/blog.component';
 import post from './post/post.component';
 import admin from './admin/admin.component';
-import imagesGalery from './imagesGalery/imagesGalery.component';
+import gallery from './gallery/gallery.component';
+//import login from './login/login.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute,
-    uiBootstrap, navbar, footer, main, contact, portfolio, blog, post, admin, imagesGalery, constants, socket, util
+angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
+    uiBootstrap, _Auth, navbar, footer, main, contact, portfolio, blog, post, admin, gallery, constants, socket, util
   ])
   .config(routeConfig);
 

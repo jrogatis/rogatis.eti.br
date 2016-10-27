@@ -2,8 +2,12 @@ div#navBar
   .container
     md-toolbar.animated.fadeInDown(flex="100")
       div.md-toolbar-tools(flex="100")
-        div(layout-align="start center", flex="25")
+        div(layout-align="start center", flex="25" layout="row")
           md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
+          div(layout="column")
+          md-button(ng-show='$ctrl.isLoggedIn()', href='/logout') Logout
+          md-button(ng-show='$ctrl.isLoggedIn()', href='/gallery') Gallery
+          md-button(ng-show='$ctrl.isLoggedIn()', href='/admin') Admin
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
           md-button(ng-href="/") about
             div.selected(ng-show="$ctrl.isActive('/')")
@@ -26,6 +30,7 @@ div#navBar
           md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
             md-tooltip git
             img(src="/assets/images/git.svg" style="width:24px;height:24px;")
+
         md-menu(hide-gt-sm, layout="row", flex="25", layout-align="end center")
           md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
             i.fa.fa-bars(style="color:white; font-size:30px")

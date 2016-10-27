@@ -17,6 +17,7 @@ export class PortfolioController {
   }
 
   $onInit() {
+    console.log('no init do port');
     this.$http.get('/api/projects')
       .then(response => {
         this.listProjects = response.data;

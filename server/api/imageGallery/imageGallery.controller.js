@@ -1,43 +1,92 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/posts              ->  index
- * POST    /api/posts              ->  create
- * GET     /api/posts/:id          ->  show
- * PUT     /api/posts/:id          ->  upsert
- * PATCH   /api/posts/:id          ->  patch
- * DELETE  /api/posts/:id          ->  destroy
+ * GET     /api/imageGallery              ->  index
+ * POST    /api/imageGallery              ->  create
+ * GET     /api/imageGallery/:id          ->  show
+ * DELETE  /api/imageGallery/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Posts from './posts.model';
+import AWS from 'aws-sdk';
+import crypto from 'crypto';
+import moment from 'moment';
+
+AWS.config.update({
+  accessKeyId: process.env.aws_access_key_id,
+  secretAccessKey: process.env.aws_secret_access_key,
+  region: 'us-east-1'
+});
+var s3 = new AWS.S3();
+
+var params = {
+  Bucket: 'rogatis'
+}
+
+var s3Url = 'https://s3.amazonaws.com/rogatis';
+
+exports.signing = function(req, res) {
+    var request = req.body;
+    var fileName = request.filename
+    var path = fileName;
+
+    var readType = 'public-read';
+
+    var expiration = moment().add(5, 'm').toDate(); //15 minutes
+
+    var s3Policy = {
+        'expiration': expiration,
+        'conditions': [{
+                'bucket': 'rogatis'
+            },
+            ['starts-with', '$key', path],
+            {
+                'acl': readType
+            },
+            {
+              'success_action_status': '201'
+            },
+            ['starts-with', '$Content-Type', request.type],
+            ['content-length-range', 2048, 10485760], //min and max
+        ]
+    };
+
+    var stringPolicy = JSON.stringify(s3Policy);
+    var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
+
+    // sign policy
+    var signature = crypto.createHmac('sha1', process.env.aws_secret_access_key)
+        .update(new Buffer(base64Policy, 'utf-8')).digest('base64');
+
+    var credentials = {
+        url: s3Url,
+        fields: {
+            key: path,
+            AWSAccessKeyId: process.env.aws_access_key_id,
+            acl: readType,
+            policy: base64Policy,
+            signature: signature,
+            'Content-Type': request.type,
+            success_action_status: 201
+        }
+    };
+    res.jsonp(credentials);
+}
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
-    if(entity) {
+  return function (entity) {
+    if (entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
   };
 }
 
-function patchUpdates(patches) {
-  return function(entity) {
-    try {
-      jsonpatch.apply(entity, patches, /*validate*/ true);
-    } catch(err) {
-      return Promise.reject(err);
-    }
-
-    return entity.save();
-  };
-}
-
 function removeEntity(res) {
-  return function(entity) {
-    if(entity) {
+  return function (entity) {
+    if (entity) {
       return entity.remove()
         .then(() => {
           res.status(204).end();
@@ -47,8 +96,8 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
-    if(!entity) {
+  return function (entity) {
+    if (!entity) {
       res.status(404).end();
       return null;
     }
@@ -58,16 +107,29 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
 
-// Gets a list of Postss
+// Gets a list of images
 export function index(req, res) {
-  return Posts.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+
+   console.log(process.env.aws_access_key_id);
+  return s3.listObjects(params).promise()
+    .then(data => {
+      let images = [];
+      data.Contents.map(image => {
+
+        images.push(image.Key);
+      })
+      return res.status(200).json(images);
+    })
+    .catch(err => {
+    console.log(err);
+    handleError(res)
+    }
+  );
 }
 
 // Gets a single Posts from the DB
@@ -78,35 +140,6 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new Posts in the DB
-export function create(req, res) {
-  return Posts.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
-}
-
-// Upserts the given Posts in the DB at the specified ID
-export function upsert(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
-  }
-  return Posts.findOneAndUpdate({_id: req.params.id}, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
-
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
-// Updates an existing Posts in the DB
-export function patch(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
-  }
-  return Posts.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
 
 // Deletes a Posts from the DB
 export function destroy(req, res) {
@@ -115,3 +148,5 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+

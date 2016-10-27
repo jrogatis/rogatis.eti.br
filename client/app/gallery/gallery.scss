@@ -1,0 +1,32 @@
+div#mainGallery {
+  div {
+    div#uploadImage {
+      div#imageForm {
+        div#drop {
+          background-color: lightgray;
+          min-height: 70px;
+        }
+      }
+    }
+    div#gallery {
+      ul {
+        li {
+          div.show-image {
+            position: relative;
+            float: left;
+            margin: 5px;
+          }
+          div.show-image:hover button {
+            display: block;
+          }
+          div.show-image button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,10 +8,13 @@ import angularMaterial from 'angular-material';
 import angularMessages from 'angular-messages';
 
 export class NavbarComponent {
-  constructor($location, $mdSidenav, $animate, $scope) {
+  constructor($location, $mdSidenav, $animate, $scope, Auth) {
     'ngInject';
     $scope.pageClass = 'pageNavbar';
     this.$location = $location;
+    this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
     this.$scope = $scope;
     this.enterState = true;
   }
