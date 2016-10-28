@@ -1,10 +1,11 @@
 link(rel='stylesheet' href='/node_modules/textangular/dist/textAngular.css')
 script(src='/bower_components/textAngular/dist/textAngular-sanitize.min.js')
 script(src='/bower_components/textAngular/dist/textAngular-rangy.min.js')
-div#Admin(style="min-height:60vh")
+div#Editor(style="min-height:60vh")
   .container(layout="column" flex = "100")
-    h1 Admin Console
-    h3 Dear You.. Take your time and write interesting things!!!
+    div(flex layout-align="center center" layout="column")
+      h1 Post Editor Console
+      h3 Dear You.. Take your time and write interesting things!!!
     div(layout="row")
       div#postsLists(flex="25")
         h3 list of posts

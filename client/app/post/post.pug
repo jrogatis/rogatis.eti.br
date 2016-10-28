@@ -1,8 +1,10 @@
 
 div#imageGaleryMain
-  .container(layout="column" layout-align="center center" flex)
+  .container(layout="column" layout-align="center center" flex="100")
     h1 {{$ctrl.post.title}}
-    div#Text.md-padding( ng-bind-html="$ctrl.post.text")
+    div(layout="row")
+      div(flex-gt-sm="20" show-gt-sm)
+      div#Text.md-padding(flex="100" flex-gt-sm="60" ng-bind-html="$ctrl.post.text")
 
 
 

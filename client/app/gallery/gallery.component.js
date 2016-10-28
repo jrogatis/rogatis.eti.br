@@ -2,7 +2,7 @@ import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './gallery.routes';
 import ngMdIcons from 'angular-material-icons';
-import ngMaterial from 'angular-material'
+import ngMaterial from 'angular-material';
 import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 import angularGrid from 'angulargrid';
@@ -27,8 +27,7 @@ export class GalleryController {
   deleteImage(imageName) {
     this.$http.delete(`/api/imageGallery/${imageName}`)
       .then(this.loadImages());
-     this.angularGridInstance.gallery.refresh();
-    console.log(imageName);
+    this.angularGridInstance.gallery.refresh();
   }
 
   $onInit() {
@@ -37,49 +36,49 @@ export class GalleryController {
 
   loadImages() {
     this.$http.get('/api/imageGallery')
-      .then(response => {
-        this.listImages = response.data;
-      });
+    .then(response => {
+      this.listImages = response.data;
+    });
   }
   onFileSelect(files) {
-    console.log('files', files)
-      var filename = files.name;
-      var type = files.type;
-      var query = {
-        filename: filename,
-        type: type
-      }
-      this.$http.post('api/imageGallery/signing', query)
-        .success(result => {
-          this.Upload.upload({
-            url: result.url, //s3Url
-            transformRequest: (data, headersGetter) => {
-              var headers = headersGetter();
-              delete headers.Authorization;
-              return data;
-            },
-            fields: result.fields, //credentials
-            method: 'POST',
-            file: files
-          }).progress( evt => {
-           this.determinateValue =parseInt(100.0 * evt.loaded / evt.total);
-            //console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
-          }).success((data, status, headers, config) => {
-            // file is uploaded successfully
-            this.determinateValue = 0;
-            this.loadImages();
-            this.angularGridInstance.gallery.refresh();
-            //console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-          }).error(err => {
-                console.log('erroooo', err)
-          });
+    var filename = files.name;
+    var type = files.type;
+    var query = {
+      filename: filename,
+      type: type
+    };
+    this.$http.post('api/imageGallery/signing', query)
+      .success(result => {
+        this.Upload.upload({
+          url: result.url, //s3Url
+          transformRequest: (data, headersGetter) => {
+            var headers = headersGetter();
+            delete headers.Authorization;
+            return data;
+          },
+          fields: result.fields, //credentials
+          method: 'POST',
+          file: files
         })
-        .error((data, status, headers, config) =>{
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        console.log('pau pau');
+        .progress(evt => {
+          this.determinateValue = parseInt(100.0 * evt.loaded / evt.total, 10);
+        })
+        .success(data => {
+          // file is uploaded successfully
+          this.determinateValue = 0;
+          this.loadImages();
+          this.angularGridInstance.gallery.refresh();
+        })
+        .error(err => {
+          console.log('erroooo', err);
         });
-    }
+      })
+      .error((data, status) => {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log('pau pau', data, status);
+      });
+  }
 }
 
 

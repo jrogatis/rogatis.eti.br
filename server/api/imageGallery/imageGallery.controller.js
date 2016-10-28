@@ -7,8 +7,6 @@
  */
 
 'use strict';
-
-import jsonpatch from 'fast-json-patch';
 import AWS from 'aws-sdk';
 import crypto from 'crypto';
 import moment from 'moment';
@@ -19,144 +17,136 @@ AWS.config.update({
   region: 'us-east-1'
 });
 var s3 = new AWS.S3();
-
 var params = {
   Bucket: 'rogatis'
-}
-
+};
 var s3Url = 'https://s3.amazonaws.com/rogatis';
 
 exports.signing = function(req, res) {
-    var request = req.body;
-    var fileName = request.filename
-    var path = fileName;
+  var request = req.body;
+  var fileName = request.filename;
+  var path = fileName;
 
-    var readType = 'public-read';
+  var readType = 'public-read';
 
-    var expiration = moment().add(5, 'm').toDate(); //15 minutes
+  var expiration = moment().add(5, 'm')
+    .toDate(); //15 minutes
 
-    var s3Policy = {
-        'expiration': expiration,
-        'conditions': [{
-                'bucket': 'rogatis'
-            },
-            ['starts-with', '$key', path],
-            {
-                'acl': readType
-            },
-            {
-              'success_action_status': '201'
-            },
-            ['starts-with', '$Content-Type', request.type],
-            ['content-length-range', 2048, 10485760], //min and max
-        ]
-    };
+  var s3Policy = {
+    expiration: expiration,
+    conditions: [{
+      bucket: 'rogatis'
+    },
+      ['starts-with', '$key', path],
+      {
+        acl: readType
+      },
+      {
+        success_action_status: '201'
+      },
+      ['starts-with', '$Content-Type', request.type],
+      ['content-length-range', 2048, 10485760], //min and max
+      ]
+  };
 
-    var stringPolicy = JSON.stringify(s3Policy);
-    var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
+  var stringPolicy = JSON.stringify(s3Policy);
+  var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
 
-    // sign policy
-    var signature = crypto.createHmac('sha1', process.env.aws_secret_access_key)
-        .update(new Buffer(base64Policy, 'utf-8')).digest('base64');
+  // sign policy
+  var signature = crypto.createHmac('sha1', process.env.aws_secret_access_key)
+    .update(new Buffer(base64Policy, 'utf-8'))
+    .digest('base64');
 
-    var credentials = {
-        url: s3Url,
-        fields: {
-            key: path,
-            AWSAccessKeyId: process.env.aws_access_key_id,
-            acl: readType,
-            policy: base64Policy,
-            signature: signature,
-            'Content-Type': request.type,
-            success_action_status: 201
-        }
-    };
-    res.jsonp(credentials);
-}
+  var credentials = {
+    url: s3Url,
+    fields: {
+      key: path,
+      AWSAccessKeyId: process.env.aws_access_key_id,
+      acl: readType,
+      policy: base64Policy,
+      signature: signature,
+      'Content-Type': request.type,
+      success_action_status: 201
+    }
+  };
+  res.jsonp(credentials);
+};
 
-function respondWithResult(res, statusCode) {
+/*function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function (entity) {
+  return function(entity) {
     if (entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
   };
-}
+}*/
 
-function removeEntity(res) {
-  return function (entity) {
-    if (entity) {
+/*function removeEntity(res) {
+  return function(entity) {
+    if(entity) {
       return entity.remove()
         .then(() => {
           res.status(204).end();
         });
     }
   };
-}
+}*/
 
-function handleEntityNotFound(res) {
-  return function (entity) {
-    if (!entity) {
+/*function handleEntityNotFound(res) {
+  return function(entity) {
+    if(!entity) {
       res.status(404).end();
       return null;
     }
     return entity;
   };
-}
+}*/
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function (err) {
+  return function(err) {
     res.status(statusCode).send(err);
   };
 }
 
 // Gets a list of images
 export function index(req, res) {
-
-   console.log(process.env.aws_access_key_id);
   return s3.listObjects(params).promise()
     .then(data => {
       let images = [];
       data.Contents.map(image => {
-
         images.push(image.Key);
-      })
+      });
       return res.status(200).json(images);
     })
     .catch(err => {
-    console.log(err);
-    handleError(res)
-    }
-  );
+      console.log(err);
+      return handleError(res);
+    });
 }
 
 // Gets a single Posts from the DB
 export function show(req, res) {
-  return Posts.findById(req.params.id).exec()
+  /*return Posts.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
-    .catch(handleError(res));
+    .catch(handleError(res));*/
 }
 
 // Deletes a image from the s3
 export function destroy(req, res) {
-  console.log(req.params.id);
   let paramsToDelete = {
-     Bucket: 'rogatis',
+    Bucket: 'rogatis',
     Key: req.params.id
-    }
+  };
   s3.deleteObject(paramsToDelete).promise()
     .then(result => {
       console.log(result);
       return res.status(200);
     })
-     .catch(err => {
+    .catch(err => {
       console.log(err);
-      handleError(res)
-    })
-
+      return handleError(res);
+    });
 }
-
-

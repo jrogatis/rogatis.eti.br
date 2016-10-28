@@ -18,7 +18,6 @@ export default class LoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          console.log('no login');
           this.$location.path('/');
         })
         .catch(err => {

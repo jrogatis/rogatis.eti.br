@@ -7,7 +7,7 @@ div#navBar
           div(layout="column")
           md-button(ng-show='$ctrl.isLoggedIn()', href='/logout') Logout
           md-button(ng-show='$ctrl.isLoggedIn()', href='/gallery') Gallery
-          md-button(ng-show='$ctrl.isLoggedIn()', href='/admin') Admin
+          md-button(ng-show='$ctrl.isLoggedIn()', href='/editor') Editor
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
           md-button(ng-href="/") about
             div.selected(ng-show="$ctrl.isActive('/')")

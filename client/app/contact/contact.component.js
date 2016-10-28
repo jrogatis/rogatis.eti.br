@@ -22,7 +22,7 @@ export class ContactController {
         this.$scope.emailForm.$setPristine();
         this.$scope.emailForm.$setUntouched();
         this.user = {};
-    });
+      });
   }
 
   showDialog() {
@@ -39,15 +39,15 @@ export class ContactController {
 }
 
 function DialogController($scope, $mdDialog) {
-  $scope.hide = function () {
+  $scope.hide = function() {
     $mdDialog.hide();
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = function() {
     $mdDialog.cancel();
   };
 
-  $scope.answer = function (answer) {
+  $scope.answer = function(answer) {
     $mdDialog.hide(answer);
   };
 }

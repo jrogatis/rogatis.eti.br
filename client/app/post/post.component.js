@@ -22,7 +22,6 @@ export class PostController {
     this.$http.get(`/api/posts/${this.$routeParams.postId}`)
       .then(response => {
         this.post = response.data;
-        console.log(this.post)
         //this.socket.syncUpdates('posts', this.listPosts);
       });
   }

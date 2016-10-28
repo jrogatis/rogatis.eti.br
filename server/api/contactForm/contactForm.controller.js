@@ -8,7 +8,6 @@
 import ContactForm from './contactForm.model';
 import express from 'express';
 import mailer from 'express-mailer';
-import path from 'path';
 
 var app = express();
 
@@ -24,10 +23,10 @@ mailer.extend(app, {
   }
 });
 
-app.set('views', `${ __dirname}/` );//path.resolve( __dirname, '/'));
+app.set('views', `${__dirname}/`);//path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-function respondWithResult(res, statusCode) {
+/*function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if(entity) {
@@ -35,7 +34,7 @@ function respondWithResult(res, statusCode) {
     }
     return null;
   };
-}
+}*/
 
 function handleSendEmail(res) {
   console.log('path', __dirname);
@@ -54,7 +53,7 @@ function handleSendEmail(res) {
         res.send('There was an error sending the email');
         return;
       }
-     res.send('Email Sent');
+      res.send('Email Sent');
     });
 }
 

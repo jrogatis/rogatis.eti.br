@@ -3497,11 +3497,10 @@ button.mdi::before {
 
 // Component styles are injected through gulp
 /* inject:scss */
-@import 'admin/admin';
 @import 'blog/blog';
 @import 'contact/contact';
+@import 'editor/editor';
 @import 'gallery/gallery';
-@import 'login/login';
 @import 'main/main';
 @import 'portfolio/portfolio';
 @import 'post/post';
