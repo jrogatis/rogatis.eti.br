@@ -21,6 +21,9 @@ div#Editor(style="min-height:60vh")
         md-input-container
           label Snipet
           textarea(ng-model="$ctrl.post.snipet")
+        md-input-container
+          label Post Image
+          textarea(ng-model="$ctrl.post.postImage")
         md-content
           text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
           md-button(ng-click="$ctrl.handleSave()") save
