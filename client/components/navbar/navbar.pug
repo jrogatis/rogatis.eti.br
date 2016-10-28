@@ -3,11 +3,21 @@ div#navBar
     md-toolbar.animated.fadeInDown(flex="100")
       div.md-toolbar-tools(flex="100")
         div(layout-align="start center", flex="25" layout="row")
-          md-icon.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
-          div(layout="column")
-          md-button(ng-show='$ctrl.isLoggedIn()', href='/logout') Logout
-          md-button(ng-show='$ctrl.isLoggedIn()', href='/gallery') Gallery
-          md-button(ng-show='$ctrl.isLoggedIn()', href='/editor') Editor
+          md-menu(ng-show='$ctrl.isLoggedIn()', layout="row", flex="25", layout-align="end center")
+            md-button.md-icon-button.md-default-theme(ng-click="$mdOpenMenu()", style="width:60px;height:60px;")
+              img(ng-src="/assets/images/personalLogo.svg")
+            //md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
+              i.fa.fa-bars(style="color:white; font-size:30px")
+            md-menu-content
+              md-menu-item
+                md-button(ng-href='/logout') Logout
+              md-menu-item
+                md-button(ng-href='/gallery') Gallery
+              md-menu-item
+                md-button(ng-href='/editor') Editor
+              md-menu-item
+                md-button(ng-href='/editorProject') Projects
+          md-icon.md-default-theme(ng-show='!$ctrl.isLoggedIn()', md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
           md-button(ng-href="/") about
             div.selected(ng-show="$ctrl.isActive('/')")
