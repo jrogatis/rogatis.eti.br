@@ -1,0 +1,51 @@
+div#EditorProject(style="min-height:60vh")
+  .container(layout="column" flex = "100")
+    div(flex layout-align="center center" layout="column")
+      h1 Project Editor Console
+    div(layout="row")
+      div#postsLists(flex="25")
+        h3 list of posts
+        md-list
+          md-list-item(ng-repeat="project in $ctrl.listProjects", ng-click="$ctrl.loadForEdition($index)")
+            .md-list-item-text
+              h4 {{project.title}}
+            md-divider
+      div#editForm(layout="column" flex-offset="5", flex="75")
+        form(layout="column")
+          md-input-container
+            label Title
+            input(ng-model="$ctrl.project.title")
+          md-input-container
+            label desc
+            input(ng-model="$ctrl.project.desc")
+          md-input-container
+            label Project Url
+            input(ng-model="$ctrl.project.siteUrl")
+          md-input-container
+            label Project Image
+            input(ng-model="$ctrl.project.imgUrl")
+            md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
+            img#projectImage(ng-src="{{$ctrl.project.imgUrl}}")
+          div(layout="row", layout-align="start center")
+            md-button(type="submit" ng-show="$ctrl.projectAnt" ng-click="$ctrl.handleSave($event)") save
+            md-button(type="submit" ng-show="!$ctrl.projectAnt" ng-click="$ctrl.handleAdd()") Add
+
+script(type="text/ng-template" id="selectImage.tmpl.pug")
+  md-dialog(aria-label="Search Images")
+    form(ng-cloak)
+      md-toolbar
+        div.md-toolbar-tools
+          h2 Select the images that you wish to display!
+          span(flex)
+          md-button.md-icon-button(ng-click="cancel()") x
+      md-dialog-content
+        md-content#StockListContent()
+          md-list#dialogImagesList(flex)
+            md-list-item.md-2-line(ng-animate='animate' ng-repeat='image in $ctrl.imagesList', layout="row", ng-click="answer($index)")
+              img(ng-src='https://s3.amazonaws.com/rogatis/{{image}}' style="max-width:100px;")
+              div.md-list-item-text(layout="column" alig)
+                h3 {{image}}
+              md-divider.md-inset(ng-if="!$last")
+      md-dialog-actions(layout="row")
+        span(flex)
+        md-button(ng-click="cancel()") Cancel

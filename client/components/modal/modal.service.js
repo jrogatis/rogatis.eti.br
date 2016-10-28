@@ -24,6 +24,15 @@ export function Modal($rootScope, $uibModal) {
   // Public API here
   return {
 
+    imageGalleryList(index = angular.noop): {
+      var args = Array.prototype.slice.call(arguments);
+      var name = args.shift();
+
+      return function() {
+
+      }
+    },
+
     /* Confirmation modals */
     confirm: {
 

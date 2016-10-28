@@ -26,7 +26,7 @@ import blog from './blog/blog.component';
 import post from './post/post.component';
 import editor from './editor/editor.component';
 import gallery from './gallery/gallery.component';
-import editorProject from './editor.project/editor.project.component'
+import editorProject from './editor-project/editor-project.component'
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
