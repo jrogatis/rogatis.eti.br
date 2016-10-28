@@ -26,6 +26,7 @@ import blog from './blog/blog.component';
 import post from './post/post.component';
 import editor from './editor/editor.component';
 import gallery from './gallery/gallery.component';
+import editorProject from './editor.project/editor.project.component'
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -33,7 +34,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
-    uiBootstrap, _Auth, navbar, footer, main, contact, portfolio, blog, post, editor, gallery, constants, socket, util
+    uiBootstrap, _Auth, navbar, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
@@ -45,7 +46,7 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
           $location.path('/login');
           //$location.path('/');
         }
-      });
+      })
     });
 });
 
