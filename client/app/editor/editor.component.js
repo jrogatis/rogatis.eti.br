@@ -9,9 +9,12 @@ var sanit = require('textangular/dist/textAngular-sanitize.min');
 export class EditorController {
 
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $mdDialog) {
     this.$http = $http;
     this.socket = socket;
+    this.$mdDialog = $mdDialog;
+    this.$scope =  $scope;
+    this.$scope.customFullscreen = false;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
@@ -36,9 +39,51 @@ export class EditorController {
     this.postAnt.text = this.post.text;
     this.postAnt.title = this.post.title;
     this.postAnt.snipet = this.post.snipet;
+    this.postAnt.postImage = this.post.postImage;
     let patches = jsonpatch.generate(observer);
     this.$http.patch(`/api/posts/${this.postAnt._id}`, patches);
   }
+
+   handleAdd() {
+    this.$http.post('/api/posts', this.post)
+  }
+
+  showDialog(ev) {
+    this.$http.get('api/imageGallery')
+      .then (images => {
+        console.log(images);
+        this.imagesList = images.data;
+        this.dialog = this.$mdDialog.show({
+        scope: this.$scope,
+        preserveScope: true,
+        controller: DialogImagesGalleryController,
+        templateUrl: 'selectImage.tmpl.pug',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: false,
+        fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(answer => {
+        this.post.postImage = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
+      });
+    })
+  }
+}
+
+DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];
+
+function DialogImagesGalleryController($scope, $mdDialog) {
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+  $scope.answer = function(answer) {
+    $mdDialog.hide(answer);
+  };
 }
 
 export default angular.module('rogatisEtiBrApp.editor', [ngRoute, textAngular])

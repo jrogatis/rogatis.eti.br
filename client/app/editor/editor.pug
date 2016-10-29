@@ -24,6 +24,29 @@ div#Editor(style="min-height:60vh")
         md-input-container
           label Post Image
           textarea(ng-model="$ctrl.post.postImage")
+          md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
+            img#postImage(ng-src="{{$ctrl.post.postImage}}")
         md-content
           text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
-          md-button(ng-click="$ctrl.handleSave()") save
+          md-button(type="submit" ng-show="$ctrl.postAnt" ng-click="$ctrl.handleSave($event)") save
+          md-button(type="submit" ng-show="!$ctrl.postAnt" ng-click="$ctrl.handleAdd()") Add
+
+script(type="text/ng-template" id="selectImage.tmpl.pug")
+  md-dialog(aria-label="Search Images")
+    form(ng-cloak)
+      md-toolbar
+        div.md-toolbar-tools
+          h2 Select the images that you wish to display!
+          span(flex)
+          md-button.md-icon-button(ng-click="cancel()") x
+      md-dialog-content
+        md-content#StockListContent()
+          md-list#dialogImagesList(flex)
+            md-list-item.md-2-line(ng-animate='animate' ng-repeat='image in $ctrl.imagesList', layout="row", ng-click="answer($index)")
+              img(ng-src='https://s3.amazonaws.com/rogatis/{{image}}' style="max-width:100px;")
+              div.md-list-item-text(layout="column" alig)
+                h3 {{image}}
+              md-divider.md-inset(ng-if="!$last")
+      md-dialog-actions(layout="row")
+        span(flex)
+        md-button(ng-click="cancel()") Cancel
