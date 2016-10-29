@@ -1,9 +1,12 @@
-div#PostMain {
-  div {
-    div#Text{
-      font-size: 1,2em;
-      padding-left: 10%;
-      padding-right: 10%;
+div#postMain {
+  div.container {
+    div#title {
+      text-align: center;
+    }
+    div#textArea {
+      div#Text {
+        font-size: 1.3em;
+      }
     }
   }
 }
