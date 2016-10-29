@@ -16,6 +16,7 @@ export default function(app) {
   app.use('/api/projects', require('./api/projects'));
   app.use('/api/posts', require('./api/posts'));
   app.use('/api/imageGallery', require('./api/imageGallery'));
+  app.use('/sitemap.xml', require('./api/sitemap'));
 
   app.use('/auth', require('./auth').default);
 
