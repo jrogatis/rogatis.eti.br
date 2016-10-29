@@ -7,6 +7,7 @@ var PostsSchema = new mongoose.Schema({
   text: String,
   postImage: String,
   snipet: String,
+  slug: String,
   active: Boolean,
   coments: [{
     from: String,

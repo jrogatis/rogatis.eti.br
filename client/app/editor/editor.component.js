@@ -9,12 +9,13 @@ var sanit = require('textangular/dist/textAngular-sanitize.min');
 export class EditorController {
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $mdDialog) {
+  constructor($http, $scope, socket, $mdDialog, Util) {
     this.$http = $http;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.$scope =  $scope;
     this.$scope.customFullscreen = false;
+    this.Util = Util;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
@@ -32,6 +33,9 @@ export class EditorController {
   loadForEdition(index) {
     this.post = this.listPosts[index];
     this.postAnt = _.clone(this.post);
+    if(this.post.slug === '' || this.post.slug === undefined ) {
+     this.post.slug = this.Util.slugify(this.post.title);
+    }
   }
 
   handleSave() {
@@ -40,6 +44,7 @@ export class EditorController {
     this.postAnt.title = this.post.title;
     this.postAnt.snipet = this.post.snipet;
     this.postAnt.postImage = this.post.postImage;
+     this.postAnt.slug = this.post.slug;
     let patches = jsonpatch.generate(observer);
     this.$http.patch(`/api/posts/${this.postAnt._id}`, patches);
   }

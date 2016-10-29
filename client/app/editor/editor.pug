@@ -16,8 +16,11 @@ div#Editor(style="min-height:60vh")
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
         md-input-container
-          label Title
-          input(ng-model="$ctrl.post.title")
+          label(style="font-size:25px;") Title
+          input(ng-model="$ctrl.post.title" style="font-size:25px;")
+        md-input-container
+          label Slug
+          input(ng-model="$ctrl.post.slug")
         md-input-container
           label Snipet
           textarea(ng-model="$ctrl.post.snipet")
