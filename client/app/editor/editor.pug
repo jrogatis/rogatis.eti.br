@@ -15,6 +15,8 @@ div#Editor(style="min-height:60vh")
               h4 {{post.title}}
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
+        md-input-conatiner
+          md-switch(ng-model="$ctrl.post.active") Active ? {{$ctrl.post.active ? true : false}}
         md-input-container
           label(style="font-size:25px;") Title
           input(ng-model="$ctrl.post.title" style="font-size:25px;")

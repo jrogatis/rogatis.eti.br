@@ -12,6 +12,8 @@ div#EditorProject(style="min-height:60vh")
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
         form(layout="column")
+          md-input-conatiner
+            md-switch(ng-model="$ctrl.project.displayFront") Front ? {{$ctrl.project.displayFront ? true : false}}
           md-input-container
             label Title
             input(ng-model="$ctrl.project.title")

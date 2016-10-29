@@ -63,19 +63,24 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Postss
+// Gets a list of Posts
 export function index(req, res) {
   return Posts.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Posts from the DB
+// Gets a single Posts from the DB from id or from slug...
 export function show(req, res) {
   return Posts.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
-    .catch(handleError(res));
+    .catch(err => {
+      Posts.findOne({'slug': req.params.id}).exec()
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res))
+    });
 }
 
 // Creates a new Posts in the DB
@@ -107,7 +112,6 @@ export function patch(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
-
 // Deletes a Posts from the DB
 export function destroy(req, res) {
   return Posts.findById(req.params.id).exec()

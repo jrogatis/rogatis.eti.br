@@ -44,6 +44,7 @@ export class EditorController {
     this.postAnt.title = this.post.title;
     this.postAnt.snipet = this.post.snipet;
     this.postAnt.postImage = this.post.postImage;
+    this.postAnt.active = this.post.active;
      this.postAnt.slug = this.post.slug;
     let patches = jsonpatch.generate(observer);
     this.$http.patch(`/api/posts/${this.postAnt._id}`, patches);
