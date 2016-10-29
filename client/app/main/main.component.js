@@ -18,8 +18,11 @@ export class MainController {
   $onInit() {
     this.$http.get('/api/projects')
       .then(response => {
-        this.listImportantProjects = response.data;
-        this.socket.syncUpdates('projects', this.listImportantProjects);
+        this.listProjects = response.data;
+        this.listImportantProjects = this.listProjects.filter(el => {
+           return el.displayFront === true;
+         })
+        this.socket.syncUpdates('projects', this.listProjects);
       });
   }
 }
