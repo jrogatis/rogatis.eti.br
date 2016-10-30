@@ -1,4 +1,36 @@
-div#SocialShareMain
-  md-button 1
-  md-button 2
-  md-button 3
+div.sticky-container
+  ul.stick(layout-gt-xs="column" layout="row")
+    li
+      md-button.md-icon-button.md-primary(socialshare
+       socialshare-provider="facebook"
+       socialshare-url="{{$ctrl.curLink()}}"
+       socialshare-text="Hey! thats a intersting Site!"
+       socialshare-title="Jean Philip de Rogatis Portfolio"
+       socialshare-via="1592090201100353"
+       socialshare-type="share"
+       socialshare-redirect-uri="{{$ctrl.curLink()}}"
+
+       )
+        md-tooltip(md-direction="right") Facebook
+        i.fa.fa-facebook-official
+    li
+      md-button.md-icon-button.md-primary
+        md-tooltip(md-direction="right") Linkedin
+        i.fa.fa-linkedin-square
+    li
+      md-button.md-icon-button.md-primary(socialshare
+        socialshare-provider="twitter"
+        socialshare-text="Some interesting site!"
+        socialshare-hashtags="angularjs, js developer"
+        socialshare-url="{{$ctrl.curLink()}}")
+        md-tooltip(md-direction="right") Twitter
+        i.fa.fa-twitter-square
+    li
+      md-button.md-icon-button.md-primary(socialshare
+      socialshare-provider="email",
+      socialshare-subject="Hey there! A interesting site for you!",
+      socialshare-body="Hey I found that this site maybe interest you! {{$ctrl.curLink()}}"
+      )
+        md-tooltip(md-direction="right") E-mail
+        i.fa.fa-envelope-o
+

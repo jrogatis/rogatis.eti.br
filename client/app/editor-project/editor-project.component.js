@@ -13,19 +13,14 @@ export class EditorProjectController {
   constructor($http, $scope, $mdDialog) {
     this.$http = $http;
     this.$mdDialog = $mdDialog;
-    this.$scope =  $scope;
+    this.$scope = $scope;
     this.$scope.customFullscreen = false;
-    //this.socket = socket;
-    /*$scope.$on('$destroy', function() {
-      socket.unsyncUpdates('projects');
-    });*/
   }
 
   $onInit() {
     this.$http.get('/api/projects')
       .then(response => {
         this.listProjects = response.data;
-        //this.socket.syncUpdates('projects', this.listProjects);
       });
   }
 
@@ -42,7 +37,6 @@ export class EditorProjectController {
     this.projectAnt.siteUrl = this.project.siteUrl;
     this.projectAnt.displayFront = this.project.displayFront;
     let patches = jsonpatch.generate(observer);
-    console.log(this.projectAnt);
     this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches);
   }
 
@@ -53,7 +47,6 @@ export class EditorProjectController {
   showDialog(ev) {
     this.$http.get('api/imageGallery')
       .then (images => {
-        console.log(images);
         this.imagesList = images.data;
         this.dialog = this.$mdDialog.show({
         scope: this.$scope,
@@ -69,9 +62,7 @@ export class EditorProjectController {
         this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
       });
     })
-
-
-}
+  }
 }
 
 DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];

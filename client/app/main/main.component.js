@@ -20,8 +20,8 @@ export class MainController {
       .then(response => {
         this.listProjects = response.data;
         this.listImportantProjects = this.listProjects.filter(el => {
-           return el.displayFront === true;
-         })
+          return el.displayFront === true;
+        });
         this.socket.syncUpdates('projects', this.listProjects);
       });
   }

@@ -18,6 +18,7 @@ import {
 import _Auth from '../components/auth/auth.module';
 import account from './account';
 import navbar from '../components/navbar/navbar.component';
+import socialShare from '../components/social-share/social-share.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import contact from './contact/contact.component';
@@ -34,7 +35,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
-    uiBootstrap, _Auth, navbar, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util
+    uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
