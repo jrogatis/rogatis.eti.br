@@ -23,17 +23,6 @@ export class EditorController {
     });
   }
 
-  shortUrl() {
-    this.$http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
-      longUrl: this.$location.absUrl()
-    })
-    .success((data, status, headers, config) => {
-      return data.id;
-    })
-    .error((data, status, headers, config) => {
-      console.log('error', data);
-    });
-  }
 
   $onInit() {
     this.$http.get('/api/posts')

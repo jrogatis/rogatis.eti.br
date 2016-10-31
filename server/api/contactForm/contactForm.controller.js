@@ -26,16 +26,6 @@ mailer.extend(app, {
 app.set('views', `${__dirname}/`);//path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-/*function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if(entity) {
-      return res.status(statusCode).json(entity);
-    }
-    return null;
-  };
-}*/
-
 function handleSendEmail(res) {
   console.log('path', __dirname);
   app.mailer.send({

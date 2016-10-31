@@ -3,22 +3,24 @@ div.sticky-container
     li
       md-button.md-icon-button.md-primary(socialshare
        socialshare-provider="facebook"
-       socialshare-url="{{$ctrl.curLink()}}"
-       socialshare-text="Hey! thats a intersting Site!"
+       socialshare-url="{{$ctrl.pageInfo.pageUrl}}"
+       socialshare-media="{{$ctrl.pageInfo.pageImgUrl}}"
+       socialshare-description="{{$ctrl.pageInfo.pageDesc}}"
        socialshare-title="Jean Philip de Rogatis Portfolio"
        socialshare-via="1592090201100353"
        socialshare-type="share"
-       socialshare-redirect-uri="{{$ctrl.curLink()}}"
+       socialshare-redirect-uri="{{$ctrl.pageInfo.pageUrl}}"
 
        )
         md-tooltip(md-direction="right") Facebook
         i.fa.fa-facebook-official
     li
       md-button.md-icon-button.md-primary(socialshare
-       socialshare-provider="linkedin"
-       socialshare-url="{{$ctrl.curLink()}}"
-       socialshare-text="Hey! thats a intersting Site!"
-       socialshare-desc="Jean Philip de Rogatis Portfolio"
+        socialshare-provider="linkedin"
+        socialshare-url="{{$ctrl.pageInfo.pageUrl}}"
+        socialshare-text="{{$ctrl.pageInfo.pageName}}"
+        socialshare-description="{{$ctrl.pageInfo.pageDesc}}"
+        socialshare-source="{{$ctrl.pageInfo.pageUrl}}"
        )
         md-tooltip(md-direction="right") Linkedin
         i.fa.fa-linkedin-square
@@ -27,14 +29,14 @@ div.sticky-container
         socialshare-provider="twitter"
         socialshare-text="Some interesting site!"
         socialshare-hashtags="angularjs, js developer"
-        socialshare-url="{{$ctrl.curLink()}}")
+        socialshare-url="{{$ctrl.pageInfo.shortUrl}}")
         md-tooltip(md-direction="right") Twitter
         i.fa.fa-twitter-square
     li
       md-button.md-icon-button.md-primary(socialshare
       socialshare-provider="email",
       socialshare-subject="Hey there! A interesting site for you!",
-      socialshare-body="Hey I found that this site maybe interest you! {{$ctrl.curLink()}}"
+      socialshare-body="Hey I found that this site maybe interest you! {{$ctrl.pageInfo.pageUrl}}"
       )
         md-tooltip(md-direction="right") E-mail
         i.fa.fa-envelope-o

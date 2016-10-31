@@ -8,6 +8,7 @@ import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 const ngRoute = require('angular-route');
 
+
 import uiBootstrap from 'angular-ui-bootstrap';
 // import ngMessages from 'angular-messages';
 
