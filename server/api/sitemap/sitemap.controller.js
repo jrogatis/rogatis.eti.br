@@ -14,42 +14,42 @@ var basicMap = {
       url: '/',
       changefreq: 'daily',
       priority: 0.3
-        },
+    },
     {
       url: '/porfolio',
       changefreq: 'monthly',
       priority: 0.7
-        },
+    },
     {
       url: '/blog',
       changefreq: 'daily',
       priority: 0.5
-        },
+    },
     {
       url: '/contact',
       changefreq: 'monthly',
       priority: 0.7
-        }
-        ]
+    }
+  ]
 };
 
 function sitemap(res) {
   Posts.find().exec()
     .then(posts => {
-
       let map = sm.createSitemap(basicMap);
       posts.map(post => {
         map.add({
           url: `/${post.slug}`
-        })
-      })
-      map.toXML(function (err, xml) {
+        });
+      });
+      map.toXML((err, xml) => {
         if(!err) {
           console.log(err, xml);
         }
       });
-      return res.status(200).header('Content-Type', 'application/xml').send(map.toString());
-    })
+      return res.status(200).header('Content-Type', 'application/xml')
+        .send(map.toString());
+    });
 }
 
 // Gets a site map

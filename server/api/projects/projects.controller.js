@@ -30,7 +30,6 @@ function patchUpdates(patches) {
     } catch(err) {
       return Promise.reject(err);
     }
-
     return entity.save();
   };
 }

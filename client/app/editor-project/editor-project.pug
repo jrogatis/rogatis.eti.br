@@ -12,25 +12,28 @@ div#EditorProject(style="min-height:60vh")
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
         form(layout="column")
-          md-input-conatiner
-            md-switch(ng-model="$ctrl.project.displayFront") Front ? {{$ctrl.project.displayFront ? true : false}}
-          md-input-container
-            label Title
-            input(ng-model="$ctrl.project.title")
+          div(layout="row" flex="100")
+            md-input-container(flex="80")
+              label Title
+              input(ng-model="$ctrl.project.title")
+            md-input-container(flex)
+              md-switch(ng-model="$ctrl.project.displayFront") Front ?
           md-input-container
             label desc
-            input(ng-model="$ctrl.project.desc")
+            textarea(ng-model="$ctrl.project.desc")
           md-input-container
             label Project Url
             input(ng-model="$ctrl.project.siteUrl")
-          md-input-container
-            label Project Image
-            input(ng-model="$ctrl.project.imgUrl")
-            md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
+          div(layout="row" flex="100")
+            md-input-container(flex)
+              label Project Image
+              input(ng-model="$ctrl.project.imgUrl")
+              md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
             img#projectImage(ng-src="{{$ctrl.project.imgUrl}}")
           div(layout="row", layout-align="start center")
             md-button(type="submit" ng-show="$ctrl.projectAnt" ng-click="$ctrl.handleSave($event)") save
             md-button(type="submit" ng-show="!$ctrl.projectAnt" ng-click="$ctrl.handleAdd()") Add
+            md-button(type="submit" ng-click="$ctrl.showPreview($event)") preview
 
 script(type="text/ng-template" id="selectImage.tmpl.pug")
   md-dialog(aria-label="Search Images")
@@ -51,3 +54,25 @@ script(type="text/ng-template" id="selectImage.tmpl.pug")
       md-dialog-actions(layout="row")
         span(flex)
         md-button(ng-click="cancel()") Cancel
+
+script(type="text/ng-template" id="preview.tmpl.pug")
+  md-dialog(aria-label="Project Preview")
+      form(ng-cloak)
+        md-toolbar
+          div.md-toolbar-tools
+            h2 project preview!
+            span(flex)
+            md-button.md-icon-button(ng-click="cancel()") x
+        md-dialog-content
+          li.grid(data-ng-repeat="project in $ctrl.project")
+            a(ng-href="{{project.siteUrl}}", target="_blank")
+              img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
+              div#textWork.col-lg-12(layout="column")
+                h3.col-lg-offset-1 {{project.title}}
+                p.col-lg-offset-1.
+                  {{project.desc}}
+        md-dialog-actions(layout="row")
+          span(flex)
+          md-button(ng-click="cancel()") Cancel
+
+

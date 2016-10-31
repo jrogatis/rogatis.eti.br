@@ -3,13 +3,13 @@ div#porfolioMain
   .container(layout-sm ="column" layout-gt-sm="row")
     div#porfolio(layout="column", flex="100").animated.bounceIn
       ul.dynamic-grid(angular-grid="$ctrl.listProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
-       li.grid(data-ng-repeat="pic in $ctrl.listProjects")
-        a(ng-href="{{pic.siteUrl}}", target="_blank")
-          img.grid-img(src="{{pic.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
+       li.grid(data-ng-repeat="project in $ctrl.listProjects")
+        a(ng-href="{{project.siteUrl}}", target="_blank")
+          img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
           div#textWork.col-lg-12(layout="column")
-            h3.col-lg-offset-1 {{pic.title}}
+            h3.col-lg-offset-1 {{project.title}}
             p.col-lg-offset-1.
-              {{pic.desc}}
+              {{project.desc}}
 
 
 

@@ -76,10 +76,10 @@ export function show(req, res) {
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(err => {
-      Posts.findOne({'slug': req.params.id}).exec()
+      Posts.findOne({slug: req.params.id}).exec()
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
-      .catch(handleError(res))
+      .catch(handleError(res));
     });
 }
 

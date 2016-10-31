@@ -26,11 +26,12 @@ div#Editor(style="min-height:60vh")
         md-input-container
           label Snipet
           textarea(ng-model="$ctrl.post.snipet")
-        md-input-container
-          label Post Image
-          textarea(ng-model="$ctrl.post.postImage")
-          md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
-            img#postImage(ng-src="{{$ctrl.post.postImage}}")
+        div(layout="row" flex="100")
+          md-input-container(flex)
+            label Post Image
+            input(ng-model="$ctrl.post.postImage")
+            md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
+          img#postImage(ng-src="{{$ctrl.post.postImage}}")
         md-content
           text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
           md-button(type="submit" ng-show="$ctrl.postAnt" ng-click="$ctrl.handleSave($event)") save

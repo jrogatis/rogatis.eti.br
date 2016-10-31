@@ -5,6 +5,7 @@ import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
+import angularGrid from 'angulargrid';
 
 export class EditorProjectController {
 
@@ -62,6 +63,20 @@ export class EditorProjectController {
       });
       });
   }
+  showPreview(ev) {
+    console.log(this.project);
+    this.dialog = this.$mdDialog.show({
+      scope: this.$scope,
+      preserveScope: true,
+      controller: DialogImagesGalleryController,
+      templateUrl: 'preview.tmpl.pug',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false,
+      fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+    })
+  }
+
 }
 
 DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];
@@ -70,11 +85,9 @@ function DialogImagesGalleryController($scope, $mdDialog) {
   $scope.hide = function() {
     $mdDialog.hide();
   };
-
   $scope.cancel = function() {
     $mdDialog.cancel();
   };
-
   $scope.answer = function(answer) {
     $mdDialog.hide(answer);
   };
