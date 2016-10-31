@@ -11,7 +11,6 @@ const ngRoute = require('angular-route');
 import uiBootstrap from 'angular-ui-bootstrap';
 // import ngMessages from 'angular-messages';
 
-
 import {
   routeConfig
 } from './app.config';
@@ -27,7 +26,7 @@ import blog from './blog/blog.component';
 import post from './post/post.component';
 import editor from './editor/editor.component';
 import gallery from './gallery/gallery.component';
-import editorProject from './editor-project/editor-project.component'
+import editorProject from './editor-project/editor-project.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -43,13 +42,13 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function (loggedIn) {
-        if (next.authenticate && !loggedIn) {
+        if(next.authenticate && !loggedIn) {
           $location.path('/login');
           //$location.path('/');
         }
-      })
+      });
     });
-});
+  });
 
 angular.element(document)
   .ready(() => {

@@ -14,7 +14,12 @@ div.sticky-container
         md-tooltip(md-direction="right") Facebook
         i.fa.fa-facebook-official
     li
-      md-button.md-icon-button.md-primary
+      md-button.md-icon-button.md-primary(socialshare
+       socialshare-provider="linkedin"
+       socialshare-url="{{$ctrl.curLink()}}"
+       socialshare-text="Hey! thats a intersting Site!"
+       socialshare-desc="Jean Philip de Rogatis Portfolio"
+       )
         md-tooltip(md-direction="right") Linkedin
         i.fa.fa-linkedin-square
     li

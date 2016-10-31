@@ -8,9 +8,6 @@ import angularMaterial from 'angular-material';
 import angularMessages from 'angular-messages';
 import socialShare from 'angular-socialshare';
 
-
-
-
 export class SocialShareComponent {
   constructor($location, $mdSidenav, $animate, $scope, Auth, $http) {
     'ngInject';
@@ -22,33 +19,18 @@ export class SocialShareComponent {
     this.$scope = $scope;
     this.enterState = true;
     this.$http = $http;
-
   }
 
-  shortUrl() {
-     this.$http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
-        longUrl: this.$location.absUrl()
-      }).success((data, status, headers, config) => {
-        return data.id;
-      }).
-      error((data, status, headers, config) => {
-        console.log('error', data);
-
-      });
-  }
   curLink() {
-
- return this.$location.absUrl();
-    //turn this.shortUrl();
+    return this.$location.absUrl();
   }
-
 
   isActive(route) {
     return route === this.$location.path();
   }
 }
 
-export default angular.module('directives.socialShare', [angularAria, ngAnimate, angularMaterial, angularMessages, socialShare ])
+export default angular.module('directives.socialShare', [angularAria, ngAnimate, angularMaterial, angularMessages, socialShare])
   .component('socialShareJp', {
     template: require('./social-share.pug'),
     controller: SocialShareComponent

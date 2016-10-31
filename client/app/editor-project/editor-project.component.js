@@ -6,7 +6,6 @@ import _ from 'lodash';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
 
-
 export class EditorProjectController {
 
   /*@ngInject*/
@@ -41,27 +40,27 @@ export class EditorProjectController {
   }
 
   handleAdd() {
-    this.$http.post('/api/projects', this.project)
+    this.$http.post('/api/projects', this.project);
   }
 
   showDialog(ev) {
     this.$http.get('api/imageGallery')
-      .then (images => {
+      .then(images => {
         this.imagesList = images.data;
         this.dialog = this.$mdDialog.show({
-        scope: this.$scope,
-        preserveScope: true,
-        controller: DialogImagesGalleryController,
-        templateUrl: 'selectImage.tmpl.pug',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: false,
-        fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
+          scope: this.$scope,
+          preserveScope: true,
+          controller: DialogImagesGalleryController,
+          templateUrl: 'selectImage.tmpl.pug',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: false,
+          fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
       .then(answer => {
         this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
       });
-    })
+      });
   }
 }
 
