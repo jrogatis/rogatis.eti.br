@@ -10,34 +10,32 @@ import ngMeta from 'ng-meta';
 export class PostController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, $routeParams, $location ) {
+  constructor($http, $scope, $animate, $mdDialog, socket, $routeParams, $location, ngMeta) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.$routeParams = $routeParams;
-    //this.ngMeta = ngMeta;
+    this.ngMeta = ngMeta;
     this.$location = $location;
   }
 
   $onInit() {
-    /* $http.get(`/api/pageInfos/pageUrl/${encoded}`)
-        .then(res => {
-          this.pageInfo = res.data;
-        })*/
-    /*this.$http.get(`/api/posts/${this.$routeParams.postId}`)
+    this.$http.get(`/api/posts/${this.$routeParams.postId}`)
       .then(response => {
         this.post = response.data;
-          this.ngMeta.setTag('url',  this.$location.absUrl());
-          this.ngMeta.setTag('image', this.post.postImage);
-          this.ngMeta.setTag('description', this.post.snipet);
-          this.ngMeta.setTag('author', 'Jean Philip de Rogatis');
+        this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
+        this.ngMeta.setTag('og:title', this.post.title);
+        this.ngMeta.setTag('description', this.post.snipet);
+        this.ngMeta.setTag('og:description', this.post.snipet);
+        this.ngMeta.setTag('og:url', this.$location.absUrl());
+        this.ngMeta.setTag('og:image', this.post.postImage);
         //this.socket.syncUpdates('posts', this.listPosts);
-      });*/
+      });
   }
 }
 
-export default angular.module('rogatisEtiBrApp.post', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial])
+export default angular.module('rogatisEtiBrApp.post', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta'])
   .config(routing)
   .component('post', {
     template: require('./post.pug'),
