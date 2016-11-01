@@ -26,11 +26,13 @@ export class SocialShareComponent {
       $http.get(`/api/pageInfos/pageUrl/${encoded}`)
         .then(res => {
           _this.pageInfo = res.data;
+          _this.pageInfo.pageUrl = $location.absUrl();
           if($location.host() === 'localhost') {
             _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`
           }
+          //console.log(_this.pageInfo);
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
-              longUrl: _this.pageInfo.pageUrl
+              longUrl: $location.absUrl()
             })
             .success((data, status, headers, config) => {
               _this.pageInfo.shortUrl = data.id;
@@ -43,9 +45,6 @@ export class SocialShareComponent {
     });
   }
 
-  isActive(route) {
-    return route === this.$location.path();
-  }
 }
 
 export default angular.module('directives.socialShare', [angularAria, ngAnimate, angularMaterial, angularMessages, socialShare])

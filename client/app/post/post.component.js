@@ -10,13 +10,13 @@ import ngMeta from 'ng-meta';
 export class PostController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, $routeParams, ngMeta, $location ) {
+  constructor($http, $scope, $animate, $mdDialog, socket, $routeParams, $location ) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.$routeParams = $routeParams;
-    this.ngMeta = ngMeta;
+    //this.ngMeta = ngMeta;
     this.$location = $location;
   }
 
@@ -25,7 +25,7 @@ export class PostController {
         .then(res => {
           this.pageInfo = res.data;
         })*/
-    this.$http.get(`/api/posts/${this.$routeParams.postId}`)
+    /*this.$http.get(`/api/posts/${this.$routeParams.postId}`)
       .then(response => {
         this.post = response.data;
           this.ngMeta.setTag('url',  this.$location.absUrl());
@@ -33,15 +33,12 @@ export class PostController {
           this.ngMeta.setTag('description', this.post.snipet);
           this.ngMeta.setTag('author', 'Jean Philip de Rogatis');
         //this.socket.syncUpdates('posts', this.listPosts);
-      });
+      });*/
   }
 }
 
-export default angular.module('rogatisEtiBrApp.post', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta'])
+export default angular.module('rogatisEtiBrApp.post', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial])
   .config(routing)
-  .run(['ngMeta', function(ngMeta) {
-  ngMeta.init();
-  }])
   .component('post', {
     template: require('./post.pug'),
     controller: PostController
