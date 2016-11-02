@@ -8,7 +8,7 @@ import angular from 'angular';
 export function UtilService($window) {
   'ngInject';
 
-  var charmap = {
+ /* var charmap = {
     ' ': ' ',
     '¡': '!',
     '¢': 'c',
@@ -228,12 +228,12 @@ export function UtilService($window) {
     'Ž': 'Z',
     'ž': 'z',
     'ſ': 's'
-  };
+  };*/
 
 
   var Util = {
 
-    slugify(s) {
+    /*slugify(s) {
       if(!s) return "";
       var ascii = [];
       var ch;
@@ -248,7 +248,7 @@ export function UtilService($window) {
       s = s.replace(/[^\w\s-]/g, '').trim()
         .toLowerCase();
       return s.replace(/[-\s]+/g, '-');
-    },
+    },*/
       /**
        * Return a callback or noop function
        *

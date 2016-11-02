@@ -22,13 +22,12 @@ export class SocialShareComponent {
     var _this = this;
 
     this.$scope.$on('$routeChangeSuccess', (current, previous) => {
-      console.log($location.path());
+      //console.log($location.path());
       const encoded = encodeURIComponent($location.path());
       $http.get(`/api/pageInfos/pageUrl/${encoded}`)
         .then(res => {
-
           _this.pageInfo = res.data;
-          console.log('res no social',  _this.pageInfo);
+          //console.log('res no social',  _this.pageInfo);
           _this.pageInfo.pageUrl = $location.absUrl();
           if($location.host() === 'localhost') {
             _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`

@@ -4,8 +4,9 @@ import routing from './editor.routes';
 import textAngular from 'textangular';
 import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
-//var ui = require('./tinymce.js')
 import ui from 'angular-ui-tinymce';
+import slugifier from 'wb-angular-slugify';
+
 
 
 var sanit = require('textangular/dist/textAngular-sanitize.min');
@@ -13,15 +14,15 @@ var sanit = require('textangular/dist/textAngular-sanitize.min');
 export class EditorController {
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $mdDialog, Util, $location) {
+  constructor($http, $scope, socket, $mdDialog, $location, Slug) {
     this.$http = $http;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
-    this.Util = Util;
     this.$location = $location;
     this.pageInfo;
+    this.Slug = Slug;
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('posts');
     });
@@ -78,14 +79,14 @@ export class EditorController {
         this.listPosts = response.data;
         this.socket.syncUpdates('posts', this.listPosts);
       });
-
   }
 
   loadForEdition(index) {
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
+    console.log(this.Slug.slugify(this.post.title));
     if (this.post.slug === '' || this.post.slug === undefined) {
-      this.post.slug = this.Util.slugify(this.post.title);
+      this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
       .then(res=> {
@@ -99,7 +100,6 @@ export class EditorController {
         }
    });
   }
-
 
   handlePostUpdate(ev) {
     const patches = jsonpatch.generate(this.observerPost);
@@ -151,9 +151,9 @@ export class EditorController {
   }
 
   handlePostAdd(ev) {
-    console.log("add");
+    //console.log("add");
      if (this.post.slug === '' || this.post.slug === undefined) {
-      this.post.slug = this.Util.slugify(this.post.title);
+      this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.post('/api/posts', this.post)
       .then(() => {
@@ -213,7 +213,7 @@ function DialogImagesGalleryController($scope, $mdDialog) {
   };
 }
 
-export default angular.module('rogatisEtiBrApp.editor', [ngRoute, textAngular, 'ui.tinymce'])
+export default angular.module('rogatisEtiBrApp.editor', [ngRoute, textAngular, 'ui.tinymce', 'slugifier'])
   .config(routing)
   .component('editor', {
     template: require('./editor.pug'),
