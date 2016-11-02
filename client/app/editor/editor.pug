@@ -10,13 +10,14 @@ div#Editor(style="min-height:60vh")
     div(layout="row")
       div#postsLists(flex="25")
         h3 list of posts
+        md-button(ng-click="$ctrl.newPost()") New Post
         md-list
           md-list-item(ng-repeat="post in $ctrl.listPosts", ng-click="$ctrl.loadForEdition($index)")
             .md-list-item-text
               h4 {{post.title}}
             md-divider
-      div#editForm(layout="column" flex-offset="5", flex="75")
-        md-input-conatiner
+      div#editForm.md-inline-form(layout="column" flex-offset="5", flex="75", name="editForm")
+        md-input-container
           md-switch(ng-model="$ctrl.post.active") Active ? {{$ctrl.post.active ? true : false}}
         md-input-container
           label(style="font-size:25px;") Title
@@ -32,12 +33,12 @@ div#Editor(style="min-height:60vh")
             label Post Image
             input(ng-model="$ctrl.post.postImage")
             md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
-          img#postImage(ng-src="{{$ctrl.post.postImage}}")
+          img#postImage(ng-show="$ctrl.post" ng-src="{{$ctrl.post.postImage}}")
         md-content
           textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text")
           //text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
-          md-button(type="submit" ng-show="$ctrl.postAnt" ng-click="$ctrl.handleSave($event)") save
-          md-button(type="submit" ng-show="!$ctrl.postAnt" ng-click="$ctrl.handleAdd()") Add
+          md-button(type="submit" ng-show="$ctrl.observerPost" ng-click="$ctrl.handlePostUpdate($event)") Update
+          md-button(type="submit" ng-show="!$ctrl.observerPost" ng-click="$ctrl.handlePostAdd($event)") Add
 
 script(type="text/ng-template" id="selectImage.tmpl.pug")
   md-dialog(aria-label="Search Images")
@@ -58,3 +59,17 @@ script(type="text/ng-template" id="selectImage.tmpl.pug")
       md-dialog-actions(layout="row")
         span(flex)
         md-button(ng-click="cancel()") Cancel
+
+script(type="text/ng-template" id="save.tmpl.pug")
+  md-dialog(aria-label="save")
+    form(ng-cloak)
+      md-toolbar
+        div.md-toolbar-tools
+          h2 Post Saved!
+          span(flex)
+          md-button.md-icon-button(ng-click="cancel()") x
+      md-dialog-content
+        h2 "post and page infos updated"
+      md-dialog-actions(layout="row")
+        span(flex)
+        md-button(ng-click="cancel()") ok

@@ -2,7 +2,7 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/pageInfos              ->  index
  * POST    /api/pageInfos              ->  create
-* GET      /api/pageInfos/pageUrl/:id  ->  showByUrl
+ * GET      /api/pageInfos/pageUrl/:id  ->  showByUrl
  * GET     /api/pageInfos/:id          ->  show
  * PUT     /api/pageInfos/:id          ->  upsert
  * PATCH   /api/pageInfos/:id          ->  patch
@@ -90,6 +90,7 @@ export function show(req, res) {
 
 // Creates a new pagesInfo in the DB
 export function create(req, res) {
+  console.log(req.body);
   return PageInfos.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

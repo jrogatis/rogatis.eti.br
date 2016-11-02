@@ -21,11 +21,14 @@ export class SocialShareComponent {
     this.$http = $http;
     var _this = this;
 
-    this.$scope.$on('$routeChangeSuccess', function (current, previous) {
-      const encoded = encodeURIComponent($location.url());
+    this.$scope.$on('$routeChangeSuccess', (current, previous) => {
+      console.log($location.path());
+      const encoded = encodeURIComponent($location.path());
       $http.get(`/api/pageInfos/pageUrl/${encoded}`)
         .then(res => {
+
           _this.pageInfo = res.data;
+          console.log('res no social',  _this.pageInfo);
           _this.pageInfo.pageUrl = $location.absUrl();
           if($location.host() === 'localhost') {
             _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`
@@ -38,9 +41,10 @@ export class SocialShareComponent {
               _this.pageInfo.shortUrl = data.id;
             })
             .error((data, status, headers, config) => {
-              console.log('error', data);
+              console.log('error get short url', data);
             });
-        });
+        })
+        .catch(err => console.log('error on get page info at social share component', err));
 
     });
   }
