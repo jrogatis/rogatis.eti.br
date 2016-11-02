@@ -1,7 +1,6 @@
-//link(rel='stylesheet' href='/node_modules/textangular/dist/textAngular.css')
-//script(src='/bower_components/textAngular/dist/textAngular-sanitize.min.js')
-//script(src='/bower_components/textAngular/dist/textAngular-rangy.min.js')
-
+link(rel='stylesheet' href='/node_modules/textangular/dist/textAngular.css')
+script(src='/bower_components/textAngular/dist/textAngular-sanitize.min.js')
+script(src='/bower_components/textAngular/dist/textAngular-rangy.min.js')
 div#Editor(style="min-height:60vh")
   .container(layout="column" flex = "100")
     div(flex layout-align="center center" layout="column")
@@ -34,8 +33,7 @@ div#Editor(style="min-height:60vh")
             md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
           img#postImage(ng-src="{{$ctrl.post.postImage}}")
         md-content
-          textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text")
-          //text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
+          text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
           md-button(type="submit" ng-show="$ctrl.postAnt" ng-click="$ctrl.handleSave($event)") save
           md-button(type="submit" ng-show="!$ctrl.postAnt" ng-click="$ctrl.handleAdd()") Add
 

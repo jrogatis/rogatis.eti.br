@@ -17,6 +17,7 @@
     "angular-socialshare": "^2.3.3",
     "angular-socket-io": "~0.7.0",
     "angular-ui-bootstrap": "^2.0.1",
+    "angular-ui-tinymce": "0.0.17",
     "angulargrid": "^0.6.3",
     "aws-sdk": "^2.6.12",
     "babel-polyfill": "^6.7.2",

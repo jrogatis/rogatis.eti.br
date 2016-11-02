@@ -38,7 +38,6 @@ export class MainController {
 export default angular.module('rogatisEtiBrApp.main', [ngRoute, angularGrid, 'ngMeta'])
   .config(routing)
   .run(['ngMeta', ngMeta => {
-    console.log('rodei')
     ngMeta.init();
   }])
   .component('main', {

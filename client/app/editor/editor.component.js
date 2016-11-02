@@ -4,6 +4,9 @@ import routing from './editor.routes';
 import textAngular from 'textangular';
 import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
+//var ui = require('./tinymce.js')
+import ui from 'angular-ui-tinymce';
+
 
 var sanit = require('textangular/dist/textAngular-sanitize.min');
 
@@ -18,9 +21,11 @@ export class EditorController {
     this.$scope.customFullscreen = false;
     this.Util = Util;
     this.$location = $location;
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       socket.unsyncUpdates('posts');
     });
+
+
   }
 
 
@@ -30,6 +35,25 @@ export class EditorController {
         this.listPosts = response.data;
         this.socket.syncUpdates('posts', this.listPosts);
       });
+
+    this.$scope.tinymceOptions = {
+
+      onChange: function(e) {
+        // put logic here for keypress and cut/paste changes
+      },
+      selector: 'textarea',
+      inline: false,
+      height : 700,
+      plugins : `advlist autolink link image imagetools advlist charmap print preview hr anchor pagebreak spellchecker
+        searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking
+        save table contextmenu directionality emoticons template paste textcolor code colorpicker`,
+      skin: 'lightgray',
+      font_formats: 'Prometo=prometo, Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n',
+      fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+      toolbar: 'insertfile undo redo | styleselect | bold italic | fontselect | fontsizeselect |alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code',
+      theme : 'modern'
+    };
+
   }
 
   loadForEdition(index) {
@@ -93,7 +117,7 @@ function DialogImagesGalleryController($scope, $mdDialog) {
   };
 }
 
-export default angular.module('rogatisEtiBrApp.editor', [ngRoute, textAngular])
+export default angular.module('rogatisEtiBrApp.editor', [ngRoute, textAngular, 'ui.tinymce'])
   .config(routing)
   .component('editor', {
     template: require('./editor.pug'),
