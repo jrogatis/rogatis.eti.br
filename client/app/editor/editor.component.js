@@ -84,7 +84,6 @@ export class EditorController {
   loadForEdition(index) {
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
-    console.log(this.Slug.slugify(this.post.title));
     if (this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
@@ -160,6 +159,21 @@ export class EditorController {
         this.handlePageInfoAdd();
         this.showDialogSave(ev);
     })
+  }
+
+  handlePostDelete(index) {
+   this.$http.delete(`api/posts/${this.listPosts[index]._id}`)
+    .then(() => {
+      this.$http.delete(`/api/pageInfos/${this.pageInfo._id}`)
+      .then(() => {
+        this.loadPosts();
+        this.post = undefined;
+        this.pageInfo = undefined;
+      })
+      .catch(err => console.log('err at delete posts page info', err))
+
+   })
+    .catch(err => console.log('err at delete posts', err))
   }
 
   showDialog(ev) {

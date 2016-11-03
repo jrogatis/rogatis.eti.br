@@ -16,14 +16,16 @@ div#mainGallery
       md-divider.md-padding
       h1 Gallery
       div#gallery(layout="column", flex="100").animated.bounceIn
-        ul.dynamic-grid(angular-grid-id="galleryGrid" angular-grid="$ctrl.listImages" ag-grid-width="150" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
-          li.grid(data-ng-repeat="pic in $ctrl.listImages")
+        ul.dynamic-grid(angular-grid-id="galleryGrid" angular-grid="$ctrl.listImages" ag-grid-width="250" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true" )
+          li.grid(data-ng-repeat="pic in $ctrl.listImages" image-dimensions)
             div.show-image
-              img.grid-img(src="https://s3.amazonaws.com/rogatis/{{pic}}" data-actual-width = "150"  data-actual-height="150")
+              img.grid-img(src="https://s3.amazonaws.com/rogatis/{{pic}}" data-actual-width =  "{{width}}" data-actual-height="{{height}}" img-dimensions-bind-directive="pic")
               md-button.md-icon-button.md-accent(aria-label="Favorite" ng-click="$ctrl.deleteImage(pic)")
                 md-icon.fa.fa-trash
-            div
-              span {{pic}}
+              div#imageDesc.md-padding
+                p {{pic}}
+                p W {{ width }} x H {{height}}
+
 
 
 

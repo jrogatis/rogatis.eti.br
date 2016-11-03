@@ -7,6 +7,7 @@ import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 import angularGrid from 'angulargrid';
 import ngFileUpload from 'ng-file-upload';
+import ngImageDimensions from 'angular-image-dimensions';
 
 
 export class GalleryController {
@@ -82,7 +83,7 @@ export class GalleryController {
 }
 
 
-export default angular.module('rogatisEtiBrApp.gallery', [ngRoute, ngMdIcons, ngMessages, ngAria, angularGrid, ngFileUpload, ngMaterial])
+export default angular.module('rogatisEtiBrApp.gallery', [ngRoute, ngMdIcons, ngMessages, ngAria, angularGrid, ngFileUpload, ngMaterial, 'ngImageDimensions'])
   .config(routing)
   .component('gallery', {
     template: require('./gallery.pug'),

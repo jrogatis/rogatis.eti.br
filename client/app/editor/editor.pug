@@ -15,7 +15,7 @@ div#Editor(style="min-height:60vh")
           md-list-item(ng-repeat="post in $ctrl.listPosts", ng-click="$ctrl.loadForEdition($index)")
             .md-list-item-text(flex)
               h4 {{post.title}}
-            md-button.md-icon-button.md-accent(flex="10" aria-label="Favorite" ng-click="$ctrl.deletePost($index)")
+            md-button.md-icon-button.md-accent(flex="10" aria-label="Favorite" ng-click="$ctrl.handlePostDelete($index)")
                 md-icon.fa.fa-trash
             md-divider
       div#editForm.md-inline-form(layout="column" flex-offset="5", flex="75", name="editForm")

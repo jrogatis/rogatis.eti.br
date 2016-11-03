@@ -23,6 +23,9 @@ $onInit() {
   this.$http.get('/api/posts')
     .then(response => {
       this.listPosts = response.data;
+      this.listPosts = this.listPosts.filter(el => {
+        return el.active === true;
+      });
       this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
       this.ngMeta.setTag('og:title', 'Jean Philip de Rogatis Tech Blog');
       this.ngMeta.setTag('description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
