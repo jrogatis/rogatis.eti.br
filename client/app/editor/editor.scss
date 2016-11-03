@@ -4,15 +4,30 @@ md-divider {
 }
 
 div#Editor {
-  div#editForm {}
+  div {
+    div#menus {
+      div#postsLists {
+        md-list {
+          overflow-y: scroll;
+          max-height: 400px;
+          md-list-item {
+            button {
+              position: absolute;
+              top: 0;
+              right: 0;
+              display: none;
+            }
+            :hover button {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
 }
-
-.ta-editor {
-  background-color: white;
-  padding: 10px 10px;
-  min-height: 100px;
-}
-
 img#postImage {
   max-height: 50px;
 }
+
+

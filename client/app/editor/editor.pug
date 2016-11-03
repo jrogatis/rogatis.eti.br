@@ -7,14 +7,16 @@ div#Editor(style="min-height:60vh")
     div(flex layout-align="center center" layout="column")
       h1 Post Editor Console
       h3 Dear You.. Take your time and write interesting things!!!
-    div(layout="row")
+    div#menus(layout="row" flex layout-align="center center")
       div#postsLists(flex="25")
         h3 list of posts
         md-button(ng-click="$ctrl.newPost()") New Post
-        md-list
+        md-list(flex)
           md-list-item(ng-repeat="post in $ctrl.listPosts", ng-click="$ctrl.loadForEdition($index)")
-            .md-list-item-text
+            .md-list-item-text(flex)
               h4 {{post.title}}
+            md-button.md-icon-button.md-accent(flex="10" aria-label="Favorite" ng-click="$ctrl.deletePost($index)")
+                md-icon.fa.fa-trash
             md-divider
       div#editForm.md-inline-form(layout="column" flex-offset="5", flex="75", name="editForm")
         md-input-container
@@ -34,12 +36,13 @@ div#Editor(style="min-height:60vh")
             input(ng-model="$ctrl.post.postImage")
             md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
           img#postImage(ng-show="$ctrl.post" ng-src="{{$ctrl.post.postImage}}")
-        md-content
-          textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text")
-          //text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
-          md-button(type="submit" ng-show="$ctrl.observerPost" ng-click="$ctrl.handlePostUpdate($event)") Update
-          md-button(type="submit" ng-show="!$ctrl.observerPost" ng-click="$ctrl.handlePostAdd($event)") Add
-
+    div(layout = "row" flex layout-align="center center")
+      md-content(flex="80" flex-offset="10")
+        textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text")
+        //text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
+        md-button(type="submit" ng-show="$ctrl.observerPost" ng-click="$ctrl.handlePostUpdate($event)") Update
+        md-button(type="submit" ng-show="!$ctrl.observerPost" ng-click="$ctrl.handlePostAdd($event)") Add
+      div(flex)
 script(type="text/ng-template" id="selectImage.tmpl.pug")
   md-dialog(aria-label="Search Images")
     form(ng-cloak)

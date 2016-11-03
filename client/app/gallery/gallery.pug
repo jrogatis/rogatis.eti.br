@@ -7,7 +7,7 @@ div#mainGallery
             label Title
             input(ng-model="$ctrl.image.title")
           div#drop(flex="20" layout="row").md-padding
-            div.drop-box(ngf-drop="$ctrl.onFileSelect($file)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'")
+            div.drop-box(ngf-drop="$ctrl.onFileSelect($file)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'" ngf-resize="{ratio: '1.91:1', width: 1203, height: 630}")
               span Drop Images or PDFs files here
             div( ngf-no-file-drop) File Drag/Drop is not supported for this browser
         div(flex)
