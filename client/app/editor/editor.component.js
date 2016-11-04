@@ -70,11 +70,12 @@ export class EditorController {
             'text-indent': '1.5em'
           }
       }
-    ]};
+    ]
+    };
   }
 
   loadPosts() {
-     this.$http.get('/api/posts')
+    this.$http.get('/api/posts')
       .then(response => {
         this.listPosts = response.data;
         this.socket.syncUpdates('posts', this.listPosts);
@@ -88,16 +89,16 @@ export class EditorController {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
-      .then(res=> {
+      .then(res => {
         this.pageInfo = res.data;
         this.observerPageInfo = jsonpatch.observe(this.pageInfo);
       })
-      .catch(err=>{
+      .catch(err => {
         console.log('error on loadForEdition', err)
         if (err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
         }
-   });
+      });
   }
 
   handlePostUpdate(ev) {
@@ -107,34 +108,34 @@ export class EditorController {
         this.handlePageInfoUpdate(ev)
         this.loadPosts()
       })
-      .catch(err=> console.log(err));
+      .catch(err => console.log(err));
   }
 
   handlePageInfoUpdate(ev) {
-      this.pageInfo.pageName = this.post.title;
-      this.pageInfo.pageDesc = this.post.snipet;
-      this.pageInfo.pageImgUrl = this.post.postImage;
-      this.pageInfo.pageUrl = `/post/${this.post.slug}`;
-      let patches = jsonpatch.generate(this.observerPageInfo);
-      this.$http.patch(`/api/pageInfos/${this.pageInfo._id}`, patches)
-        .then(this.showDialogSave(ev));
+    this.pageInfo.pageName = this.post.title;
+    this.pageInfo.pageDesc = this.post.snipet;
+    this.pageInfo.pageImgUrl = this.post.postImage;
+    this.pageInfo.pageUrl = `/post/${this.post.slug}`;
+    let patches = jsonpatch.generate(this.observerPageInfo);
+    this.$http.patch(`/api/pageInfos/${this.pageInfo._id}`, patches)
+      .then(this.showDialogSave(ev));
   }
 
   handlePageInfoAdd() {
-     this.pageInfo = {
-        pageName: this.post.title,
-        pageDesc: this.post.snipet,
-        pageImgUrl: this.post.postImage,
-        pageUrl: `/post/${this.post.slug}`
+    this.pageInfo = {
+      pageName: this.post.title,
+      pageDesc: this.post.snipet,
+      pageImgUrl: this.post.postImage,
+      pageUrl: `/post/${this.post.slug}`
     };
     this.$http.post('/api/pageInfos', this.pageInfo)
       .then(
         this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
-          .then(res=> {
-             this.pageInfo = res.data;
-             this.observerPageInfo = jsonpatch.observe(this.pageInfo);
-          })
-          .catch(err => console.log('error on handlePageInfoAdd no get do pageurl', err))
+        .then(res => {
+          this.pageInfo = res.data;
+          this.observerPageInfo = jsonpatch.observe(this.pageInfo);
+        })
+        .catch(err => console.log('error on handlePageInfoAdd no get do pageurl', err))
       )
       .catch(err => console.log('error on handlePageInfoAdd', err))
   }
@@ -151,29 +152,29 @@ export class EditorController {
 
   handlePostAdd(ev) {
     //console.log("add");
-     if (this.post.slug === '' || this.post.slug === undefined) {
+    if (this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.post('/api/posts', this.post)
       .then(() => {
         this.handlePageInfoAdd();
         this.showDialogSave(ev);
-    })
+      })
   }
 
   handlePostDelete(index) {
-   this.$http.delete(`api/posts/${this.listPosts[index]._id}`)
-    .then(() => {
-      this.$http.delete(`/api/pageInfos/${this.pageInfo._id}`)
+    this.$http.delete(`api/posts/${this.listPosts[index]._id}`)
       .then(() => {
-        this.loadPosts();
-        this.post = undefined;
-        this.pageInfo = undefined;
-      })
-      .catch(err => console.log('err at delete posts page info', err))
+        this.$http.delete(`/api/pageInfos/${this.pageInfo._id}`)
+          .then(() => {
+            this.loadPosts();
+            this.post = undefined;
+            this.pageInfo = undefined;
+          })
+          .catch(err => console.log('err at delete posts page info', err))
 
-   })
-    .catch(err => console.log('err at delete posts', err))
+      })
+      .catch(err => console.log('err at delete posts', err))
   }
 
   showDialog(ev) {
@@ -198,15 +199,15 @@ export class EditorController {
 
   showDialogSave(ev) {
     this.dialog = this.$mdDialog.show({
-        scope: this.$scope,
-        preserveScope: true,
-        controller: DialogImagesGalleryController,
-        templateUrl: 'save.tmpl.pug',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: false,
-        fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
+      scope: this.$scope,
+      preserveScope: true,
+      controller: DialogImagesGalleryController,
+      templateUrl: 'save.tmpl.pug',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false,
+      fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+    })
   };
 
 }
