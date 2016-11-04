@@ -4,6 +4,7 @@ export default function routes($routeProvider) {
   'ngInject';
 
   $routeProvider.when('/gallery', {
-    template: '<gallery></gallery>'
+    template: '<gallery></gallery>',
+    authenticate: true
   });
 }

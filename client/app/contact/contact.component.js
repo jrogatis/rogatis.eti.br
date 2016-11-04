@@ -17,7 +17,7 @@ export class ContactController {
 
   sendEmail() {
     this.$http.post('/api/contactForm', this.user)
-      .then(res => {
+      .then(() => {
         this.showDialog();
         this.$scope.emailForm.$setPristine();
         this.$scope.emailForm.$setUntouched();

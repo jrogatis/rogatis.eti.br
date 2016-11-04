@@ -11,30 +11,30 @@ import ngMeta from 'ng-meta';
 export class BlogController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta,  $location) {
+  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.ngMeta = ngMeta;
     this.$mdDialog = $mdDialog;
-     this.$location = $location;
+    this.$location = $location;
   }
-$onInit() {
-  this.$http.get('/api/posts')
-    .then(response => {
-      this.listPosts = response.data;
-      this.listPosts = this.listPosts.filter(el => {
-        return el.active === true;
+  $onInit() {
+    this.$http.get('/api/posts')
+      .then(response => {
+        this.listPosts = response.data;
+        this.listPosts = this.listPosts.filter(el => {
+          return el.active === true;
+        });
+        this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
+        this.ngMeta.setTag('og:title', 'Jean Philip de Rogatis Tech Blog');
+        this.ngMeta.setTag('description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
+        this.ngMeta.setTag('og:description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
+        this.ngMeta.setTag('og:url', this.$location.absUrl());
+        this.ngMeta.setTag('og:image', 'https://s3.amazonaws.com/rogatis/anxiusbw.jpg');
+        this.socket.syncUpdates('posts', this.listPosts);
       });
-      this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
-      this.ngMeta.setTag('og:title', 'Jean Philip de Rogatis Tech Blog');
-      this.ngMeta.setTag('description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
-      this.ngMeta.setTag('og:description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
-      this.ngMeta.setTag('og:url', this.$location.absUrl());
-      this.ngMeta.setTag('og:image', 'https://s3.amazonaws.com/rogatis/anxiusbw.jpg');
-      this.socket.syncUpdates('posts', this.listPosts);
-    });
-}
+  }
 }
 
 export default angular.module('rogatisEtiBrApp.blog', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta'])

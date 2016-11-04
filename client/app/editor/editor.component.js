@@ -3,7 +3,7 @@ const ngRoute = require('angular-route');
 import routing from './editor.routes';
 import textAngular from 'textangular';
 import jsonpatch from 'fast-json-patch';
-import _ from 'lodash';
+//import _ from 'lodash';
 import ui from 'angular-ui-tinymce';
 import slugifier from 'wb-angular-slugify';
 
@@ -23,16 +23,15 @@ export class EditorController {
     this.$location = $location;
     this.pageInfo;
     this.Slug = Slug;
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function() {
       socket.unsyncUpdates('posts');
     });
   }
 
   $onInit() {
-
-    this.loadPosts()
+    this.loadPosts();
     this.$scope.tinymceOptions = {
-      onChange: function (e) {
+      onChange: function(e) {
         // put logic here for keypress and cut/paste changes
       },
       selector: 'textarea',
@@ -105,8 +104,8 @@ export class EditorController {
     const patches = jsonpatch.generate(this.observerPost);
     this.$http.patch(`/api/posts/${this.post._id}`, patches)
       .then(() => {
-        this.handlePageInfoUpdate(ev)
-        this.loadPosts()
+        this.handlePageInfoUpdate(ev);
+        this.loadPosts();
       })
       .catch(err => console.log(err));
   }
@@ -137,7 +136,7 @@ export class EditorController {
         })
         .catch(err => console.log('error on handlePageInfoAdd no get do pageurl', err))
       )
-      .catch(err => console.log('error on handlePageInfoAdd', err))
+      .catch(err => console.log('error on handlePageInfoAdd', err));
   }
 
   newPost() {
@@ -145,14 +144,12 @@ export class EditorController {
     this.pageInfo = undefined;
     this.observerPageInfo = undefined;
     this.observerPost = undefined;
-
-    this.loadPosts()
-
+    this.loadPosts();
   }
 
   handlePostAdd(ev) {
     //console.log("add");
-    if (this.post.slug === '' || this.post.slug === undefined) {
+    if(this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.post('/api/posts', this.post)
@@ -171,10 +168,10 @@ export class EditorController {
             this.post = undefined;
             this.pageInfo = undefined;
           })
-          .catch(err => console.log('err at delete posts page info', err))
+          .catch(err => console.log('err at delete posts page info', err));
 
       })
-      .catch(err => console.log('err at delete posts', err))
+      .catch(err => console.log('err at delete posts', err));
   }
 
   showDialog(ev) {
@@ -207,7 +204,7 @@ export class EditorController {
       targetEvent: ev,
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
+    });
   };
 
 }

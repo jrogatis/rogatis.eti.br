@@ -10,7 +10,7 @@ import ngMeta from 'ng-meta';
 export class PortfolioController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta,  $location) {
+  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;

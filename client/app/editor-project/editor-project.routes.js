@@ -4,6 +4,7 @@ export default function routes($routeProvider) {
   'ngInject';
 
   $routeProvider.when('/editorProject', {
-    template: '<editor-project></editor-project>'
+    template: '<editor-project></editor-project>',
+     authenticate: true
   });
 }
