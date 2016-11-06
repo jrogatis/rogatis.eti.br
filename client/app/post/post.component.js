@@ -24,7 +24,8 @@ export class PostController {
     this.$http.get(`/api/posts/${this.$routeParams.postId}`)
       .then(response => {
         this.post = response.data;
-        this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
+        this.ngMeta.setTitle(this.post.title);
+        this.ngMeta.setTag('og:type', 'article');
         this.ngMeta.setTag('og:title', this.post.title);
         this.ngMeta.setTag('description', this.post.snipet);
         this.ngMeta.setTag('og:description', this.post.snipet);

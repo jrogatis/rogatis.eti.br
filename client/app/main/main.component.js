@@ -23,7 +23,8 @@ export class MainController {
     this.ngMeta.setTag('description', 'This are my personal portofio! Show of some of my work as a code warrior!');
     this.ngMeta.setTag('og:description', 'This are my personal portofio! Show of some of my work as a code warrior!');
     this.ngMeta.setTag('og:url', this.$location.absUrl());
-     this.ngMeta.setTag('og:image', 'https://s3.amazonaws.com/rogatis/skydive6.jpg');
+    this.ngMeta.setTag('og:image', 'https://s3.amazonaws.com/rogatis/skydive6.jpg');
+     this.ngMeta.setTag('og:type', 'website');
     this.$http.get('/api/projects')
       .then(response => {
         this.listProjects = response.data;
