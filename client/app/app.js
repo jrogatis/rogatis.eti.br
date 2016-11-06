@@ -31,11 +31,12 @@ import editorProject from './editor-project/editor-project.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import ngMeta from 'ng-meta';
 
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
-    uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util
+    uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util, 'ngMeta'
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
