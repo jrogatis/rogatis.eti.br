@@ -12,7 +12,6 @@ export class MainController {
     this.socket = socket;
     this.ngMeta = ngMeta;
     this.$location = $location;
-
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('projects');
     });
