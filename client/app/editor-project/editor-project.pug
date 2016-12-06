@@ -19,11 +19,16 @@ div#EditorProject(style="min-height:60vh")
             md-input-container(flex)
               md-switch(ng-model="$ctrl.project.displayFront") Front ?
           md-input-container
-            label desc
+            label Desc
             textarea(ng-model="$ctrl.project.desc")
-          md-input-container
-            label Project Url
-            input(ng-model="$ctrl.project.siteUrl")
+          div(layout="row" flex="100")  
+            md-input-container(flex)
+              label Project Type
+              <md-select ng-model="$ctrl.project.type">
+                <md-option ng-repeat="type in $ctrl.projectTypes" value="{{type}}"> {{type}}
+            md-input-container(flex="80")
+              label Project Url
+              input(ng-model="$ctrl.project.siteUrl")
           div(layout="row" flex="100")
             md-input-container(flex)
               label Project Image

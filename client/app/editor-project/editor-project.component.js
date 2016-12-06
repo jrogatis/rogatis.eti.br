@@ -15,6 +15,7 @@ export class EditorProjectController {
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
+    this.projectTypes = ['Demo', 'Demo MEAN Stack', 'Demo MERN Stack', 'Demo React', 'Demo Angular'];
   }
 
   $onInit() {
@@ -31,11 +32,7 @@ export class EditorProjectController {
 
   handleSave() {
     const observer = jsonpatch.observe(this.projectAnt);
-    this.projectAnt.title = this.project.title;
-    this.projectAnt.desc = this.project.desc;
-    this.projectAnt.imgUrl = this.project.imgUrl;
-    this.projectAnt.siteUrl = this.project.siteUrl;
-    this.projectAnt.displayFront = this.project.displayFront;
+    this.projectAnt.type = this.project.type;
     let patches = jsonpatch.generate(observer);
     this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches);
   }

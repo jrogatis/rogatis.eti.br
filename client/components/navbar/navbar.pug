@@ -3,9 +3,19 @@ div#navBar(flex="100", layout-align="center center")
     md-toolbar.animated.fadeInDown(flex="100", layout-align="center center")
       div.md-toolbar-tools(flex="100", layout-align="center center")
         div(layout-align="start center", flex="25" layout="row")
-          md-menu(ng-show='$ctrl.isLoggedIn()', layout="row", flex="25", layout-align="end center" )
-            md-button.md-icon-button.md-default-theme(ng-click="$mdOpenMenu()", style="width:60px;height:60px;", aria-label="manut-menu")
-              img(ng-src="/assets/images/personalLogo.svg")
+          a(ng-href="/") 
+            md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
+        div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
+          md-button(ng-href="/") about
+            div.selected(ng-show="$ctrl.isActive('/')")
+          md-button(ng-href="/portfolio") portfolio
+            div.selected(ng-show="$ctrl.isActive('/portfolio')")
+          md-button(ng-href="/blog") blog
+            div.selected(ng-show="$ctrl.isActive('/blog')")
+          md-button(ng-href="/contact") contact
+            div.selected(ng-show="$ctrl.isActive('/contact')")
+          md-menu#menuAdmin(ng-show='$ctrl.isLoggedIn()', layout="row")
+            md-button(ng-click="$mdOpenMenu()", aria-label="manut-menu") admin
             //md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
               i.fa.fa-bars(style="color:white; font-size:30px")
             md-menu-content
@@ -16,17 +26,7 @@ div#navBar(flex="100", layout-align="center center")
               md-menu-item
                 md-button(ng-href='/editor') Editor
               md-menu-item
-                md-button(ng-href='/editorProject') Projects
-          md-icon#logo.md-default-theme(ng-show='!$ctrl.isLoggedIn()', md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
-        div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
-          md-button(ng-href="/") about
-            div.selected(ng-show="$ctrl.isActive('/')")
-          md-button(ng-href="/portfolio") portfolio
-            div.selected(ng-show="$ctrl.isActive('/portfolio')")
-          md-button(ng-href="/blog") blog
-            div.selected(ng-show="$ctrl.isActive('/blog')")
-          md-button(ng-href="/contact") contact
-            div.selected(ng-show="$ctrl.isActive('/contact')")
+                md-button(ng-href='/editorProject') Projects           
         div#socialLinks(hide-xs  layout="row" layout-align="center center",  layout-align-gt-sm="end center", flex="25", flex-sm="50")
           md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
             md-tooltip Linkedin
@@ -40,7 +40,6 @@ div#navBar(flex="100", layout-align="center center")
           md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
             md-tooltip git
             img(src="/assets/images/git.svg" style="width:24px;height:24px;")
-
         md-menu(hide-gt-sm, layout="row", flex="25", layout-align="end center")
           md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
             i.fa.fa-bars(style="color:white; font-size:30px")
@@ -53,3 +52,4 @@ div#navBar(flex="100", layout-align="center center")
               md-button(ng-href="/blog") blog
             md-menu-item
               md-button(ng-href="/contact") contact
+  

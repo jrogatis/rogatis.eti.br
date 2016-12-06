@@ -17,7 +17,7 @@ div#Main {
   }
   div#latestWorkTitle {
     h1 {
-      font-size: 25px;
+      font-size: 20px;
       text-align: center;
       @include respond-to(screen-xs) {
         font-size: 15px;
@@ -32,10 +32,11 @@ div#Main {
 }
 
 .grid {
-  border: 1px solid #cccccc;
-  box-shadow: 5px 5px 5px #888888;
+  border: 0px solid #cccccc;
+  box-shadow: 0.5px 0.5px 0.5px #c4bdbd;
   list-style: none;
-  background: #f8f3f3;
+  //background: #f8f3f3;
+  background-color: white;
   -webkit-transition: all 0.6s ease-out;
   position: absolute;
   box-sizing: border-box;
@@ -44,7 +45,7 @@ div#Main {
   overflow: hidden;
   border-radius: 5px;
   .grid-img {
-    box-shadow: 5px 5px 5px #888888;
+    box-shadow: 0px 0px 0px #888888;
     width: 100%;
     vertical-align: middle;
     -webkit-transition: opacity 0.6s ease-out;
@@ -55,11 +56,14 @@ div#Main {
     padding: 10px 10px;
   }
   div#textWork {
-    padding-top: 10px;
-    p {
-      padding-top: 5px;
-      text-align: justify;
-       padding-right: 5px;
+    background-color: white;
+    color: #324e81;
+    padding-top: 5px;
+    h2{
+      margin: 0;
+     }
+     h3 {
+      margin: 0;
     }
   }
 }
