@@ -1,26 +1,25 @@
 
 div#BlogMain
-  .container(layout-sm ="columns" layout-gt-sm="row")
-    div#blogText(flex="65", layout-align="center center")
-      h1 my weekly code anxiety
-      div#posts
-        md-list(flex)
-          md-list-item(layout="column" layout-gt-sm="row" ng-repeat="post in $ctrl.listPosts")
-            div(flex-xs flex-gt-xs="60" layout="column").animated.slideInUp
-              md-card
-                md-card-title
-                  md-card-title-media.md-padding
-                    div.md-media-lg.card-media
-                      img(ng-src="{{post.postImage}}")
+  .container(layout-align="center center")
+    h1 My Weekly Code Anxiety
+    div(layout-sm ="columns" layout-gt-sm="row")
+      div#blogPicture(flex="100", flex-gt-md="35").animated.slideInLeft
+      div#blogText(flex="100", flex-gt-md="65", layout-align="center center")
+        div#posts
+          md-list(flex)
+            md-list-item(layout="column" layout-gt-sm="row" ng-repeat="post in $ctrl.listPosts")
+              div(flex-xs flex-gt-xs="60" layout="column").animated.slideInUp
+                md-card
+                  md-card-title(layout="column" layout-gt-sm="row")
+                    md-card-title-media.md-padding
+                      div.md-media-lg.card-media
+                        img(ng-src="{{post.postImage}}")
+                    md-card-title-text
+                      span.md-headline {{post.title}}
+                      span.md-subhead {{post.snipet}}
+                      a(ng-href=`/post/{{post.slug}}`) more ...
 
-                  md-card-title-text
-                    span.md-headline {{post.title}}
-                    span.md-subhead {{post.snipet}}
-                    a(ng-href=`/post/{{post.slug}}`) more ...
-
-
-
-    div#blogPicture(flex="35").animated.slideInRight
+    
 
 
 

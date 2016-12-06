@@ -1,31 +1,44 @@
-
 div#navBar {
   font-family: prometo, roboto, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2em;
   border-color: transparent;
-  min-height: 2em;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#064a99+18,7db9e8+82 */
-background: rgb(6,74,153); /* Old browsers */
-background: -moz-linear-gradient(left, rgba(6,74,153,1) 18%, rgba(125,185,232,1) 82%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, rgba(6,74,153,1) 18%,rgba(125,185,232,1) 82%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, rgba(6,74,153,1) 18%,rgba(125,185,232,1) 82%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  md-toolbar {
-    background-color: transparent;
-    .md-toolbar-tools {
-      div#navbar-main li a {
-        color: white;
-        background-color: transparent;
-      }
-      div#menuButtons {
-        .md-button {
-          font-size: 1em;
-          .selected {
-            border-style: solid;
-            border-width: thin;
-            border-color: lightgray;
-            max-height: 0.6px;
+  background: rgb(6, 74, 153);
+  /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  div.container {
+    md-toolbar {
+      min-height: 4em;
+      background-color: transparent;
+      .md-toolbar-tools {
+        div#navbar-main li a {
+          color: white;
+          background-color: transparent;
+        }
+        div#menuButtons {
+          .md-button {
+            font-size: 1em;
+            .selected {
+              border-style: solid;
+              border-width: thin;
+              border-color: lightgray;
+              max-height: 0.6px;
+            } 
+          }
+        }
+        div#socialLinks {
+          a {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0px;
+            margin-right: 0px;
           }
         }
       }

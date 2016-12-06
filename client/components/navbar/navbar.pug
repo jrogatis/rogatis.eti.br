@@ -1,9 +1,9 @@
-div#navBar
-  .container
-    md-toolbar.animated.fadeInDown(flex="100")
-      div.md-toolbar-tools(flex="100")
+div#navBar(flex="100", layout-align="center center")
+  .container(flex="100", layout-align="center center")
+    md-toolbar.animated.fadeInDown(flex="100", layout-align="center center")
+      div.md-toolbar-tools(flex="100", layout-align="center center")
         div(layout-align="start center", flex="25" layout="row")
-          md-menu(ng-show='$ctrl.isLoggedIn()', layout="row", flex="25", layout-align="end center")
+          md-menu(ng-show='$ctrl.isLoggedIn()', layout="row", flex="25", layout-align="end center" )
             md-button.md-icon-button.md-default-theme(ng-click="$mdOpenMenu()", style="width:60px;height:60px;", aria-label="manut-menu")
               img(ng-src="/assets/images/personalLogo.svg")
             //md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
@@ -17,7 +17,7 @@ div#navBar
                 md-button(ng-href='/editor') Editor
               md-menu-item
                 md-button(ng-href='/editorProject') Projects
-          md-icon.md-default-theme(ng-show='!$ctrl.isLoggedIn()', md-svg-icon="/assets/images/personalLogo.svg", style="width:60px;height:60px;")
+          md-icon#logo.md-default-theme(ng-show='!$ctrl.isLoggedIn()', md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
           md-button(ng-href="/") about
             div.selected(ng-show="$ctrl.isActive('/')")
@@ -27,7 +27,7 @@ div#navBar
             div.selected(ng-show="$ctrl.isActive('/blog')")
           md-button(ng-href="/contact") contact
             div.selected(ng-show="$ctrl.isActive('/contact')")
-        div(hide-xs  layout="row" layout-align="end center",  flex="25", flex-sm="50")
+        div#socialLinks(hide-xs  layout="row" layout-align="center center",  layout-align-gt-sm="end center", flex="25", flex-sm="50")
           md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
             md-tooltip Linkedin
             img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
