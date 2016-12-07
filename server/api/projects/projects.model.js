@@ -8,7 +8,7 @@ var ProjectsSchema = new mongoose.Schema({
   desc: { type: 'String', required: true },
   imgUrl: { type: 'String', required: true },
   siteUrl: { type: 'String', required: true },
-  displayFront: { type: Boolean, required: true }
+  displayFront: { type: Boolean, required: false }
 });
 
 export default mongoose.model('Projects', ProjectsSchema);
