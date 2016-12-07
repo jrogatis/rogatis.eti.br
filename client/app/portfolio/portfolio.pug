@@ -1,15 +1,22 @@
 
-div#porfolioMain
+div#portfolioMain
   .container(layout-sm ="column" layout-gt-sm="row")
-    div#porfolio(layout="column", flex="100").animated.bounceIn
-      ul.dynamic-grid(angular-grid="$ctrl.listProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
-       li.grid(data-ng-repeat="project in $ctrl.listProjects")
-        a(ng-href="{{project.siteUrl}}", target="_blank")
-          img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-          div#textWork.col-lg-12(layout="column")
-            h3.col-lg-offset-1 {{project.title}}
-            p.col-lg-offset-1.
-              {{project.desc}}
+    div#portfolio(flex)  
+      md-grid-list( flex
+            md-cols-gt-sm="3" md-cols="1" 
+            md-row-height="4:3"
+            md-gutter-gt-sd="25px"  md-gutter="4px")
+            md-grid-tile(ng-repeat="project in $ctrl.listProjects")
+              md-button(ng-href="{{project.siteUrl}}")
+                md-card
+                  img(ng-src="{{project.imgUrl}}") 
+                  div#card(flex layout="row"  layout-align="center center") 
+                    md-card-title(flex="90")
+                      md-card-title-text
+                        span.md-headline {{project.title}}
+                        span.md-subhead {{project.type}}
+                    div#pointer(flex layout-align="center center")
+                      i.fa.fa-angle-right      
 
 
 

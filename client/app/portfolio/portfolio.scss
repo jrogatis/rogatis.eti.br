@@ -1,49 +1,45 @@
-div#projectMain {
-  div#portolio {
-    .grid {
-      border: 1px solid #cccccc;
-      box-shadow: 5px 5px 5px #888888;
-      list-style: none;
-      background: #f8f3f3;
-      -webkit-transition: all 0.6s ease-out;
-      position: absolute;
-      box-sizing: border-box;
-      -webkit-transition: all 400ms ease;
-      transition: all 400ms ease;
-      overflow: hidden;
-      border-radius: 5px;
-      .grid-img {
-        box-shadow: 5px 5px 5px #888888;
-        width: 100%;
-        vertical-align: middle;
-        -webkit-transition: opacity 0.6s ease-out;
-        transition: opacity 0.6s ease-out;
-        background-color: #fff;
-        opacity: 0;
-        visibility: hidden;
-        padding: 10px 10px;
-      }
-      div#textWork {
-        padding-top: 10px;
-        p {
-          padding-top: 5px;
-          text-align: justify;
+div#portfolioMain {
+  div#portfolio {
+    padding-top: 20px;
+    md-grid-list {
+      a.md-button md-card {
+        &:hover {
+          div#card {
+            md-card-title {
+              border: 0px;
+              border-right: 1px;
+              border-style: solid;
+              border-color: #ced0d4;
+            }
+            div#pointer {
+              opacity: 1;
+            }
+          }
+        }
+        div#card {
+          md-card-title {
+            padding: 10px;
+            md-card-title-text {
+              .md-headline {
+                text-align: left;
+                padding: 0px;
+              }
+              .md-subhead {
+                text-align: left;
+                padding: 0px;
+              }
+            }
+          }
+          div#pointer {
+            text-align: center;
+            opacity: 0;
+            i {
+              font-size: 25px;
+              color: #ced0d4;
+            }
+          }
         }
       }
     }
-  }
-}
-
-dynamic-grid {
-  position: relative;
-  display: none;
-}
-
-.dynamic-grid.angular-grid {
-  display: block;
-}
-
-.grid-img.img-loaded {
-  visibility: visible;
-  opacity: 1;
+  }  
 }

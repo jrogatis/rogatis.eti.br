@@ -23,12 +23,4 @@ div#Main
                       span.md-subhead {{project.type}}
                   div#pointer(flex layout-align="center center")
                     i.fa.fa-angle-right      
-
-      //ul.dynamic-grid(flex angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
-        li.grid(flex data-ng-repeat="project in $ctrl.listImportantProjects")
-          img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-          div#textWork(flex layout="column" flex-offset="5")
-            a(ng-href="{{project.siteUrl}}", target="_blank")
-              h2 {{project.title}}
-              h3 {{project.type}}
-              
+                    
