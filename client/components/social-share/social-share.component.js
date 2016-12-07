@@ -34,14 +34,14 @@ export class SocialShareComponent {
           }
           //console.log(_this.pageInfo);
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
-              longUrl: $location.absUrl()
-            })
-            .success((data, status, headers, config) => {
-              _this.pageInfo.shortUrl = data.id;
-            })
-            .error((data, status, headers, config) => {
-              console.log('error get short url', data);
-            });
+            longUrl: $location.absUrl()
+          })
+          .success((data, status, headers, config) => {
+            _this.pageInfo.shortUrl = data.id;
+          })
+          .error((data, status, headers, config) => {
+            console.log('error get short url', data);
+          });
         })
         .catch(err => console.log('error on get page info at social share component', err));
 

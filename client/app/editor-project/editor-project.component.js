@@ -15,7 +15,7 @@ export class EditorProjectController {
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
-    this.projectTypes = ['Demo', 'Demo MEAN Stack', 'Demo MERN Stack', 'Demo React', 'Demo Angular'];
+    this.projectTypes = ['Demo', 'Demo MEAN Stack', 'Demo MERN Stack', 'Demo React', 'Demo Angular', 'WordPress'];
   }
 
   $onInit() {
@@ -34,7 +34,8 @@ export class EditorProjectController {
     const observer = jsonpatch.observe(this.projectAnt);
     this.projectAnt.type = this.project.type;
     let patches = jsonpatch.generate(observer);
-    this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches);
+    this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches)
+      .then(res => console.log(res));
   }
 
   handleAdd() {

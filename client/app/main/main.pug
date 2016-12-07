@@ -2,17 +2,33 @@
 div#Main
   .container
     div#MainText(flex="100", layout="column").animated.slideInLeft
-
     div(flex).animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
         h1(flex="50") SOME OF MY LATEST WORK
         div.lineDivider(flex="20")
-      ul.dynamic-grid(flex angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
+      div#projects(flex)
+        md-grid-list( flex
+          md-cols-gt-sm="3" md-cols="1" 
+          md-row-height="4:3"
+          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
+            md-button(ng-href="{{project.siteUrl}}")
+              md-card
+                img(ng-src="{{project.imgUrl}}") 
+                div#card(flex layout="row"  layout-align="center center") 
+                  md-card-title(flex="90")
+                    md-card-title-text
+                      span.md-headline {{project.title}}
+                      span.md-subhead {{project.type}}
+                  div#pointer(flex layout-align="center center")
+                    i.fa.fa-angle-right      
+
+      //ul.dynamic-grid(flex angular-grid="$ctrl.listImportantProjects" ag-grid-width="280" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true")
         li.grid(flex data-ng-repeat="project in $ctrl.listImportantProjects")
-          a(ng-href="{{project.siteUrl}}", target="_blank")
-            img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-            div#textWork(flex layout="column" flex-offset="5")
+          img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
+          div#textWork(flex layout="column" flex-offset="5")
+            a(ng-href="{{project.siteUrl}}", target="_blank")
               h2 {{project.title}}
               h3 {{project.type}}
-                
+              

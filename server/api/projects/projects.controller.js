@@ -90,7 +90,6 @@ export function upsert(req, res) {
     delete req.body._id;
   }
   return Project.findOneAndUpdate({_id: req.params.id}, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
-
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

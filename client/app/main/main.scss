@@ -1,19 +1,22 @@
 div#Main {
   div#MainText {
-
     min-height: 70vh;
     background-image: url("/assets/images/skydive6.jpg");
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
     background-position: top center;
     @include respond-to(screen-xs) {
-       background-image: url("/assets/images/skydive7.jpg");
+      background-image: url("/assets/images/skydive7.jpg");
       min-height: 70vh;
-      }
+    }
     @include respond-to(screen-sm) {
-        min-height: 45vh;
-      }
-
+      min-height: 45vh;
+    }
+  }
+  .lineDivider {
+    border-color: black;
+    border: 2px;
+    border-bottom-style: solid;
   }
   div#latestWorkTitle {
     h1 {
@@ -24,51 +27,60 @@ div#Main {
       }
     }
   }
-  .lineDivider {
-    border-color: black;
-    border: 2px;
-    border-bottom-style: solid;
-  }
-}
-
-.grid {
-  border: 0px solid #cccccc;
-  box-shadow: 0.5px 0.5px 0.5px #c4bdbd;
-  list-style: none;
-  //background: #f8f3f3;
-  background-color: white;
-  -webkit-transition: all 0.6s ease-out;
-  position: absolute;
-  box-sizing: border-box;
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
-  overflow: hidden;
-  border-radius: 5px;
-  .grid-img {
-    box-shadow: 0px 0px 0px #888888;
-    width: 100%;
-    vertical-align: middle;
-    -webkit-transition: opacity 0.6s ease-out;
-    transition: opacity 0.6s ease-out;
-    background-color: #fff;
-    opacity: 0;
-    visibility: hidden;
-    padding: 10px 10px;
-  }
-  div#textWork {
-    background-color: white;
-    color: #324e81;
-    padding-top: 5px;
-    h2{
-      margin: 0;
-     }
-     h3 {
-      margin: 0;
+  div#projects {
+    padding-top: 30px;
+    md-grid-list {
+      figure {
+        &:hover {
+          div#pointer {
+            opacity: 1;
+          }
+        }
+      }
+      a.md-button md-card {
+        &:hover {
+          div#card {
+            md-card-title {
+              border: 0px;
+              border-right: 1px;
+              border-style: solid;
+              border-color: #ced0d4;
+            }
+            div#pointer {
+              opacity: 1;
+            }
+          }
+        }
+        div#card {
+          md-card-title {
+            padding: 10px;
+            md-card-title-text {
+              .md-headline {
+                text-align: left;
+                padding: 0px;
+              }
+              .md-subhead {
+                text-align: left;
+                padding: 0px;
+              }
+            }
+          }
+          div#pointer {
+            text-align: center;
+            opacity: 0;
+            i {
+              font-size: 25px;
+              color: #ced0d4;
+            }
+          }
+        }
+      }
     }
   }
 }
 
-dynamic-grid {
+
+/*dynamic-grid {
   position: relative;
   display: none;
 }
@@ -81,3 +93,41 @@ dynamic-grid {
   visibility: visible;
   opacity: 1;
 }
+
+    ul li.grid {
+      border: 0px solid #cccccc;
+      box-shadow: 0.5px 0.5px 0.5px #c4bdbd;
+      list-style: none;
+      //background: #f8f3f3;
+      background-color: white;
+      -webkit-transition: all 0.6s ease-out;
+      position: absolute;
+      box-sizing: border-box;
+      -webkit-transition: all 400ms ease;
+      transition: all 400ms ease;
+      overflow: hidden;
+      border-radius: 5px;
+        .grid-img {
+          box-shadow: 0px 0px 0px #888888;
+          width: 100%;
+          vertical-align: middle;
+          -webkit-transition: opacity 0.6s ease-out;
+          transition: opacity 0.6s ease-out;
+          background-color: #fff;
+          opacity: 0;
+          visibility: hidden;
+          padding: 10px 10px;
+        }
+        div#textWork {
+          background-color: red;
+          color: #324e81;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          h2 {
+            margin: 0;
+          }
+          h3 {
+            margin: 0;
+          }
+        }
+      }*/
