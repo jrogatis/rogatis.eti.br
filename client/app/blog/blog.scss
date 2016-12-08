@@ -11,6 +11,21 @@ div#BlogMain {
             div{
               md-card{
                 background-color: #fcfaf8;
+                md-card-title {
+                  img { 
+                    width: 150px;
+                    height: 200px;
+                  }
+                   md-card-title-text{
+                     .md-headline {
+                       font-size: 25px;
+                     }
+                     .md-subhead {
+                       font-size: 20px;
+                     }
+                   }
+                }
+
               }
             }
           }

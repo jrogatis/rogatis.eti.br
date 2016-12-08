@@ -28,6 +28,7 @@ import post from './post/post.component';
 import editor from './editor/editor.component';
 import gallery from './gallery/gallery.component';
 import editorProject from './editor-project/editor-project.component';
+import about from './about/about.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -36,14 +37,15 @@ import ngMeta from 'ng-meta';
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
-    uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject, constants, socket, util, 'ngMeta'
+  uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject,
+  about, constants, socket, util, 'ngMeta'
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function (loggedIn) {
+      Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
           $location.path('/login');
           //$location.path('/');
