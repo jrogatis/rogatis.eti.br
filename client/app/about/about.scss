@@ -1,2 +1,37 @@
-
+div#aboutMain {
+    md-grid-tile {
+        transition: all 400ms ease-out 50ms; 
+        }      
+    .container{
+      div#aboutMe{
+        div#text{
+          //padding-top: 3%;
+          h1 {
+            font-size: 4.5em;
+            font-weight: 800;
+          }
+          div#innerText {
+            font-size: 1.5em;
+          }
+        }
+      div#aboutImage{
+        padding-top: 20px;
+        padding-bottom: 20px;
+      } 
+    }
+    div#pics{
+      border-top: #dddddd 1px solid;
+      border-top-width: 1px;
+      border-top-style: solid;
+      border-top-color: rgb(221, 221, 221);
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }  
+  }
+  div#randomFacts {
+    div#factsText{
+      font-size: 1.5em;
+    }
+  } 
+}
 

@@ -5,7 +5,7 @@ import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
-import angularGrid from 'angulargrid';
+
 
 export class EditorProjectController {
 
@@ -30,16 +30,36 @@ export class EditorProjectController {
     this.projectAnt = _.clone(this.project);
   }
 
-  handleSave() {
+  handleSave(ev) {
     const observer = jsonpatch.observe(this.projectAnt);
     this.projectAnt.type = this.project.type;
     let patches = jsonpatch.generate(observer);
     this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches)
-      .then(res => console.log(res));
+      .then(res => {
+        if(res.status === 200) {
+          this.showDialogSaveOk(ev);
+        } else {
+          alert('ops a error! ' + res.status);
+          console.log(res);
+        }
+      });
   }
 
   handleAdd() {
     this.$http.post('/api/projects', this.project);
+  }
+
+  showDialogSaveOk(ev) {
+    this.dialog = this.$mdDialog.show({
+      scope: this.$scope,
+      preserveScope: true,
+      controller: DialogImagesGalleryController,
+      templateUrl: 'saveOk.tmpl.pug',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false,
+      fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+    });
   }
 
   showDialog(ev) {
@@ -72,9 +92,8 @@ export class EditorProjectController {
       targetEvent: ev,
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
+    });
   }
-
 }
 
 DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];

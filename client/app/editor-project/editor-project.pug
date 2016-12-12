@@ -80,4 +80,18 @@ script(type="text/ng-template" id="preview.tmpl.pug")
           span(flex)
           md-button(ng-click="cancel()") Cancel
 
+script(type="text/ng-template" id="saveOk.tmpl.pug")
+  md-dialog(aria-label="Save ok")
+      form(ng-cloak)
+        md-toolbar
+          div.md-toolbar-tools
+            h2 Project Add or Change
+            span(flex)
+            md-button.md-icon-button(ng-click="cancel()") x
+        md-dialog-content
+            span(flex) Its OK! All changes saved!  
+        md-dialog-actions(layout="row")
+          span(flex)
+          md-button(ng-click="cancel()") ok          
+
 

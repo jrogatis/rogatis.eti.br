@@ -6,8 +6,8 @@ div#navBar(flex="100", layout-align="center center")
           a(ng-href="/") 
             md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
-          md-button(ng-href="/") about
-            div.selected(ng-show="$ctrl.isActive('/')")
+          md-button(ng-href="/about") about
+            div.selected(ng-show="$ctrl.isActive('/about')")
           md-button(ng-href="/portfolio") portfolio
             div.selected(ng-show="$ctrl.isActive('/portfolio')")
           md-button(ng-href="/blog") blog

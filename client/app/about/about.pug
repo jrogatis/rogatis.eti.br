@@ -1,13 +1,62 @@
-
 div#aboutMain
-  .container(layout-align="center center")
-    div#aboutMe(flex layout="row")
-      div#text(flex="50")
+  .container
+    div#aboutMe(flex="100"
+      layout="column" 
+      layout-gt-sm="row"
+      layout-align="center center"
+      )
+      div#text(flex="50" layout="column")
         h1 about me
-      div#image(flex="50")  
+        h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
+        div#innerText
+          p. 
+            I enjoy turning complex problems into simple, 
+            beautiful and intuitive systems. 
+            When I'm not coding or pushing pixels, 
+            you'll find me in the skies or at running course.
+      div#aboutImage(flex="50" layout="column")
+        md-grid-list(
+          md-cols="1"
+          md-row-height="4:3"
+          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-grid-tile
+            md-card
+              img(ng-src="../../assets/images/picsAbout9100.jpg")   
     div#pics(flex="row")
-    div#facts(flex="row")
-    div#skills
+      md-grid-list( flex
+          md-cols-gt-xs="8" md-cols="2" 
+          md-row-height="4:3"
+          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-grid-tile(ng-repeat="pics in $ctrl.listPics")
+            md-card
+              img(ng-src="{{pics.imgUrl}}") 
+    div#randomFacts(flex layout="column" layout-gt-sm="row" )
+      div#factsPic(flex = "50")
+         md-grid-list(
+          md-cols="1"
+          md-row-height="4:3"
+          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-grid-tile
+            md-card
+              img(ng-src="../../assets/images/yoda.jpg")   
+      div#factsText(
+        flex = "50" 
+        layout="column" 
+        layout-align="center center")
+        md-list
+          md-list-item 
+            span I love Star Wars and got a colection of 500 action figures.
+          md-list-item 
+            span Skydive is my new passion, 1000 jumps in 3 years.
+          md-list-item 
+            span I love special coffee beans
+          md-list-item 
+            span I want to be a super mutant
+          md-list-item 
+            span I use mac
+
+    div#skills(flex="100" layout ="column")
+      nvd3#skillsGraph(flex="100" options='$ctrl.graphOptions' data='$ctrl.data')
 
     
 

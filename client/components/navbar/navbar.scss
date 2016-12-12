@@ -1,5 +1,6 @@
 div#navBar {
-  font-family: prometo, roboto, sans-serif;
+  //font-family: prometo;
+  font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 2em;
@@ -21,10 +22,21 @@ div#navBar {
         div#navbar-main li a {
           color: white;
           background-color: transparent;
+         
+        }
+        #logo {
+           &:hover {
+            fill: black;
+          } 
         }
         div#menuButtons {
           .md-button {
             font-size: 1em;
+             &:hover {
+               span {
+                color:black;
+              }
+            } 
             .selected {
               border-style: solid;
               border-width: thin;
