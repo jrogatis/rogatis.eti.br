@@ -22,38 +22,33 @@ div#navBar {
         div#navbar-main li a {
           color: white;
           background-color: transparent;
-         
         }
-        #logo {
-           &:hover {
-            fill: black;
-          } 
-        }
-        div#menuButtons {
-          .md-button {
-            font-size: 1em;
-             &:hover {
-               span {
-                color:black;
-              }
-            } 
-            .selected {
-              border-style: solid;
-              border-width: thin;
-              border-color: lightgray;
-              max-height: 0.6px;
-            } 
+      }
+      div#menuButtons {
+        .md-button {
+          font-size: 1em;
+          &:hover {
+            span {
+              color: black;
+            }
+          }
+          .selected {
+            border-style: solid;
+            border-width: thin;
+            border-color: lightgray;
+            max-height: 0.6px;
           }
         }
-        div#socialLinks {
-          a {
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 0px;
-            margin-right: 0px;
-          }
+      }
+      div#socialLinks {
+        a {
+          padding-left: 0;
+          padding-right: 0;
+          margin-left: 0px;
+          margin-right: 0px;
         }
       }
     }
   }
 }
+

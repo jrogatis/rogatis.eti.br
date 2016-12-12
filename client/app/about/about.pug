@@ -5,7 +5,7 @@ div#aboutMain
       layout-gt-sm="row"
       layout-align="center center"
       )
-      div#text(flex="50" layout="column")
+      div#text(flex="100" flex-gt-sm="50" layout="column")
         h1 about me
         h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
         div#innerText
@@ -14,7 +14,7 @@ div#aboutMain
             beautiful and intuitive systems. 
             When I'm not coding or pushing pixels, 
             you'll find me in the skies or at running course.
-      div#aboutImage(flex="50" layout="column")
+      div#aboutImage(flex="100" flex-gt-sm="50" layout="column")
         md-grid-list(
           md-cols="1"
           md-row-height="4:3"
@@ -56,7 +56,12 @@ div#aboutMain
             span I use mac
 
     div#skills(flex="100" layout ="column")
-      nvd3#skillsGraph(flex="100" options='$ctrl.graphOptions' data='$ctrl.data')
+      nvd3#skillsGraph(flex="100" 
+        options='$ctrl.graphOptions'
+        api="$ctrl.api" 
+        data='$ctrl.data'
+        events="$ctrl.graphEvents"
+      )
 
     
 

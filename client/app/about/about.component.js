@@ -5,7 +5,6 @@ import ngMdIcons from 'angular-material-icons';
 import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
-import ezfb from 'angular-easyfb';
 import nvd3 from 'angular-nvd3';
 import d3 from 'd3';
 //import { d3.scaleLinear }  from 'd3-scale';
@@ -51,8 +50,11 @@ export class AboutController {
           axisLabel: 'Y Axis',
           axisLabelDistance: 30
         },
-        yDomain: [0, 100]
-      }
+        yDomain: [0, 100],
+        api: {
+        }
+      },
+
     };
 
     this.data = [{
@@ -88,11 +90,17 @@ export class AboutController {
   resized(ev) {
     console.log('fired', this.$window.innerWidth);
     this.graphOptions.width = this.$window.innerWidth - 150;
+    this.api.update();
     return this.$scope.$broadcast('resize');
   }
+
+  graphEvents(ev) {
+    console.log(ev);
+  }
+
 }
 
-export default angular.module('rogatisEtiBrApp.about', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ezfb', 'ngMeta', nvd3])
+export default angular.module('rogatisEtiBrApp.about', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta', nvd3])
   .config(routing)
   .component('about', {
     template: require('./about.pug'),
