@@ -1,7 +1,15 @@
 
-div#Main
+div#main
   .container
-    div#MainText(flex="100", layout="column").animated.slideInLeft
+    div#mainText(flex="100", layout="column").animated.slideInLeft
+      md-grid-list( flex
+        md-cols="1"
+        md-row-height="4:2.5"
+        md-row-height-gt-md="2:1"
+        md-gutter="10px")
+        md-grid-tile
+          md-card#mainTextCard
+            img(ng-src="/assets/images/skydive6.jpg")   
     div(flex).animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
@@ -9,9 +17,11 @@ div#Main
         div.lineDivider(flex="20")
       div#projects(flex)
         md-grid-list( flex
-          md-cols-gt-sm="3" md-cols="1" 
+          md-cols-gt-sm="3" 
+          md-cols="1" 
           md-row-height="4:3"
-          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-gutter-gt-sd="25px"  
+          md-gutter="35px")
           md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
             md-button(ng-href="{{project.siteUrl}}")
               md-card

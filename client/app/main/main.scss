@@ -1,16 +1,19 @@
-div#Main {
-  div#MainText {
-    min-height: 70vh;
-    background-image: url("/assets/images/skydive6.jpg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top center;
-    @include respond-to(screen-xs) {
-      background-image: url("/assets/images/skydive7.jpg");
-      min-height: 70vh;
-    }
-    @include respond-to(screen-sm) {
-      min-height: 45vh;
+div#main {
+  div#mainText {
+    padding-top: 20px;
+    md-grid-list {
+      //height: 70vh;
+      @include respond-to(screen-sm) {
+      //height: 55vh;
+      }
+      @include respond-to(screen-xs) {
+        //height: 35vh;
+      }
+      md-grid-tile {
+        #mainTextCard{
+          box-shadow: 0px 0px 0px 0px;
+        }
+      }
     }
   }
   .lineDivider {
@@ -53,7 +56,6 @@ div#Main {
         }
         div#card {
           md-card-title {
-            padding: 10px;
             md-card-title-text {
               .md-headline {
                 text-align: left;
