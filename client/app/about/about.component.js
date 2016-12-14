@@ -7,9 +7,6 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 import nvd3 from 'angular-nvd3';
 import d3 from 'd3';
-//import { d3.scaleLinear }  from 'd3-scale';
-//import ngMeta from 'ng-meta';
-
 
 export class AboutController {
 
@@ -29,43 +26,70 @@ export class AboutController {
     ];
     this.graphOptions = {
       chart: {
+        extended: true,
+        growOnHover: true,
         type: 'discreteBarChart',
-        height: 450,
-        width: $window.innerWidth - 150,
+        height: 550,
+        width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
+        showYAxis: true,
         margin: {
-          top: 20,
-          right: 20,
-          bottom: 60,
-          left: 55
+          top: 50,
+          right: 10,
+          bottom: 10,
+          left: this.leftMargin()
         },
         x: d => d.label,
         y: d => d.value,
-        showValues: true,
-        valueFormat: d => d3.format(',.0f')(d),
-        transitionDuration: 10,
+        showValues: false,
+        valueFormat: d => this.scaleY()(d),
+        duration: 1000,
         xAxis: {
-          axisLabel: 'x Axis'
+          axisLabel: '',
+          //rotateLabels: -90,
+         
         },
         yAxis: {
-          axisLabel: 'Y Axis',
-          axisLabelDistance: 30
+          axisLabel: '',
+          axisLabelDistance: 30,
+          showMaxMin: false,
+          domain: [0, 4],
+          tickFormat: d => this.scaleY()(d),
+          ticks: 6,
+          tickSubdivide: 0,
+          tickSize: 1,
+         
         },
-        yDomain: [0, 100],
-        api: {
+        yDomain: null,
+        api: this.api,
+        legend: {
+          margin: {
+            top: 5,
+            right: 200,
+            bottom: 5,
+            left: 0
+          }
         }
       },
-
+      styles: {
+        classes: {
+          'with-3d-shadow': true,
+          'with-transitions': true,
+          gallery: false
+        },
+        css: {}
+      }
     };
 
     this.data = [{
       key: 'Cumulative Return',
       values: [
-        { label: 'JavaScript', value: 90 },
-        { label: 'Angular', value: 100 },
-        { label: 'React', value: 82 },
-        { label: 'React Native', value: 100 },
-        { label: 'MongoDB', value: 90 },
-        { label: 'Barista', value: 37 }
+        { label: 'JavaScript', value: 2 },
+        { label: 'Angular', value: 4.5 },
+        { label: 'React', value: 4 },
+        { label: 'React Native', value: 3 },
+        { label: 'MongoDB', value: 3 },
+        { label: 'Barista', value: 1.6 },
+        { label: 'Sky Diver', value: 4 }
       ]
     }];
   }
@@ -81,15 +105,27 @@ export class AboutController {
   }
 
   scaleY() {
-    console.log()  
-    return d3.scaleLinear()
-      .domain([0, 100])
-      .range(['Newbie', 'Geek', 'Ninja', 'Jedi']);
+    return d3.scale.ordinal()
+      .domain([0, 1, 2, 3, 4])
+      .range([' ', 'Newbie', 'Geek', 'Ninja', 'Jedi', ' ']);
+  }
+
+  leftMargin() {
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    //console.log(innerSize);
+    if(innerSize < 599) {
+      return 45;
+    } else {
+      return 63;
+    }
   }
 
   resized(ev) {
-    console.log('fired', this.$window.innerWidth);
-    this.graphOptions.width = this.$window.innerWidth - 150;
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    //console.log(innerSize);
+    this.graphOptions.chart.width = innerSize;
+    this.graphOptions.chart.margin.left = this.leftMargin();
+    //this.repositionXLabel();
     this.api.update();
     return this.$scope.$broadcast('resize');
   }
@@ -98,6 +134,13 @@ export class AboutController {
     console.log(ev);
   }
 
+  repositionXLabel() {
+    const xTicks = d3.select('.nv-x').selectAll('g');
+    
+    xTicks
+      .selectAll('text')
+      .attr('transform', (d,i,j) => 'translate (0, -100)');
+  }
 }
 
 export default angular.module('rogatisEtiBrApp.about', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta', nvd3])

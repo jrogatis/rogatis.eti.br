@@ -1,37 +1,105 @@
+@mixin translate ($x, $y) {
+   @include transform(translate($x, $y));
+}
+
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
 div#aboutMain {
-    md-grid-tile {
-        transition: all 400ms ease-out 50ms; 
-        }      
-    .container{
-      div#aboutMe{
-        div#text{
-          //padding-top: 3%;
-          h1 {
-            font-size: 4.5em;
-            font-weight: 800;
-          }
-          div#innerText {
-            font-size: 1.5em;
-          }
+  md-grid-tile {
+    transition: all 400ms ease-out 50ms;
+  }
+  .container {
+    div#aboutMe {
+      div#text {
+        //padding-top: 3%;
+        h1 {
+          font-size: 4.5em;
+          font-weight: 800;
         }
-      div#aboutImage{
+        div#innerText {
+          font-size: 1.5em;
+        }
+      }
+      div#aboutImage {
         padding-top: 20px;
         padding-bottom: 20px;
-      } 
+      }
     }
-    div#pics{
+    div#pics {
       border-top: #dddddd 1px solid;
       border-top-width: 1px;
       border-top-style: solid;
       border-top-color: rgb(221, 221, 221);
       padding-top: 20px;
       padding-bottom: 20px;
-    }  
+    }
   }
   div#randomFacts {
-    div#factsText{
+    border-top: #dddddd 1px solid;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(221, 221, 221);
+    padding-top: 20px;  
+    padding-bottom: 20px;
+
+    div#factsText {
       font-size: 1.5em;
+
     }
-  } 
+  }
+  div#skills {
+    border-top: #dddddd 1px solid;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(221, 221, 221);
+    padding-top: 20px;  
+     
+    h1 {
+      font-size: 4.5em;
+      font-weight: 800;
+    }
+    .nvd3 .nv-axis path {
+      fill: transparent;
+      stroke: transparent;
+      stroke-opacity: 0;
+    }
+    .nv-x text {
+      text-align: left;
+      font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      stroke: 3;
+      stroke-opacity: 1;
+      stroke-color: blue;
+      fill: lighten($color: blue, $amount: 10);
+      -ms-transform: rotate(90deg) translateX(-100px); /* IE 9 */
+      -webkit-transform: rotate(90deg) translateX(-100px); /* Safari */
+      transform: rotate(90deg) translateX(-100px) translateY(-10px) ;
+      z-index: 100;
+      
+    }
+    .nv-y text {
+      font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      fill: red;
+       @include respond-to(screen-xs) {
+        font-size: 12px;
+      }
+
+    }
+  }
+  .nvd3 .nv-axis.nv-x  {
+    stroke-opacity: 0;
 }
 
+}

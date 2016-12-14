@@ -1,5 +1,5 @@
 div#aboutMain
-  .container
+  .container#aboutContainer
     div#aboutMe(flex="100"
       layout="column" 
       layout-gt-sm="row"
@@ -22,7 +22,7 @@ div#aboutMain
           md-grid-tile
             md-card
               img(ng-src="../../assets/images/picsAbout9100.jpg")   
-    div#pics(flex="row")
+    div#pics(flex="100" layout="row")
       md-grid-list( flex
           md-cols-gt-xs="8" md-cols="2" 
           md-row-height="4:3"
@@ -30,7 +30,7 @@ div#aboutMain
           md-grid-tile(ng-repeat="pics in $ctrl.listPics")
             md-card
               img(ng-src="{{pics.imgUrl}}") 
-    div#randomFacts(flex layout="column" layout-gt-sm="row" )
+    div#randomFacts(flex="100" layout="column" layout-gt-sm="row" )
       div#factsPic(flex = "50")
          md-grid-list(
           md-cols="1"
@@ -56,12 +56,13 @@ div#aboutMain
             span I use mac
 
     div#skills(flex="100" layout ="column")
-      nvd3#skillsGraph(flex="100" 
-        options='$ctrl.graphOptions'
-        api="$ctrl.api" 
-        data='$ctrl.data'
-        events="$ctrl.graphEvents"
-      )
+      h1 my skills
+        nvd3#skillsGraph(flex="100" 
+          options='$ctrl.graphOptions'
+          api="$ctrl.api" 
+          data='$ctrl.data'
+          events="$ctrl.graphEvents"
+        )
 
     
 

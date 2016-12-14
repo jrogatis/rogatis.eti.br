@@ -1,4 +1,5 @@
 div#navBar {
+
   //font-family: prometo;
   font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
   font-style: normal;
@@ -19,36 +20,45 @@ div#navBar {
       min-height: 4em;
       background-color: transparent;
       .md-toolbar-tools {
-        div#navbar-main li a {
-          color: white;
-          background-color: transparent;
-        }
-      }
-      div#menuButtons {
-        .md-button {
-          font-size: 1em;
+        div#menuLogo a md-icon{
           &:hover {
             span {
-              color: black;
+              color: deepskyblue;
             }
           }
-          .selected {
-            border-style: solid;
-            border-width: thin;
-            border-color: lightgray;
-            max-height: 0.6px;
+        }
+        div#menuButtons {
+          .md-button {
+            font-size: 1.2em;
+            font-weight: 800;
+            &:hover {
+              span {
+                 transition: 200ms;
+                 transition-timing-function: ease-in-out;
+                 -webkit-transition: 200ms;
+                 -webkit-transition-timing-function: ease-in-out;
+                color: deepskyblue;
+              }
+            }
+            .selected {
+              border-style: solid;
+              border-width: thin;
+              border-color: lightgray;
+              max-height: 0.6px;
+            }
           }
         }
-      }
-      div#socialLinks {
-        a {
-          padding-left: 0;
-          padding-right: 0;
-          margin-left: 0px;
-          margin-right: 0px;
+        div#socialLinks {
+          a {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0px;
+            margin-right: 0px;
+            img {fill: black;}
+    
+          }
         }
       }
     }
   }
 }
-

@@ -1,11 +1,15 @@
 .container(layout="row" layout-align="center center").animated.fadeInUp
   p.col-lg-4  @2016 Jean Philip de Rogatis
   div.col-lg-4(hide-xs layout="row" layout-align="space-between")
-    a(href='/') about
+    a(href='/about') about
     a(href='/portfolio') portfolio
     a(href='/blog') blog
     a(href='/contact') contact
   div.col-lg-4(hide-xs layout="row" layout-align="end end")
-    md-button.md-primary.md-raised
-      i.fa.fa-thumbs-up
-        span Like 11 mil
+    div.fb-like(data-href="http://www.rogatis.eti.br" 
+      data-layout="button_count" 
+      data-action="like" 
+      data-size="large" 
+      data-show-faces="false" 
+      data-share="false")
+   
