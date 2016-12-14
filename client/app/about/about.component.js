@@ -23,6 +23,10 @@ export class AboutController {
       { imgUrl: '../../assets/images/picsAbout9100.jpg' },
       { imgUrl: '../../assets/images/picsAbout98f8.jpg' },
       { imgUrl: '../../assets/images/picsAbout99c4.jpg' },
+      { imgUrl: '../../assets/images/picsAboutActionFig.jpg' },
+      { imgUrl: '../../assets/images/picsAboutBallon.jpg' },
+      { imgUrl: '../../assets/images/picsAboutCoffe.jpg' },
+      { imgUrl: '../../assets/images/picsAboutPlaneDor.jpg' },
     ];
     this.graphOptions = {
       chart: {

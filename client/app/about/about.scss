@@ -1,18 +1,3 @@
-@mixin translate ($x, $y) {
-   @include transform(translate($x, $y));
-}
-
-@mixin rotate ($deg) {
-  @include transform(rotate(#{$deg}deg));
-}
-
-@mixin transform($transforms) {
-	   -moz-transform: $transforms;
-	     -o-transform: $transforms;
-	    -ms-transform: $transforms;
-	-webkit-transform: $transforms;
-          transform: $transforms;
-}
 div#aboutMain {
   md-grid-tile {
     transition: all 400ms ease-out 50ms;
