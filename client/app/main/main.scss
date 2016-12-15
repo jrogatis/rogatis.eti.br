@@ -1,20 +1,24 @@
 div#main {
   div#mainText {
+   // min-height: 70vh;
     padding-top: 20px;
-    md-grid-list {
-      //height: 70vh;
+   
+      min-height: 70vh;
+      @include respond-to(screen-md) {
+        min-height: 60vh;
+      }
       @include respond-to(screen-sm) {
-      //height: 55vh;
+        min-height: 50vh;
       }
       @include respond-to(screen-xs) {
-        //height: 35vh;
+        min-height: 70vh;
       }
-      md-grid-tile {
+      
         #mainTextCard{
           box-shadow: 0px 0px 0px 0px;
         }
-      }
-    }
+      
+    
   }
   .lineDivider {
     border-color: black;

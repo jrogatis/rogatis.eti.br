@@ -4,8 +4,9 @@ div#aboutMain
       layout="column" 
       layout-gt-sm="row"
       layout-align="center center"
+      layout-fill
       )
-      div#text(flex="100" flex-gt-sm="50" layout="column")
+      div.animated.slideInLeft#text(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         h1 about me
         h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
         div#innerText
@@ -14,32 +15,24 @@ div#aboutMain
             beautiful and intuitive systems. 
             When I'm not coding or pushing pixels, 
             you'll find me in the skies or at running course.
-      div#aboutImage(flex="100" flex-gt-sm="50" layout="column")
-        md-grid-list(
-          md-cols="1"
-          md-row-height="4:3"
-          md-gutter-gt-sd="25px"  md-gutter="4px")
-          md-grid-tile
-            md-card
-              img(ng-src="../../assets/images/picsAbout9100.jpg")   
-    div#pics(flex="100" layout="row")
-      md-grid-list( flex
+      div.animated.slideInRight#aboutImage(flex="100" flex-gt-sm="50" layout-fill)
+        md-card
+          img(ng-src="../../assets/images/picsAbout9100.jpg")   
+    div.animated.fadeInUp#pics(flex="100" layout="row")
+      md-grid-list(flex
           md-cols-gt-xs="8" md-cols="2" 
           md-row-height="4:3"
-          md-gutter-gt-sd="25px"  md-gutter="4px")
+          md-gutter="4px")
           md-grid-tile(ng-repeat="pics in $ctrl.listPics")
-            md-card
-              img(ng-src="{{pics.imgUrl}}") 
-    div#randomFacts(flex="100" layout="column" layout-gt-sm="row" )
-      div#factsPic(flex = "50")
-         md-grid-list(
-          md-cols="1"
-          md-row-height="4:3"
-          md-gutter-gt-sd="25px"  md-gutter="4px")
-          md-grid-tile
-            md-card
-              img(ng-src="../../assets/images/yoda.jpg")   
-      div#factsText(
+            div(layout="column" layout-fill)          
+              md-card
+                img(ng-src="{{pics.imgUrl}}") 
+    div#randomFacts(flex="100" layout="column" layout-gt-sm="row")
+      div.animated.slideInLeft#factsPic(flex = "50")
+        div(layout="column" layout-fill)
+          md-card
+            img(ng-src="../../assets/images/yoda.jpg")   
+      div.animated.slideInRight#factsText(
         flex = "50" 
         layout="column" 
         layout-align="center center")

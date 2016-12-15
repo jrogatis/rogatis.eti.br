@@ -27,6 +27,7 @@ export class AboutController {
       { imgUrl: '../../assets/images/picsAboutBallon.jpg' },
       { imgUrl: '../../assets/images/picsAboutCoffe.jpg' },
       { imgUrl: '../../assets/images/picsAboutPlaneDor.jpg' },
+      { imgUrl: '../../assets/images/picsAboutPlane.jpg' },
     ];
     this.graphOptions = {
       chart: {

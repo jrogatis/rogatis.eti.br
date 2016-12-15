@@ -21,14 +21,15 @@ div#mainGallery
           md-row-height="3:4"
           md-gutter="10px")
           md-grid-tile(ng-repeat="pic in $ctrl.listImages")
-            md-card
-              img(ng-src="https://s3.amazonaws.com/rogatis/{{pic}}") 
-              md-title
-                md-button.md-icon-button.md-accent(aria-label="Favorite" ng-click="$ctrl.deleteImage(pic)")
-                  md-icon.fa.fa-trash
-                div#imageDesc.md-padding
-                  p {{pic}}
-                  p W {{ width }} x H {{height}}
+            div(layout="column" layout-fill)
+              md-card
+                img(ng-src="https://s3.amazonaws.com/rogatis/{{pic}}") 
+                md-title
+                  md-button.md-icon-button.md-accent(aria-label="Favorite" ng-click="$ctrl.deleteImage(pic)")
+                    md-icon.fa.fa-trash
+                  div#imageDesc.md-padding
+                    p {{pic}}
+                    p W {{ width }} x H {{height}}
 
 
 

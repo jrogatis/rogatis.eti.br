@@ -7,8 +7,6 @@ import jsonpatch from 'fast-json-patch';
 import ui from 'angular-ui-tinymce';
 import slugifier from 'wb-angular-slugify';
 
-
-
 var sanit = require('textangular/dist/textAngular-sanitize.min');
 
 export class EditorController {
@@ -50,26 +48,26 @@ export class EditorController {
           title: 'Image Left',
           selector: 'img',
           styles: {
-            'float': 'left',
-            'margin': '0 10px 0 10px'
+            float: 'left',
+            margin: '0 10px 0 10px'
           }
-      },
+        },
         {
           title: 'Image Right',
           selector: 'img',
           styles: {
-            'float': 'right',
-            'margin': '0 0 10px 10px'
+            float: 'right',
+            margin: '0 0 10px 10px'
           }
-      },
+        },
         {
           title: 'Tab on Paragraf',
           selector: 'p',
           styles: {
             'text-indent': '1.5em'
           }
-      }
-    ]
+        }
+      ]
     };
   }
 
@@ -84,7 +82,7 @@ export class EditorController {
   loadForEdition(index) {
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
-    if (this.post.slug === '' || this.post.slug === undefined) {
+    if(this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
@@ -94,7 +92,7 @@ export class EditorController {
       })
       .catch(err => {
         console.log('error on loadForEdition', err)
-        if (err.status === 500 || err.status === 404) {
+        if(err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
         }
       });
@@ -129,7 +127,8 @@ export class EditorController {
     };
     this.$http.post('/api/pageInfos', this.pageInfo)
       .then(
-        this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
+        // const postSlug = `/post/${this.post.slug}`
+        this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent(`/post/${this.post.slug}`)}`)
         .then(res => {
           this.pageInfo = res.data;
           this.observerPageInfo = jsonpatch.observe(this.pageInfo);
@@ -156,7 +155,7 @@ export class EditorController {
       .then(() => {
         this.handlePageInfoAdd();
         this.showDialogSave(ev);
-      })
+      });
   }
 
   handlePostDelete(index) {
@@ -169,7 +168,6 @@ export class EditorController {
             this.pageInfo = undefined;
           })
           .catch(err => console.log('err at delete posts page info', err));
-
       })
       .catch(err => console.log('err at delete posts', err));
   }

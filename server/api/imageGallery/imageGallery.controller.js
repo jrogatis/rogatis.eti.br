@@ -35,7 +35,7 @@ exports.signing = function(req, res) {
   var s3Policy = {
     expiration: expiration,
     conditions: [{
-      bucket: 'rogatis'
+      bucket: 'doebem'
     },
       ['starts-with', '$key', path],
       {

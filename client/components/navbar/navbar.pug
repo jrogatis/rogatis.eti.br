@@ -2,10 +2,10 @@ div#navBar.animated.fadeInDown(flex="100", layout-align="center center")
   .container(flex="100", layout-align="center center")
     md-toolbar(flex="100", layout-align="center center")
       div.md-toolbar-tools(flex="100", layout-align="center center")
-        div#menuLogo(layout-align="start center", flex="25" layout="row")
+        div#menuLogo(layout-align="start center", flex="15",layout="row")
           a(ng-href="/") 
             md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
-        div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="50")
+        div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="65")
           md-button(ng-href="/about") about
             div.selected(ng-show="$ctrl.isActive('/about')")
           md-button(ng-href="/portfolio") portfolio
@@ -27,7 +27,7 @@ div#navBar.animated.fadeInDown(flex="100", layout-align="center center")
                 md-button(ng-href='/editor') Editor
               md-menu-item
                 md-button(ng-href='/editorProject') Projects           
-        div#socialLinks(hide-xs  layout="row" layout-align="center center",  layout-align-gt-sm="end center", flex="25", flex-sm="50")
+        div#socialLinks(hide-xs  layout="row" layout-align="center center",  layout-align-gt-sm="end center", flex-gt-sm="20", flex="75")
           md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
             md-tooltip Linkedin
             img(src="/assets/images/linkedin.svg" style="width:24px;height:24px;")
@@ -40,7 +40,7 @@ div#navBar.animated.fadeInDown(flex="100", layout-align="center center")
           md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
             md-tooltip git
             img(src="/assets/images/git.svg" style="width:24px;height:24px;")
-        md-menu(hide-gt-sm, layout="row", flex="25", layout-align="end center")
+        md-menu(hide-gt-sm, layout="row", flex, layout-align="end center")
           md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
             i.fa.fa-bars(style="color:white; font-size:30px")
           md-menu-content

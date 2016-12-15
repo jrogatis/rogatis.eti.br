@@ -2,14 +2,10 @@
 div#main
   .container
     div#mainText(flex="100", layout="column").animated.slideInLeft
-      md-grid-list( flex
-        md-cols="1"
-        md-row-height="4:2.5"
-        md-row-height-gt-md="2:1"
-        md-gutter="10px")
-        md-grid-tile
-          md-card#mainTextCard
-            img(ng-src="/assets/images/skydive6.jpg")   
+      div(layout="column" layout-fill)
+        md-card#mainTextCard
+          img(ng-src="/assets/images/skydive6.jpg"  hide-xs)
+          img(ng-src="/assets/images/skydive7.jpg" hide-gt-xs)      
     div(flex).animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
@@ -19,18 +15,19 @@ div#main
         md-grid-list( flex
           md-cols-gt-sm="3" 
           md-cols="1" 
-          md-row-height="4:3"
-          md-gutter-gt-sd="25px"  
-          md-gutter="35px")
+          md-row-height="4:4"
+          md-gutter-gt-sm="35px"  
+          md-gutter="4px")
           md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
-            md-button(ng-href="{{project.siteUrl}}")
-              md-card
-                img(ng-src="{{project.imgUrl}}") 
-                div#card(flex layout="row"  layout-align="center center") 
-                  md-card-title(flex="90")
-                    md-card-title-text
-                      span.md-headline {{project.title}}
-                      span.md-subhead {{project.type}}
-                  div#pointer(flex layout-align="center center")
-                    i.fa.fa-angle-right      
+            div(layout="column" layout-fill)
+              md-button(ng-href="{{project.siteUrl}}")
+                md-card
+                  img(ng-src="{{project.imgUrl}}") 
+                  div#card(flex layout="row"  layout-align="center center") 
+                    md-card-title(flex="90")
+                      md-card-title-text
+                        span.md-headline {{project.title}}
+                        span.md-subhead {{project.type}}
+                    div#pointer(flex layout-align="center center")
+                      i.fa.fa-angle-right      
                     
