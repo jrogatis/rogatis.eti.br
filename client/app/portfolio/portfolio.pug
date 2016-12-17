@@ -1,5 +1,5 @@
 
-div#portfolioMain.animated.fadeInUp
+div#portfolioMain
   .container(layout-sm ="column" layout-gt-sm="row")
     div#portfolio(flex)  
       md-grid-list( flex
@@ -11,7 +11,7 @@ div#portfolioMain.animated.fadeInUp
              md-gutter="35px")
             md-grid-tile(ng-repeat="project in $ctrl.listProjects")
               md-button(ng-href="{{project.siteUrl}}")
-                md-card
+                md-card.animated.fadeInUp
                   img(ng-src="{{project.imgUrl}}") 
                   div#card(flex layout="row"  layout-align="center center") 
                     md-card-title(flex="90")

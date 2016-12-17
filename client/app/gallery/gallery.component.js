@@ -49,7 +49,9 @@ export class GalleryController {
       type: type
     };
     this.$http.post('api/imageGallery/signing', query)
-      .success(result => {
+      .then(res => {
+        console.log(res);
+        let result = res.data;
         this.Upload.upload({
           url: result.url, //s3Url
           transformRequest: (data, headersGetter) => {
@@ -64,17 +66,14 @@ export class GalleryController {
         .progress(evt => {
           this.determinateValue = parseInt(100.0 * evt.loaded / evt.total, 10);
         })
-        .success(data => {
+        .then(() => {
           // file is uploaded successfully
           this.determinateValue = 0;
           this.loadImages();
-          this.angularGridInstance.gallery.refresh();
         })
-        .error(err => {
-          console.log('erroooo', err);
-        });
+        .catch(err => console.log('erroooo', err));
       })
-      .error((data, status) => {
+      .catch((data, status) => {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
         console.log('pau pau', data, status);

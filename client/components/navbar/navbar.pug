@@ -16,8 +16,6 @@ div#navBar.animated.fadeInDown(flex="100", layout-align="center center")
             div.selected(ng-show="$ctrl.isActive('/contact')")
           md-menu#menuAdmin(ng-show='$ctrl.isLoggedIn()', layout="row")
             md-button(ng-click="$mdOpenMenu()", aria-label="manut-menu") admin
-            //md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
-              i.fa.fa-bars(style="color:white; font-size:30px")
             md-menu-content
               md-menu-item
                 md-button(ng-href='/logout') Logout

@@ -10,22 +10,22 @@ div#BlogMain {
           md-list-item {
             div{
               md-card{
-                background-color: #fcfaf8;
+                background-color: transparent;
                 md-card-title {
                   img { 
-                    width: 150px;
-                    height: 200px;
+                    width: 250px;
+                    height: 300px;
                   }
                    md-card-title-text{
-                     .md-headline {
-                       font-size: 25px;
-                     }
-                     .md-subhead {
-                       font-size: 20px;
-                     }
-                   }
+                    .md-headline {
+                      font-size: 25px;
+                    }
+                    .md-subhead {
+                      font-size: 20px;
+                      text-align: justify;
+                    }
+                  }
                 }
-
               }
             }
           }

@@ -25,13 +25,11 @@ div#navBar {
             font-size: 1.2em;
             font-weight: 800;
             &:hover {
-            
                  transition: 200ms;
                  transition-timing-function: ease-in-out;
                  -webkit-transition: 200ms;
                  -webkit-transition-timing-function: ease-in-out;
                 color: deepskyblue;
-            
             }
             .selected {
               border-style: solid;

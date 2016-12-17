@@ -10,11 +10,11 @@ div#BlogMain
             md-list-item(layout="column" layout-gt-sm="row" ng-repeat="post in $ctrl.listPosts")
               div(flex flex-gt-xs="60" layout="column").animated.slideInUp
                 md-card
-                  md-card-title(layout="column" layout-gt-sm="row" layout-align="center center")
+                  md-card-title(layout="column"  layout-align="center center")
                     img.md-padding(ng-src="{{post.postImage}}", layout-align="center center")
                     md-card-title-text
                       span.md-headline.md-padding {{post.title}}
-                      span.md-subhead {{post.snipet}}
+                      span.md-subhead(ng-bind-html="post.text | limitTo: 600") 
                       a(ng-href=`/post/{{post.slug}}`) more ...
 
     

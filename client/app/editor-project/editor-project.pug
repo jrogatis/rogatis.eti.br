@@ -11,35 +11,35 @@ div#EditorProject(style="min-height:60vh")
               h4 {{project.title}}
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
-        form(layout="column")
+        form(layout="column" name="projectForm" ng-submit=" $ctrl.handleSubmit($event)")
           div(layout="row" flex="100")
             md-input-container(flex="80")
               label Title
-              input(ng-model="$ctrl.project.title")
+              input(ng-model="$ctrl.project.title" required)
             md-input-container(flex)
-              md-switch(ng-model="$ctrl.project.displayFront") Front ?
+              md-switch(ng-model="$ctrl.project.displayFront" required) Front ?
           md-input-container
             label Desc
-            textarea(ng-model="$ctrl.project.desc")
+            textarea(ng-model="$ctrl.project.desc" required)
           div(layout="row" flex="100")  
             md-input-container(flex)
               label Project Type
-              <md-select ng-model="$ctrl.project.type">
-                <md-option ng-repeat="type in $ctrl.projectTypes" value="{{type}}"> {{type}}
+              md-select(ng-model="$ctrl.project.type" required name="type")
+                md-option(ng-repeat="type in $ctrl.projectTypes" value="{{type}}") {{type}}
+                div(ng-messages="projectForm.type.$error")
+                  div(ng-message="required") This is required.
             md-input-container(flex="80")
               label Project Url
-              input(ng-model="$ctrl.project.siteUrl")
+              input(ng-model="$ctrl.project.siteUrl" required)
           div(layout="row" flex="100")
             md-input-container(flex)
               label Project Image
-              input(ng-model="$ctrl.project.imgUrl")
+              input(ng-model="$ctrl.project.imgUrl" required)
               md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
             img#projectImage(ng-src="{{$ctrl.project.imgUrl}}")
           div(layout="row", layout-align="start center")
-            md-button(type="submit" ng-show="$ctrl.projectAnt" ng-click="$ctrl.handleSave($event)") save
-            md-button(type="submit" ng-show="!$ctrl.projectAnt" ng-click="$ctrl.handleAdd()") Add
-            md-button(type="submit" ng-click="$ctrl.showPreview($event)") preview
-
+            md-button(type="submit")  {{$ctrl.addOrSave}} 
+            md-button(ng-click="$ctrl.showPreview($event)") preview
 script(type="text/ng-template" id="selectImage.tmpl.pug")
   md-dialog(aria-label="Search Images")
     form(ng-cloak)
@@ -69,13 +69,15 @@ script(type="text/ng-template" id="preview.tmpl.pug")
             span(flex)
             md-button.md-icon-button(ng-click="cancel()") x
         md-dialog-content
-          li.grid(data-ng-repeat="project in $ctrl.project")
-            a(ng-href="{{project.siteUrl}}", target="_blank")
-              img.grid-img(src="{{project.imgUrl}}" data-actual-width = "250"  data-actual-height="250")
-              div#textWork.col-lg-12(layout="column")
-                h3.col-lg-offset-1 {{project.title}}
-                p.col-lg-offset-1.
-                  {{project.type}}
+            md-card.animated.fadeInUp
+                img(ng-src="{{$ctrl.project.imgUrl}}") 
+                div#card(flex layout="row"  layout-align="center center") 
+                  md-card-title(flex="90")
+                    md-card-title-text
+                      span.md-headline {{$ctrl.project.title}}
+                      span.md-subhead {{$ctrl.project.type}}
+                  div#pointer(flex layout-align="center center")
+                    i.fa.fa-angle-right      
         md-dialog-actions(layout="row")
           span(flex)
           md-button(ng-click="cancel()") Cancel

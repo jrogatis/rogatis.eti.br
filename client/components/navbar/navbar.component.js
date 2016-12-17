@@ -16,8 +16,18 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$scope = $scope;
+    this.$animate = $animate;
     this.enterState = true;
+    /*this.$animate.on('enter', 'navbar',
+      function callback(element, phase) {
+        // cool we detected an enter animation within the container
+        console.log('entao')
+      }
+    );*/
+
+
   }
+
 
   isActive(route) {
     return route === this.$location.path();

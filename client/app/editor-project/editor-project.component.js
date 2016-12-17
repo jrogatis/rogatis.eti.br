@@ -5,6 +5,7 @@ import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
+import ngMessages from 'angular-messages';
 
 
 export class EditorProjectController {
@@ -15,6 +16,7 @@ export class EditorProjectController {
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
+    this.addOrSave = 'Add';
     this.projectTypes = ['Demo', 'Demo MEAN Stack', 'Demo MERN Stack', 'Demo React', 'Demo Angular', 'WordPress'];
   }
 
@@ -26,23 +28,28 @@ export class EditorProjectController {
   }
 
   loadForEdition(index) {
+    this.addOrSave = 'Save';
     this.project = this.listProjects[index];
-    this.projectAnt = _.clone(this.project);
+    this.observer = jsonpatch.observe(this.project);
+  }
+
+  handleSubmit(ev) {
+    if(this.addOrSave !== 'Save') {
+      this.handleAdd();
+    } else {
+      this.handleSave(ev);
+    }
   }
 
   handleSave(ev) {
-    const observer = jsonpatch.observe(this.projectAnt);
-    this.projectAnt.type = this.project.type;
-    let patches = jsonpatch.generate(observer);
-    this.$http.patch(`/api/projects/${this.projectAnt._id}`, patches)
+    let patches = jsonpatch.generate(this.observer);
+    this.$http.patch(`/api/projects/${this.project._id}`, patches)
       .then(res => {
         if(res.status === 200) {
           this.showDialogSaveOk(ev);
-        } else {
-          alert('ops a error! ' + res.status);
-          console.log(res);
         }
-      });
+      })
+      .catch(error => console.log('ops a error!', error));
   }
 
   handleAdd() {
@@ -110,7 +117,7 @@ function DialogImagesGalleryController($scope, $mdDialog) {
   };
 }
 
-export default angular.module('rogatisEtiBrApp.editorProject', [ngRoute, ngMaterial])
+export default angular.module('rogatisEtiBrApp.editorProject', [ngRoute, ngMaterial, ngMessages])
   .config(routing)
   .component('editorProject', {
     template: require('./editor-project.pug'),
