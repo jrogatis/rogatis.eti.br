@@ -1,18 +1,18 @@
-div#navBar.animated.fadeInDown(flex="100", layout-align="center center")
+div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
   .container(flex="100", layout-align="center center")
     md-toolbar(flex="100", layout-align="center center")
       div.md-toolbar-tools(flex="100", layout-align="center center")
         div#menuLogo(layout-align="start center", flex="15",layout="row")
-          a(ng-href="/") 
+          a(ng-href="/" ng-click="$ctrl.animate()") 
             md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:80px;height:60px;")
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="65")
-          md-button(ng-href="/about") about
+          md-button(ng-href="/about" ng-click="$ctrl.animate()") about
             div.selected(ng-show="$ctrl.isActive('/about')")
-          md-button(ng-href="/portfolio") portfolio
+          md-button(ng-href="/portfolio" ng-click="$ctrl.animate()") portfolio
             div.selected(ng-show="$ctrl.isActive('/portfolio')")
-          md-button(ng-href="/blog") blog
+          md-button(ng-href="/blog" ng-click="$ctrl.animate()") blog
             div.selected(ng-show="$ctrl.isActive('/blog')")
-          md-button(ng-href="/contact") contact
+          md-button(ng-href="/contact" ng-click="$ctrl.animate()") contact
             div.selected(ng-show="$ctrl.isActive('/contact')")
           md-menu#menuAdmin(ng-show='$ctrl.isLoggedIn()', layout="row")
             md-button(ng-click="$mdOpenMenu()", aria-label="manut-menu") admin

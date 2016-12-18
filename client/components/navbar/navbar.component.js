@@ -7,8 +7,9 @@ import ngAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
 import angularMessages from 'angular-messages';
 
+
 export class NavbarComponent {
-  constructor($location, $mdSidenav, $animate, $scope, Auth) {
+  constructor($location, $mdSidenav, $animate, $scope, Auth, $timeout) {
     'ngInject';
     $scope.pageClass = 'pageNavbar';
     this.$location = $location;
@@ -16,21 +17,24 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$scope = $scope;
+    this.$timeout = $timeout;
     this.$animate = $animate;
     this.enterState = true;
-    /*this.$animate.on('enter', 'navbar',
-      function callback(element, phase) {
-        // cool we detected an enter animation within the container
-        console.log('entao')
-      }
-    );*/
-
-
+    this.myCssVar = 'animated fadeInDown';
+    this.$timeout(() => {
+      this.myCssVar = '';
+    }, 1000);
   }
-
 
   isActive(route) {
     return route === this.$location.path();
+  }
+
+  animate() {
+    this.myCssVar = 'animated fadeInDown';
+    this.$timeout(() => {
+      this.myCssVar = '';
+    }, 1000);
   }
 }
 
@@ -38,4 +42,5 @@ export default angular.module('directives.navbar', [angularAria, ngAnimate, angu
   .component('navbar', {
     template: require('./navbar.pug'),
     controller: NavbarComponent
-  }).name;
+  })
+  .name;

@@ -91,7 +91,7 @@ export class EditorController {
         this.observerPageInfo = jsonpatch.observe(this.pageInfo);
       })
       .catch(err => {
-        console.log('error on loadForEdition', err)
+        console.log('error on loadForEdition', err);
         if(err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
         }
@@ -99,6 +99,7 @@ export class EditorController {
   }
 
   handlePostUpdate(ev) {
+    this.post.date = new Date();
     const patches = jsonpatch.generate(this.observerPost);
     this.$http.patch(`/api/posts/${this.post._id}`, patches)
       .then(() => {
@@ -177,18 +178,18 @@ export class EditorController {
       .then(images => {
         this.imagesList = images.data;
         this.dialog = this.$mdDialog.show({
-            scope: this.$scope,
-            preserveScope: true,
-            controller: DialogImagesGalleryController,
-            templateUrl: 'selectImage.tmpl.pug',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false,
-            fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
-          })
-          .then(answer => {
-            this.post.postImage = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
-          });
+          scope: this.$scope,
+          preserveScope: true,
+          controller: DialogImagesGalleryController,
+          templateUrl: 'selectImage.tmpl.pug',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: false,
+          fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(answer => {
+          this.post.postImage = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
+        });
       });
   }
 
@@ -203,7 +204,7 @@ export class EditorController {
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
     });
-  };
+  }
 
 }
 

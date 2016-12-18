@@ -20,6 +20,16 @@ div#navBar {
       min-height: 4em;
       background-color: transparent;
       .md-toolbar-tools {
+        md-icon#logo{
+          fill: white;
+          &:hover {
+                 transition: 200ms;
+                 transition-timing-function: ease-in-out;
+                 -webkit-transition: 200ms;
+                 -webkit-transition-timing-function: ease-in-out;
+                fill: deepskyblue;
+            }
+        }
         div#menuButtons {
           .md-button {
             font-size: 1.2em;
