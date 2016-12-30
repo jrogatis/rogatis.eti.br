@@ -80,19 +80,22 @@
     ga('create', 'UA-86210015-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <div id="fb-root"></div>
+<div id="fb-root"></div>
 <script type="text/javascript">
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1592090201100353',
-      xfbml      : true,
+      status: true, 
+      cookie: true, 
+      xfbml: true,
       version    : 'v2.8'
     });
   };
-
+  
   (function(d, s, id){
+     FB = null;
      var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
+     //if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);

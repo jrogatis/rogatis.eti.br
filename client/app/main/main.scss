@@ -1,24 +1,14 @@
 div#main {
   div#mainText {
-   // min-height: 70vh;
-    padding-top: 20px;
-   
-      min-height: 70vh;
-      @include respond-to(screen-md) {
-        min-height: 60vh;
-      }
-      @include respond-to(screen-sm) {
-        min-height: 50vh;
-      }
-      @include respond-to(screen-xs) {
-        min-height: 70vh;
-      }
-      
+    padding-top: 0px;
         #mainTextCard{
+          max-width: 700px;
           box-shadow: 0px 0px 0px 0px;
+          margin: 0px 0px;
+            img{
+              max-height: 70vh;
+          }
         }
-      
-    
   }
   .lineDivider {
     border-color: black;

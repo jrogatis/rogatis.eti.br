@@ -4,6 +4,8 @@ import routing from './main.routes';
 import angularGrid from 'angulargrid';
 import ngMeta from 'ng-meta';
 
+
+
 export class MainController {
 
   /*@ngInject*/

@@ -9,12 +9,18 @@ div#aboutMain
       div.animated.slideInLeft#text(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         h1 about me
         h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
-        div#innerText
+        div(flex layout="column")#innerText
           p. 
             I enjoy turning complex problems into simple, 
             beautiful and intuitive systems. 
             When I'm not coding or pushing pixels, 
             you'll find me in the skies or at running course.
+        //div.fb-like(data-href="http://www.rogatis.eti.br" 
+          data-layout="button_count" 
+          data-action="like" 
+          data-size="large" 
+          data-show-faces="false" 
+          data-share="false")    
       div.animated.slideInRight#aboutImage(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         md-card
           img(ng-src="../../assets/images/picsAbout9100.jpg")   

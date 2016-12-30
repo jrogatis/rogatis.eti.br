@@ -1,11 +1,12 @@
 
 div#main
-  .container
-    div#mainText(flex="100", layout="column").animated.slideInLeft
-      div(layout="column" layout-fill)
-        md-card#mainTextCard
-          img(ng-src="/assets/images/skydive6.jpg"  hide-xs)
-          img(ng-src="/assets/images/skydive7.jpg" hide-gt-xs)      
+  div#mainText(flex="100", layout="column")
+    div(layout="row" layout-fill layout-align="center center")
+      md-card.animated.slideInLeft(flex)#mainTextCard
+        img(ng-src="/assets/images/skyEsqV2comTexo.jpg")            
+      md-card.animated.slideInRight(flex)#mainTextCard
+        img(ng-src="/assets/images/skyDirV2.jpg")
+  .container                    
     div(flex).animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
