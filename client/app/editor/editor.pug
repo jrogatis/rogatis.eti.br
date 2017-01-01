@@ -7,8 +7,8 @@ div#Editor(style="min-height:60vh")
     div(flex layout-align="center center" layout="column")
       h1 Post Editor Console
       h3 Dear You.. Take your time and write interesting things!!!
-    div#menus(layout="row" flex layout-align="center center")
-      div#postsLists(flex="25")
+    div#menus(layout="row" flex layout-align="center start")
+      div#postsLists(flex="25" layout-align="center start")
         h3 list of posts
         md-button(ng-click="$ctrl.newPost()") New Post
         md-list(flex)
@@ -19,34 +19,32 @@ div#Editor(style="min-height:60vh")
                 md-icon.fa.fa-trash
             md-divider
       div#editForm.md-inline-form(layout="column" flex-offset="5", flex="75")
-        form(name="postForm" layout="column")
-            md-input-container
-              md-switch(ng-model="$ctrl.post.active") Active ? {{$ctrl.post.active ? true : false}}
-            md-input-container
-              label(style="font-size:25px;") Title
-              input(ng-model="$ctrl.post.title" style="font-size:25px;" required)
-            md-input-container
-              label Author
-              input(ng-model="$ctrl.post.author" style="font-size:25px;" required)  
-            md-input-container
-              label Slug
-              input(ng-model="$ctrl.post.slug" required)
-            md-input-container
-              label Snipet
-              textarea(ng-model="$ctrl.post.snipet" required)
-            div#imgSelector(layout="row" flex)
-              md-input-container#imgSelector(flex)
-                label Post Image
-                input(ng-model="$ctrl.post.postImage" required)
-                md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
-              img#postImage(ng-show="$ctrl.post" ng-src="{{$ctrl.post.postImage}}")
-    div(layout = "row" flex layout-align="center center")
-      md-content(flex="80" flex-offset="10")
-        textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text" required)
-        //text-angular(name="postEditor"  ng-model="$ctrl.post.text" ta-text-editor-class="border-around" ta-html-editor-class="border-around")
-        md-button(type="submit" ng-show="$ctrl.observerPost" ng-click="$ctrl.handlePostUpdate($event)") Update
-        md-button(type="submit" ng-show="!$ctrl.observerPost" ng-click="$ctrl.handlePostAdd($event)") Add
-      div(flex)
+        form(name="postForm" layout="column" ng-submit="$ctrl.handleSubmit($event)")
+          md-input-container
+            md-switch(ng-model="$ctrl.post.active") Active ? {{$ctrl.post.active ? true : false}}
+          md-input-container
+            label(style="font-size:25px;") Title
+            input(ng-model="$ctrl.post.title" style="font-size:25px;" ng-change="$ctrl.handleTitleOnChange()" required)
+          md-input-container
+            label Author
+            input(ng-model="$ctrl.post.author" style="font-size:25px;" required)  
+          md-input-container
+            label Slug
+            input(ng-model="$ctrl.post.slug" required)
+          md-input-container
+            label Snipet
+            textarea(ng-model="$ctrl.post.snipet" required)
+          div#imgSelector(layout="row" flex)
+            md-input-container#imgSelector(flex)
+              label Post Image
+              input(ng-model="$ctrl.post.postImage" required)
+              md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
+            img#postImage(ng-show="$ctrl.post" ng-src="{{$ctrl.post.postImage}}")
+          div(layout = "row" flex layout-align="center center")
+            md-content(flex="100")
+              textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.post.text" )
+          div(layout="row", layout-align="start center")    
+            md-button(type="submit")  {{$ctrl.addOrSave}}   
 script(type="text/ng-template" id="selectImage.tmpl.pug")
   md-dialog(aria-label="Search Images")
     form(ng-cloak)

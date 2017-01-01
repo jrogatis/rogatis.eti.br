@@ -1,14 +1,20 @@
 div#main {
   div#mainText {
     padding-top: 0px;
-        #mainTextCard{
-          max-width: 700px;
-          box-shadow: 0px 0px 0px 0px;
-          margin: 0px 0px;
-            img{
-              max-height: 70vh;
+      #mainTextCard{
+        max-width: 900px;
+        box-shadow: 0px 0px 0px 0px;
+        margin: 0px 0px;
+         @include respond-to(screen-gt-lg) {
+            min-height: 800px;
           }
-        }
+        img{
+          @include respond-to(screen-gt-lg) {
+            //min-height: 80vh;
+            //height: 800px;
+          }
+        } 
+      }
   }
   .lineDivider {
     border-color: black;

@@ -87,7 +87,11 @@ export function show(req, res) {
 export function create(req, res) {
   return Posts.create(req.body)
     .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+    .catch(err => {
+      console.log(err);
+      handleError(res);
+    }
+  );
 }
 
 // Upserts the given Posts in the DB at the specified ID

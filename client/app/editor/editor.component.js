@@ -69,6 +69,7 @@ export class EditorController {
         }
       ]
     };
+    this.addOrSave = 'Add';
   }
 
   loadPosts() {
@@ -80,12 +81,14 @@ export class EditorController {
   }
 
   loadForEdition(index) {
+    this.addOrSave = 'Save';
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
     if(this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
-    this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent('/post/' + this.post.slug )}`)
+    const postUrl = `/post/${this.post.slug}`; 
+    this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent(postUrl)}`)
       .then(res => {
         this.pageInfo = res.data;
         this.observerPageInfo = jsonpatch.observe(this.pageInfo);
@@ -98,9 +101,22 @@ export class EditorController {
       });
   }
 
+  handleSubmit(ev) {
+    if(this.addOrSave !== 'Save') {
+      this.handlePostAdd(ev);
+    } else {
+      this.handlePostUpdate(ev);
+    }
+  }
+
+  handleTitleOnChange() {
+    this.post.slug = this.Slug.slugify(this.post.title);
+  }
+
   handlePostUpdate(ev) {
     this.post.date = new Date();
     const patches = jsonpatch.generate(this.observerPost);
+    console.log(patches);
     this.$http.patch(`/api/posts/${this.post._id}`, patches)
       .then(() => {
         this.handlePageInfoUpdate(ev);
@@ -144,14 +160,17 @@ export class EditorController {
     this.pageInfo = undefined;
     this.observerPageInfo = undefined;
     this.observerPost = undefined;
+    this.addOrSave = 'Add';
+    this.$scope.postForm.$setpristine();
+    this.post.active = false;
     this.loadPosts();
   }
 
   handlePostAdd(ev) {
-    //console.log("add");
     if(this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
+    if(this.post.active === undefined) this.post.active = false;
     this.$http.post('/api/posts', this.post)
       .then(() => {
         this.handlePageInfoAdd();
