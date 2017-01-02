@@ -65,7 +65,9 @@ function handleError(res, statusCode) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  return Posts.find().exec()
+  return Posts.find()
+    .sort([['date', 'descending']])
+    .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -75,7 +77,7 @@ export function show(req, res) {
   return Posts.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
-    .catch(err => {
+    .catch(() => {
       Posts.findOne({slug: req.params.id}).exec()
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))

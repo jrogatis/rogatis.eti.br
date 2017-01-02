@@ -27,7 +27,7 @@ div#BlogMain
                       div(flex)#image
                         img.md-padding(ng-src="{{post.postImage}}", layout-align="center center")
                     md-card-content  
-                      span#text.md-padding(ng-bind-html="post.text | limitTo: 1000")
+                      span#text.md-padding(ng-bind-html="post.text | limitTo: 800")
                       div#more 
                         a(ng-href=`/post/{{post.slug}}`) more ...
       div(flex)
