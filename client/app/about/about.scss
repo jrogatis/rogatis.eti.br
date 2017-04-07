@@ -3,10 +3,15 @@ div#aboutMain {
     transition: all 400ms ease-out 50ms;
   }
   .container {
+   
     div#aboutMe {
       display:block;
+      flex-direction:column;
+        @include respond-to(screen-gt-sm) {
+        display:flex;
+        flex-direction:row;
+      }
       div#text {
-        //padding-top: 3%;
         h1 {
           font-size: 4.5em;
           font-weight: 800;
@@ -31,6 +36,11 @@ div#aboutMain {
   }
   div#randomFacts {
     display:block;
+    flex-direction:column;
+      @include respond-to(screen-gt-sm) {
+      display:flex;
+      flex-direction:row;
+    }
     border-top: #dddddd 1px solid;
     border-top-width: 1px;
     border-top-style: solid;
