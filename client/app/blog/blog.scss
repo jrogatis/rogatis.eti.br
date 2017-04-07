@@ -1,14 +1,16 @@
 div#BlogMain {
+   display:block;
    font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial, Sans-serif;
    h1 {
     text-align: center;
       }
   div {
     div#blogText {
-     
+      display:block;
       div#posts {
         md-list {
           md-list-item {
+            display:block;
             div{
               md-card{
                 background-color: transparent;
