@@ -34,27 +34,7 @@ div#main {
   div#projects {
     padding-top: 30px;
     md-grid-list {
-      figure {
-        &:hover {
-          div#pointer {
-            opacity: 1;
-          }
-        }
-      }
       a.md-button md-card {
-        &:hover {
-          div#card {
-            md-card-title {
-              border: 0px;
-              border-right: 1px;
-              border-style: solid;
-              border-color: #ced0d4;
-            }
-            div#pointer {
-              opacity: 1;
-            }
-          }
-        }
         div#card {
           md-card-title {
             md-card-title-text {
@@ -77,6 +57,20 @@ div#main {
             }
           }
         }
+        &:hover {
+          div#card {
+            md-card-title {
+              border: 0px;
+              border-right: 1px;
+              border-style: solid;
+              border-color: #ced0d4;
+            }
+            div#pointer {
+              opacity: 1;
+            }
+          }
+        }
+
       }
     }
   }
