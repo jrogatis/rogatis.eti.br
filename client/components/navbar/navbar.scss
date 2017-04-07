@@ -26,7 +26,8 @@ div#navBar {
                  transition-timing-function: ease-in-out;
                  -webkit-transition: 200ms;
                  -webkit-transition-timing-function: ease-in-out;
-                fill: deepskyblue;
+                fill: #064A99;
+                background-color: white;
             }
         }
         div#menuButtons {
@@ -38,7 +39,8 @@ div#navBar {
                  transition-timing-function: ease-in-out;
                  -webkit-transition: 200ms;
                  -webkit-transition-timing-function: ease-in-out;
-                color: deepskyblue;
+                color: #064A99;
+                background-color: white;
             }
             .selected {
               border-style: solid;
