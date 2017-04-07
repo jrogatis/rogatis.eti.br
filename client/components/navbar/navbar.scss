@@ -25,13 +25,13 @@ div#navBar {
         width: 50px;
         height: 50px;
         &:hover {
-                transition: 200ms;
-                transition-timing-function: ease-in-out;
-                -webkit-transition: 200ms;
-                -webkit-transition-timing-function: ease-in-out;
-              fill: #064A99;
-              background-color: white;
-          }
+          transition: 200ms;
+          transition-timing-function: ease-in-out;
+          -webkit-transition: 200ms;
+          -webkit-transition-timing-function: ease-in-out;
+          fill: #064A99;
+          background-color: white;
+        }
       }
       div#menuButtons {
         .md-button {
@@ -40,12 +40,12 @@ div#navBar {
           height: 50px;
           padding-top: 5px;
           &:hover {
-                transition: 200ms;
-                transition-timing-function: ease-in-out;
-                -webkit-transition: 200ms;
-                -webkit-transition-timing-function: ease-in-out;
-              color: #064A99;
-              background-color: white;
+            transition: 200ms;
+            transition-timing-function: ease-in-out;
+            -webkit-transition: 200ms;
+            -webkit-transition-timing-function: ease-in-out;
+            color: #064A99;
+            background-color: white;
           }
           .selected {
             border-style: solid;
@@ -54,7 +54,24 @@ div#navBar {
             max-height: 0.6px;
           }
         }
+       #menuAdmin {
+          .md-button {
+            font-size: 1em;
+            font-weight: 800;
+            height: 50px;
+            padding-top: 0px;
+            &:hover {
+              transition: 200ms;
+              transition-timing-function: ease-in-out;
+              -webkit-transition: 200ms;
+              -webkit-transition-timing-function: ease-in-out;
+              color: #064A99;
+              background-color: white;
+            }
+          }
+        }
       }
+
       div#socialLinks {     
         a {
           padding-left: 0;

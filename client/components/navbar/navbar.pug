@@ -14,7 +14,7 @@ div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
             div.selected(ng-show="$ctrl.isActive('/blog')")
           md-button(ng-href="/contact" ng-click="$ctrl.animate()") contact
             div.selected(ng-show="$ctrl.isActive('/contact')")
-          md-menu#menuAdmin(ng-show='$ctrl.isLoggedIn()', layout="row")
+          md-menu#menuAdmin(ng-show='$ctrl.isLoggedIn()', layout="row", md-offset="0 52")
             md-button(ng-click="$mdOpenMenu()", aria-label="manut-menu") admin
             md-menu-content
               md-menu-item
@@ -39,7 +39,7 @@ div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
             md-tooltip git
             img(src="/assets/images/git.svg" )
         md-menu#breadMenu(hide-gt-sm, layout="row", flex, layout-align="end center")
-          md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
+          md-button#menuAdmin.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
             i.fa.fa-bars
           md-menu-content
             md-menu-item
