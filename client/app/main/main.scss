@@ -35,6 +35,10 @@ div#main {
     padding-top: 30px;
     md-grid-list {
       a.md-button md-card {
+        img {
+          width: 313px;
+          height: 200px;
+        }
         div#card {
           md-card-title {
             md-card-title-text {
@@ -54,6 +58,7 @@ div#main {
             i {
               font-size: 25px;
               color: #ced0d4;
+              font-weight: bold;
             }
           }
         }
