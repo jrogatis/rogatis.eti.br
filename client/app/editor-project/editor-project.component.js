@@ -16,7 +16,11 @@ export class EditorProjectController {
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
     this.addOrSave = 'Add';
-    this.projectTypes = ['Demo', 'Demo MEAN Stack', 'Demo MERN Stack', 'Demo React', 'Demo Angular', 'WordPress'];
+    this.projectTypes = [
+      'Demo', 'Demo MEAN Stack', 'Demo MERN Stack',
+      'Demo React', 'Demo Angular', 'WordPress',
+      'React', 'MEAN Stack'
+    ];
   }
 
   $onInit() {
