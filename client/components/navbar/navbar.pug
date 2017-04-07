@@ -4,7 +4,7 @@ div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
       div.md-toolbar-tools(flex="100", layout-align="center center")
         div#menuLogo(layout-align="start center", flex="15",layout="row")
           a(ng-href="/" ng-click="$ctrl.animate()") 
-            md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg", style="width:50px;height:50px;")
+            md-icon#logo.md-default-theme(md-svg-icon="/assets/images/personalLogo.svg")
         div#menuButtons(hide-xs hide-sm layout="row" layout-align="center center", flex="65")
           md-button(ng-href="/about" ng-click="$ctrl.animate()") about
             div.selected(ng-show="$ctrl.isActive('/about')")
@@ -38,9 +38,9 @@ div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
           md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
             md-tooltip git
             img(src="/assets/images/git.svg" )
-        md-menu(hide-gt-sm, layout="row", flex, layout-align="end center")
+        md-menu#breadMenu(hide-gt-sm, layout="row", flex, layout-align="end center")
           md-button.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
-            i.fa.fa-bars(style="color:white; font-size:30px")
+            i.fa.fa-bars
           md-menu-content
             md-menu-item
               md-button(ng-href="/about") about
