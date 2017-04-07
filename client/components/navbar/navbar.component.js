@@ -7,7 +7,6 @@ import ngAnimate from 'angular-animate';
 import angularMaterial from 'angular-material';
 import angularMessages from 'angular-messages';
 
-
 export class NavbarComponent {
   constructor($location, $mdSidenav, $animate, $scope, Auth, $timeout) {
     'ngInject';

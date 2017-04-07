@@ -16,7 +16,7 @@ div#navBar {
   background: linear-gradient(to right, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     md-toolbar {
-      min-height: 4em;
+      min-height: 3em;
       background-color: transparent;
       .md-toolbar-tools {
         md-icon#logo{
@@ -31,7 +31,7 @@ div#navBar {
         }
         div#menuButtons {
           .md-button {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: 800;
             &:hover {
                  transition: 200ms;
@@ -49,6 +49,10 @@ div#navBar {
           }
         }
         div#socialLinks {
+          img {
+            height: 20px;
+            width: 20px;
+          }
           a {
             padding-left: 0;
             padding-right: 0;
