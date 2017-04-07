@@ -6,17 +6,17 @@ div#main(flex="100", layout="column")
         img(src="/assets/images/skyEsqV2comTexto.jpg")            
       md-card.animated.slideInRight(flex)#mainTextCard
         img(src="/assets/images/skyDirV2.jpg")       
-  .container        
-    div(flex).animated.slideInUp
+  div
+    div.animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
         h1(flex="50") SOME OF MY LATEST WORK
         div.lineDivider(flex="20")
-      div#projects(flex)
-        md-grid-list( flex
-          md-cols-gt-sm="3" 
+      div#projects(flex="grow")
+        md-grid-list(
+          md-cols-gt-xs="3" 
           md-cols="1" 
-          md-row-height="4:4"
+          md-row-height="1:1"
           md-gutter-gt-sm="35px"  
           md-gutter="4px")
           md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
