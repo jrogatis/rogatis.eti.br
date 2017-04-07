@@ -4,8 +4,6 @@ import routing from './main.routes';
 import angularGrid from 'angulargrid';
 import ngMeta from 'ng-meta';
 
-
-
 export class MainController {
 
   /*@ngInject*/
@@ -29,9 +27,7 @@ export class MainController {
     this.$http.get('/api/projects')
       .then(response => {
         this.listProjects = response.data;
-        this.listImportantProjects = this.listProjects.filter(el => {
-          return el.displayFront === true;
-        });
+        this.listImportantProjects = this.listProjects.filter(el => el.displayFront === true);
         this.socket.syncUpdates('projects', this.listProjects);
       });
   }
@@ -39,9 +35,7 @@ export class MainController {
 
 export default angular.module('rogatisEtiBrApp.main', [ngRoute, angularGrid, 'ngMeta'])
   .config(routing)
-  .run(['ngMeta', ngMeta => {
-    ngMeta.init();
-  }])
+  .run(['ngMeta', ngMeta => ngMeta.init()])
   .component('main', {
     template: require('./main.pug'),
     controller: MainController

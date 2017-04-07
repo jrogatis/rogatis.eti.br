@@ -2,7 +2,6 @@ import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './editor-project.routes';
 import jsonpatch from 'fast-json-patch';
-import _ from 'lodash';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
@@ -52,8 +51,15 @@ export class EditorProjectController {
       .catch(error => console.log('ops a error!', error));
   }
 
-  handleAdd() {
-    this.$http.post('/api/projects', this.project);
+  handleAdd(ev) {
+    this.$http.post('/api/projects', this.project)
+      .then(res => {
+        console.log(res);
+        if(res.status === 201) {
+          this.showDialogSaveOk(ev);
+        }
+      })
+      .catch(error => console.log('ops a error!', error));
   }
 
   showDialogSaveOk(ev) {
@@ -89,7 +95,6 @@ export class EditorProjectController {
       });
   }
   showPreview(ev) {
-    console.log(this.project);
     this.dialog = this.$mdDialog.show({
       scope: this.$scope,
       preserveScope: true,
