@@ -2,9 +2,6 @@ div#navBar {
   display:block;
   //font-family: prometo;
   font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2em;
   border-color: transparent;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#064a99+18,7db9e8+82 */
   background: rgb(6, 74, 153);
@@ -16,8 +13,12 @@ div#navBar {
   background: linear-gradient(to right, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   md-toolbar {
-    min-height: 3em;
     background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+    height: 50px;
+    max-height: 50px;
+    min-height: 0px;
     .md-toolbar-tools {
       md-icon#logo{
         fill: white;
@@ -36,6 +37,8 @@ div#navBar {
         .md-button {
           font-size: 1em;
           font-weight: 800;
+          height: 50px;
+          padding-top: 5px;
           &:hover {
                 transition: 200ms;
                 transition-timing-function: ease-in-out;
