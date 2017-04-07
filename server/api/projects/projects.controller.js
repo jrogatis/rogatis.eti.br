@@ -65,7 +65,9 @@ function handleError(res, statusCode) {
 
 // Gets a list of Project
 export function index(req, res) {
-  return Project.find().exec()
+  return Project.find()
+    .sort({ _id: -1 })
+    .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
