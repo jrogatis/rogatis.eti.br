@@ -1,5 +1,5 @@
 div#navBar {
-
+  display:block;
   //font-family: prometo;
   font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
   font-style: normal;
@@ -15,7 +15,6 @@ div#navBar {
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(6, 74, 153, 1) 18%, rgba(125, 185, 232, 1) 82%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  div.container {
     md-toolbar {
       min-height: 4em;
       background-color: transparent;
@@ -63,4 +62,3 @@ div#navBar {
       }
     }
   }
-}

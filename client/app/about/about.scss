@@ -4,6 +4,7 @@ div#aboutMain {
   }
   .container {
     div#aboutMe {
+      display:block;
       div#text {
         //padding-top: 3%;
         h1 {
@@ -29,6 +30,7 @@ div#aboutMain {
     }
   }
   div#randomFacts {
+    display:block;
     border-top: #dddddd 1px solid;
     border-top-width: 1px;
     border-top-style: solid;
@@ -42,6 +44,7 @@ div#aboutMain {
     }
   }
   div#skills {
+    display:block;
     border-top: #dddddd 1px solid;
     border-top-width: 1px;
     border-top-style: solid;
