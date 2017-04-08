@@ -3,19 +3,18 @@ const ngRoute = require('angular-route');
 import routing from './editor-project.routes';
 import jsonpatch from 'fast-json-patch';
 import ngMaterial from 'angular-material';
-import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
-
 
 export class EditorProjectController {
 
   /*@ngInject*/
-  constructor($http, $scope, $mdDialog) {
+  constructor($http, $scope, $mdDialog, Slug) {
     this.$http = $http;
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
     this.$scope.customFullscreen = false;
     this.addOrSave = 'Add';
+    this.Slug = Slug;
     this.projectTypes = [
       'Demo', 'Demo MEAN Stack', 'Demo MERN Stack',
       'Demo React', 'Demo Angular', 'WordPress',
@@ -34,6 +33,12 @@ export class EditorProjectController {
     this.addOrSave = 'Save';
     this.project = this.listProjects[index];
     this.observer = jsonpatch.observe(this.project);
+    if(this.project.slug === '' || this.project.slug === undefined) {
+      this.project.slug = this.Slug.slugify(this.project.title);
+    }
+    if(this.project.hasDesc === '' || this.project.hasDesc === undefined) {
+      this.project.hasDesc = false;
+    }
   }
 
   handleSubmit(ev) {
@@ -45,7 +50,10 @@ export class EditorProjectController {
   }
 
   handleSave(ev) {
-    let patches = jsonpatch.generate(this.observer);
+    console.log(this.project.hasDesc);
+    this.project.hasDesc = (this.project.hasDesc !== undefined);
+    const patches = jsonpatch.generate(this.observer);
+    console.log(patches);
     this.$http.patch(`/api/projects/${this.project._id}`, patches)
       .then(res => {
         if(res.status === 200) {
@@ -98,6 +106,7 @@ export class EditorProjectController {
       });
       });
   }
+
   showPreview(ev) {
     this.dialog = this.$mdDialog.show({
       scope: this.$scope,
@@ -115,18 +124,18 @@ export class EditorProjectController {
 DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];
 
 function DialogImagesGalleryController($scope, $mdDialog) {
-  $scope.hide = function() {
+  $scope.hide = () => {
     $mdDialog.hide();
   };
-  $scope.cancel = function() {
+  $scope.cancel = () => {
     $mdDialog.cancel();
   };
-  $scope.answer = function(answer) {
+  $scope.answer = answer => {
     $mdDialog.hide(answer);
   };
 }
 
-export default angular.module('rogatisEtiBrApp.editorProject', [ngRoute, ngMaterial, ngMessages])
+export default angular.module('rogatisEtiBrApp.editorProject', [ngRoute, ngMaterial, ngMessages, 'slugifier'])
   .config(routing)
   .component('editorProject', {
     template: require('./editor-project.pug'),

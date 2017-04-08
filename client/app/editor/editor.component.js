@@ -87,7 +87,7 @@ export class EditorController {
     if(this.post.slug === '' || this.post.slug === undefined) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
-    const postUrl = `/post/${this.post.slug}`; 
+    const postUrl = `/post/${this.post.slug}`;
     this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent(postUrl)}`)
       .then(res => {
         this.pageInfo = res.data;
@@ -230,15 +230,15 @@ export class EditorController {
 DialogImagesGalleryController.$inject = ['$scope', '$mdDialog'];
 
 function DialogImagesGalleryController($scope, $mdDialog) {
-  $scope.hide = function () {
+  $scope.hide = () => {
     $mdDialog.hide();
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = () => {
     $mdDialog.cancel();
   };
 
-  $scope.answer = function (answer) {
+  $scope.answer = answer => {
     $mdDialog.hide(answer);
   };
 }

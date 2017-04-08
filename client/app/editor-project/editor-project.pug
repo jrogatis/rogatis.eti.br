@@ -11,13 +11,13 @@ div#EditorProject(style="min-height:60vh")
               h4 {{project.title}}
             md-divider
       div#editForm(layout="column" flex-offset="5", flex="75")
-        form(layout="column" name="projectForm" ng-submit=" $ctrl.handleSubmit($event)")
-          div(layout="row" flex="100")
-            md-input-container(flex="80")
-              label Title
-              input(ng-model="$ctrl.project.title" required)
-            md-input-container(flex)
-              md-switch(ng-model="$ctrl.project.displayFront" required) Front ?
+        form(layout="column" name="projectForm" ng-submit="$ctrl.handleSubmit($event)")
+          md-input-container
+            label Title
+            input(ng-model="$ctrl.project.title" required)
+          md-input-container
+            label Slug
+            input(ng-model="$ctrl.project.slug" required)
           md-input-container
             label Desc
             textarea(ng-model="$ctrl.project.desc" required)
@@ -37,6 +37,18 @@ div#EditorProject(style="min-height:60vh")
               input(ng-model="$ctrl.project.imgUrl" required)
               md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
             img#projectImage(ng-src="{{$ctrl.project.imgUrl}}")
+          md-input-container(flex)
+            div(layout="row")
+              md-switch(
+                ng-model="$ctrl.project.displayFront"
+                aria-label="displayFront"
+                ng-true-value="true"
+                ng-false-value="false"
+                ) Front ?
+              md-switch(ng-model="$ctrl.project.hasDesc" 
+                ng-true-value="true"
+                ng-false-value="false"
+                required) Has Details ?
           div(layout="row", layout-align="start center")
             md-button(type="submit")  {{$ctrl.addOrSave}} 
             md-button(ng-click="$ctrl.showPreview($event)") preview

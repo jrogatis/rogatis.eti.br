@@ -1,0 +1,8 @@
+div#projectDetailsMain
+  .container(layout="column" layout-align="center center" flex="100")
+    div#title(flex layout="row")
+      div(flex="20")
+      h1(flex="60") {{$ctrl.post.title}}
+    div#textArea(layout="row")
+      div(flex-gt-sm="15" show-gt-sm)
+      div#Text.md-padding(flex="100" flex-gt-sm="70" ng-bind-html="$ctrl.post.text")
