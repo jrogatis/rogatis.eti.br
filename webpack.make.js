@@ -34,7 +34,7 @@ module.exports = function makeWebpackConfig(options) {
    * Should be an empty object if it's generating a test build
    * Karma will set this when it's a test build
    */
-  if (TEST) {
+  if(TEST) {
     config.entry = {};
   } else {
     config.entry = {
@@ -62,7 +62,7 @@ module.exports = function makeWebpackConfig(options) {
    * Should be an empty object if it's generating a test build
    * Karma will handle setting it up for you when it's a test build
    */
-  if (TEST) {
+  if(TEST) {
     config.output = {};
   } else {
     config.output = {
@@ -100,9 +100,9 @@ module.exports = function makeWebpackConfig(options) {
    * Reference: http://webpack.github.io/docs/configuration.html#devtool
    * Type of sourcemap to use per build type
    */
-  if (TEST) {
+  if(TEST) {
     config.devtool = 'inline-source-map';
-  } else if (BUILD || DEV) {
+  } else if(BUILD || DEV) {
     config.devtool = 'source-map';
   } else {
     config.devtool = 'eval';

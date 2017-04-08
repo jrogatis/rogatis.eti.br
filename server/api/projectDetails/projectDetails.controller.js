@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/posts              ->  index
- * POST    /api/posts              ->  create
- * GET     /api/posts/:id          ->  show
- * PUT     /api/posts/:id          ->  upsert
- * PATCH   /api/posts/:id          ->  patch
- * DELETE  /api/posts/:id          ->  destroy
+ * GET     /api/projectDetails              ->  index
+ * POST    /api/projectDetails              ->  create
+ * GET     /api/projectDetails/:id          ->  show
+ * PUT     /api/projectDetails/:id          ->  upsert
+ * PATCH   /api/projectDetails/:id          ->  patch
+ * DELETE  /api/projectDetails/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Posts from './posts.model';
+import projectDetails from './projectDetails.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -65,7 +65,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  return Posts.find()
+  return projectDetails.find()
     .sort([['date', 'descending']])
     .exec()
     .then(respondWithResult(res))
@@ -74,11 +74,11 @@ export function index(req, res) {
 
 // Gets a single Posts from the DB from id or from slug...
 export function show(req, res) {
-  return Posts.findById(req.params.id).exec()
+  return projectDetails.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(() => {
-      Posts.findOne({slug: req.params.id}).exec()
+      projectDetails.findOne({slug: req.params.id}).exec()
       .then(handleEntityNotFound(res))
       .then(respondWithResult(res))
       .catch(handleError(res));
@@ -87,7 +87,7 @@ export function show(req, res) {
 
 // Creates a new Posts in the DB
 export function create(req, res) {
-  return Posts.create(req.body)
+  return projectDetails.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(err => {
       console.log(err);
@@ -101,7 +101,7 @@ export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Posts.findOneAndUpdate(
+  return projectDetails.findOneAndUpdate(
     { _id: req.params.id },
     req.body,
     { upsert: true, setDefaultsOnInsert: true, runValidators: true })
@@ -115,7 +115,7 @@ export function patch(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Posts.findById(req.params.id).exec()
+  return projectDetails.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
@@ -123,7 +123,7 @@ export function patch(req, res) {
 }
 // Deletes a Posts from the DB
 export function destroy(req, res) {
-  return Posts.findById(req.params.id).exec()
+  return projectDetails.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
