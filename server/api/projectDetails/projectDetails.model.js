@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-var ProjectDetailsSchema = new mongoose.Schema({
+const ProjectDetailsSchema = new mongoose.Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
   postImage: { type: String, required: true },

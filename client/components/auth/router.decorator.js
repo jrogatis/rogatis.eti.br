@@ -9,13 +9,12 @@ export function routerDecorator($rootScope, $location, Auth) {
       return;
     }
 
-    if(typeof next.authenticate === 'string') {
+    if(angular.isString(next.authenticate)) {
       Auth.hasRole(next.authenticate)
         .then(has => {
           if(has) {
             return;
           }
-
           event.preventDefault();
           return Auth.isLoggedIn()
             .then(is => {

@@ -35,7 +35,7 @@ export default function(socketio) {
   //   handshake: true
   // }));
 
-  socketio.on('connection', function(socket) {
+  socketio.on('connection', socket => {
     socket.address = `${socket.request.connection.remoteAddress}:${socket.request.connection.remotePort}`;
 
     socket.connectedAt = new Date();

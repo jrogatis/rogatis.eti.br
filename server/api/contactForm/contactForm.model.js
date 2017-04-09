@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-var contactFormSchema = new mongoose.Schema({
+const contactFormSchema = new mongoose.Schema({
   fistName: String,
   lastName: String,
   email: String,

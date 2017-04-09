@@ -6,7 +6,7 @@ import mongoose, {Schema} from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   name: String,
   fullName: String,
   city: String,
@@ -110,12 +110,12 @@ UserSchema
         }
         return respond(true);
       })
-      .catch(function(err) {
+      .catch(err => {
         throw err;
       });
   }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function(value) {
+const validatePresenceOf = function(value) {
   return value && value.length;
 };
 
@@ -192,7 +192,7 @@ UserSchema.methods = {
    * @api public
    */
   makeSalt(byteSize, callback) {
-    var defaultByteSize = 16;
+    const defaultByteSize = 16;
 
     if(typeof arguments[0] === 'function') {
       callback = arguments[0];
@@ -233,9 +233,9 @@ UserSchema.methods = {
       }
     }
 
-    var defaultIterations = 10000;
-    var defaultKeyLength = 64;
-    var salt = new Buffer(this.salt, 'base64');
+    const defaultIterations = 10000;
+    const defaultKeyLength = 64;
+    const salt = new Buffer(this.salt, 'base64');
 
     if(!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)

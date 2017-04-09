@@ -12,7 +12,7 @@ import http from 'http';
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('error', function(err) {
+mongoose.connection.on('error', err => {
   console.error(`MongoDB connection error: ${err}`);
   process.exit(-1); // eslint-disable-line no-process-exit
 });
@@ -23,10 +23,10 @@ if(config.seedDB) {
 }
 
 // Setup server
-var app = express();
+const app = express();
 
-var server = http.createServer(app);
-var socketio = require('socket.io')(server, {
+const server = http.createServer(app);
+const socketio = require('socket.io')(server, {
   serveClient: config.env !== 'production',
   path: '/socket.io-client'
 });
@@ -36,9 +36,7 @@ require('./routes').default(app);
 
 // Start server
 function startServer() {
-  app.angularFullstack = server.listen(config.port, config.ip, function() {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-  });
+  app.angularFullstack = server.listen(config.port, config.ip, () => console.log('Express server listening on %d, in %s mode', config.port, app.get('env')));
 }
 
 setImmediate(startServer);

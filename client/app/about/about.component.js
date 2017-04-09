@@ -11,10 +11,9 @@ import d3 from 'd3';
 export class AboutController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $window, $document, $log) {
+  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $window, $log) {
     this.$http = $http;
     this.$scope = $scope;
-    this.$document = $document;
     this.socket = socket;
     this.$log = $log;
     this.ngMeta = ngMeta;
@@ -37,7 +36,7 @@ export class AboutController {
         growOnHover: true,
         type: 'discreteBarChart',
         height: 550,
-        width: angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth,
+        width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
         showYAxis: true,
         margin: {
           top: 50,
@@ -115,7 +114,7 @@ export class AboutController {
   }
 
   leftMargin() {
-    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
     //console.log(innerSize);
     if(innerSize < 599) {
       return 45;
@@ -125,7 +124,7 @@ export class AboutController {
   }
 
   resized(ev) {
-    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
     //console.log(innerSize);
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();

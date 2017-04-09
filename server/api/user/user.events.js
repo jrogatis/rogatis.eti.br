@@ -25,7 +25,7 @@ for(let e in events) {
 
 function emitEvent(event) {
   return doc => {
-    UserEvents.emit(event + ':' + doc._id, doc);
+    UserEvents.emit(`${event}:${doc._id}`, doc);
     UserEvents.emit(event, doc);
   };
 }

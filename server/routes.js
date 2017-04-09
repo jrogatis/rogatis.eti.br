@@ -11,7 +11,6 @@ import path from 'path';
 export default function(app) {
   // Insert routes below
   app.use('/api/users', require('./api/user'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/contactForm', require('./api/contactForm'));
   app.use('/api/projects', require('./api/projects'));
   app.use('/api/posts', require('./api/posts'));

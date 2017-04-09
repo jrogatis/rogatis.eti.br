@@ -18,10 +18,10 @@ import config from './environment';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
-var MongoStore = connectMongo(session);
+const MongoStore = connectMongo(session);
 
 export default function(app) {
-  var env = app.get('env');
+  const env = app.get('env');
 
   if(env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));
@@ -111,7 +111,7 @@ export default function(app) {
      * Reload all devices when bundle is complete
      * or send a fullscreen error message to the browser instead
      */
-    compiler.plugin('done', function(stats) {
+    compiler.plugin('done', stats => {
       console.log('webpack done hook');
       if(stats.hasErrors() || stats.hasWarnings()) {
         return browserSync.sockets.emit('fullscreen:message', {

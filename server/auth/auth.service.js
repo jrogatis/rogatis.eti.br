@@ -5,7 +5,7 @@ import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
 import User from '../api/user/user.model';
 
-var validateJwt = expressJwt({
+const validateJwt = expressJwt({
   secret: config.secrets.session
 });
 
@@ -16,7 +16,7 @@ var validateJwt = expressJwt({
 export function isAuthenticated() {
   return compose()
     // Validate jwt
-    .use(function(req, res, next) {
+    .use((req, res, next) => {
       // allow access_token to be passed through query parameter as well
       if(req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = `Bearer ${req.query.access_token}`;
@@ -28,7 +28,7 @@ export function isAuthenticated() {
       validateJwt(req, res, next);
     })
     // Attach user to request
-    .use(function(req, res, next) {
+    .use((req, res, next) => {
       User.findById(req.user._id).exec()
         .then(user => {
           if(!user) {
@@ -77,7 +77,7 @@ export function setTokenCookie(req, res) {
   if(!req.user) {
     return res.status(404).send('It looks like you aren\'t logged in, please try again.');
   }
-  var token = signToken(req.user._id, req.user.role);
+  const token = signToken(req.user._id, req.user.role);
   res.cookie('token', token);
   res.redirect('/');
 }

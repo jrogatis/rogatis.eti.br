@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./contactForm.controller');
+const express = require('express');
+const controller = require('./contactForm.controller');
 
-var router = express.Router();
+const router = express.Router();
 router.post('/', controller.create);
 
 module.exports = router;

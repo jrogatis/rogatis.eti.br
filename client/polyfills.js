@@ -13,7 +13,7 @@ import 'core-js/es7/reflect';
 
 
 if(!ENV) {
-  var ENV = 'development';
+  const ENV = 'development';
 }
 
 if(ENV === 'production') {

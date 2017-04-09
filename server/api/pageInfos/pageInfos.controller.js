@@ -65,7 +65,6 @@ function handleError(res, statusCode) {
 
 // Gets a list of pagesInfos
 export function index(req, res) {
-  console.log("entao");
   return PageInfos.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));

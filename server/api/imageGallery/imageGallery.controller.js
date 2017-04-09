@@ -33,7 +33,7 @@ exports.signing = (req, res) => {
     .toDate(); //15 minutes
 
   const s3Policy = {
-    expiration: expiration,
+    expiration,
     conditions: [{
       bucket: 'rogatis'
     },
@@ -64,7 +64,7 @@ exports.signing = (req, res) => {
       AWSAccessKeyId: process.env.aws_access_key_id,
       acl: readType,
       policy: base64Policy,
-      signature: signature,
+      signature,
       'Content-Type': request.type,
       success_action_status: 201
     }

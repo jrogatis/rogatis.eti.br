@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-var PageInfosSchema = new mongoose.Schema({
+const PageInfosSchema = new mongoose.Schema({
   pageName: String,
   pageDesc: String,
   pageImgUrl: String,

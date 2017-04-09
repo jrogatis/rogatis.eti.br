@@ -6,7 +6,7 @@
 import sm from 'sitemap';
 import Posts from '../posts/posts.model';
 
-var basicMap = {
+const basicMap = {
   hostname: 'http://www.rogatis.eti.br',
   cacheTime: 600000, // 600 sec cache peåriod
   urls: [
@@ -33,24 +33,20 @@ var basicMap = {
   ]
 };
 
-function sitemap(res) {
+const sitemap = res => {
   Posts.find().exec()
     .then(posts => {
       let map = sm.createSitemap(basicMap);
-      posts.map(post => {
-        map.add({
-          url: `/${post.slug}`
-        });
-      });
+      posts.map(post => map.add({ url: `/${post.slug}` }));
       map.toXML((err, xml) => {
-        if(!err) {
+        if (!err) {
           console.log(err, xml);
         }
       });
       return res.status(200).header('Content-Type', 'application/xml')
         .send(map.toString());
     });
-}
+};
 
 // Gets a site map
 export function index(req, res) {

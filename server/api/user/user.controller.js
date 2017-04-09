@@ -15,14 +15,12 @@ const handleError = (res, statusCode) => {
 };
 
 
-const handleEntityNotFound = res => {
-  return entity => {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
+const handleEntityNotFound = res => entity => {
+  if(!entity) {
+    res.status(404).end();
+    return null;
+  }
+  return entity;
 };
 
 /**
@@ -39,7 +37,7 @@ export function index(req, res) {
  * Creates a new user
  */
 export function create(req, res) {
-  var newUser = new User(req.body);
+  const newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save()
