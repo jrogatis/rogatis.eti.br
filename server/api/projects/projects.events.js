@@ -6,7 +6,7 @@
 
 import {EventEmitter} from 'events';
 import Projects from './projects.model';
-var ProjectsEvents = new EventEmitter();
+const ProjectsEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 ProjectsEvents.setMaxListeners(0);
@@ -18,7 +18,7 @@ var events = {
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
+for(let e in events) {
   let event = events[e];
   Projects.schema.post(e, emitEvent(event));
 }

@@ -12,16 +12,18 @@ var sanit = require('textangular/dist/textAngular-sanitize.min');
 export class EditorController {
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $mdDialog, $location, Slug) {
+  constructor($http, $scope, socket, $mdDialog, $location, Slug, $log, $document) {
     this.$http = $http;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
+    this.$log = $log;
+    this.$document = $document;
     this.$scope.customFullscreen = false;
     this.$location = $location;
     this.pageInfo;
     this.Slug = Slug;
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', () => {
       socket.unsyncUpdates('posts');
     });
   }
@@ -29,7 +31,7 @@ export class EditorController {
   $onInit() {
     this.loadPosts();
     this.$scope.tinymceOptions = {
-      onChange: function(e) {
+      onChange: e => {
         // put logic here for keypress and cut/paste changes
       },
       selector: 'textarea',
@@ -41,7 +43,10 @@ export class EditorController {
       skin: 'lightgray',
       font_formats: 'Prometo=prometo, Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n',
       fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
-      toolbar: 'insertfile undo redo | styleselect | bold italic | fontselect | fontsizeselect |alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code',
+      toolbar: `insertfile undo redo | styleselect | bold italic | fontselect 
+        | fontsizeselect |alignleft aligncenter alignright alignjustify 
+        | bullist numlist outdent indent | link image | print preview media fullpage 
+        | forecolor backcolor emoticons | code`,
       theme: 'modern',
       style_formats: [
         {
@@ -84,7 +89,7 @@ export class EditorController {
     this.addOrSave = 'Save';
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
-    if(this.post.slug === '' || this.post.slug === undefined) {
+    if(this.post.slug === '' || angular.isUndefined(this.post.slug)) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     const postUrl = `/post/${this.post.slug}`;
@@ -94,7 +99,7 @@ export class EditorController {
         this.observerPageInfo = jsonpatch.observe(this.pageInfo);
       })
       .catch(err => {
-        console.log('error on loadForEdition', err);
+        this.$log.error('error on loadForEdition', err);
         if(err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
         }
@@ -116,13 +121,13 @@ export class EditorController {
   handlePostUpdate(ev) {
     this.post.date = new Date();
     const patches = jsonpatch.generate(this.observerPost);
-    console.log(patches);
+    this.$log.debug(patches);
     this.$http.patch(`/api/posts/${this.post._id}`, patches)
       .then(() => {
         this.handlePageInfoUpdate(ev);
         this.loadPosts();
       })
-      .catch(err => console.log(err));
+      .catch(err => this.$log.error(err));
   }
 
   handlePageInfoUpdate(ev) {
@@ -150,9 +155,9 @@ export class EditorController {
           this.pageInfo = res.data;
           this.observerPageInfo = jsonpatch.observe(this.pageInfo);
         })
-        .catch(err => console.log('error on handlePageInfoAdd no get do pageurl', err))
+        .catch(err => this.$log.error('error on handlePageInfoAdd no get do pageurl', err))
       )
-      .catch(err => console.log('error on handlePageInfoAdd', err));
+      .catch(err => this.$log.error('error on handlePageInfoAdd', err));
   }
 
   newPost() {
@@ -167,10 +172,10 @@ export class EditorController {
   }
 
   handlePostAdd(ev) {
-    if(this.post.slug === '' || this.post.slug === undefined) {
+    if(this.post.slug === '' || angular.isUndefined(this.post.slug)) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
-    if(this.post.active === undefined) this.post.active = false;
+    if(angular.isUndefined(this.post.active)) this.post.active = false;
     this.$http.post('/api/posts', this.post)
       .then(() => {
         this.handlePageInfoAdd();
@@ -187,9 +192,9 @@ export class EditorController {
             this.post = undefined;
             this.pageInfo = undefined;
           })
-          .catch(err => console.log('err at delete posts page info', err));
+          .catch(err => this.$log.error('err at delete posts page info', err));
       })
-      .catch(err => console.log('err at delete posts', err));
+      .catch(err => this.$log.error('err at delete posts', err));
   }
 
   showDialog(ev) {
@@ -201,7 +206,7 @@ export class EditorController {
           preserveScope: true,
           controller: DialogImagesGalleryController,
           templateUrl: 'selectImage.tmpl.pug',
-          parent: angular.element(document.body),
+          parent: angular.element(this.$document.body),
           targetEvent: ev,
           clickOutsideToClose: false,
           fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -218,7 +223,7 @@ export class EditorController {
       preserveScope: true,
       controller: DialogImagesGalleryController,
       templateUrl: 'save.tmpl.pug',
-      parent: angular.element(document.body),
+      parent: angular.element(this.$document.body),
       targetEvent: ev,
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.

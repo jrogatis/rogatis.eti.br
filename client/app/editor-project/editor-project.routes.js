@@ -5,6 +5,6 @@ export default function routes($routeProvider) {
 
   $routeProvider.when('/editorProject', {
     template: '<editor-project></editor-project>',
-     authenticate: true
+    authenticate: true
   });
 }

@@ -4,17 +4,17 @@ import * as _ from 'lodash';
 import angular from 'angular';
 import io from 'socket.io-client';
 
-function Socket(socketFactory) {
+const Socket = socketFactory => {
   'ngInject';
   // socket.io now auto-configures its connection when we ommit a connection url
 
-  var ioSocket = io('', {
+  const ioSocket = io('', {
     // Send auth token on connection, you will need to DI the Auth service above
     // 'query': 'token=' + Auth.getToken()
     path: '/socket.io-client'
   });
 
-  var socket = socketFactory({
+  const socket = socketFactory({
     ioSocket
   });
 
@@ -37,12 +37,12 @@ function Socket(socketFactory) {
       /**
        * Syncs item creation/updates on 'model:save'
        */
-      socket.on(`${modelName}:save`, function(item) {
-        var oldItem = _.find(array, {
+      socket.on(`${modelName}:save`, item => {
+        const oldItem = _.find(array, {
           _id: item._id
         });
-        var index = array.indexOf(oldItem);
-        var event = 'created';
+        const index = array.indexOf(oldItem);
+        let event = 'created';
 
         // replace oldItem if it exists
         // otherwise just add item to the collection
@@ -59,8 +59,8 @@ function Socket(socketFactory) {
       /**
        * Syncs removed items on 'model:remove'
        */
-      socket.on(`${modelName}:remove`, function(item) {
-        var event = 'deleted';
+      socket.on(`${modelName}:remove`, item => {
+        const event = 'deleted';
         _.remove(array, {
           _id: item._id
         });
@@ -78,7 +78,7 @@ function Socket(socketFactory) {
       socket.removeAllListeners(`${modelName}:remove`);
     }
   };
-}
+};
 
 export default angular.module('rogatisEtiBrApp.socket', [])
   .factory('socket', Socket)

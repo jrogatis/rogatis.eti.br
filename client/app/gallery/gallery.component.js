@@ -13,9 +13,10 @@ import ngImageDimensions from 'angular-image-dimensions';
 export class GalleryController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, Upload, angularGridInstance) {
+  constructor($http, $scope, $animate, $mdDialog, socket, Upload, angularGridInstance, $log) {
     this.$http = $http;
     this.$scope = $scope;
+    this.$log = $log;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
     this.Upload = Upload;
@@ -42,20 +43,20 @@ export class GalleryController {
     });
   }
   onFileSelect(files) {
-    var filename = files.name;
-    var type = files.type;
-    var query = {
-      filename: filename,
-      type: type
+    const filename = files.name;
+    const type = files.type;
+    const query = {
+      filename,
+      type
     };
     this.$http.post('api/imageGallery/signing', query)
       .then(res => {
-        console.log(res);
+        this.$log.debug(res);
         let result = res.data;
         this.Upload.upload({
           url: result.url, //s3Url
           transformRequest: (data, headersGetter) => {
-            var headers = headersGetter();
+            const headers = headersGetter();
             delete headers.Authorization;
             return data;
           },
@@ -71,12 +72,12 @@ export class GalleryController {
           this.determinateValue = 0;
           this.loadImages();
         })
-        .catch(err => console.log('erroooo', err));
+        .catch(err => this.$log.error('erroooo', err));
       })
       .catch((data, status) => {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
-        console.log('pau pau', data, status);
+        this.$log.error('pau pau', data, status);
       });
   }
 }

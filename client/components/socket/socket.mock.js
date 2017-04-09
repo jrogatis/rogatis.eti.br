@@ -3,7 +3,7 @@
 const angular = require('angular');
 
 angular.module('socketMock', [])
-  .factory('socket', function() {
+  .factory('socket', () => {
     return {
       socket: {
         connect() {},

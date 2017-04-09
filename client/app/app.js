@@ -41,11 +41,11 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
   about, constants, socket, util, 'ngMeta'
   ])
   .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
+  .run(($rootScope, $location, Auth) => {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function(loggedIn) {
+    $rootScope.$on('$stateChangeStart', (event, next) => {
+      Auth.isLoggedIn(loggedIn => {
         if(next.authenticate && !loggedIn) {
           $location.path('/login');
           //$location.path('/');

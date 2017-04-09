@@ -9,7 +9,7 @@ import ContactForm from './contactForm.model';
 import express from 'express';
 import mailer from 'express-mailer';
 
-var app = express();
+const app = express();
 
 mailer.extend(app, {
   from: 'Jean Philip de Rogatis <jrogatis@gmail.com>',

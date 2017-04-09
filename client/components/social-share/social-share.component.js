@@ -9,7 +9,7 @@ import angularMessages from 'angular-messages';
 import socialShare from 'angular-socialshare';
 
 export class SocialShareComponent {
-  constructor($location, $mdSidenav, $animate, $scope, Auth, $http) {
+  constructor($location, $mdSidenav, $animate, $scope, Auth, $http, $log) {
     'ngInject';
     $scope.pageClass = 'pageNavbar';
     this.$location = $location;
@@ -17,9 +17,10 @@ export class SocialShareComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$scope = $scope;
+    this.$log = $log;
     this.enterState = true;
     this.$http = $http;
-    var _this = this;
+    const _this = this;
 
     this.$scope.$on('$routeChangeSuccess', (current, previous) => {
       //console.log($location.path());
@@ -30,7 +31,7 @@ export class SocialShareComponent {
           //console.log('res no social',  _this.pageInfo);
           _this.pageInfo.pageUrl = $location.absUrl();
           if($location.host() === 'localhost') {
-            _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`
+            _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`;
           }
           //console.log(_this.pageInfo);
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
@@ -40,11 +41,10 @@ export class SocialShareComponent {
             _this.pageInfo.shortUrl = data.id;
           })
           .error((data, status, headers, config) => {
-            console.log('error get short url', data);
+            this.$log.error('error get short url', data);
           });
         })
-        .catch(err => console.log('error on get page info at social share component', err));
-
+        .catch(err => this.$log.error('error on get page info at social share component', err));
     });
   }
 

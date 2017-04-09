@@ -25,7 +25,7 @@ export class PortfolioController {
         this.ngMeta.setTitle('Jean Philip de Rogatis Code Porfolio');
         this.ngMeta.setTag('og:title', 'Jean Philip de Rogatis  Code Porfolio');
         this.ngMeta.setTag('description', 'My code war! Some exemple of my battles!');
-        this.ngMeta.setTag('og:description',  'My code war! Some exemple of my battles!');
+        this.ngMeta.setTag('og:description', 'My code war! Some exemple of my battles!');
         this.ngMeta.setTag('og:url', this.$location.absUrl());
         this.ngMeta.setTag('og:image', 'https://s3.amazonaws.com/rogatis/anxiusbw.jpg');
         this.listProjects = response.data;

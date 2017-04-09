@@ -8,10 +8,12 @@ import ngMessages from 'angular-messages';
 export class EditorProjectController {
 
   /*@ngInject*/
-  constructor($http, $scope, $mdDialog, Slug) {
+  constructor($http, $scope, $mdDialog, Slug, $log, $document) {
     this.$http = $http;
     this.$mdDialog = $mdDialog;
     this.$scope = $scope;
+    this.$log = $log;
+    this.$document = $document;
     this.$scope.customFullscreen = false;
     this.addOrSave = 'Add';
     this.Slug = Slug;
@@ -33,10 +35,10 @@ export class EditorProjectController {
     this.addOrSave = 'Save';
     this.project = this.listProjects[index];
     this.observer = jsonpatch.observe(this.project);
-    if(this.project.slug === '' || this.project.slug === undefined) {
+    if(this.project.slug === '' || angular.isUndefined(this.project.slug)) {
       this.project.slug = this.Slug.slugify(this.project.title);
     }
-    if(this.project.hasDesc === '' || this.project.hasDesc === undefined) {
+    if(this.project.hasDesc === '' || angular.isUndefined(this.project.hasDesc)) {
       this.project.hasDesc = false;
     }
   }
@@ -50,28 +52,28 @@ export class EditorProjectController {
   }
 
   handleSave(ev) {
-    console.log(this.project.hasDesc);
-    this.project.hasDesc = (this.project.hasDesc !== undefined);
+    this.$log.debug(this.project.hasDesc);
+    this.project.hasDesc = angular.isDefined(this.project.hasDesc);
     const patches = jsonpatch.generate(this.observer);
-    console.log(patches);
+    this.$log.debug(patches);
     this.$http.patch(`/api/projects/${this.project._id}`, patches)
       .then(res => {
         if(res.status === 200) {
           this.showDialogSaveOk(ev);
         }
       })
-      .catch(error => console.log('ops a error!', error));
+      .catch(error => this.$log.error('ops a error!', error));
   }
 
   handleAdd(ev) {
     this.$http.post('/api/projects', this.project)
       .then(res => {
-        console.log(res);
+        this.$log.debug(res);
         if(res.status === 201) {
           this.showDialogSaveOk(ev);
         }
       })
-      .catch(error => console.log('ops a error!', error));
+      .catch(error => this.$log.error('ops a error!', error));
   }
 
   showDialogSaveOk(ev) {
@@ -80,7 +82,7 @@ export class EditorProjectController {
       preserveScope: true,
       controller: DialogImagesGalleryController,
       templateUrl: 'saveOk.tmpl.pug',
-      parent: angular.element(document.body),
+      parent: angular.element(this.$document.body),
       targetEvent: ev,
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -96,7 +98,7 @@ export class EditorProjectController {
           preserveScope: true,
           controller: DialogImagesGalleryController,
           templateUrl: 'selectImage.tmpl.pug',
-          parent: angular.element(document.body),
+          parent: angular.element(this.$document.body),
           targetEvent: ev,
           clickOutsideToClose: false,
           fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -113,7 +115,7 @@ export class EditorProjectController {
       preserveScope: true,
       controller: DialogImagesGalleryController,
       templateUrl: 'preview.tmpl.pug',
-      parent: angular.element(document.body),
+      parent: angular.element(this.$document.body),
       targetEvent: ev,
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.

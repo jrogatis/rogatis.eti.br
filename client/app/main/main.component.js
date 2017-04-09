@@ -12,9 +12,7 @@ export class MainController {
     this.socket = socket;
     this.ngMeta = ngMeta;
     this.$location = $location;
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('projects');
-    });
+    $scope.$on('$destroy', () => socket.unsyncUpdates('projects'));
   }
   $onInit() {
     this.ngMeta.setTitle('Jean Philip de Rogatis Portfolio');
