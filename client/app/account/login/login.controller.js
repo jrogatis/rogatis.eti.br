@@ -2,9 +2,10 @@
 
 export default class LoginController {
   /*@ngInject*/
-  constructor(Auth, $location) {
+  constructor(Auth, $location, $log) {
     this.Auth = Auth;
     this.$location = $location;
+    this.$log = $log;
   }
 
   login(loginForm) {
@@ -15,12 +16,12 @@ export default class LoginController {
         password: this.user.password
       })
         .then(res => {
-          console.log(res);
+          this.$log.debug(res);
           // Logged in, redirect to home
           this.$location.path('/');
         })
         .catch(err => {
-          console.log(err);
+          this.$log.error(err);
           this.errors.login = err.message;
         });
     }

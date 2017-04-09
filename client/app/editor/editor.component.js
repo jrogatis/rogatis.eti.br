@@ -7,7 +7,7 @@ import jsonpatch from 'fast-json-patch';
 import ui from 'angular-ui-tinymce';
 import slugifier from 'wb-angular-slugify';
 
-var sanit = require('textangular/dist/textAngular-sanitize.min');
+const sanit = require('textangular/dist/textAngular-sanitize.min');
 
 export class EditorController {
 

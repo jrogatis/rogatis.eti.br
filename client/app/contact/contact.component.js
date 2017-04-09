@@ -8,11 +8,12 @@ import ngAria from 'angular-aria';
 export class ContactController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket) {
+  constructor($http, $scope, $animate, $mdDialog, socket, $document) {
     this.$http = $http;
     this.$scope = $scope;
     this.socket = socket;
     this.$mdDialog = $mdDialog;
+    this.$document = $document;
   }
 
   sendEmail() {
@@ -31,7 +32,7 @@ export class ContactController {
       preserveScope: true,
       controller: DialogController,
       templateUrl: 'dialogEmailSend.tmpl.pug',
-      parent: angular.element(document.body),
+      parent: angular.element(this.$document.body),
       clickOutsideToClose: false,
       fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
     });

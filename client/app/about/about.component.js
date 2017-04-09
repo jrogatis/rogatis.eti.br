@@ -11,10 +11,12 @@ import d3 from 'd3';
 export class AboutController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $window) {
+  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $window, $document, $log) {
     this.$http = $http;
     this.$scope = $scope;
+    this.$document = $document;
     this.socket = socket;
+    this.$log = $log;
     this.ngMeta = ngMeta;
     this.$mdDialog = $mdDialog;
     this.$location = $location;
@@ -35,7 +37,7 @@ export class AboutController {
         growOnHover: true,
         type: 'discreteBarChart',
         height: 550,
-        width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
+        width: angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth,
         showYAxis: true,
         margin: {
           top: 50,
@@ -50,8 +52,6 @@ export class AboutController {
         duration: 1000,
         xAxis: {
           axisLabel: '',
-          //rotateLabels: -90,
-         
         },
         yAxis: {
           axisLabel: '',
@@ -62,7 +62,6 @@ export class AboutController {
           ticks: 6,
           tickSubdivide: 0,
           tickSize: 1,
-         
         },
         yDomain: null,
         api: this.api,
@@ -116,7 +115,7 @@ export class AboutController {
   }
 
   leftMargin() {
-    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
     //console.log(innerSize);
     if(innerSize < 599) {
       return 45;
@@ -126,7 +125,7 @@ export class AboutController {
   }
 
   resized(ev) {
-    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
     //console.log(innerSize);
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();
@@ -136,15 +135,15 @@ export class AboutController {
   }
 
   graphEvents(ev) {
-    console.log(ev);
+    this.$log.debug(ev);
   }
 
   repositionXLabel() {
     const xTicks = d3.select('.nv-x').selectAll('g');
-    
+
     xTicks
       .selectAll('text')
-      .attr('transform', (d,i,j) => 'translate (0, -100)');
+      .attr('transform', (d, i, j) => 'translate (0, -100)');
   }
 }
 

@@ -24,9 +24,7 @@ export class BlogController {
     this.$http.get('/api/posts')
       .then(response => {
         this.listPosts = response.data;
-        this.listPosts = this.listPosts.filter(post => {
-          return post.active === true;
-        });
+        this.listPosts = this.listPosts.filter(post => post.active === true);
         this.ngMeta.setTitle('Jean Philip de Rogatis Tech Blog');
         this.ngMeta.setTag('og:title', 'Jean Philip de Rogatis Tech Blog');
         this.ngMeta.setTag('description', 'Blog about been a code warrior! From Jean Philip de Rogatis');
