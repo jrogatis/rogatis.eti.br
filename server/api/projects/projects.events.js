@@ -12,7 +12,7 @@ const ProjectsEvents = new EventEmitter();
 ProjectsEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+const events = {
   save: 'save',
   remove: 'remove'
 };

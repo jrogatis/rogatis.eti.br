@@ -16,23 +16,23 @@ AWS.config.update({
   secretAccessKey: process.env.aws_secret_access_key,
   region: 'us-east-1'
 });
-var s3 = new AWS.S3();
-var params = {
+const s3 = new AWS.S3();
+let params = {
   Bucket: 'rogatis'
 };
-var s3Url = 'https://s3.amazonaws.com/rogatis';
+const s3Url = 'https://s3.amazonaws.com/rogatis';
 
-exports.signing = function(req, res) {
-  var request = req.body;
-  var fileName = request.filename;
-  var path = fileName;
+exports.signing = (req, res) => {
+  const request = req.body;
+  const fileName = request.filename;
+  const path = fileName;
 
-  var readType = 'public-read';
+  const readType = 'public-read';
 
-  var expiration = moment().add(5, 'm')
+  const expiration = moment().add(5, 'm')
     .toDate(); //15 minutes
 
-  var s3Policy = {
+  const s3Policy = {
     expiration: expiration,
     conditions: [{
       bucket: 'rogatis'
@@ -49,15 +49,15 @@ exports.signing = function(req, res) {
       ]
   };
 
-  var stringPolicy = JSON.stringify(s3Policy);
-  var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
+  const stringPolicy = JSON.stringify(s3Policy);
+  const base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
 
   // sign policy
-  var signature = crypto.createHmac('sha1', process.env.aws_secret_access_key)
+  const signature = crypto.createHmac('sha1', process.env.aws_secret_access_key)
     .update(new Buffer(base64Policy, 'utf-8'))
     .digest('base64');
 
-  var credentials = {
+  const credentials = {
     url: s3Url,
     fields: {
       key: path,
@@ -72,66 +72,23 @@ exports.signing = function(req, res) {
   res.jsonp(credentials);
 };
 
-/*function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      return res.status(statusCode).json(entity);
-    }
-    return null;
-  };
-}*/
-
-/*function removeEntity(res) {
-  return function(entity) {
-    if(entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}*/
-
-/*function handleEntityNotFound(res) {
-  return function(entity) {
-    if(!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}*/
-
-function handleError(res, statusCode) {
+const handleError = (res, statusCode) => {
   statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
+  return err => res.status(statusCode).send(err);
+};
 
 // Gets a list of images
 export function index(req, res) {
   return s3.listObjects(params).promise()
     .then(data => {
       let images = [];
-      data.Contents.map(image => {
-        images.push(image.Key);
-      });
+      data.Contents.map(image => images.push(image.Key));
       return res.status(200).json(images);
     })
     .catch(err => {
       console.log(err);
       return handleError(res);
     });
-}
-
-// Gets a single Posts from the DB
-export function show(req, res) {
-  /*return Posts.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));*/
 }
 
 // Deletes a image from the s3

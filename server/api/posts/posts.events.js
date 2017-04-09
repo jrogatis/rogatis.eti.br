@@ -6,19 +6,19 @@
 
 import {EventEmitter} from 'events';
 import Posts from './posts.model';
-var PostsEvents = new EventEmitter();
+const PostsEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 PostsEvents.setMaxListeners(0);
 
 // Model events
-var events = {
+const events = {
   save: 'save',
   remove: 'remove'
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
+for(let e in events) {
   let event = events[e];
   Posts.schema.post(e, emitEvent(event));
 }

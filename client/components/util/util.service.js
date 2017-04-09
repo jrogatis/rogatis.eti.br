@@ -5,7 +5,7 @@ import angular from 'angular';
 /**
  * The Util service is for thin, globally reusable, utility functions
  */
-export function UtilService($window, $document) {
+export function UtilService($window) {
   'ngInject';
 
   const Util = {
@@ -49,7 +49,7 @@ export function UtilService($window, $document) {
       origins = origins && [].concat(origins) || [];
       origins = origins.map(Util.urlParse);
       origins.push($window.location);
-      origins = origins.filter(function(o) {
+      origins = origins.filter(o => {
         let hostnameCheck = url.hostname === o.hostname;
         let protocolCheck = url.protocol === o.protocol;
         // 2nd part of the special treatment for IE fix (see above):

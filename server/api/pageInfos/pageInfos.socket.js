@@ -7,28 +7,18 @@
 import PageInfosEvents from './pageInfos.events';
 
 // Model events to emit
-var events = ['save', 'remove'];
+const events = ['save', 'remove'];
 
-export function register(socket) {
+export const register = socket => {
   // Bind model events to socket events
-  for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
-    var event = events[i];
-    var listener = createListener(`pageInfos:${event}`, socket);
+  for(let i = 0, eventsLength = events.length; i < eventsLength; i++) {
+    const event = events[i];
+    const listener = createListener(`pageInfos:${event}`, socket);
 
     PageInfosEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
-}
+};
 
-
-function createListener(event, socket) {
-  return function(doc) {
-    socket.emit(event, doc);
-  };
-}
-
-function removeListener(event, listener) {
-  return function() {
-    PageInfosEvents.removeListener(event, listener);
-  };
-}
+const createListener = (event, socket) => doc => socket.emit(event, doc);
+const removeListener = (event, listener) => () => PageInfosEvents.removeListener(event, listener);

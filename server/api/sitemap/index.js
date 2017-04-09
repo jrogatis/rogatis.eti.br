@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./sitemap.controller');
+const express = require('express');
+const controller = require('./sitemap.controller');
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', controller.index);
 

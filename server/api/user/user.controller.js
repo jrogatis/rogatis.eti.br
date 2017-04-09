@@ -4,39 +4,34 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
-function validationError(res, statusCode) {
+const validationError = (res, statusCode) => {
   statusCode = statusCode || 422;
-  return function(err) {
-    return res.status(statusCode).json(err);
-  };
-}
+  return err => res.status(statusCode).json(err);
+};
 
-function handleError(res, statusCode) {
+const handleError = (res, statusCode) => {
   statusCode = statusCode || 500;
-  return function(err) {
-    return res.status(statusCode).send(err);
-  };
-}
+  return err => res.status(statusCode).send(err);
+};
 
 
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if(!entity) {
+const handleEntityNotFound = res => {
+  return entity => {
+    if (!entity) {
       res.status(404).end();
       return null;
     }
     return entity;
   };
-}
+};
+
 /**
  * Get list of users
  * restriction: 'admin'
  */
 export function index(req, res) {
   return User.find({}, '-salt -password').exec()
-    .then(users => {
-      res.status(200).json(users);
-    })
+    .then(users => res.status(200).json(users))
     .catch(handleError(res));
 }
 
@@ -48,8 +43,8 @@ export function create(req, res) {
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save()
-    .then(function(user) {
-      var token = jwt.sign({ _id: user._id }, config.secrets.session, {
+    .then(user => {
+      const token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });
       res.json({ token });
@@ -61,8 +56,7 @@ export function create(req, res) {
  * Get a single user Info
  */
 export function showInfo(req, res) {
-  var userId = req.params.id;
-
+  const userId = req.params.id;
   return User.findById(userId).exec()
     .then(handleEntityNotFound(res))
     .then(user => {
@@ -75,7 +69,7 @@ export function showInfo(req, res) {
  */
 export function show(req, res, next) {
   console.log('no show');
-  var userId = req.params.id;
+  const userId = req.params.id;
 
   return User.findById(userId).exec()
     .then(user => {
@@ -93,9 +87,7 @@ export function show(req, res, next) {
  */
 export function destroy(req, res) {
   return User.findByIdAndRemove(req.params.id).exec()
-    .then(function() {
-      res.status(204).end();
-    })
+    .then(() => res.status(204).end())
     .catch(handleError(res));
 }
 
@@ -103,18 +95,16 @@ export function destroy(req, res) {
  * Change a users password
  */
 export function changePassword(req, res) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
+  const userId = req.user._id;
+  const oldPass = String(req.body.oldPassword);
+  const newPass = String(req.body.newPassword);
 
   return User.findById(userId).exec()
     .then(user => {
       if(user.authenticate(oldPass)) {
         user.password = newPass;
         return user.save()
-          .then(() => {
-            res.status(204).end();
-          })
+          .then(() => res.status(204).end())
           .catch(validationError(res));
       } else {
         return res.status(403).end();
@@ -123,17 +113,15 @@ export function changePassword(req, res) {
 }
 
 export function changeSettings(req, res) {
-  var userId = req.user._id;
-  var userNewSettings = req.body;
+  const userId = req.user._id;
+  const userNewSettings = req.body;
   return User.findById(userId).exec()
     .then(user => {
       user.fullName = userNewSettings.newUser.fullName;
       user.city = userNewSettings.newUser.city;
       user.state = userNewSettings.newUser.state;
       return user.save()
-        .then(() => {
-          res.status(204).end();
-        })
+        .then(() => res.status(204).end())
         .catch(error => console.log(error));
     });
 }
@@ -142,7 +130,7 @@ export function changeSettings(req, res) {
  * Get my info
  */
 export function me(req, res, next) {
-  var userId = req.user._id;
+  const userId = req.user._id;
 
   return User.findOne({ _id: userId }, '-salt -password').exec()
     .then(user => { // don't ever give out the password or salt
