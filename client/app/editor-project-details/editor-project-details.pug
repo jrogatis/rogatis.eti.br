@@ -51,9 +51,11 @@ div#EditorProject(style="min-height:60vh")
                 ng-true-value="true"
                 ng-false-value="false"
                 required) Has Details ?
-          div(layout = "row" flex layout-align="center center" ng-show="$ctrl.project.hasDesc" )
-            md-content(flex="100")
-              textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.text" )  
+          md-input-container(flex ng-show="$ctrl.project.hasDesc")
+            label Challenge Text
+            textarea(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.challengeText")
+          md-input-container(flex="100" ng-show="$ctrl.project.hasDesc")
+            textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.text" )
           div(layout="row", layout-align="start center" )
             md-button(type="submit")  {{$ctrl.addOrSave}} 
             md-button(ng-click="$ctrl.showPreview($event)") preview

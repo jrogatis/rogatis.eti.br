@@ -1,0 +1,11 @@
+div#projectCard
+  md-button(ng-href="{{project.siteUrl}}")
+    md-card.animated.fadeInUp
+      img(ng-src="{{project.imgUrl}}") 
+      div#card(flex layout="row"  layout-align="center center") 
+        md-card-title(flex="90")
+          md-card-title-text
+            span.md-headline {{project.title}}
+            span.md-subhead {{project.type}}
+        div#pointer(flex layout-align="center center")
+          i.fa.fa-angle-right      

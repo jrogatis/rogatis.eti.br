@@ -2,14 +2,26 @@ div#projectDetailsMain {
   div.container {
     div#title {
       text-align: left;
-      padding: 3% 0% 3% 0%;
+      padding: 3% 5% 3% 5%;
       #left {
-        h1: {
-          
+       padding: 0 3% 0 0;
+      }
+      #right {
+        img {
+          max-width: 100%;
         }
       }
     }
     div#textArea {
+      div#challengeText {
+        padding: 0 15% 0 15%;
+        h1 {
+          text-align: left;
+        }
+         h4 {
+          text-align: justify;
+        }
+      }
       div#Text {
         font-size: 1.3em;
       }

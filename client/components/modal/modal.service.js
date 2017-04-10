@@ -9,7 +9,7 @@ export function Modal($rootScope, $uibModal) {
    * @param  {String} modalClass - (optional) class(es) to be applied to the modal
    * @return {Object}            - the instance $uibModal.open() returns
    */
-  function openModal(scope = {}, modalClass = 'modal-default') {
+  const openModal = (scope = {}, modalClass = 'modal-default') => {
     var modalScope = $rootScope.$new();
 
     angular.extend(modalScope, scope);

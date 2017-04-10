@@ -13,6 +13,7 @@ const ProjectsSchema = new mongoose.Schema({
   slug: { type: String, required: false },
   text: { type: String, required: false },
   doneDate: { type: Date, required: true },
+  challengeText: { type: String, required: false },
 });
 
 export default mongoose.model('Projects', ProjectsSchema);
