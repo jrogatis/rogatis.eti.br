@@ -17,11 +17,6 @@ mongoose.connection.on('error', err => {
   process.exit(-1); // eslint-disable-line no-process-exit
 });
 
-// Populate databases with sample data
-if(config.seedDB) {
-  require('./config/seed');
-}
-
 // Setup server
 const app = express();
 
