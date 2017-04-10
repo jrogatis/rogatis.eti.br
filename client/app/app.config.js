@@ -9,3 +9,9 @@ export function routeConfig($routeProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 }
+
+export function logConfig($logProvider) {
+  'ngInject';
+
+  $logProvider.debugEnabled(true);
+}

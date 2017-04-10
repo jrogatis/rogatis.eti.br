@@ -1,0 +1,14 @@
+div#projectDetailsMain
+  .container(layout="column" layout-align="center center" flex="100")
+    div#title(flex="100" layout="row")
+      div#left(flex="40")
+        h1 {{$ctrl.projectDetails.title}}
+        h3 {{$ctrl.projectDetails.desc}}
+        md-divider
+        h4 {{$ctrl.projectDetails.doneDate}}
+        h4 {{$ctrl.projectDetails.type}}
+      div#right(flex="40")
+        img(ng-src="{{$ctrl.projectDetails.imgUrl}}")
+    div#textArea(layout="row")
+      div(flex-gt-sm="15" show-gt-sm)
+      div#Text.md-padding(flex="100" flex-gt-sm="70" ng-bind-html="$ctrl.projectDetails.text")

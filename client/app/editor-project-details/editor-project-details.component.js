@@ -79,6 +79,7 @@ export class EditorProjectDetailsController {
   loadForEdition(index) {
     this.addOrSave = 'Save';
     this.project = this.listProjects[index];
+    this.project.doneDate = new Date(this.project.doneDate);
     this.observer = jsonpatch.observe(this.project);
     if(this.project.slug === '' || angular.isUndefined(this.project.slug)) {
       this.project.slug = this.Slug.slugify(this.project.title);

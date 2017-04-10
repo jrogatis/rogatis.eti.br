@@ -12,9 +12,7 @@ const ngRoute = require('angular-route');
 import uiBootstrap from 'angular-ui-bootstrap';
 // import ngMessages from 'angular-messages';
 
-import {
-  routeConfig
-} from './app.config';
+import { routeConfig, logProvider } from './app.config';
 import _Auth from '../components/auth/auth.module';
 import account from './account';
 import navbar from '../components/navbar/navbar.component';
@@ -29,6 +27,7 @@ import editor from './editor/editor.component';
 import gallery from './gallery/gallery.component';
 import editorProject from './editor-project/editor-project.component';
 import editorProjectDetails from './editor-project-details/editor-project-details.component';
+import projectDetails from './project-details/project-details.component';
 import about from './about/about.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
@@ -39,9 +38,9 @@ import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
   uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject,
-  about, editorProjectDetails, constants, socket, util, 'ngMeta'
+  about, editorProjectDetails, projectDetails, constants, socket, util, 'ngMeta'
   ])
-  .config(routeConfig)
+  .config(routeConfig, logProvider)
   .run(($rootScope, $location, Auth) => {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in

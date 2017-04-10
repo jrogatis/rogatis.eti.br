@@ -21,14 +21,16 @@ div#EditorProject(style="min-height:60vh")
           md-input-container
             label Desc
             textarea(ng-model="$ctrl.project.desc" required)
-          div(layout="row" flex="100")  
-            md-input-container(flex)
+          div(layout="row" flex="100")
+            md-input-container(flex="25")
+              md-datepicker(ng-model="$ctrl.project.doneDate" md-placeholder="Enter date")
+            md-input-container(flex="20")
               label Project Type
               md-select(ng-model="$ctrl.project.type" required name="type")
                 md-option(ng-repeat="type in $ctrl.projectTypes" value="{{type}}") {{type}}
                 div(ng-messages="projectForm.type.$error")
                   div(ng-message="required") This is required.
-            md-input-container(flex="80")
+            md-input-container(flex)
               label Project Url
               input(ng-model="$ctrl.project.siteUrl" required)
           div(layout="row" flex="100")
