@@ -10,7 +10,8 @@ const ProjectsSchema = new mongoose.Schema({
   siteUrl: { type: String, required: true },
   displayFront: { type: Boolean, required: false, default: false },
   hasDesc: { type: Boolean, required: false, default: false },
-  slug: { type: String, required: true }
+  slug: { type: String, required: true },
+  text: { type: String, required: false },
 });
 
 export default mongoose.model('Projects', ProjectsSchema);
