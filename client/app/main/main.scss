@@ -19,7 +19,7 @@ div#main {
       border-bottom-style: solid;
     }
     h1 {
-      color: #777777;
+      color: $MAIN_HEADER_COLOR;
       font-size: 25px;
       text-align: center;
       @include respond-to(screen-xs) {

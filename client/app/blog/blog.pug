@@ -3,7 +3,6 @@ div#BlogMain
   .container(layout-align="center center")
     h1 My Weekly Code Anxiety
     div(layout ="columns" layout-gt-sm="row")
-      //div#blogPicture(flex="100", flex-gt-md="25").animated.slideInLeft
       div(flex)
       div#blogText(flex="100", flex-gt-sm="70" layout-align="center center")
         div#posts
@@ -11,11 +10,13 @@ div#BlogMain
             md-list-item(layout="column" layout-gt-sm="row" ng-repeat="post in $ctrl.listPosts")
               div(flex="100" flex-gt-xs="60" layout="column").animated.slideInUp
                 md-card
+                  div(flex)#image
+                    img(ng-src="{{post.postImage}}", layout-align="center center")
                   md-card-title(layout="column"  layout-align="center center")
                     md-card-title-text
-                      span.md-headline {{post.title}}
-                      div(flex)#divider 
                       div(flex="100" layout="row" layout-align="space-between center")#title
+                        span.md-headline {{post.title}}
+                        div(flex)#divider 
                         span.md-subhead By {{post.author}} on {{post.date | date:"dd MMM yyyy"}}
                         div.fb-like(
                           data-href="http://www.rogatis.eti.br" 
@@ -24,8 +25,6 @@ div#BlogMain
                           data-size="small" 
                           data-show-faces="false" 
                           data-share="false")
-                      div(flex)#image
-                        img.md-padding(ng-src="{{post.postImage}}", layout-align="center center")
                     md-card-content  
                       span#text.md-padding(ng-bind-html="post.text | limitTo: 800")
                       div#more 

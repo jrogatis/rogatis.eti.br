@@ -1,39 +1,42 @@
 div#BlogMain {
-   display:block;
-   font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial, Sans-serif;
-   h1 {
+  display: block;
+  font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+  h1 {
     text-align: center;
-      }
+    color: $MAIN_HEADER_COLOR;
+  }
   div {
     div#blogText {
-      display:block;
+      display: block;
       div#posts {
         md-list {
           md-list-item {
-            display:block;
-            div{
-              display:block;
-              md-card{
-                background-color: transparent;
+            display: block;
+            div {
+              display: block;
+              md-card {
+                border-radius: 10px;
+                background-color: #F5F5F3;
                 border-width: 0px 0px;
                 box-shadow: 0px 0px;
-                md-card-title {
-                  div#image {
-                    margin-top: 20px;
-                    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12);
-                    img { 
-                    
-                      height: 300px;
-                    
-                    }
+                div#image {
+                  margin: -50px -10px 0px 0px;
+                  img {
+                    border-radius: 10px;
+                    height: 300px;
+                    -webkit-box-shadow: 0px 14px 14px 2px rgba(125, 125, 125, 0.99);
+                    -moz-box-shadow: 0px 14px 14px 2px rgba(125, 125, 125, 0.99);
+                    box-shadow: 0px 14px 14px 2px rgba(125, 125, 125, 0.99);
                   }
-                   md-card-title-text{
+                }
+                md-card-title {
+                  md-card-title-text {
                     div#divider {
                       border-bottom-style: solid;
                       border-color: rgb(226, 226, 226);
                       border-width: 0.3px;
                       height: 0.3px;
-                    } 
+                    }
                     .md-headline {
                       font-size: 45px;
                       line-height: 52px;
@@ -42,14 +45,11 @@ div#BlogMain {
                       font-size: 15px;
                       text-align: justify;
                     }
-                    
                   }
-
-
-                  md-card-content{ 
+                  md-card-content {
                     span {
                       font-size: 20px;
-                    } 
+                    }
                     a {
                       font-size: 20px;
                     }
@@ -71,4 +71,3 @@ div#BlogMain {
     min-height: 70vh;
   }
 }
-

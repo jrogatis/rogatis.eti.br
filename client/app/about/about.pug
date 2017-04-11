@@ -6,7 +6,7 @@ div#aboutMain
       layout-align="center center"
       layout-fill
       )
-      div.animated.slideInLeft#text(flex="100" flex-gt-sm="50" layout="column" layout-fill)
+      div#text.animated.slideInLeft(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         h1 about me
         h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
         div(flex layout="column")#innerText
@@ -15,7 +15,7 @@ div#aboutMain
             beautiful and intuitive systems. 
             When I'm not coding or pushing pixels, 
             you'll find me in the skies or at running course.
-      div.animated.slideInRight#aboutImage(flex="100" flex-gt-sm="50" layout="column" layout-fill)
+      div#aboutImage.animated.slideInRight(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         md-card
           img(ng-src="../../assets/images/picsAbout9100.jpg")   
     div.animated.fadeInUp#pics(flex="100" layout="row")

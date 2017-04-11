@@ -2,7 +2,6 @@ import angular from 'angular';
 const ngRoute = require('angular-route');
 import routing from './main.routes';
 import angularGrid from 'angulargrid';
-import ngMeta from 'ng-meta';
 
 export class MainController {
 

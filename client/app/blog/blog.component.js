@@ -5,8 +5,6 @@ import ngMdIcons from 'angular-material-icons';
 import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
-import ngMeta from 'ng-meta';
-
 
 export class BlogController {
 
