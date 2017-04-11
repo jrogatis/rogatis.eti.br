@@ -2,14 +2,9 @@
       a.md-button md-card {
         &:hover {
           div#card {
-            md-card-title {
-              border: 0px;
-              border-right: 1px;
-              border-style: solid;
-              border-color: #ced0d4;
-            }
             div#pointer {
               opacity: 1;
+              @extend .fadeInRightBig;
             }
           }
         }
@@ -31,10 +26,50 @@
             text-align: center;
             opacity: 0;
             i {
-              font-size: 25px;
+              font-size: 40px;
+              font-weight: 100;
               color: #ced0d4;
             }
           }
         }
       }
      }  
+
+$INICIAL_DIST: 40px;
+
+@-webkit-keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d($INICIAL_DIST, 0, 0);
+    transform: translate3d($INICIAL_DIST, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d($INICIAL_DIST, 0, 0);
+    transform: translate3d($INICIAL_DIST, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInRightBig {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInRightBig;
+  animation-name: fadeInRightBig;
+}

@@ -30,6 +30,7 @@ import editorProjectDetails from './editor-project-details/editor-project-detail
 import projectDetails from './project-details/project-details.component';
 import about from './about/about.component';
 import constants from './app.constants';
+import projectCard from '../components/project-card/project-card.component';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import ngMeta from 'ng-meta';
@@ -38,7 +39,7 @@ import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,
   uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject,
-  about, editorProjectDetails, projectDetails, constants, socket, util, 'ngMeta'
+  about, editorProjectDetails, projectDetails, constants, socket, util, 'ngMeta', projectCard
   ])
   .config(routeConfig, logProvider)
   .run(($rootScope, $location, Auth) => {

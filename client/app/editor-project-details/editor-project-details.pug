@@ -14,10 +14,10 @@ div#EditorProject(style="min-height:60vh")
         form(layout="column" name="projectForm" ng-submit="$ctrl.handleSubmit($event)")
           md-input-container
             label Title
-            input(ng-model="$ctrl.project.title" required)
+            input(ng-model="project.title" required)
           md-input-container
             label Slug
-            input(ng-model="$ctrl.project.slug" required)
+            input(ng-model="project.slug" required)
           md-input-container
             label Desc
             textarea(ng-model="$ctrl.project.desc" required)

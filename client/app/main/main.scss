@@ -27,46 +27,5 @@ div#main {
   }
   div#projects {
     padding-top: 30px;
-    md-grid-list {
-      a.md-button md-card { 
-        div#card {
-          md-card-title {
-            md-card-title-text {
-              .md-headline {
-                text-align: left;
-                padding: 0px;
-              }
-              .md-subhead {
-                text-align: left;
-                padding: 0px;
-              }
-            }
-          }
-          div#pointer {
-            text-align: center;
-            opacity: 0;
-            i {
-              font-size: 25px;
-              color: #ced0d4;
-              font-weight: bold;
-            }
-          }
-        }
-        &:hover {
-          div#card {
-            md-card-title {
-              border: 0px;
-              border-right: 1px;
-              border-style: solid;
-              border-color: #ced0d4;
-            }
-            div#pointer {
-              opacity: 1;
-            }
-          }
-        }
-
-      }
-    }
   }
 }

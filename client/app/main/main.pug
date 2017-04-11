@@ -21,14 +21,5 @@ div#main(flex="100", layout="column")
           md-gutter="4px")
           md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
             div(layout="column" layout-fill)
-              md-button(ng-href="{{project.siteUrl}}")
-                md-card
-                  img(ng-src="{{project.imgUrl}}") 
-                  div#card(flex layout="row"  layout-align="center center") 
-                    md-card-title(flex="90")
-                      md-card-title-text
-                        span.md-headline {{project.title}}
-                        span.md-subhead {{project.type}}
-                    div#pointer(flex layout-align="center center")
-                      i.fa.fa-angle-right      
+              project-card(project="project")
                     
