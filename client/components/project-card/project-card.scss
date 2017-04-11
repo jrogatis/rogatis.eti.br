@@ -1,5 +1,16 @@
      #projectCard {
       a.md-button md-card {
+        border-radius: 20px;
+        padding: 5px 5px 5px 5px;
+        margin: 60px 0 10px 0;
+        img {
+          margin: -30px 10px 0px 0px;
+          padding: 0 10px 0 0;
+          border-radius: 10px;
+          -webkit-box-shadow: 0px 14px 14px 2px rgba(214,211,214,0.91);
+          -moz-box-shadow: 0px 14px 14px 2px rgba(214,211,214,0.91);
+          box-shadow: 0px 14px 14px 2px rgba(214,211,214,0.91); 
+        }
         &:hover {
           div#card {
             div#pointer {
@@ -10,7 +21,7 @@
         }
         div#card {
           md-card-title {
-            padding: 10px;
+            padding: 10px 0 0 5px;
             md-card-title-text {
               .md-headline {
                 text-align: left;
