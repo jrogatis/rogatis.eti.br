@@ -39,23 +39,27 @@ div#EditorProject(style="min-height:60vh")
               input(ng-model="$ctrl.project.imgUrl" required)
               md-icon.fa.fa-search(ng-click="$ctrl.showDialog()")
             img#projectImage(ng-src="{{$ctrl.project.imgUrl}}")
-          md-input-container(flex)
-            div(layout="row")
+          div(layout="row" flex="50")
+            md-input-container
               md-switch(
                 ng-model="$ctrl.project.displayFront"
                 aria-label="displayFront"
                 ng-true-value="true"
                 ng-false-value="false"
                 ) Front ?
+            md-input-container
               md-switch(ng-model="$ctrl.project.hasDesc" 
                 ng-true-value="true"
                 ng-false-value="false"
                 required) Has Details ?
-          md-input-container(flex ng-show="$ctrl.project.hasDesc")
+          div(ng-show="$ctrl.project.hasDesc")
+            
             label Challenge Text
-            textarea(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.challengeText")
-          md-input-container(flex="100" ng-show="$ctrl.project.hasDesc")
-            textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.text" )
+            md-input-container(flex="100")
+              textarea(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.challengeText")
+            label Desc Text
+            md-input-container(flex="100")
+              textarea#mytext(ui-tinymce="tinymceOptions" ng-model="$ctrl.project.text" )
           div(layout="row", layout-align="start center" )
             md-button(type="submit")  {{$ctrl.addOrSave}} 
             md-button(ng-click="$ctrl.showPreview($event)") preview

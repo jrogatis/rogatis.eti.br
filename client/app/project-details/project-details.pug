@@ -1,15 +1,28 @@
 div#projectDetailsMain
   .container(layout="column" layout-align="center center" flex="100")
-    div#title(flex="100" layout="row")
-      div#left(flex="50")
+    div#title(flex="100" layout="column" layout-gt-sm="row")
+      div#left(flex="40")
         h1 {{$ctrl.projectDetails.title}}
         md-divider
         div(layout="row" layout-align="space-between center")
           h5 {{$ctrl.projectDetails.type}}
           h5 {{$ctrl.projectDetails.doneDate | date:'MMM yyyy'}}
         h3 {{$ctrl.projectDetails.desc}}
-      div#right(flex="50")
+      div#right(flex="60")
         img.ng-cloak(ng-src="{{$ctrl.projectDetails.imgUrl}}")
+    div#imagesArea
+         md-grid-list(
+          md-cols-gt-xs="2" 
+          md-cols-gt-sm="3" 
+          md-cols="1" 
+          md-row-height="1:1"
+          md-gutter-gt-sm="10px"  
+          md-gutter="4px")
+          md-grid-tile(ng-repeat="image in $ctrl.projectDetails.images")
+            div(layout="column" layout-fill)
+              md-card
+                img.md-card-image(ng-src="{{image.imagePath}}")
+    
     div#textArea(layout="column")
       div#challengeText(layout="column")
         h2 The Challenge

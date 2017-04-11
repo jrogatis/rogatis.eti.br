@@ -30,16 +30,16 @@ div#navBar(flex="100", layout-align="center center" ng-class="$ctrl.myCssVar")
         div#socialLinks(hide-xs  layout="row" layout-align="center center",  layout-align-gt-sm="end center", flex-gt-sm="20", flex="75")
           md-button.md-icon-button(ng-href="https://br.linkedin.com/in/jrogatis",  target="_blank")
             md-tooltip Linkedin
-            img(src="/assets/images/linkedin.svg" )
+            md-icon(md-svg-icon="/assets/images/linkedin.svg" )
           md-button.md-icon-button(ng-href="http://www.facebook.com/jrogatis",  target="_blank")
             md-tooltip Facebook
-            img(src="/assets/images/facebook.svg" )
+            md-icon(md-svg-icon="/assets/images/facebook.svg" )
           md-button.md-icon-button(ng-href="http://codepen.io/jrogatis/",  target="_blank")
             md-tooltip CodePen
-            img(src="/assets/images/codepenio.svg" )
+            md-icon(md-svg-icon="/assets/images/codepenio.svg" )
           md-button.md-icon-button(ng-href="https://github.com/jrogatis/",  target="_blank")
             md-tooltip git
-            img(src="/assets/images/git.svg" )
+            md-icon(md-svg-icon="/assets/images/git.svg" )
         md-menu#breadMenu(hide-gt-sm, layout="row", flex, layout-align="end center")
           md-button#menuAdmin.md-icon-button.md.md-primary(ng-click="$mdOpenMenu()", aria-label="Menu")
             i.fa.fa-bars

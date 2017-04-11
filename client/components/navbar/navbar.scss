@@ -70,12 +70,19 @@ div#navBar {
           padding-right: 0;
           margin-left: 0px;
           margin-right: 0px;
-          img {
-            height: 20px;
-            width: 20px;
-            &:hover {
-              color: #064A99;
-              fill: #064A99;
+           &:hover {
+             background-color: white;
+             md-icon {
+              svg {
+                fill: #191919;
+              }
+            }
+           }
+          md-icon{ 
+            svg {
+              height: 20px;
+              width: 20px;
+              fill: white;
             }
           }
         }

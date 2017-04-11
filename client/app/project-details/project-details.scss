@@ -1,29 +1,51 @@
 div#projectDetailsMain {
   div.container {
+    display: block;
+    padding: 5% 0 0 0;
     div#title {
       text-align: left;
       padding: 3% 5% 3% 5%;
+       @include respond-to(screen-gt-xs) {
+        padding: 3% 5% 10% 5%;
+      }
       #left {
-       padding: 0 3% 0 0;
+        padding: 0 3% 0 0;
+        h1 {
+          font-size: 30px;
+          color: $MAIN_HEADER_COLOR;
+          @include respond-to(screen-gt-xs) {
+            font-size: 60px;
+          }
+        }
       }
       #right {
         img {
+          border-radius: 15px;
+          -webkit-box-shadow: -7px 9px 5px 0px rgba(125, 125, 125, 1);
+          -moz-box-shadow: -7px 9px 5px 0px rgba(125, 125, 125, 1);
+          box-shadow: -7px 9px 5px 0px rgba(125, 125, 125, 1);
           max-width: 100%;
         }
       }
     }
+    div#imagesArea {
+      img {
+        height: 300px;
+        padding: 0 0px 0 0;
+      }
+    }
     div#textArea {
+      display: block;
       div#challengeText {
-        padding: 0 15% 0 15%;
-        h1 {
+        padding: 0 15% 5% 15%;
+        h2 {
           text-align: left;
-        }
-         h4 {
-          text-align: justify;
+          color: $MAIN_HEADER_COLOR;
         }
       }
       div#Text {
         font-size: 1.3em;
+        padding: 0 10% 0 10%;
       }
     }
   }
