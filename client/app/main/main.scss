@@ -1,18 +1,67 @@
 div#main {
   background-color: #DADADA;
-  div#mainText {
-    display:block;
-    padding-top: 0px;
-    #mainTextCard {
-      max-width: 900px;
-      box-shadow: 0px 0px 0px 0px;
-      margin: 0px 0px;
-      @include respond-to(screen-gt-lg) {
-        min-height: 800px;
+  div#header {
+    position: relative;
+    display: inline-block;
+    div#textBox {
+      z-index: 100;
+      position: absolute;    
+      text-align: center;    
+      width: 50%;
+      height: 20%;
+      @include respond-to(screen-gt-xs) {
+        height: 25%;
+        width: 44%;
       }
+      &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+      p#text {
+        font-size: 13px;
+        font-weight: 900;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMjUwMEY1OyIgLz48c3RvcCBvZmZzZXQ9Ijk5JSIgc3R5bGU9InN0b3AtY29sb3I6IzAwMDAwMDsiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNncmFkaWVudCkiIGhlaWdodD0iMTAwJSIgd2lkdGg9IjEwMCUiIC8+PC9zdmc+);
+        background-image: -webkit-gradient(linear, left top, -90deg, color-stop(0%, #2500F5), color-stop(99%, #000000));
+        background-image: -moz-linear-gradient(-90deg,#2500F5 0%,#000000 99%);
+        background-image: -webkit-linear-gradient(-90deg,#2500F5 0%,#000000 99%);
+        background-image: -o-linear-gradient(-90deg,#2500F5 0%,#000000 99%);
+        background-image: -ms-linear-gradient(-90deg,#2500F5 0%,#000000 99%);
+        background-image: linear-gradient(-90deg,#2500F5 0%,#000000 99%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        @include respond-to(screen-gt-xs) {
+          font-size: 20px;
+          }
+        @include respond-to(screen-gt-sm) {
+          font-size: 32px;
+          line-height: 35px;
+        }
+        @include respond-to(screen-gt-md) {
+          font-size: 38px;
+        }
+      }
+    }
+    div#mainImage {
+      display:block;
+      padding: 0px 0px 0px 0px;
+      -webkit-box-shadow: 0px 12px 15px 0px rgba(0,0,0,0.48);
+      -moz-box-shadow: 0px 12px 15px 0px rgba(0,0,0,0.48);
+      box-shadow: 0px 12px 15px 0px rgba(0,0,0,0.48);
+      #mainImageCard {
+        background-color: white;
+        max-width: 900px;
+        box-shadow: 0px 0px 0px 0px;
+        margin: 0px 0px;
+        @include respond-to(screen-gt-lg) {
+          min-height: 800px;
+        }
       } 
+    }
   }
   div#latestWorkTitle {
+    padding: 5% 0 0 0;
     .lineDivider {
       border-color: black;
       border: 2px;
@@ -20,7 +69,7 @@ div#main {
     }
     h1 {
       color: $MAIN_HEADER_COLOR;
-      font-size: 25px;
+      font-size: 20px;
       text-align: center;
       @include respond-to(screen-xs) {
         font-size: 15px;
@@ -30,7 +79,7 @@ div#main {
   div#projects {
     padding: 2px 0px 0px 0px;
     @include respond-to(screen-gt-sm) {
-      padding: 30px 10% 0 10%;
+      padding: 0% 10% 0 10%;
     }
   }
 }

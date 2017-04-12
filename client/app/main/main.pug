@@ -1,16 +1,23 @@
 
 div#main(flex="100", layout="column")
-  div#mainText(flex="100", layout="column")
-    div(layout="row" layout-fill layout-align="center center")
-      md-card.animated.slideInLeft(flex)#mainTextCard
-        img(src="/assets/images/skyEsqV2comTexto.jpg")            
-      md-card.animated.slideInRight(flex)#mainTextCard
-        img(src="/assets/images/skyDirV2.jpg")       
+  div#header(layout="row")
+    div#textBox
+      p#text.animated.fadeIn.
+        Look at the word<br>
+        from new angles<br>
+        solving &lt;coding&gt; problems <br>
+        from an unusual point of view.
+    div#mainImage(flex="100", layout="column")
+      div(layout="row" layout-fill layout-align="center center")
+        md-card#mainImageCard.animated.slideInLeft(flex)
+          img(src="/assets/images/skyEsqV5.png")            
+        md-card#mainImageCard.animated.slideInRight(flex)
+          img(src="/assets/images/skyDirV5.png")   
   div
     div.animated.slideInUp
       div#latestWorkTitle(flex="100", layout="row" layout-align="center center")
         div.lineDivider(flex="20")
-        h1(flex="50") SOME OF MY LATEST WORK
+        h1(flex="40") SOME OF MY LATEST WORK
         div.lineDivider(flex="20")
       div#projects(flex="grow")
         md-grid-list(
