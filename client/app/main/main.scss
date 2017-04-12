@@ -83,3 +83,8 @@ div#main {
     }
   }
 }
+
+.IntroAnimated {
+  -webkit-animation-delay: 1.1s; /* Safari 4.0 - 8.0 */
+  animation-delay: 1.1s;
+}
