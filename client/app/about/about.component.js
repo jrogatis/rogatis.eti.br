@@ -30,6 +30,7 @@ export class AboutController {
       { imgUrl: '../../assets/images/picsAboutPlaneDor.jpg' },
       { imgUrl: '../../assets/images/picsAboutPlane.jpg' },
     ];
+    this.imgToDisplay = this.listPics[0].imgUrl;
     this.graphOptions = {
       chart: {
         extended: true,
@@ -143,6 +144,10 @@ export class AboutController {
     xTicks
       .selectAll('text')
       .attr('transform', (d, i, j) => 'translate (0, -100)');
+  }
+
+  handleClick(path) {
+    this.imgToDisplay = path;
   }
 }
 

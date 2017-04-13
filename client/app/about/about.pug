@@ -17,16 +17,16 @@ div#aboutMain
             you'll find me in the skies or at running course.
       div#aboutImage.animated.slideInRight(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         md-card
-          img(ng-src="../../assets/images/picsAbout9100.jpg")   
+          img(ng-src="{{$ctrl.imgToDisplay}}" alt="{{$ctrl.imgToDisplay}}")  
     div.animated.fadeInUp#pics(flex="100" layout="row")
       md-grid-list(flex
           md-cols-gt-xs="8" md-cols="2" 
           md-row-height="4:3"
           md-gutter="4px")
           md-grid-tile(ng-repeat="pics in $ctrl.listPics")
-            div(layout="column" layout-fill)          
-              md-card
-                img(ng-src="{{pics.imgUrl}}") 
+            div(layout="column" layout-fill)    
+              md-card               
+                img(ng-src="{{pics.imgUrl}}" ng-click="$ctrl.handleClick(pics.imgUrl)") 
     div#randomFacts(flex="100" layout="column" layout-gt-sm="row")
       div.animated.slideInLeft#factsPic(flex = "50")
         div(layout="column" layout-fill)
