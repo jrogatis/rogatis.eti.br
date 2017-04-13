@@ -50,8 +50,14 @@ module.exports = function makeWebpackConfig(options) {
         'angular-sanitize',
         'angular-socket-io',
         'angular-ui-bootstrap',
-
-        'lodash'
+        'angular-material',
+        'nvd3',
+        'd3',
+        'lodash',
+        'angular-material-icons',
+        'textangular',
+        'ng-file-upload',
+        'angular-nvd3'
       ]
     };
   }
