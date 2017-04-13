@@ -39,6 +39,7 @@ export class AboutController {
         height: 550,
         width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
         showYAxis: true,
+        color: d => d.color,
         margin: {
           top: 50,
           right: 10,
@@ -80,20 +81,22 @@ export class AboutController {
           'with-transitions': true,
           gallery: false
         },
-        css: {}
+        css: {
+       
+        }
       }
     };
 
     this.data = [{
       key: 'Cumulative Return',
       values: [
-        { label: 'JavaScript', value: 2 },
-        { label: 'Angular', value: 4.5 },
-        { label: 'React', value: 4 },
-        { label: 'React Native', value: 3 },
-        { label: 'MongoDB', value: 3 },
-        { label: 'Barista', value: 1.6 },
-        { label: 'Sky Diver', value: 4 }
+        { label: 'JavaScript', value: 3.4, color: '#9edae5' },
+        { label: 'Angular', value: 3.8, color: '#c7c7c7'},
+        { label: 'React', value: 4, color: '#c5b0d5' },
+        { label: 'React Native', value: 3, color: '#aec7e8' },
+        { label: 'MongoDB', value: 3.1, color: '#7f7f7f' },
+        { label: 'Barista', value: 1.6, color: '#bcbd22' },
+        { label: 'Sky Diver', value: 4, color: '#17becf' }
       ]
     }];
   }
@@ -126,24 +129,10 @@ export class AboutController {
 
   resized(ev) {
     const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
-    //console.log(innerSize);
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();
-    //this.repositionXLabel();
     this.api.update();
     return this.$scope.$broadcast('resize');
-  }
-
-  graphEvents(ev) {
-    this.$log.debug(ev);
-  }
-
-  repositionXLabel() {
-    const xTicks = d3.select('.nv-x').selectAll('g');
-
-    xTicks
-      .selectAll('text')
-      .attr('transform', (d, i, j) => 'translate (0, -100)');
   }
 
   handleClick(path) {

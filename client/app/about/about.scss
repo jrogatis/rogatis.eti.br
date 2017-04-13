@@ -95,34 +95,44 @@ div#aboutMain {
       stroke: transparent;
       stroke-opacity: 0;
     }
-    .nv-x text {
-      text-align: left;
-      font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      stroke: 3;
-      stroke-opacity: 1;
-      stroke-color: blue;
-      fill: lighten($color: blue, $amount: 10);
-      -ms-transform: rotate(90deg) translateX(-100px); /* IE 9 */
-      -webkit-transform: rotate(90deg) translateX(-100px); /* Safari */
-      transform: rotate(90deg) translateX(-100px) translateY(-10px) ;
-      z-index: 100;
-      
+    .nv-x { 
+      line {
+        fill: white;
+        stroke: white;
+        stroke-opacity: 0;
+      }
+      text {
+        text-align: left;
+        font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        fill: darkblue;
+        color: darkblue;
+        -ms-transform: rotate(90deg) translateX(-100px); /* IE 9 */
+        -webkit-transform: rotate(90deg) translateX(-100px); /* Safari */
+        transform: rotate(90deg) translateX(-100px) translateY(-10px) ;
+      }
     }
-    .nv-y text {
-      font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      fill: red;
-       @include respond-to(screen-xs) {
-        font-size: 12px;
+    .nv-y {
+       line {
+        fill: white;
+        stroke: white;
+        stroke-opacity: 1;
+      }
+      text {
+        font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        fill: red;
+        @include respond-to(screen-xs) {
+          font-size: 12px;
+        }
       }
 
     }
   }
   .nvd3 .nv-axis.nv-x  {
-    stroke-opacity: 0;
+    stroke-opacity: 1;
 }
 
 }

@@ -3,13 +3,42 @@
     display: block;
     text-align: left;
     .container {
-        background-color: #DADADA;
-      a {
-      padding-right: 2%;
-    }
-    }
-    
-  }
+      background-color: #DADADA;
+      div#upButtonWrapper {
+        #divider {
+          border-bottom: 1px #EAEAEA solid;
+        }
+        #upButton {
+          border-top: 1px #EAEAEA solid;
+          border-left: 1px #EAEAEA solid;
+          border-right: 1px #EAEAEA solid;
+          border-bottom: 1px #DADADA solid;
+          border-radius: 100px 100px 0px 0px;
+          width: 90px;
+          min-height: 30px;
+          height: 40px;
+          min-width: 70px;
+          padding: 0px;
+          margin: 0px;
+          &:hover {
+            height: 50px;
+          }
+          #chevron {
+            margin: -40px 16px 0 0;
+            font-size: 70px;
+            color: #EAEAEA
+          } 
+
+        }
+      }
+      div#secondLine { 
+        padding: 1% 0 0 0; 
+        a {
+          padding-right: 2%;
+        }
+      }
+  }    
+}
 footer {
   background-color: #DADADA; 
   padding: 30px 0 0 0;
