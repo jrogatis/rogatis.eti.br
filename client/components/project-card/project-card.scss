@@ -3,7 +3,10 @@
         background-color: #F5F5F3;
         border-radius: 15px;
         padding: 5px 10px 5px 10px;
-        margin: 60px 0 10px 0;
+        @include respond-to(screen-gt-xs) {
+           margin: 60px 0 10px 0;
+          }
+        margin: 60px 0 0px 0;
         img {
           margin: -50px 10px 0px 0px;
           padding: 0 0px 0 0;
