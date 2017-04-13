@@ -43,4 +43,3 @@ export default angular.module('rogatisEtiBrApp.projectDetails', [ngRoute, ngMdIc
     controller: ProjectDetails
   })
   .name;
-

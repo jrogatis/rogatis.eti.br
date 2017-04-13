@@ -3,12 +3,11 @@ div#portfolioMain
   .container(layout-sm ="column" layout-gt-sm="row")
     div#portfolio(flex)  
       md-grid-list( flex
-            md-cols-gt-xs="2" 
-            md-cols-gt-md="3"
-            md-cols="1" 
-            md-row-height="4:3"
-            md-gutter-gt-sd="25px" 
-             md-gutter="35px")
-            md-grid-tile(ng-repeat="project in $ctrl.listProjects")
-              project-card(project="project")
-                     
+        md-cols-gt-xs="2" 
+        md-cols-gt-md="3"
+        md-cols="1" 
+        md-row-height="4:3"
+        md-gutter-gt-sd="25px" 
+          md-gutter="35px")
+        md-grid-tile(ng-repeat="project in $ctrl.listProjects")
+          project-card(project="project")

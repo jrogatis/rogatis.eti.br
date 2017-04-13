@@ -42,4 +42,3 @@ export default angular.module('rogatisEtiBrApp.post', [ngRoute, ngMdIcons, ngMes
     controller: PostController
   })
   .name;
-
