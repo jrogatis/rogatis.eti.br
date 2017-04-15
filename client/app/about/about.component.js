@@ -90,12 +90,12 @@ export class AboutController {
     this.data = [{
       key: 'Cumulative Return',
       values: [
-        { label: 'JavaScript', value: 3.4, color: '#9edae5' },
-        { label: 'Angular', value: 3.8, color: '#c7c7c7'},
-        { label: 'React', value: 4, color: '#c5b0d5' },
-        { label: 'React Native', value: 3, color: '#aec7e8' },
-        { label: 'MongoDB', value: 3.1, color: '#7f7f7f' },
-        { label: 'Barista', value: 1.6, color: '#bcbd22' },
+        { label: 'JavaScript', value: 3.2, color: '#9edae5' },
+        { label: 'Angular', value: 3, color: '#c7c7c7'},
+        { label: 'React', value: 3.2, color: '#c5b0d5' },
+        { label: 'React Native', value: 2.5, color: '#aec7e8' },
+        { label: 'MongoDB', value: 3, color: '#7f7f7f' },
+        { label: 'D3', value: 1.2, color: '#bcbd22' },
         { label: 'Sky Diver', value: 4, color: '#17becf' }
       ]
     }];

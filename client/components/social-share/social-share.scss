@@ -2,10 +2,9 @@ div.sticky-container {
   padding: 0px;
   margin: 0px;
   position: fixed;
-  left: -40px;
+  right: 0px;
   top: 130px;
   z-index: 1000;
-  //width: 200px;
   @include respond-to(screen-xs) {
     padding: 0px;
     margin: 0px;

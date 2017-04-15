@@ -49,7 +49,6 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
       Auth.isLoggedIn(loggedIn => {
         if(next.authenticate && !loggedIn) {
           $location.path('/login');
-          //$location.path('/');
         }
       });
     });

@@ -74,6 +74,9 @@ div#aboutMain {
 
     div#factsText {
       font-size: 1.5em;
+      .factsListItem {
+        margin: 0 0 8px 0;
+      }
 
     }
   }

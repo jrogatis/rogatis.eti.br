@@ -7,14 +7,14 @@ div#aboutMain
       layout-fill
       )
       div#text.animated.slideInLeft(flex="100" flex-gt-sm="50" layout="column" layout-fill)
-        h1 about me
+        h1 about J.P.
         h2 Im a Full Stack Engineer  <br /> from São Paulo, Brazil
         div(flex layout="column")#innerText
           p. 
             I enjoy turning complex problems into simple, 
             beautiful and intuitive systems. 
             When I'm not coding or pushing pixels, 
-            you'll find me in the skies or at running course.
+            you'll find me in the skies or at a running course.
       div#aboutImage.animated.slideInRight(flex="100" flex-gt-sm="50" layout="column" layout-fill)
         md-card
           img(ng-src="{{$ctrl.imgToDisplay}}" alt="{{$ctrl.imgToDisplay}}")  
@@ -28,25 +28,25 @@ div#aboutMain
               md-card               
                 img(ng-src="{{pics.imgUrl}}" ng-click="$ctrl.handleClick(pics.imgUrl)") 
     div#randomFacts(flex="100" layout="column" layout-gt-sm="row")
-      div.animated.slideInLeft#factsPic(flex = "50")
+      div#factsPic.animated.slideInLeft(flex = "50")
         div(layout="column" layout-fill)
           md-card
             img(ng-src="../../assets/images/yoda.jpg")   
-      div.animated.slideInRight#factsText(
+      div#factsText.animated.slideInRight(
         flex = "50" 
         layout="column" 
         layout-align="center center")
         md-list
-          md-list-item 
-            span I love Star Wars and got a colection of 500 action figures.
-          md-list-item 
-            span Skydive is my new passion, 1000 jumps in 3 years.
-          md-list-item 
-            span I love special coffee beans
-          md-list-item 
+          md-list-item.factsListItem
+            span I love Star Wars, and have a collection of over 500 action figures
+          md-list-item.factsListItem
+            span Skydiving is my passion. I’ve got 1000+ jumps in the past 3 years
+          md-list-item.factsListItem
+            span love gourmet coffee beans.
+          md-list-item.factsListItem
             span I want to be a super mutant
-          md-list-item 
-            span I use mac
+          md-list-item.factsListItem
+            span I use a Mac
 
     div#skills(flex="100" layout ="column")
       h1 my skills
