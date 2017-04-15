@@ -1,16 +1,13 @@
 'use strict';
 
 import angular from 'angular';
-import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import 'angular-socket-io';
 const ngRoute = require('angular-route');
 
-
 import uiBootstrap from 'angular-ui-bootstrap';
-// import ngMessages from 'angular-messages';
 
 import { routeConfig, logProvider } from './app.config';
 import _Auth from '../components/auth/auth.module';
