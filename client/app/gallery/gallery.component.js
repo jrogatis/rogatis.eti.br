@@ -51,7 +51,6 @@ export class GalleryController {
     };
     this.$http.post('api/imageGallery/signing', query)
       .then(res => {
-        this.$log.debug(res);
         let result = res.data;
         this.Upload.upload({
           url: result.url, //s3Url

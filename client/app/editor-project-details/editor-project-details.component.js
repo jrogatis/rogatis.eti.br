@@ -101,7 +101,6 @@ export class EditorProjectDetailsController {
     this.$log.debug(this.project.hasDesc);
     this.project.hasDesc = angular.isDefined(this.project.hasDesc);
     const patches = jsonpatch.generate(this.observer);
-    this.$log.debug(patches);
     this.$http.patch(`/api/projects/${this.project._id}`, patches)
       .then(res => {
         if(res.status === 200) {

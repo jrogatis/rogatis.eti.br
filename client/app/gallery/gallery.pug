@@ -23,7 +23,7 @@ div#mainGallery
           md-grid-tile(ng-repeat="pic in $ctrl.listImages")
             div(layout="column" layout-fill)
               md-card
-                img(ng-src="https://s3.amazonaws.com/rogatis/{{pic}}") 
+                img(ng-src="https://s3.amazonaws.com/rogatis/{{pic}}" alt="{{pic}}") 
                 md-title
                   md-button.md-icon-button.md-accent(aria-label="Favorite" ng-click="$ctrl.deleteImage(pic)")
                     md-icon.fa.fa-trash

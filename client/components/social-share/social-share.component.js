@@ -22,25 +22,22 @@ export class SocialShareComponent {
     this.$http = $http;
     const _this = this;
 
-    this.$scope.$on('$routeChangeSuccess', (current, previous) => {
-      //console.log($location.path());
+    this.$scope.$on('$routeChangeSuccess', () => {
       const encoded = encodeURIComponent($location.path());
       $http.get(`/api/pageInfos/pageUrl/${encoded}`)
         .then(res => {
           _this.pageInfo = res.data;
-          //console.log('res no social',  _this.pageInfo);
           _this.pageInfo.pageUrl = $location.absUrl();
           if($location.host() === 'localhost') {
             _this.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`;
           }
-          //console.log(_this.pageInfo);
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
             longUrl: $location.absUrl()
           })
-          .success((data, status, headers, config) => {
+          .success(data => {
             _this.pageInfo.shortUrl = data.id;
           })
-          .error((data, status, headers, config) => {
+          .error(data => {
             this.$log.error('error get short url', data);
           });
         })

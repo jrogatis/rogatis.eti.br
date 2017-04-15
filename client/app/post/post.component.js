@@ -30,7 +30,6 @@ export class PostController {
         this.ngMeta.setTag('og:description', this.post.snipet);
         this.ngMeta.setTag('og:url', this.$location.absUrl());
         this.ngMeta.setTag('og:image', this.post.postImage);
-        //this.socket.syncUpdates('posts', this.listPosts);
       });
   }
 }
