@@ -4,9 +4,9 @@ div#main(flex="100", layout="column")
     div#textBox
       p#text.IntroAnimated.animated.fadeIn.
         Look at the word<br>
-        from new angles,<br>
-        solving <span id="inner">&lt;coding&gt;</span> problems <br>
-        from an unusual point of view.
+        from new angles, solving <br>
+        <span id="inner">&lt;coding&gt;</span> <br> 
+        problems from an unusual point of view.
     div#mainImage(flex="100", layout="column")
       div(layout="row" layout-fill layout-align="center center")
         md-card#mainImageCard.animated.slideInLeft(flex)
@@ -26,6 +26,6 @@ div#main(flex="100", layout="column")
           md-row-height="4:3.5"
           md-gutter-gt-sm="10px"  
           md-gutter="4px")
-          md-grid-tile(ng-repeat="project in $ctrl.listImportantProjects")
-            div(layout="column" layout-fill)
+          md-grid-tile#projectTiles(ng-repeat="project in $ctrl.listImportantProjects")
+            div#cardWraper(layout="column" layout-fill)
               project-card(project="project")

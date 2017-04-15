@@ -9,5 +9,5 @@ div#portfolioMain
         md-row-height="4:3"
         md-gutter-gt-sd="25px" 
           md-gutter="35px")
-        md-grid-tile(ng-repeat="project in $ctrl.listProjects")
+        md-grid-tile#projectTiles(ng-repeat="project in $ctrl.listProjects")
           project-card(project="project")

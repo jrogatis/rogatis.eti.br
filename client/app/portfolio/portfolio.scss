@@ -1,5 +1,87 @@
 div#portfolioMain {
   div#portfolio {
     padding-top: 20px;
+    &:hover #projectTiles {
+      box-shadow: white;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: forwards;
+      /* Safari 4.0 - 8.0 */
+      animation-fill-mode: forwards;
+      -webkit-animation-name: fadeAll;
+      animation-name: fadeAll;
+      &:hover {
+        box-shadow: none;
+        opacity: 1;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: forwards;
+        /* Safari 4.0 - 8.0 */
+        animation-fill-mode: forwards;
+        -webkit-animation-name: fadeSelected;
+        animation-name: fadeSelected;
+      }
+    }
   }
 }  
+
+
+@-webkit-keyframes fadeSelected {
+  from {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeSelected {
+  from {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+}
+
+@-webkit-keyframes fadeAll {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .40;
+    -webkit-transform: scale(.95);
+    -moz-transform: scale(.95);
+    -ms-transform: scale(.95);
+    -o-transform: scale(.95);
+    transform: scale(.95);
+  }
+}
+
+@keyframes fadeAll {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: .40;
+    -webkit-transform: scale(.95);
+    -moz-transform: scale(.95);
+    -ms-transform: scale(.95);
+    -o-transform: scale(.95);
+    transform: scale(.95);
+  }
+}

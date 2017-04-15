@@ -5,7 +5,6 @@ import ngMdIcons from 'angular-material-icons';
 import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 import angularGrid from 'angulargrid';
-import ngMeta from 'ng-meta';
 
 export class PortfolioController {
 
