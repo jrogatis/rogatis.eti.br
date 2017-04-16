@@ -2,22 +2,9 @@ div#portfolioMain {
   div#portfolio {
     padding-top: 20px;
     &:hover #projectTiles {
-      box-shadow: white;
-      animation-duration: 1s;
-      -webkit-animation-fill-mode: forwards;
-      /* Safari 4.0 - 8.0 */
-      animation-fill-mode: forwards;
-      -webkit-animation-name: fadeAll;
-      animation-name: fadeAll;
+       @extend .fadeAll;
       &:hover {
-        box-shadow: none;
-        opacity: 1;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: forwards;
-        /* Safari 4.0 - 8.0 */
-        animation-fill-mode: forwards;
-        -webkit-animation-name: fadeSelected;
-        animation-name: fadeSelected;
+        @extend .fadeSelected;
       }
     }
   }
@@ -26,6 +13,7 @@ div#portfolioMain {
 
 @-webkit-keyframes fadeSelected {
   from {
+    opacity: 1;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -33,6 +21,7 @@ div#portfolioMain {
     transform: scale(1);
   }
   to {
+    opacity: 1;
     -webkit-transform: scale(1.05);
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -43,6 +32,7 @@ div#portfolioMain {
 
 @keyframes fadeSelected {
   from {
+     opacity: 1;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -50,12 +40,22 @@ div#portfolioMain {
     transform: scale(1);
   }
   to {
+     opacity: 1;
     -webkit-transform: scale(1.05);
     -moz-transform: scale(1.05);
     -ms-transform: scale(1.05);
     -o-transform: scale(1.05);
     transform: scale(1.05);
   }
+}
+
+.fadeSelected {
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  /* Safari 4.0 - 8.0 */
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeSelected;
+  animation-name: fadeSelected;
 }
 
 @-webkit-keyframes fadeAll {
@@ -84,4 +84,13 @@ div#portfolioMain {
     -o-transform: scale(.95);
     transform: scale(.95);
   }
+}
+
+.fadeAll {
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  /* Safari 4.0 - 8.0 */
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeAll;
+  animation-name: fadeAll;
 }

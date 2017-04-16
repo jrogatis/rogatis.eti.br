@@ -26,6 +26,6 @@ div#main(flex="100", layout="column")
           md-row-height="4:3.5"
           md-gutter-gt-sm="10px"  
           md-gutter="4px")
-          md-grid-tile#projectTiles(ng-repeat="project in $ctrl.listImportantProjects")
-            div#cardWraper(layout="column" layout-fill)
+          md-grid-tile.projectTiles(ng-repeat="project in $ctrl.listImportantProjects")
+            div#cardWrapper(layout="column" layout-fill)
               project-card(project="project")
