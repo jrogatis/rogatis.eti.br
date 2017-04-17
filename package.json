@@ -1,6 +1,14 @@
 {
   "name": "rogatis-eti-br",
-  "version": "0.2.0",
+  "version": "1.0.0",
+  "description": "Portfolio of Jean Philip de Rogatis",
+  "homepage": "http://www.rogatis.eti.br",
+  "repository": {
+    "type": "git",
+    "url": "git+ https://github.com/jrogatis/rogatis.eti.br"
+  },
+  "author": "Jean Philip de Rogatis <jrogatis@rogatis.eti.br>",
+  "license": "MIT",
   "main": "server/index.js",
   "dependencies": {
     "angular": "~1.5.5",
