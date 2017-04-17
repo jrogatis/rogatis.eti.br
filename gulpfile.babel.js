@@ -19,6 +19,7 @@ import { Instrumenter } from 'isparta';
 import webpack from 'webpack-stream';
 import makeWebpackConfig from './webpack.make';
 import { EventEmitter } from 'events';
+import manifest from 'gulp-manifest';
 
 const eventEmitter = new EventEmitter();
 
@@ -481,6 +482,7 @@ gulp.task('build', cb => {
       'webpack:dist'
     ],
     'revReplaceWebpack',
+    'manifest',
     cb);
 });
 
@@ -568,6 +570,18 @@ gulp.task('copy:server', () => gulp.src(['package.json'], { cwdbase: true })
   .pipe(gulp.dest(paths.dist))
 );
 
+
+gulp.task('manifest', () => {
+  gulp.src(['dist/client/*'], { base: './' })
+    .pipe(manifest({
+      hash: true,
+      preferOnline: true,
+      network: ['*'],
+      filename: 'app.manifest',
+      exclude: 'app.manifest'
+    }))
+    .pipe(gulp.dest('dist'));
+});
 /********************
  * Grunt ported tasks
  ********************/
