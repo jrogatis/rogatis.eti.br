@@ -6,6 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var ManifestPlugin = require('webpack-manifest-plugin');
 var fs = require('fs');
 var path = require('path');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
@@ -316,6 +317,10 @@ module.exports = function makeWebpackConfig(options) {
         'process.env': {
           NODE_ENV: '"production"'
         }
+      }),
+      new ManifestPlugin({
+        fileName: 'manifest.json',
+        basePath: '/'
       })
     );
   }
