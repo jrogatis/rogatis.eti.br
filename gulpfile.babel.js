@@ -61,14 +61,14 @@ const paths = {
  * Helper functions
  ********************/
 
-function onServerLog(log) {
+const onServerLog = log => {
   console.log(plugins.util.colors.white('[') +
     plugins.util.colors.yellow('nodemon') +
     plugins.util.colors.white('] ') +
     log.message);
 }
 
-function checkAppReady(cb) {
+const checkAppReady = cb => {
   const options = {
     host: 'localhost',
     port: config.port
@@ -79,7 +79,7 @@ function checkAppReady(cb) {
 }
 
 // Call page until first success
-function whenServerReady(cb) {
+const whenServerReady = cb => {
   let serverReady = false;
   const appReadyInterval = setInterval(() =>
     checkAppReady((ready) => {
@@ -405,15 +405,13 @@ gulp.task('test:server', cb => {
     cb);
 });
 
-gulp.task('mocha:unit', () => {
-  return gulp.src(paths.server.test.unit)
-    .pipe(mocha());
-});
+gulp.task('mocha:unit', () => gulp.src(paths.server.test.unit)
+    .pipe(mocha())
+);
 
-gulp.task('mocha:integration', () => {
-  return gulp.src(paths.server.test.integration)
-    .pipe(mocha());
-});
+gulp.task('mocha:integration', () => gulp.src(paths.server.test.integration)
+    .pipe(mocha())
+);
 
 gulp.task('test:server:coverage', cb => {
   runSequence('coverage:pre',
@@ -435,19 +433,17 @@ gulp.task('coverage:pre', () => {
     .pipe(plugins.istanbul.hookRequire());
 });
 
-gulp.task('coverage:unit', () => {
-  return gulp.src(paths.server.test.unit)
+gulp.task('coverage:unit', () => gulp.src(paths.server.test.unit)
     .pipe(mocha())
     .pipe(istanbul())
   // Creating the reports after tests ran
-});
+);
 
-gulp.task('coverage:integration', () => {
-  return gulp.src(paths.server.test.integration)
+gulp.task('coverage:integration', () => gulp.src(paths.server.test.integration)
     .pipe(mocha())
     .pipe(istanbul())
   // Creating the reports after tests ran
-});
+);
 
 // Downloads the selenium webdriver
 gulp.task('webdriver_update', webdriver_update);
@@ -458,10 +454,10 @@ gulp.task('test:e2e', ['webpack:e2e', 'env:all', 'env:test', 'start:server', 'we
       configFile: 'protractor.conf.js',
     }))
     .on('error', e => {
-      throw e
+      throw e;
     })
     .on('end', () => {
-      process.exit()
+      process.exit();
     });
 });
 
@@ -503,8 +499,7 @@ gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**
   dot: true
 }));
 
-gulp.task('build:images', () => {
-  return gulp.src(paths.client.images)
+gulp.task('build:images', () => gulp.src(paths.client.images)
     .pipe(plugins.imagemin([
       plugins.imagemin.optipng({
         optimizationLevel: 5
@@ -527,8 +522,8 @@ gulp.task('build:images', () => {
       base: `${paths.dist}/${clientPath}/assets`,
       merge: true
     }))
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
-});
+    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
+);
 
 gulp.task('revReplaceWebpack', () => {
   return gulp.src('dist/client/app.*.js')
@@ -538,59 +533,52 @@ gulp.task('revReplaceWebpack', () => {
     .pipe(gulp.dest('dist/client'));
 });
 
-gulp.task('copy:extras', () => {
-  return gulp.src([
-      `${clientPath}/favicon.ico`,
-      `${clientPath}/robots.txt`,
-      `${clientPath}/.htaccess`
-    ], {
-      dot: true
-    })
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
-});
+gulp.task('copy:extras', () => gulp.src([
+  `${clientPath}/favicon.ico`,
+  `${clientPath}/robots.txt`,
+  `${clientPath}/.htaccess`
+], {
+  dot: true
+})
+.pipe(gulp.dest(`${paths.dist}/${clientPath}`))
+);
 
 /**
  * turns 'boostrap/fonts/font.woff' into 'boostrap/font.woff'
  */
 function flatten() {
   return through2.obj(function (file, enc, next) {
-    if (!file.isDirectory()) {
+    if(!file.isDirectory()) {
       try {
         let dir = path.dirname(file.relative).split(path.sep)[0];
         let fileName = path.normalize(path.basename(file.path));
         file.path = path.join(file.base, path.join(dir, fileName));
         this.push(file);
-      } catch (e) {
-        this.emit('error', new Error(e));
+      } catch(e) {
+        eventEmitter.emit('error', new Error(e));
       }
     }
     next();
   });
 }
-gulp.task('copy:fonts:dev', () => {
-  return gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
-    .pipe(flatten())
-    .pipe(gulp.dest(`${clientPath}/assets/fonts`));
-});
-gulp.task('copy:fonts:dist', () => {
-  return gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
-    .pipe(flatten())
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`));
-});
 
-gulp.task('copy:assets', () => {
-  return gulp.src([paths.client.assets, '!' + paths.client.images])
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
-});
+gulp.task('copy:fonts:dev', () => gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
+    .pipe(flatten())
+    .pipe(gulp.dest(`${clientPath}/assets/fonts`))
+);
 
-gulp.task('copy:server', () => {
-  return gulp.src([
-      'package.json'
-    ], {
-      cwdbase: true
-    })
-    .pipe(gulp.dest(paths.dist));
-});
+gulp.task('copy:fonts:dist', () => gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
+    .pipe(flatten())
+    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`))
+);
+
+gulp.task('copy:assets', () => gulp.src([paths.client.assets, `!${paths.client.images}`])
+    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
+);
+
+gulp.task('copy:server', () => gulp.src(['package.json'], { cwdbase: true })
+  .pipe(gulp.dest(paths.dist))
+);
 
 /********************
  * Grunt ported tasks
