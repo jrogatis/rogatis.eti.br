@@ -23,7 +23,7 @@ import { EventEmitter } from 'events';
 const eventEmitter = new EventEmitter();
 
 const plugins = gulpLoadPlugins();
-var config;
+let config;
 
 const clientPath = 'client';
 const serverPath = 'server';
@@ -62,11 +62,11 @@ const paths = {
  ********************/
 
 const onServerLog = log => {
-  console.log(plugins.util.colors.white('[') +
-    plugins.util.colors.yellow('nodemon') +
-    plugins.util.colors.white('] ') +
-    log.message);
-}
+  console.log(plugins.util.colors.white('[')
+    + plugins.util.colors.yellow('nodemon')
+    + plugins.util.colors.white('] ')
+    + log.message);
+};
 
 const checkAppReady = cb => {
   const options = {
@@ -76,13 +76,13 @@ const checkAppReady = cb => {
   http
     .get(options, () => cb(true))
     .on('error', () => cb(false));
-}
+};
 
 // Call page until first success
 const whenServerReady = cb => {
   let serverReady = false;
   const appReadyInterval = setInterval(() =>
-    checkAppReady((ready) => {
+    checkAppReady(ready => {
       if(!ready || serverReady) {
         return;
       }
@@ -91,7 +91,7 @@ const whenServerReady = cb => {
       cb();
     }),
     100);
-}
+};
 
 /********************
  * Reusable pipelines
@@ -199,14 +199,13 @@ gulp.task('inject', cb => {
   runSequence(['inject:scss'], cb);
 });
 
-gulp.task('inject:scss', () => {
-  return gulp.src(paths.client.mainStyle)
+gulp.task('inject:scss', () => gulp.src(paths.client.mainStyle)
     .pipe(plugins.inject(
-      gulp.src(_.union(paths.client.styles, ['!' + paths.client.mainStyle]), {
+      gulp.src(_.union(paths.client.styles, [`!${paths.client.mainStyle}`]), {
         read: false
       })
       .pipe(plugins.sort()), {
-        transform: (filepath) => {
+        transform: filepath => {
           let newPath = filepath
             .replace(`/${clientPath}/app/`, '')
             .replace(`/${clientPath}/components/`, '../components/')
@@ -215,8 +214,8 @@ gulp.task('inject:scss', () => {
           return `@import '${newPath}';`;
         }
       }))
-    .pipe(gulp.dest(`${clientPath}/app`));
-});
+    .pipe(gulp.dest(`${clientPath}/app`))
+);
 
 gulp.task('webpack:dev', () => {
   const webpackDevConfig = makeWebpackConfig({
@@ -258,48 +257,41 @@ gulp.task('webpack:e2e', () => {
     .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('styles', () => {
-  return gulp.src(paths.client.mainStyle)
+gulp.task('styles', () => gulp.src(paths.client.mainStyle)
     .pipe(styles())
-    .pipe(gulp.dest('.tmp/app'));
-});
+    .pipe(gulp.dest('.tmp/app'))
+);
 
-gulp.task('transpile:server', () => {
-  return gulp.src(_.union(paths.server.scripts, paths.server.json))
+gulp.task('transpile:server', () => gulp.src(_.union(paths.server.scripts, paths.server.json))
     .pipe(transpileServer())
-    .pipe(gulp.dest(`${paths.dist}/${serverPath}`));
-});
+    .pipe(gulp.dest(`${paths.dist}/${serverPath}`))
+);
 
 gulp.task('lint:scripts', cb => runSequence(['lint:scripts:client', 'lint:scripts:server'], cb));
 
-gulp.task('lint:scripts:client', () => {
-  return gulp.src(_.union(
+gulp.task('lint:scripts:client', () => gulp.src(_.union(
       paths.client.scripts,
-      _.map(paths.client.test, blob => '!' + blob)
+      _.map(paths.client.test, blob => `!${blob}`)
     ))
-    .pipe(lintClientScripts());
-});
+    .pipe(lintClientScripts())
+);
 
-gulp.task('lint:scripts:server', () => {
-  return gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => '!' + blob)))
-    .pipe(lintServerScripts());
-});
+gulp.task('lint:scripts:server', () => gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => '!' + blob)))
+    .pipe(lintServerScripts())
+);
 
-gulp.task('lint:scripts:clientTest', () => {
-  return gulp.src(paths.client.test)
-    .pipe(lintClientScripts());
-});
+gulp.task('lint:scripts:clientTest', () => gulp.src(paths.client.test)
+    .pipe(lintClientScripts())
+);
 
-gulp.task('lint:scripts:serverTest', () => {
-  return gulp.src(paths.server.test)
-    .pipe(lintServerTestScripts());
-});
+gulp.task('lint:scripts:serverTest', () => gulp.src(paths.server.test)
+    .pipe(lintServerTestScripts())
+);
 
-gulp.task('jscs', () => {
-  return gulp.src(_.union(paths.client.scripts, paths.server.scripts))
+gulp.task('jscs', () => gulp.src(_.union(paths.client.scripts, paths.server.scripts))
     .pipe(plugins.jscs())
-    .pipe(plugins.jscs.reporter());
-});
+    .pipe(plugins.jscs.reporter())
+);
 
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {
   dot: true
@@ -392,9 +384,7 @@ gulp.task('serve:dist', cb => {
     cb);
 });
 
-gulp.task('test', cb => {
-  return runSequence('test:server', 'test:client', cb);
-});
+gulp.task('test', cb => runSequence('test:server', 'test:client', cb));
 
 gulp.task('test:server', cb => {
   runSequence(
@@ -422,16 +412,15 @@ gulp.task('test:server:coverage', cb => {
     cb);
 });
 
-gulp.task('coverage:pre', () => {
-  return gulp.src(paths.server.scripts)
+gulp.task('coverage:pre', () => gulp.src(paths.server.scripts)
     // Covering files
     .pipe(plugins.istanbul({
       instrumenter: Instrumenter, // Use the isparta instrumenter (code coverage for ES6)
       includeUntested: true
     }))
     // Force `require` to return covered files
-    .pipe(plugins.istanbul.hookRequire());
-});
+    .pipe(plugins.istanbul.hookRequire())
+);
 
 gulp.task('coverage:unit', () => gulp.src(paths.server.test.unit)
     .pipe(mocha())
@@ -525,13 +514,12 @@ gulp.task('build:images', () => gulp.src(paths.client.images)
     .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
 );
 
-gulp.task('revReplaceWebpack', () => {
-  return gulp.src('dist/client/app.*.js')
+gulp.task('revReplaceWebpack', () => gulp.src('dist/client/app.*.js')
     .pipe(plugins.revReplace({
       manifest: gulp.src(`${paths.dist}/${paths.client.revManifest}`)
     }))
-    .pipe(gulp.dest('dist/client'));
-});
+    .pipe(gulp.dest('dist/client'))
+);
 
 gulp.task('copy:extras', () => gulp.src([
   `${clientPath}/favicon.ico`,
@@ -547,7 +535,7 @@ gulp.task('copy:extras', () => gulp.src([
  * turns 'boostrap/fonts/font.woff' into 'boostrap/font.woff'
  */
 function flatten() {
-  return through2.obj(function (file, enc, next) {
+  return through2.obj(function(file, enc, next) {
     if(!file.isDirectory()) {
       try {
         let dir = path.dirname(file.relative).split(path.sep)[0];
@@ -610,24 +598,24 @@ grunt.initConfig({
 
 grunt.loadNpmTasks('grunt-build-control');
 
-gulp.task('buildcontrol:heroku', function (done) {
+gulp.task('buildcontrol:heroku', done => {
   grunt.tasks(
     ['buildcontrol:heroku'], //you can add more grunt tasks in this array
     {
       gruntfile: false
     }, //don't look for a Gruntfile - there is none. :-)
-    function () {
+    () => {
       done();
     }
   );
 });
-gulp.task('buildcontrol:openshift', function (done) {
+gulp.task('buildcontrol:openshift', done => {
   grunt.tasks(
     ['buildcontrol:openshift'], //you can add more grunt tasks in this array
     {
       gruntfile: false
     }, //don't look for a Gruntfile - there is none. :-)
-    function () {
+    () => {
       done();
     }
   );
