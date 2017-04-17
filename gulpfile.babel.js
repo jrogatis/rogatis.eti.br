@@ -18,6 +18,9 @@ import { protractor, webdriver_update } from 'gulp-protractor';
 import { Instrumenter } from 'isparta';
 import webpack from 'webpack-stream';
 import makeWebpackConfig from './webpack.make';
+import { EventEmitter } from 'events';
+
+const eventEmitter = new EventEmitter();
 
 const plugins = gulpLoadPlugins();
 var config;
@@ -225,19 +228,19 @@ gulp.task('webpack:dev', () => {
     .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('webpack:dist', function () {
+gulp.task('webpack:dist', () => {
   const webpackDistConfig = makeWebpackConfig({
     BUILD: true
   });
   return gulp.src(webpackDistConfig.entry.app)
     .pipe(webpack(webpackDistConfig))
-    .on('error', (err) => {
-      this.emit('end'); // Recover from errors
+    .on('error', err => {
+      eventEmitter.emit('end'); // Recover from errors
     })
     .pipe(gulp.dest(`${paths.dist}/client`));
 });
 
-gulp.task('webpack:test', function () {
+gulp.task('webpack:test', () => {
   const webpackTestConfig = makeWebpackConfig({
     TEST: true
   });
@@ -246,7 +249,7 @@ gulp.task('webpack:test', function () {
     .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('webpack:e2e', function () {
+gulp.task('webpack:e2e', () => {
   const webpackE2eConfig = makeWebpackConfig({
     E2E: true
   });
@@ -338,7 +341,7 @@ gulp.task('start:server:debug', () => {
 });
 
 gulp.task('watch', () => {
-  var testFiles = _.union(paths.client.test, paths.server.test.unit, paths.server.test.integration);
+  const testFiles = _.union(paths.client.test, paths.server.test.unit, paths.server.test.integration);
 
   plugins.watch(_.union(paths.server.scripts, testFiles))
     .pipe(plugins.plumber())
@@ -527,7 +530,7 @@ gulp.task('build:images', () => {
     .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
 });
 
-gulp.task('revReplaceWebpack', function () {
+gulp.task('revReplaceWebpack', () => {
   return gulp.src('dist/client/app.*.js')
     .pipe(plugins.revReplace({
       manifest: gulp.src(`${paths.dist}/${paths.client.revManifest}`)
