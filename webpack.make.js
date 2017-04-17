@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-var ManifestPlugin = require('webpack-manifest-plugin');
+var WebpackAssetsManifest = require('webpack-assets-manifest');
 var fs = require('fs');
 var path = require('path');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
@@ -318,10 +318,17 @@ module.exports = function makeWebpackConfig(options) {
           NODE_ENV: '"production"'
         }
       }),
-      new ManifestPlugin({
-        fileName: 'manifest.json',
-        basePath: '/'
-      })
+      new WebpackAssetsManifest({
+        done: function(manifest) {
+          console.log(`The manifest has been written to ${manifest.getOutputPath()}`);
+        },
+        apply: function(manifest) {
+          manifest.set('short_name', 'JPFolio');
+          manifest.set('name', 'rogatis.eti.br');
+          manifest.set('background_color', '#DADADA');
+          manifest.set('theme_color', '#A7A6FB');
+        }
+      }),
     );
   }
 

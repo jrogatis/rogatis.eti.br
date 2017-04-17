@@ -74,7 +74,7 @@
     "textangular": "^1.5.12",
     "tinymce": "^4.4.3",
     "wb-angular-slugify": "^1.2.0",
-    "webpack-manifest-plugin": "^1.1.0"
+    "webpack-assets-manifest": "^0.6.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.5",
