@@ -331,7 +331,8 @@ module.exports = function makeWebpackConfig(options) {
           manifest.set('name', 'rogatis.eti.br');
           manifest.set('background_color', '#DADADA');
           manifest.set('theme_color', '#A7A6FB');
-        }
+        },
+        merge: true
       }),
       new OfflinePlugin(),
     );

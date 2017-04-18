@@ -506,6 +506,9 @@ gulp.task('build:images', () => gulp.src(paths.client.images)
           removeViewBox: false
         }]
       })
+    ], [{
+      verbose: true,
+    }
     ]))
     .pipe(plugins.rev())
     .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/images`))
@@ -526,7 +529,9 @@ gulp.task('revReplaceWebpack', () => gulp.src('dist/client/app.*.js')
 gulp.task('copy:extras', () => gulp.src([
   `${clientPath}/favicon.ico`,
   `${clientPath}/robots.txt`,
-  `${clientPath}/.htaccess`
+  `${clientPath}/.htaccess`,
+  `${clientPath}/android-icon-192x192.png`,
+  `${clientPath}/manifest.json`,
 ], {
   dot: true
 })
