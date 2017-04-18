@@ -11,7 +11,7 @@ div#BlogMain
               div(flex="100" flex-gt-xs="60" layout="column").animated.slideInUp
                 md-card
                   div(flex)#image
-                    img(ng-src="{{post.postImage}}", layout-align="center center")
+                    img(ng-src="{{post.postImage}}", layout-align="center center" alt="{{post.postImage}}")
                   md-card-title(layout="column"  layout-align="center center")
                     md-card-title-text
                       div(flex="100" layout="row" layout-align="space-between center")#title
@@ -19,7 +19,7 @@ div#BlogMain
                         div(flex)#divider 
                         span.md-subhead By {{post.author}} on {{post.date | date:"dd MMM yyyy"}}
                         div.fb-like(
-                          data-href="http://www.rogatis.eti.br" 
+                          data-href="https://www.rogatis.eti.br" 
                           data-layout="button_count" 
                           data-action="like" 
                           data-size="small" 
