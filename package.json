@@ -169,7 +169,7 @@
     "webpack-stream": "^3.2.0"
   },
   "engines": {
-    "node": "^6.10.1",
+    "node": "^6.10.2",
     "npm": "^3.9.5"
   },
   "scripts": {
