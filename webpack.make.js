@@ -168,7 +168,10 @@ module.exports = function makeWebpackConfig(options) {
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)([\?]?.*)$/,
-      loader: 'file'
+      loaders: [
+        'file',
+        'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
+      ],
     }, {
       // Pug HTML LOADER
       // Reference: https://github.com/willyelm/pug-html-loader
@@ -320,10 +323,10 @@ module.exports = function makeWebpackConfig(options) {
         }
       }),
       new WebpackAssetsManifest({
-        done: function(manifest) {
+        done(manifest) {
           console.log(`The manifest has been written to ${manifest.getOutputPath()}`);
         },
-        apply: function(manifest) {
+        apply(manifest) {
           manifest.set('short_name', 'JPFolio');
           manifest.set('name', 'rogatis.eti.br');
           manifest.set('background_color', '#DADADA');
