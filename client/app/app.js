@@ -31,7 +31,8 @@ import projectCard from '../components/project-card/project-card.component';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import ngMeta from 'ng-meta';
-
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+OfflinePluginRuntime.install();
 import './app.scss';
 
 angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, account,

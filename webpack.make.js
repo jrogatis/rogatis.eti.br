@@ -10,6 +10,7 @@ var WebpackAssetsManifest = require('webpack-assets-manifest');
 var fs = require('fs');
 var path = require('path');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+var OfflinePlugin = require('offline-plugin');
 
 module.exports = function makeWebpackConfig(options) {
   /**
@@ -329,6 +330,7 @@ module.exports = function makeWebpackConfig(options) {
           manifest.set('theme_color', '#A7A6FB');
         }
       }),
+      new OfflinePlugin(),
     );
   }
 

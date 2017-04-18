@@ -7,6 +7,8 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 import nvd3 from 'angular-nvd3';
 import d3 from 'd3';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+OfflinePluginRuntime.install();
 
 export class AboutController {
 
