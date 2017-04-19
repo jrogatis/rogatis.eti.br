@@ -27,20 +27,21 @@ const handleEntityNotFound = res => entity => {
  * Get list of users
  * restriction: 'admin'
  */
-export function index(req, res) {
-  return User.find({}, '-salt -password').exec()
-    .then(users => res.status(200).json(users))
-    .catch(handleError(res));
-}
+export const index = (req, res) => User
+  .find({}, '-salt -password').exec()
+  .then(users => res.status(200).json(users))
+  .catch(handleError(res));
+
 
 /**
  * Creates a new user
  */
-export function create(req, res) {
+export const create = (req, res) => {
   const newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
-  newUser.save()
+  newUser
+    .save()
     .then(user => {
       const token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
@@ -48,27 +49,25 @@ export function create(req, res) {
       res.json({ token });
     })
     .catch(validationError(res));
-}
+};
 
 /**
  * Get a single user Info
  */
-export function showInfo(req, res) {
+export const showInfo = (req, res) => {
   const userId = req.params.id;
   return User.findById(userId).exec()
     .then(handleEntityNotFound(res))
     .then(user => {
       res.json(user);
     });
-}
+};
 
 /**
  * Get a single user
  */
-export function show(req, res, next) {
-  console.log('no show');
+export const show = (req, res, next) => {
   const userId = req.params.id;
-
   return User.findById(userId).exec()
     .then(user => {
       if(!user) {
@@ -77,22 +76,21 @@ export function show(req, res, next) {
       res.json(user.profile);
     })
     .catch(err => next(err));
-}
+};
 
 /**
  * Deletes a user
  * restriction: 'admin'
  */
-export function destroy(req, res) {
-  return User.findByIdAndRemove(req.params.id).exec()
-    .then(() => res.status(204).end())
-    .catch(handleError(res));
-}
+export const destroy = (req, res) => User
+  .findByIdAndRemove(req.params.id).exec()
+  .then(() => res.status(204).end())
+  .catch(handleError(res));
 
 /**
  * Change a users password
  */
-export function changePassword(req, res) {
+export const changePassword = (req, res) => {
   const userId = req.user._id;
   const oldPass = String(req.body.oldPassword);
   const newPass = String(req.body.newPassword);
@@ -108,9 +106,9 @@ export function changePassword(req, res) {
         return res.status(403).end();
       }
     });
-}
+};
 
-export function changeSettings(req, res) {
+export const changeSettings = (req, res) => {
   const userId = req.user._id;
   const userNewSettings = req.body;
   return User.findById(userId).exec()
@@ -122,15 +120,15 @@ export function changeSettings(req, res) {
         .then(() => res.status(204).end())
         .catch(error => console.log(error));
     });
-}
+};
 
 /**
  * Get my info
  */
-export function me(req, res, next) {
+export const me = (req, res, next) => {
   const userId = req.user._id;
-
-  return User.findOne({ _id: userId }, '-salt -password').exec()
+  return User.findOne({ _id: userId }, '-salt -password')
+    .exec()
     .then(user => { // don't ever give out the password or salt
       if(!user) {
         return res.status(401).end();
@@ -138,11 +136,11 @@ export function me(req, res, next) {
       res.json(user);
     })
     .catch(err => next(err));
-}
+};
 
 /**
  * Authentication callback
  */
-export function authCallback(req, res) {
+export const authCallback = (req, res) => {
   res.redirect('/');
-}
+};

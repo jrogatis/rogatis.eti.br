@@ -70,18 +70,16 @@ export const index = (req, res) =>
     .catch(handleError(res));
 
 // Gets a single Project from the DB from id or from slug...
-export function show(req, res) {
-  return Project.findById(req.params.id).exec()
+export const show = (req, res) => Project
+  .findById(req.params.id).exec()
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(() => {
+    Project.findOne({slug: req.params.id}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
-    .catch(() => {
-      Project.findOne({slug: req.params.id}).exec()
-      .then(handleEntityNotFound(res))
-      .then(respondWithResult(res))
-      .catch(handleError(res));
-    });
-}
-
+    .catch(handleError(res));
+  });
 
 // Creates a new Project in the DB
 export const create = (req, res) =>

@@ -78,21 +78,21 @@ const handleError = (res, statusCode) => {
 };
 
 // Gets a list of images
-export function index(req, res) {
-  return s3.listObjects(params).promise()
-    .then(data => {
-      let images = [];
-      data.Contents.map(image => images.push(image.Key));
-      return res.status(200).json(images);
-    })
-    .catch(err => {
-      console.log(err);
-      return handleError(res);
-    });
-}
+export const index = (req, res) => s3
+  .listObjects(params)
+  .promise()
+  .then(data => {
+    let images = [];
+    data.Contents.map(image => images.push(image.Key));
+    return res.status(200).json(images);
+  })
+  .catch(err => {
+    console.log(err);
+    return handleError(res);
+  });
 
 // Deletes a image from the s3
-export function destroy(req, res) {
+export const destroy = (req, res) => {
   let paramsToDelete = {
     Bucket: 'rogatis',
     Key: req.params.id
@@ -106,4 +106,4 @@ export function destroy(req, res) {
       console.log(err);
       return handleError(res);
     });
-}
+};

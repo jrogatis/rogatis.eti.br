@@ -23,11 +23,10 @@ for(let e in events) {
   Posts.schema.post(e, emitEvent(event));
 }
 
-function emitEvent(event) {
-  return function(doc) {
-    PostsEvents.emit(`${event}:${doc._id}`, doc);
-    PostsEvents.emit(event, doc);
-  };
-}
+const emitEvent = event => doc => {
+  PostsEvents.emit(`${event}:${doc._id}`, doc);
+  PostsEvents.emit(event, doc);
+};
+
 
 export default PostsEvents;
