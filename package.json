@@ -147,7 +147,7 @@
     "karma-script-launcher": "^1.0.0",
     "karma-sourcemap-loader": "~0.3.7",
     "karma-spec-reporter": "~0.0.20",
-    "karma-webpack": "^1.7.0",
+    "karma-webpack": "^2.0.3",
     "lazypipe": "^1.0.1",
     "mocha": "^3.0.2",
     "ng-annotate-loader": "^0.2.0",
@@ -166,7 +166,7 @@
     "sinon-chai": "^2.8.0",
     "strip-ansi": "^3.0.1",
     "style-loader": "^0.16.1",
-    "supertest": "^1.1.0",
+    "supertest": "^3.0.0",
     "through2": "^2.0.1",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.10.2",
@@ -174,7 +174,7 @@
   },
   "engines": {
     "node": "^7.8",
-    "npm": "^3.9.5"
+    "npm": "^4.2.0"
   },
   "scripts": {
     "test": "gulp test",
