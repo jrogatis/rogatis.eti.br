@@ -18,18 +18,20 @@ import {
 } from './user.service';
 const ngRoute = require('angular-route');
 
-function addInterceptor($httpProvider) {
+const addInterceptor = $httpProvider => {
   'ngInject';
-
   $httpProvider.interceptors.push('authInterceptor');
-}
+};
 
-export default angular.module('camperFullStackProjectsApp.auth', [constants, util, ngCookies,
-    ngRoute
-  ])
-  .factory('authInterceptor', authInterceptor)
-  .run(routerDecorator)
-  .factory('Auth', AuthService)
-  .factory('User', UserResource)
-  .config(['$httpProvider', addInterceptor])
-  .name;
+export default angular.module('camperFullStackProjectsApp.auth', [
+  constants,
+  util,
+  ngCookies,
+  ngRoute
+])
+.factory('authInterceptor', authInterceptor)
+.run(routerDecorator)
+.factory('Auth', AuthService)
+.factory('User', UserResource)
+.config(['$httpProvider', addInterceptor])
+.name;
