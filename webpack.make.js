@@ -1,16 +1,16 @@
 'use strict';
 /*eslint-env node*/
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-var WebpackAssetsManifest = require('webpack-assets-manifest');
-var fs = require('fs');
-var path = require('path');
-var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
-var OfflinePlugin = require('offline-plugin');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const WebpackAssetsManifest = require('webpack-assets-manifest');
+const fs = require('fs');
+const path = require('path');
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = function makeWebpackConfig(options) {
   /**
@@ -18,17 +18,17 @@ module.exports = function makeWebpackConfig(options) {
    * BUILD is for generating minified builds
    * TEST is for generating test builds
    */
-  var BUILD = !!options.BUILD;
-  var TEST = !!options.TEST;
-  var E2E = !!options.E2E;
-  var DEV = !!options.DEV;
+  const BUILD = !!options.BUILD;
+  const TEST = !!options.TEST;
+  const E2E = !!options.E2E;
+  const DEV = !!options.DEV;
 
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
    * This is the object where all configuration gets set
    */
-  var config = {};
+  let config = {};
 
   /**
    * Entry

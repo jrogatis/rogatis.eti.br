@@ -10,8 +10,11 @@ export class ProjectCardComponent {
   constructor($scope, $log) {
     this.$scope = $scope;
     this.$log = $log;
-    this.$scope.project = this.project;
     this.$scope.target = 'blank';
+  }
+
+  $onInit() {
+    this.$scope.project = this.project;
     if(this.$scope.project.hasDesc) {
       this.$scope.project.siteUrl = `/projectDetails/${this.$scope.project.slug}`;
       this.$scope.target = '_self';
