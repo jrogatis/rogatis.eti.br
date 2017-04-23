@@ -233,7 +233,7 @@ gulp.task('webpack:dist', () => {
     BUILD: true
   });
   return gulp.src(webpackDistConfig.entry.app)
-    .pipe(webpack(webpackDistConfig))
+    .pipe(webpack(webpackDistConfig, require('webpack')))
     .on('error', err => {
       eventEmitter.emit('end'); // Recover from errors
     })
