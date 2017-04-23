@@ -6,9 +6,11 @@
 
 import errors from './components/errors';
 import path from 'path';
+import sslRedirect from 'heroku-ssl-redirect';
 
 export default function(app) {
   // Insert routes below
+  app.use(sslRedirect());
   app.use('/api/users', require('./api/user'));
   app.use('/api/contactForm', require('./api/contactForm'));
   app.use('/api/projects', require('./api/projects'));
