@@ -1,12 +1,12 @@
 div#projectCard
-  md-button.md-no-focus(ng-href="{{project.siteUrl}}" target="{{target}}")
+  md-button.md-no-focus(ng-href="{{::project.siteUrl}}" target="{{::target}}")
     md-card.animated.fadeInUp
-      img.md-card-image(ng-src="{{project.imgUrl}}" alt="{{project.title}}") 
+      img.md-card-image(ng-src="{{::project.imgUrl}}" alt="{{::project.title}}") 
       div#card(flex layout="row"  layout-align="center center") 
         md-card-title(flex="80")
           md-card-title-text
-            span.md-headline {{project.title}}
-            span.md-subhead {{project.type}}
+            span.md-headline {{::project.title}}
+            span.md-subhead {{::project.type}}
         div#pointer(
           flex 
           layout-align="center center"
