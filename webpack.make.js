@@ -1,13 +1,11 @@
 'use strict';
 /*eslint-env node*/
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-const fs = require('fs');
 const path = require('path');
 //const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const OfflinePlugin = require('offline-plugin');
@@ -239,31 +237,12 @@ module.exports = function makeWebpackConfig(options) {
     });
   }
 
-
-  /**
-   * PostCSS
-   * Reference: https://github.com/postcss/autoprefixer-core
-   * Add vendor prefixes to your css
-   */
- /* config.postcss = [
-    autoprefixer({
-      browsers: ['last 2 version']
-    })
-  ];*/
-
   /**
    * Plugins
    * Reference: http://webpack.github.io/docs/configuration.html#plugins
    * List: http://webpack.github.io/docs/list-of-plugins.html
    */
   config.plugins = [
-    /*
-      * Plugin: ForkCheckerPlugin
-      * Description: Do type checking in a separate process, so webpack don't need to wait.
-      *
-      * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
-      */
-    //new ForkCheckerPlugin(),
 
     // Reference: https://github.com/webpack/extract-text-webpack-plugin
     // Extract css files
@@ -305,10 +284,6 @@ module.exports = function makeWebpackConfig(options) {
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors
       new webpack.NoEmitOnErrorsPlugin(),
-
-      // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      // Dedupe modules in the output
-      //new webpack.optimize.DedupePlugin(),
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
