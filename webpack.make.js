@@ -185,7 +185,8 @@ module.exports = function makeWebpackConfig(options) {
         // Reference: https://github.com/webpack/style-loader
         // Use style-loader in development for hot-loading
         ? ExtractTextPlugin.extract({
-          fallback: 'style-loader', use: [{
+          fallback: 'style-loader',
+          use: [{
             loader: 'css?sourceMap!postcss'
           }]
         })
