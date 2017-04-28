@@ -250,7 +250,8 @@ module.exports = function makeWebpackConfig(options) {
     // Disabled when in test mode or not in build mode
     new ExtractTextPlugin({filename: '[name].[hash].css',
       disable: !BUILD || TEST
-    })
+    }),
+    new OfflinePlugin(),
   ];
 
   if(!TEST) {
@@ -317,7 +318,6 @@ module.exports = function makeWebpackConfig(options) {
         },
         merge: true
       }),
-      new OfflinePlugin(),
     );
   }
 
