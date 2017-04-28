@@ -7,10 +7,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const path = require('path');
-//const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const OfflinePlugin = require('offline-plugin');
 
+
 module.exports = function makeWebpackConfig(options) {
+  console.log('webpack opt', options);
   /**
    * Environment type
    * BUILD is for generating minified builds
@@ -140,18 +141,6 @@ module.exports = function makeWebpackConfig(options) {
         path.resolve(__dirname, 'node_modules/lodash-es/')
       ]
     }, {
-      // TS LOADER
-      // Reference: https://github.com/s-panferov/awesome-typescript-loader
-      // Transpile .ts files using awesome-typescript-loader
-      test: /\.ts$/,
-      loader: 'awesome-typescript-loader',
-      query: {
-        tsconfig: path.resolve(__dirname, 'tsconfig.client.json')
-      },
-      include: [
-        path.resolve(__dirname, 'client/')
-      ]
-    }, {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
       // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
@@ -159,16 +148,33 @@ module.exports = function makeWebpackConfig(options) {
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)([\?]?.*)$/,
-      loaders: [
-        'file',
-        'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
+      use: [
+        { loader: 'file-loader' },
+        {
+          loader: 'image-webpack-loader',
+          query: {
+            mozjpeg: {
+              progressive: true,
+            },
+            gifsicle: {
+              interlaced: false,
+            },
+            optipng: {
+              optimizationLevel: 4,
+            },
+            pngquant: {
+              quality: '75-90',
+              speed: 3,
+            },
+          },
+        },
       ],
     }, {
       // Pug HTML LOADER
       // Reference: https://github.com/willyelm/pug-html-loader
       // Allow loading Pug throw js
       test: /\.(jade|pug)$/,
-      loaders: ['pug-html-loader']
+      use: 'pug-html-loader'
     }, {
 
       // CSS LOADER
@@ -215,7 +221,7 @@ module.exports = function makeWebpackConfig(options) {
     }, {
       enforce: 'post',
       test: /\.js$/,
-      loader: 'ng-annotate-loader?single_quotes'
+      use: 'ng-annotate-loader?single_quotes'
     }]
   };
 
@@ -229,7 +235,7 @@ module.exports = function makeWebpackConfig(options) {
       enforce: 'pre',
       test: /\.js$/,
       exclude: /(node_modules|spec\.js|mock\.js)/,
-      loader: 'isparta-instrumenter',
+      use: 'isparta-instrumenter',
       query: {
         babel: {
           // optional: ['runtime', 'es7.classProperties', 'es7.decorators']

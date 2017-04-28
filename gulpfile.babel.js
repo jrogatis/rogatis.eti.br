@@ -102,7 +102,7 @@ let lintClientScripts = lazypipe()
   .pipe(plugins.eslint, `${clientPath}/.eslintrc`)
   .pipe(plugins.eslint.format);
 
-const lintClientTestScripts = lazypipe()
+/*const lintClientTestScripts = lazypipe()
   .pipe(plugins.eslint, {
     configFile: `${clientPath}/.eslintrc`,
     envs: [
@@ -111,13 +111,13 @@ const lintClientTestScripts = lazypipe()
       'mocha'
     ]
   })
-  .pipe(plugins.eslint.format);
+  .pipe(plugins.eslint.format);*/
 
 let lintServerScripts = lazypipe()
   .pipe(plugins.eslint, `${serverPath}/.eslintrc`)
   .pipe(plugins.eslint.format);
 
-let lintServerTestScripts = lazypipe()
+/*let lintServerTestScripts = lazypipe()
   .pipe(plugins.eslint, {
     configFile: `${serverPath}/.eslintrc`,
     envs: [
@@ -126,7 +126,7 @@ let lintServerTestScripts = lazypipe()
       'mocha'
     ]
   })
-  .pipe(plugins.eslint.format);
+  .pipe(plugins.eslint.format);*/
 
 let transpileServer = lazypipe()
   .pipe(plugins.sourcemaps.init)
@@ -138,7 +138,7 @@ let transpileServer = lazypipe()
   })
   .pipe(plugins.sourcemaps.write, '.');
 
-let mocha = lazypipe()
+/*let mocha = lazypipe()
   .pipe(plugins.mocha, {
     reporter: 'spec',
     timeout: 5000,
@@ -160,7 +160,7 @@ let istanbul = lazypipe()
     },
     coverageDirectory: './coverage',
     rootDirectory: ''
-  });
+  });*/
 
 /********************
  * Env
@@ -177,13 +177,14 @@ gulp.task('env:all', () => {
     vars: localConfig
   });
 });
-gulp.task('env:test', () => {
+/*gulp.task('env:test', () => {
   plugins.env({
     vars: {
       NODE_ENV: 'test'
     }
   });
-});
+});*/
+
 gulp.task('env:prod', () => {
   plugins.env({
     vars: {
@@ -240,23 +241,23 @@ gulp.task('webpack:dist', () => {
     .pipe(gulp.dest(`${paths.dist}/client`));
 });
 
-gulp.task('webpack:test', () => {
+/*gulp.task('webpack:test', () => {
   const webpackTestConfig = makeWebpackConfig({
     TEST: true
   });
   return gulp.src(webpackTestConfig.entry.app)
     .pipe(webpack(webpackTestConfig))
     .pipe(gulp.dest('.tmp'));
-});
+});*/
 
-gulp.task('webpack:e2e', () => {
+/*gulp.task('webpack:e2e', () => {
   const webpackE2eConfig = makeWebpackConfig({
     E2E: true
   });
   return gulp.src(webpackE2eConfig.entry.app)
     .pipe(webpack(webpackE2eConfig))
     .pipe(gulp.dest('.tmp'));
-});
+});*/
 
 gulp.task('styles', () => gulp.src(paths.client.mainStyle)
     .pipe(styles())
@@ -281,13 +282,13 @@ gulp.task('lint:scripts:server', () => gulp.src(_.union(paths.server.scripts, _.
     .pipe(lintServerScripts())
 );
 
-gulp.task('lint:scripts:clientTest', () => gulp.src(paths.client.test)
+/*gulp.task('lint:scripts:clientTest', () => gulp.src(paths.client.test)
     .pipe(lintClientScripts())
 );
 
 gulp.task('lint:scripts:serverTest', () => gulp.src(paths.server.test)
     .pipe(lintServerTestScripts())
-);
+);*/
 
 gulp.task('jscs', () => gulp.src(_.union(paths.client.scripts, paths.server.scripts))
     .pipe(plugins.jscs())
@@ -385,7 +386,7 @@ gulp.task('serve:dist', cb => {
     cb);
 });
 
-gulp.task('test', cb => runSequence('test:server', 'test:client', cb));
+/*gulp.task('test', cb => runSequence('test:server', 'test:client', cb));
 
 gulp.task('test:server', cb => {
   runSequence(
@@ -411,7 +412,7 @@ gulp.task('test:server:coverage', cb => {
     'coverage:unit',
     'coverage:integration',
     cb);
-});
+});*/
 
 gulp.task('coverage:pre', () => gulp.src(paths.server.scripts)
     // Covering files
@@ -451,7 +452,7 @@ gulp.task('test:e2e', ['webpack:e2e', 'env:all', 'env:test', 'start:server', 'we
     });
 });
 
-gulp.task('test:client', done => {
+/*gulp.task('test:client', done => {
   new KarmaServer({
     configFile: `${__dirname}/${paths.karma}`,
     singleRun: true
@@ -459,7 +460,7 @@ gulp.task('test:client', done => {
     done(err);
     process.exit(err);
   }).start();
-});
+});*/
 
 /********************
  * Build
