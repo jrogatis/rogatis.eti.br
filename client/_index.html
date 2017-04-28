@@ -14,7 +14,7 @@
   <meta name="reply-to" content="jrogatis@rogatis.eti.br">
   <meta name="theme-color" content="#A7A6FB">
   <!--og:meta-->
-  <meta property="og:type" content="{{ngMeta['og:type']}}"  />
+  <meta property="og:type" content="{{ngMeta['og:type']}}" />
   <meta property="og:title" content="{{ngMeta['og:title']}}" />
   <meta property="og:description" content="{{ngMeta['og:description']}}" />
   <meta property="og:url" content="{{ngMeta['og:url']}}" />
@@ -42,8 +42,8 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  <style> 
-      .loader {
+  <style>
+    .loader {
       color: blue;
       font-size: 90px;
       text-indent: -9999em;
@@ -59,6 +59,7 @@
       -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
       animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     }
+
     @-webkit-keyframes load6 {
       0% {
         box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
@@ -81,6 +82,7 @@
         box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
       }
     }
+
     @keyframes load6 {
       0% {
         box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
@@ -103,6 +105,7 @@
         box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
       }
     }
+
     @-webkit-keyframes round {
       0% {
         -webkit-transform: rotate(0deg);
@@ -113,6 +116,7 @@
         transform: rotate(360deg);
       }
     }
+
     @keyframes round {
       0% {
         -webkit-transform: rotate(0deg);
@@ -123,14 +127,23 @@
         transform: rotate(360deg);
       }
     }
+
+    .loadContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
   </style>
 
 </head>
 
 <body>
   <div ng-if="false">
-    <h1>Loading the application, please hold on</h1>
-    <div class="loader">Loading...</div>
+    <div class="loadContainer">
+      <h4 style="text-align:center">Loading the application, please hold on</h4>
+      <div class="loader">Loading...</div>
+    </div>
   </div>
 
   <!--[if lt IE 9]>
@@ -153,42 +166,45 @@
 
     ga('create', 'UA-86210015-1', 'auto');
     ga('send', 'pageview');
+
   </script>
-<div id="fb-root"></div>
-<script type="text/javascript">
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1592090201100353',
-      status: true, 
-      cookie: true, 
-      xfbml: true,
-      version    : 'v2.8'
-    });
-  };
-  
-  (function(d, s, id){
-     FB = null;
-     var js, fjs = d.getElementsByTagName(s)[0];
-     //if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<noscript>
-  <div style="display:flex; justify-content:center; flex-direction:column"> 
-    <p style="text-align: center;"> Please enable javascript to use this site.</p>
-    <div style="display:flex; justify-content:center; flex-direction:row"> 
-      <div/>
-      <img style="max-width: 100px;" src="/android-icon-192x192.png"/>
-      <div/>
+  <div id="fb-root"></div>
+  <script type="text/javascript">
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1592090201100353',
+        status: true,
+        cookie: true,
+        xfbml: true,
+        version: 'v2.8'
+      });
+    };
+
+    (function (d, s, id) {
+      FB = null;
+      var js, fjs = d.getElementsByTagName(s)[0];
+      //if (d.getElementById(id)) {return;}
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+  <noscript>
+    <div style="display:flex; justify-content:center; flex-direction:column">
+      <p style="text-align: center;"> Please enable javascript to use this site.</p>
+      <div style="display:flex; justify-content:center; flex-direction:row">
+        <div/>
+        <img style="max-width: 100px;" src="/android-icon-192x192.png" />
+        <div/>
+      </div>
     </div>
-  </div>
-</noscript>  
+  </noscript>
   <navbar></navbar>
   <div ng-view=""></div>
   <footer></footer>
 </body>
- <script async src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
-</html>
+<script async src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
 
+</html>
