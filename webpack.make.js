@@ -8,6 +8,7 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const path = require('path');
 const OfflinePlugin = require('offline-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 module.exports = function makeWebpackConfig(options) {
@@ -35,33 +36,29 @@ module.exports = function makeWebpackConfig(options) {
    * Should be an empty object if it's generating a test build
    * Karma will set this when it's a test build
    */
-  if(TEST) {
-    config.entry = {};
-  } else {
-    config.entry = {
-      app: './client/app/app.js',
-      polyfills: './client/polyfills.js',
-      vendor: [
-        'angular',
-        'angular-animate',
-        'angular-aria',
-        'angular-cookies',
-        'angular-resource',
-        'angular-route',
-        'angular-sanitize',
-        'angular-socket-io',
-        'angular-ui-bootstrap',
-        'angular-material',
-        'nvd3',
-        'd3',
-        'lodash',
-        'angular-material-icons',
-        'textangular',
-        'ng-file-upload',
-        'angular-nvd3'
-      ]
-    };
-  }
+  config.entry = {
+    app: './client/app/app.js',
+    polyfills: './client/polyfills.js',
+    vendor: [
+      'angular',
+      'angular-animate',
+      'angular-aria',
+      'angular-cookies',
+      'angular-resource',
+      'angular-route',
+      'angular-sanitize',
+      'angular-socket-io',
+      'angular-ui-bootstrap',
+      'angular-material',
+      'nvd3',
+      'd3',
+      'lodash',
+      'angular-material-icons',
+      'textangular',
+      'ng-file-upload',
+      'angular-nvd3'
+    ]
+  };
 
   /**
    * Output
@@ -69,49 +66,23 @@ module.exports = function makeWebpackConfig(options) {
    * Should be an empty object if it's generating a test build
    * Karma will handle setting it up for you when it's a test build
    */
-  if(TEST) {
-    config.output = {};
-  } else {
-    config.output = {
-      // Absolute output directory
-      path: BUILD ? path.join(__dirname, '/dist/client/') : path.join(__dirname, '/.tmp/'),
+  config.output = {
+    // Absolute output directory
+    path: BUILD ? path.join(__dirname, '/dist/client/') : path.join(__dirname, '/.tmp/'),
 
-      // Output path from the view of the page
-      // Uses webpack-dev-server in development
-      publicPath: BUILD || DEV || E2E ? '/' : `http://localhost:${8080}/`,
-      //publicPath: BUILD ? '/' : 'http://localhost:' + env.port + '/',
+    // Output path from the view of the page
+    // Uses webpack-dev-server in development
+    publicPath: BUILD || DEV || E2E ? '/' : `http://localhost:${8080}/`,
+    //publicPath: BUILD ? '/' : 'http://localhost:' + env.port + '/',
 
-      // Filename for entry points
-      // Only adds hash in build mode
-      filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
+    // Filename for entry points
+    // Only adds hash in build mode
+    filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
 
-      // Filename for non-entry points
-      // Only adds hash in build mode
-      chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
-    };
-  }
-
-  if(TEST) {
-    config.resolve = {
-      modulesDirectories: [
-        'node_modules'
-      ],
-      extensions: ['', '.js', '.ts']
-    };
-  }
-
-  /**
-   * Devtool
-   * Reference: http://webpack.github.io/docs/configuration.html#devtool
-   * Type of sourcemap to use per build type
-   */
-  if(TEST) {
-    config.devtool = 'inline-source-map';
-  } else if(BUILD || DEV) {
-    config.devtool = 'source-map';
-  } else {
-    config.devtool = 'eval';
-  }
+    // Filename for non-entry points
+    // Only adds hash in build mode
+    chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
+  };
 
   /**
    * Loaders
@@ -184,21 +155,18 @@ module.exports = function makeWebpackConfig(options) {
       // Reference: https://github.com/postcss/postcss-loader
       // Postprocess your css with PostCSS plugins
       test: /\.css$/,
-      loader: !TEST
-        // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        // Extract css files in production builds
-        //
-        // Reference: https://github.com/webpack/style-loader
-        // Use style-loader in development for hot-loading
-        ? ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: 'css?sourceMap!postcss'
-          }]
-        })
-        // Reference: https://github.com/webpack/null-loader
-        // Skip loading css in test mode
-        : 'null'
+     
+      // Reference: https://github.com/webpack/extract-text-webpack-plugin
+      // Extract css files in production builds
+      //
+      // Reference: https://github.com/webpack/style-loader
+      // Use style-loader in development for hot-loading
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [{
+          loader: 'css?sourceMap!postcss'
+        }]
+      })
     }, {
       // SASS LOADER
       // Reference: https://github.com/jtangelder/sass-loader
@@ -225,25 +193,6 @@ module.exports = function makeWebpackConfig(options) {
     }]
   };
 
-  // ISPARTA INSTRUMENTER LOADER
-  // Reference: https://github.com/ColCh/isparta-instrumenter-loader
-  // Instrument JS files with Isparta for subsequent code coverage reporting
-  // Skips node_modules and spec files
-  if(TEST) {
-    config.module.push({
-      //delays coverage til after tests are run, fixing transpiled source coverage error
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: /(node_modules|spec\.js|mock\.js)/,
-      use: 'isparta-instrumenter',
-      query: {
-        babel: {
-          // optional: ['runtime', 'es7.classProperties', 'es7.decorators']
-        }
-      }
-    });
-  }
-
   /**
    * Plugins
    * Reference: http://webpack.github.io/docs/configuration.html#plugins
@@ -257,21 +206,17 @@ module.exports = function makeWebpackConfig(options) {
     new ExtractTextPlugin({filename: '[name].[hash].css',
       disable: !BUILD || TEST
     }),
-    new OfflinePlugin(),
-  ];
-
-  if(!TEST) {
-    config.plugins.push(new CommonsChunkPlugin({
+    new CommonsChunkPlugin({
       name: 'vendor',
-
-      // filename: "vendor.js"
+      //filename: 'vendor.[hash].js',
+      filename: 'vendor.js',
       // (Give the chunk a different name)
 
       minChunks: Infinity
-        // (with more entries, this ensures that no other module
-        //  goes into the vendor chunk)
-    }));
-  }
+      // (with more entries, this ensures that no other module
+      //  goes into the vendor chunk)
+    }),
+  ];
 
   // Skip rendering index.html in test mode
   // Reference: https://github.com/ampedandwired/html-webpack-plugin
@@ -311,18 +256,14 @@ module.exports = function makeWebpackConfig(options) {
         'process.env': {
           NODE_ENV: '"production"'
         }
-      }),
-      new WebpackAssetsManifest({
-        done(manifest) {
-          console.log(`The manifest has been written to ${manifest.getOutputPath()}`);
-        },
-        apply(manifest) {
-          manifest.set('short_name', 'JPFolio');
-          manifest.set('name', 'rogatis.eti.br');
-          manifest.set('background_color', '#DADADA');
-          manifest.set('theme_color', '#A7A6FB');
-        },
-        merge: true
+      })
+    );
+  }
+
+  if(options.ANALYSE_PACK === 'true') {
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
       }),
     );
   }
@@ -335,19 +276,28 @@ module.exports = function makeWebpackConfig(options) {
         'process.env': {
           NODE_ENV: '"development"'
         }
-      })
+      }),
     );
   }
 
-  config.cache = DEV;
+  // FINAL PUSH to plugins
+  config.plugins.push(
+    new OfflinePlugin(),
+    new WebpackAssetsManifest({
+      done(manifest) {
+        console.log(`The manifest has been written to ${manifest.getOutputPath()}`);
+      },
+      apply(manifest) {
+        manifest.set('short_name', 'JPFolio');
+        manifest.set('name', 'rogatis.eti.br');
+        manifest.set('background_color', '#DADADA');
+        manifest.set('theme_color', '#A7A6FB');
+      },
+      merge: true
+    }),
+  );
 
-  if(TEST) {
-    config.stats = {
-      colors: true,
-      reasons: true
-    };
-    config.debug = false;
-  }
+  config.cache = DEV;
 
   /**
    * Dev server configuration

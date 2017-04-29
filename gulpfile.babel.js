@@ -12,10 +12,8 @@ import http from 'http';
 import open from 'open';
 import lazypipe from 'lazypipe';
 import nodemon from 'nodemon';
-import { Server as KarmaServer } from 'karma';
 import runSequence from 'run-sequence';
-import { protractor, webdriver_update } from 'gulp-protractor';
-import { Instrumenter } from 'isparta';
+import { webdriver_update } from 'gulp-protractor';
 import webpack from 'webpack-stream';
 import makeWebpackConfig from './webpack.make';
 import { EventEmitter } from 'events';
@@ -102,31 +100,9 @@ let lintClientScripts = lazypipe()
   .pipe(plugins.eslint, `${clientPath}/.eslintrc`)
   .pipe(plugins.eslint.format);
 
-/*const lintClientTestScripts = lazypipe()
-  .pipe(plugins.eslint, {
-    configFile: `${clientPath}/.eslintrc`,
-    envs: [
-      'browser',
-      'es6',
-      'mocha'
-    ]
-  })
-  .pipe(plugins.eslint.format);*/
-
 let lintServerScripts = lazypipe()
   .pipe(plugins.eslint, `${serverPath}/.eslintrc`)
   .pipe(plugins.eslint.format);
-
-/*let lintServerTestScripts = lazypipe()
-  .pipe(plugins.eslint, {
-    configFile: `${serverPath}/.eslintrc`,
-    envs: [
-      'node',
-      'es6',
-      'mocha'
-    ]
-  })
-  .pipe(plugins.eslint.format);*/
 
 let transpileServer = lazypipe()
   .pipe(plugins.sourcemaps.init)
@@ -138,30 +114,6 @@ let transpileServer = lazypipe()
   })
   .pipe(plugins.sourcemaps.write, '.');
 
-/*let mocha = lazypipe()
-  .pipe(plugins.mocha, {
-    reporter: 'spec',
-    timeout: 5000,
-    require: [
-      './mocha.conf'
-    ]
-  });
-
-let istanbul = lazypipe()
-  .pipe(plugins.istanbul.writeReports)
-  .pipe(plugins.istanbulEnforcer, {
-    thresholds: {
-      global: {
-        lines: 80,
-        statements: 80,
-        branches: 80,
-        functions: 80
-      }
-    },
-    coverageDirectory: './coverage',
-    rootDirectory: ''
-  });*/
-
 /********************
  * Env
  ********************/
@@ -171,19 +123,13 @@ gulp.task('env:all', () => {
   try {
     localConfig = require(`./${serverPath}/config/local.env`);
   } catch(e) {
+    console.log('error', e);
     localConfig = {};
   }
   plugins.env({
     vars: localConfig
   });
 });
-/*gulp.task('env:test', () => {
-  plugins.env({
-    vars: {
-      NODE_ENV: 'test'
-    }
-  });
-});*/
 
 gulp.task('env:prod', () => {
   plugins.env({
@@ -221,11 +167,12 @@ gulp.task('inject:scss', () => gulp.src(paths.client.mainStyle)
 
 gulp.task('webpack:dev', () => {
   const webpackDevConfig = makeWebpackConfig({
+    ANALYSE_PACK: process.env.ANALYSE_PACK,
     DEV: true
   });
   return gulp.src(webpackDevConfig.entry.app)
     .pipe(plugins.plumber())
-    .pipe(webpack(webpackDevConfig))
+    .pipe(webpack(webpackDevConfig, require('webpack')))
     .pipe(gulp.dest('.tmp'));
 });
 
@@ -236,28 +183,11 @@ gulp.task('webpack:dist', () => {
   return gulp.src(webpackDistConfig.entry.app)
     .pipe(webpack(webpackDistConfig, require('webpack')))
     .on('error', err => {
+      console.log('err no webpackDistConfig', err);
       eventEmitter.emit('end'); // Recover from errors
     })
     .pipe(gulp.dest(`${paths.dist}/client`));
 });
-
-/*gulp.task('webpack:test', () => {
-  const webpackTestConfig = makeWebpackConfig({
-    TEST: true
-  });
-  return gulp.src(webpackTestConfig.entry.app)
-    .pipe(webpack(webpackTestConfig))
-    .pipe(gulp.dest('.tmp'));
-});*/
-
-/*gulp.task('webpack:e2e', () => {
-  const webpackE2eConfig = makeWebpackConfig({
-    E2E: true
-  });
-  return gulp.src(webpackE2eConfig.entry.app)
-    .pipe(webpack(webpackE2eConfig))
-    .pipe(gulp.dest('.tmp'));
-});*/
 
 gulp.task('styles', () => gulp.src(paths.client.mainStyle)
     .pipe(styles())
@@ -281,14 +211,6 @@ gulp.task('lint:scripts:client', () => gulp.src(_.union(
 gulp.task('lint:scripts:server', () => gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => '!' + blob)))
     .pipe(lintServerScripts())
 );
-
-/*gulp.task('lint:scripts:clientTest', () => gulp.src(paths.client.test)
-    .pipe(lintClientScripts())
-);
-
-gulp.task('lint:scripts:serverTest', () => gulp.src(paths.server.test)
-    .pipe(lintServerTestScripts())
-);*/
 
 gulp.task('jscs', () => gulp.src(_.union(paths.client.scripts, paths.server.scripts))
     .pipe(plugins.jscs())
@@ -342,8 +264,7 @@ gulp.task('watch', () => {
     .pipe(lintServerScripts());
 
   plugins.watch(_.union(paths.server.test.unit, paths.server.test.integration))
-    .pipe(plugins.plumber())
-    .pipe(lintServerTestScripts());
+    .pipe(plugins.plumber());
 });
 
 gulp.task('serve', cb => {
@@ -355,7 +276,7 @@ gulp.task('serve', cb => {
       'copy:fonts:dev',
       'env:all'
     ],
-    // 'webpack:dev',
+    'webpack:dev',
     ['start:server', 'start:client'],
     'watch',
     cb
@@ -386,81 +307,8 @@ gulp.task('serve:dist', cb => {
     cb);
 });
 
-/*gulp.task('test', cb => runSequence('test:server', 'test:client', cb));
-
-gulp.task('test:server', cb => {
-  runSequence(
-    'env:all',
-    'env:test',
-    'mocha:unit',
-    'mocha:integration',
-    cb);
-});
-
-gulp.task('mocha:unit', () => gulp.src(paths.server.test.unit)
-    .pipe(mocha())
-);
-
-gulp.task('mocha:integration', () => gulp.src(paths.server.test.integration)
-    .pipe(mocha())
-);
-
-gulp.task('test:server:coverage', cb => {
-  runSequence('coverage:pre',
-    'env:all',
-    'env:test',
-    'coverage:unit',
-    'coverage:integration',
-    cb);
-});*/
-
-gulp.task('coverage:pre', () => gulp.src(paths.server.scripts)
-    // Covering files
-    .pipe(plugins.istanbul({
-      instrumenter: Instrumenter, // Use the isparta instrumenter (code coverage for ES6)
-      includeUntested: true
-    }))
-    // Force `require` to return covered files
-    .pipe(plugins.istanbul.hookRequire())
-);
-
-gulp.task('coverage:unit', () => gulp.src(paths.server.test.unit)
-    .pipe(mocha())
-    .pipe(istanbul())
-  // Creating the reports after tests ran
-);
-
-gulp.task('coverage:integration', () => gulp.src(paths.server.test.integration)
-    .pipe(mocha())
-    .pipe(istanbul())
-  // Creating the reports after tests ran
-);
-
 // Downloads the selenium webdriver
 gulp.task('webdriver_update', webdriver_update);
-
-gulp.task('test:e2e', ['webpack:e2e', 'env:all', 'env:test', 'start:server', 'webdriver_update'], cb => {
-  gulp.src(paths.client.e2e)
-    .pipe(protractor({
-      configFile: 'protractor.conf.js',
-    }))
-    .on('error', e => {
-      throw e;
-    })
-    .on('end', () => {
-      process.exit();
-    });
-});
-
-/*gulp.task('test:client', done => {
-  new KarmaServer({
-    configFile: `${__dirname}/${paths.karma}`,
-    singleRun: true
-  }, err => {
-    done(err);
-    process.exit(err);
-  }).start();
-});*/
 
 /********************
  * Build

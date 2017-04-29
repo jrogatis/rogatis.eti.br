@@ -85,7 +85,6 @@
   "devDependencies": {
     "angular-mocks": "~1.6.4",
     "autoprefixer": "^6.0.0",
-    "awesome-typescript-loader": "^3.1.2",
     "babel-core": "^6.24",
     "babel-eslint": "^7.0",
     "babel-loader": "^7.0.0",
@@ -98,6 +97,7 @@
     "chai": "^3.2.0",
     "chai-as-promised": "^6.0",
     "chai-things": "^0.2.0",
+    "const": "^1.0.0",
     "css-loader": "^0.28.0",
     "del": "^2.0.2",
     "eslint": "^3.19.0",
@@ -170,6 +170,7 @@
     "supertest": "^3.0.0",
     "through2": "^2.0.1",
     "webpack": "^2.4.1",
+    "webpack-bundle-analyzer": "^2.4.0",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-stream": "^3.2.0"
   },
