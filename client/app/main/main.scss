@@ -73,7 +73,7 @@ div#main {
       border-bottom-style: solid;
     }
     h1 {
-      color: $MAIN_HEADER_COLOR;
+      color: black;
       font-size: 20px;
       text-align: center;
       @include respond-to(screen-xs) {

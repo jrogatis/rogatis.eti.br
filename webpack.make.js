@@ -155,7 +155,7 @@ module.exports = function makeWebpackConfig(options) {
       // Reference: https://github.com/postcss/postcss-loader
       // Postprocess your css with PostCSS plugins
       test: /\.css$/,
-     
+
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract css files in production builds
       //
