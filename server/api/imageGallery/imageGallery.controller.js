@@ -38,14 +38,14 @@ exports.signing = (req, res) => {
       bucket: 'rogatis'
     },
     ['starts-with', '$key', path],
-      {
-        acl: readType
-      },
-      {
-        success_action_status: '201'
-      },
-    ['starts-with', '$Content-Type', request.type],
-    ['content-length-range', 2048, 10485760], //min and max
+    {
+      acl: readType
+    },
+    {
+      success_action_status: '201'
+    },
+      ['starts-with', '$Content-Type', request.type],
+      ['content-length-range', 2048, 10485760], //min and max
     ]
   };
 
