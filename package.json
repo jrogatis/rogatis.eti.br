@@ -1,6 +1,6 @@
 {
   "name": "rogatis-eti-br",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Portfolio of Jean Philip de Rogatis",
   "homepage": "http://www.rogatis.eti.br",
   "repository": {
@@ -151,8 +151,8 @@
     "webpack-stream": "^3.2.0"
   },
   "engines": {
-    "node": "^7.8",
-    "npm": "^4.2.0"
+    "node": "^8.1",
+    "npm": "^5.0.0"
   },
   "scripts": {
     "test": "gulp test",
