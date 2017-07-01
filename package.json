@@ -155,7 +155,6 @@
     "npm": "^5.0.0"
   },
   "scripts": {
-    "test": "gulp test",
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update",
     "start": "node server"
   },
