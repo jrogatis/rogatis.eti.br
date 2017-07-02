@@ -30,7 +30,7 @@ const handleEntityNotFound = res => entity => {
 export const index = (req, res) => User
   .find({}, '-salt -password').exec()
   .then(users => res.status(200).json(users))
-  .catch (handleError(res));
+  .catch(handleError(res));
 
 
 /**
@@ -48,7 +48,7 @@ export const create = (req, res) => {
       });
       res.json({ token });
     })
-    .catch (validationError(res));
+    .catch(validationError(res));
 };
 
 /**
@@ -75,7 +75,7 @@ export const show = (req, res, next) => {
       }
       res.json(user.profile);
     })
-    .catch (err => next(err));
+    .catch(err => next(err));
 };
 
 /**
@@ -85,7 +85,7 @@ export const show = (req, res, next) => {
 export const destroy = (req, res) => User
   .findByIdAndRemove(req.params.id).exec()
   .then(() => res.status(204).end())
-  .catch (handleError(res));
+  .catch(handleError(res));
 
 /**
  * Change a users password
@@ -101,7 +101,7 @@ export const changePassword = (req, res) => {
         user.password = newPass;
         return user.save()
           .then(() => res.status(204).end())
-          .catch (validationError(res));
+          .catch(validationError(res));
       } else {
         return res.status(403).end();
       }
@@ -118,7 +118,7 @@ export const changeSettings = (req, res) => {
       user.state = userNewSettings.newUser.state;
       return user.save()
         .then(() => res.status(204).end())
-        .catch (error => console.log(error));
+        .catch(error => console.log(error));
     });
 };
 
@@ -135,7 +135,7 @@ export const me = (req, res, next) => {
       }
       res.json(user);
     })
-    .catch (err => next(err));
+    .catch(err => next(err));
 };
 
 /**

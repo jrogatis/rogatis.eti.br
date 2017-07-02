@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 
-export function Modal($rootScope, $uibModal) {
+export  const Modal = ($rootScope, $uibModal) => {
   /**
    * Opens a modal
    * @param  {Object} scope      - an object to be merged with modal's scope

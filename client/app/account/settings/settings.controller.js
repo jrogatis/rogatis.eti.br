@@ -23,7 +23,7 @@ export default class SettingsController {
       .then(() => {
         this.message = 'User successfully changed.';
       })
-      .catch (error => {
+      .catch(error => {
         this.message = error;
       });
   }
@@ -36,7 +36,7 @@ export default class SettingsController {
         .then(() => {
           this.message = 'Password successfully changed.';
         })
-        .catch (() => {
+        .catch(() => {
           form.password.$setValidity('mongoose', false);
           this.errors.other = 'Incorrect password';
           this.message = '';

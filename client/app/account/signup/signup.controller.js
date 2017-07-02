@@ -23,7 +23,7 @@ export default class SignupController {
           // Account created, redirect to home
           this.$location.path('/');
         })
-        .catch (err => {
+        .catch(err => {
           err = err.data;
           this.errors = {};
           // Update validity of form fields that match the mongoose errors

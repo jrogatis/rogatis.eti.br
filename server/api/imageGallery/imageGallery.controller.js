@@ -86,7 +86,7 @@ export const index = (req, res) => s3
     data.Contents.map(image => images.push(image.Key));
     return res.status(200).json(images);
   })
-  .catch (err => {
+  .catch(err => {
     console.log(err);
     return handleError(res);
   });
@@ -102,7 +102,7 @@ export const destroy = (req, res) => {
       console.log(result);
       return res.status(200);
     })
-    .catch (err => {
+    .catch(err => {
       console.log(err);
       return handleError(res);
     });

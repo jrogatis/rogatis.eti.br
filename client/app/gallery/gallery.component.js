@@ -71,9 +71,9 @@ export class GalleryController {
           this.determinateValue = 0;
           this.loadImages();
         })
-        .catch (err => this.$log.error('erroooo', err));
+        .catch(err => this.$log.error('erroooo', err));
       })
-      .catch ((data, status) => {
+      .catch((data, status) => {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
         this.$log.error('pau pau', data, status);

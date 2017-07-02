@@ -41,7 +41,7 @@ export class SocialShareComponent {
             this.$log.error('error get short url', data);
           });
         })
-        .catch (err => this.$log.error('error on get page info at social share component', err));
+        .catch(err => this.$log.error('error on get page info at social share component', err));
     });
   }
 

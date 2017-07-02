@@ -62,7 +62,7 @@ export class EditorProjectController {
           this.showDialogSaveOk(ev);
         }
       })
-      .catch (error => this.$log.error('ops a error!', error));
+      .catch(error => this.$log.error('ops a error!', error));
   }
 
   handleAdd(ev) {
@@ -73,7 +73,7 @@ export class EditorProjectController {
           this.showDialogSaveOk(ev);
         }
       })
-      .catch (error => this.$log.error('ops a error!', error));
+      .catch(error => this.$log.error('ops a error!', error));
   }
 
   showDialogSaveOk(ev) {

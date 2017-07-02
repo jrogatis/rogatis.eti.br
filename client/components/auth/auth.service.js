@@ -36,7 +36,7 @@ export const AuthService = ($location, $http, $cookies, $q, appConfig, Util, Use
           safeCb(callback)(null, user);
           return user;
         })
-        .catch (err => {
+        .catch(err => {
           Auth.logout();
           safeCb(callback)(err.data);
           return $q.reject(err.data);

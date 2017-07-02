@@ -98,7 +98,7 @@ export class EditorController {
         this.pageInfo = res.data;
         this.observerPageInfo = jsonpatch.observe(this.pageInfo);
       })
-      .catch (err => {
+      .catch(err => {
         this.$log.error('error on loadForEdition', err);
         if (err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
@@ -127,7 +127,7 @@ export class EditorController {
         this.handlePageInfoUpdate(ev);
         this.loadPosts();
       })
-      .catch (err => this.$log.error(err));
+      .catch(err => this.$log.error(err));
   }
 
   handlePageInfoUpdate(ev) {
@@ -155,9 +155,9 @@ export class EditorController {
           this.pageInfo = res.data;
           this.observerPageInfo = jsonpatch.observe(this.pageInfo);
         })
-        .catch (err => this.$log.error('error on handlePageInfoAdd no get do pageurl', err))
+        .catch(err => this.$log.error('error on handlePageInfoAdd no get do pageurl', err))
       )
-      .catch (err => this.$log.error('error on handlePageInfoAdd', err));
+      .catch(err => this.$log.error('error on handlePageInfoAdd', err));
   }
 
   newPost() {
@@ -192,9 +192,9 @@ export class EditorController {
             this.post = undefined;
             this.pageInfo = undefined;
           })
-          .catch (err => this.$log.error('err at delete posts page info', err));
+          .catch(err => this.$log.error('err at delete posts page info', err));
       })
-      .catch (err => this.$log.error('err at delete posts', err));
+      .catch(err => this.$log.error('err at delete posts', err));
   }
 
   showDialog(ev) {

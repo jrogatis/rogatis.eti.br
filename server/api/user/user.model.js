@@ -2,7 +2,7 @@
 /*eslint no-invalid-this:0*/
 import crypto from 'crypto';
 mongoose.Promise = require('bluebird');
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
@@ -15,25 +15,13 @@ const UserSchema = new Schema({
     type: String,
     lowercase: true,
     required() {
-      if (authTypes.indexOf(this.provider) === -1) {
-        return true;
-      } else {
-        return false;
-      }
+      return authTypes.indexOf(this.provider) === -1 === true;
     }
   },
-  role: {
-    type: String,
-    default: 'user'
-  },
-  password: {
-    type: String,
+  role: { type: String, default: 'user' },
+  password: { type: String,
     required() {
-      if (authTypes.indexOf(this.provider) === -1) {
-        return true;
-      } else {
-        return false;
-      }
+      return authTypes.indexOf(this.provider) === -1 === true;
     }
   },
   provider: String,
@@ -51,22 +39,12 @@ const UserSchema = new Schema({
 // Public profile information
 UserSchema
   .virtual('profile')
-  .get(function() {
-    return {
-      name: this.name,
-      role: this.role
-    };
-  });
+  .get(() => ({ name: this.name, role: this.role }));
 
 // Non-sensitive info we'll be putting in the token
 UserSchema
   .virtual('token')
-  .get(function() {
-    return {
-      _id: this._id,
-      role: this.role
-    };
-  });
+  .get(() => ({ _id: this._id, role: this.role }));
 
 /**
  * Validations
@@ -103,14 +81,12 @@ UserSchema
     return this.constructor.findOne({ email: value }).exec()
       .then(user => {
         if (user) {
-          if (this.id === user.id) {
-            return respond(true);
-          }
+          if (this.id === user.id) return respond(true);
           return respond(false);
         }
         return respond(true);
       })
-      .catch (err => {
+      .catch(err => {
         throw err;
       });
   }, 'The specified email address is already in use.');
@@ -125,9 +101,7 @@ const validatePresenceOf = function(value) {
 UserSchema
   .pre('save', function(next) {
     // Handle new/update passwords
-    if (!this.isModified('password')) {
-      return next();
-    }
+    if (!this.isModified('password')) return next();
 
     if (!validatePresenceOf(this.password)) {
       if (authTypes.indexOf(this.provider) === -1) {
@@ -139,14 +113,10 @@ UserSchema
 
     // Make salt with a callback
     this.makeSalt((saltErr, salt) => {
-      if (saltErr) {
-        return next(saltErr);
-      }
+      if (saltErr) return next(saltErr);
       this.salt = salt;
       this.encryptPassword(this.password, (encryptErr, hashedPassword) => {
-        if (encryptErr) {
-          return next(encryptErr);
-        }
+        if (encryptErr) return next(encryptErr);
         this.password = hashedPassword;
         return next();
       });
@@ -166,9 +136,7 @@ UserSchema.methods = {
    * @api public
    */
   authenticate(password, callback) {
-    if (!callback) {
-      return this.password === this.encryptPassword(password);
-    }
+    if (!callback) return this.password === this.encryptPassword(password);
 
     this.encryptPassword(password, (err, pwdGen) => {
       if (err) {

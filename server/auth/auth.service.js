@@ -5,9 +5,7 @@ import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
 import User from '../api/user/user.model';
 
-const validateJwt = expressJwt({
-  secret: config.secrets.session
-});
+const validateJwt = expressJwt({ secret: config.secrets.session });
 
 /**
  * Attaches the user object to the request if authenticated
@@ -37,7 +35,7 @@ export const isAuthenticated = () => compose()
         req.user = user;
         next();
       })
-      .catch (err => next(err));
+      .catch(err => next(err));
   });
 
 /**

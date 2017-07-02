@@ -18,7 +18,7 @@ export default class LoginController {
           // Logged in, redirect to home
           this.$location.path('/');
         })
-        .catch (err => {
+        .catch(err => {
           this.$log.error('ERROR na auth', err);
           this.errors.login = err.message;
         });
