@@ -15,7 +15,7 @@ export default angular.module('rogatisEtiBrApp.account', [ngRoute, login, settin
   'ngInject';
 
   $rootScope.$on('$routeChangeStart', (event, next, current) => {
-    if(next.name === 'logout' && current && current.originalPath && !current.authenticate) {
+    if (next.name === 'logout' && current && current.originalPath && !current.authenticate) {
       next.referrer = current.originalPath;
     }
   });

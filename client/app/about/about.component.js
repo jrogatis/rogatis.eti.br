@@ -122,7 +122,7 @@ export class AboutController {
   leftMargin() {
     const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
     //console.log(innerSize);
-    if(innerSize < 599) {
+    if (innerSize < 599) {
       return 45;
     } else {
       return 63;

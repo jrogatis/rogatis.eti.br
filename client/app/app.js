@@ -45,7 +45,7 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
   // Redirect to login if route requires auth and you're not logged in
   $rootScope.$on('$stateChangeStart', (event, next) => {
     Auth.isLoggedIn(loggedIn => {
-      if(next.authenticate && !loggedIn) {
+      if (next.authenticate && !loggedIn) {
         $location.path('/login');
       }
     });

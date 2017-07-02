@@ -156,10 +156,10 @@
             "before": true,
             "after": true,
             "overrides": {
-                "if": {"after": false},
-                "for": {"after": false},
-                "while": {"after": false},
-                "catch": {"after": false}
+                "if": {"after": true},
+                "for": {"after": true},
+                "while": {"after": true},
+                "catch": {"after": true}
             }
         }],                                                         //enforce spacing before and after keywords
         "linebreak-style": 2,                                       //disallow mixed 'LF' and 'CRLF' as linebreaks

@@ -28,7 +28,7 @@ export class SocialShareComponent {
         .then(res => {
           that.pageInfo = res.data;
           that.pageInfo.pageUrl = $location.absUrl();
-          if($location.host() === 'localhost') {
+          if ($location.host() === 'localhost') {
             that.pageInfo.pageUrl = `http://www.rogatis.eti.br${$location.path()}`;
           }
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
@@ -41,7 +41,7 @@ export class SocialShareComponent {
             this.$log.error('error get short url', data);
           });
         })
-        .catch(err => this.$log.error('error on get page info at social share component', err));
+        .catch (err => this.$log.error('error on get page info at social share component', err));
     });
   }
 

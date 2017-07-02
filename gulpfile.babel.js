@@ -82,7 +82,7 @@ const whenServerReady = cb => {
   let serverReady = false;
   const appReadyInterval = setInterval(() =>
     checkAppReady(ready => {
-      if(!ready || serverReady) {
+      if (!ready || serverReady) {
         return;
       }
       clearInterval(appReadyInterval);
@@ -122,7 +122,7 @@ gulp.task('env:all', () => {
   let localConfig;
   try {
     localConfig = require(`./${serverPath}/config/local.env`);
-  } catch(e) {
+  } catch (e) {
     console.log('error', e);
     localConfig = {};
   }
@@ -392,13 +392,13 @@ gulp.task('copy:extras', () => gulp.src([
  */
 function flatten() {
   return through2.obj(function(file, enc, next) {
-    if(!file.isDirectory()) {
+    if (!file.isDirectory()) {
       try {
         let dir = path.dirname(file.relative).split(path.sep)[0];
         let fileName = path.normalize(path.basename(file.path));
         file.path = path.join(file.base, path.join(dir, fileName));
         this.push(file);
-      } catch(e) {
+      } catch (e) {
         eventEmitter.emit('error', new Error(e));
       }
     }

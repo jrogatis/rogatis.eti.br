@@ -6,23 +6,23 @@ function localAuthenticate(User, email, password, done) {
     email: email.toLowerCase()
   }).exec()
     .then(user => {
-      if(!user) {
+      if (!user) {
         return done(null, false, {
           message: 'This email is not registered.'
         });
       }
       user.authenticate(password, (authError, authenticated) => {
-        if(authError) {
+        if (authError) {
           return done(authError);
         }
-        if(!authenticated) {
+        if (!authenticated) {
           return done(null, false, { message: 'This password is not correct.' });
         } else {
           return done(null, user);
         }
       });
     })
-    .catch(err => done(err));
+    .catch (err => done(err));
 }
 
 export function setup(User/*, config*/) {

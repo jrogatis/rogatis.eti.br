@@ -15,7 +15,7 @@ export class ProjectCardComponent {
 
   $onInit() {
     this.$scope.project = this.project;
-    if(this.$scope.project.hasDesc) {
+    if (this.$scope.project.hasDesc) {
       this.$scope.project.siteUrl = `/projectDetails/${this.$scope.project.slug}`;
       this.$scope.target = '_self';
     }

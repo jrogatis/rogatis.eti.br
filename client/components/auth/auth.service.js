@@ -2,7 +2,7 @@
 
 class _User {}
 
-export function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
+export const AuthService = ($location, $http, $cookies, $q, appConfig, Util, User) => {
   'ngInject';
 
   const safeCb = Util.safeCb;
@@ -15,9 +15,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
    */
   const hasRole = (userRole, role) => userRoles.indexOf(userRole) >= userRoles.indexOf(role);
 
-  if($cookies.get('token') && $location.path() !== '/logout') {
-    currentUser = User.get();
-  }
+  if ($cookies.get('token') && $location.path() !== '/logout') currentUser = User.get();
 
   const Auth = {
     /**
@@ -27,14 +25,8 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      * @param  {Function} callback - function(error, user)
      * @return {Promise}
      */
-    login({
-      email,
-      password
-    }, callback) {
-      return $http.post('/auth/local', {
-        email,
-        password
-      })
+    login({ email, password }, callback) {
+      return $http.post('/auth/local', { email, password })
         .then(res => {
           $cookies.put('token', res.data.token);
           currentUser = User.get();
@@ -44,7 +36,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
           safeCb(callback)(null, user);
           return user;
         })
-        .catch(err => {
+        .catch (err => {
           Auth.logout();
           safeCb(callback)(err.data);
           return $q.reject(err.data);
@@ -79,14 +71,9 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     },
 
     changeSettings(newUser, callback) {
-      return User.changeSettings({
-        id: currentUser._id
-      }, {
-        newUser
-      }, () => safeCb(callback)(null)
-      , err => safeCb(callback)(err)
-      )
-        .$promise;
+      return User.changeSettings({ id: currentUser._id }, { newUser },
+        () => safeCb(callback)(null), err => safeCb(callback)(err)
+      ).$promise;
     },
 
     /**
@@ -104,7 +91,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
         oldPassword,
         newPassword
       }, () => safeCb(callback)(null)
-      , err => safeCb(callback)(err))
+        , err => safeCb(callback)(err))
         .$promise;
     },
 
@@ -203,6 +190,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      * @return {Bool}
      */
     isAdminSync() {
+     
       return Auth.hasRoleSync('admin');
     },
 
@@ -217,4 +205,4 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
   };
 
   return Auth;
-}
+};

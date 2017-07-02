@@ -232,7 +232,7 @@ module.exports = function makeWebpackConfig(options) {
   );
 
   // Add build specific plugins
-  if(BUILD) {
+  if (BUILD) {
     config.plugins.push(
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
       // Only emit files when there are no errors
@@ -260,7 +260,7 @@ module.exports = function makeWebpackConfig(options) {
     );
   }
 
-  if(options.ANALYSE_PACK === 'true') {
+  if (options.ANALYSE_PACK === 'true') {
     config.plugins.push(
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
@@ -268,7 +268,7 @@ module.exports = function makeWebpackConfig(options) {
     );
   }
 
-  if(DEV) {
+  if (DEV) {
     config.plugins.push(
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       // Define free global variables

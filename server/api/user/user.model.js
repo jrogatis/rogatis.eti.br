@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
     lowercase: true,
     required() {
-      if(authTypes.indexOf(this.provider) === -1) {
+      if (authTypes.indexOf(this.provider) === -1) {
         return true;
       } else {
         return false;
@@ -29,7 +29,7 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required() {
-      if(authTypes.indexOf(this.provider) === -1) {
+      if (authTypes.indexOf(this.provider) === -1) {
         return true;
       } else {
         return false;
@@ -76,7 +76,7 @@ UserSchema
 UserSchema
   .path('email')
   .validate(function(email) {
-    if(authTypes.indexOf(this.provider) !== -1) {
+    if (authTypes.indexOf(this.provider) !== -1) {
       return true;
     }
     return email.length;
@@ -86,7 +86,7 @@ UserSchema
 UserSchema
   .path('password')
   .validate(function(password) {
-    if(authTypes.indexOf(this.provider) !== -1) {
+    if (authTypes.indexOf(this.provider) !== -1) {
       return true;
     }
     return password.length;
@@ -96,21 +96,21 @@ UserSchema
 UserSchema
   .path('email')
   .validate(function(value, respond) {
-    if(authTypes.indexOf(this.provider) !== -1) {
+    if (authTypes.indexOf(this.provider) !== -1) {
       return respond(true);
     }
 
     return this.constructor.findOne({ email: value }).exec()
       .then(user => {
-        if(user) {
-          if(this.id === user.id) {
+        if (user) {
+          if (this.id === user.id) {
             return respond(true);
           }
           return respond(false);
         }
         return respond(true);
       })
-      .catch(err => {
+      .catch (err => {
         throw err;
       });
   }, 'The specified email address is already in use.');
@@ -125,12 +125,12 @@ const validatePresenceOf = function(value) {
 UserSchema
   .pre('save', function(next) {
     // Handle new/update passwords
-    if(!this.isModified('password')) {
+    if (!this.isModified('password')) {
       return next();
     }
 
-    if(!validatePresenceOf(this.password)) {
-      if(authTypes.indexOf(this.provider) === -1) {
+    if (!validatePresenceOf(this.password)) {
+      if (authTypes.indexOf(this.provider) === -1) {
         return next(new Error('Invalid password'));
       } else {
         return next();
@@ -139,12 +139,12 @@ UserSchema
 
     // Make salt with a callback
     this.makeSalt((saltErr, salt) => {
-      if(saltErr) {
+      if (saltErr) {
         return next(saltErr);
       }
       this.salt = salt;
       this.encryptPassword(this.password, (encryptErr, hashedPassword) => {
-        if(encryptErr) {
+        if (encryptErr) {
           return next(encryptErr);
         }
         this.password = hashedPassword;
@@ -166,16 +166,16 @@ UserSchema.methods = {
    * @api public
    */
   authenticate(password, callback) {
-    if(!callback) {
+    if (!callback) {
       return this.password === this.encryptPassword(password);
     }
 
     this.encryptPassword(password, (err, pwdGen) => {
-      if(err) {
+      if (err) {
         return callback(err);
       }
 
-      if(this.password === pwdGen) {
+      if (this.password === pwdGen) {
         return callback(null, true);
       } else {
         return callback(null, false);
@@ -194,21 +194,21 @@ UserSchema.methods = {
   makeSalt(byteSize, callback) {
     const defaultByteSize = 16;
 
-    if(typeof arguments[0] === 'function') {
+    if (typeof arguments[0] === 'function') {
       callback = arguments[0];
       byteSize = defaultByteSize;
-    } else if(typeof arguments[1] === 'function') {
+    } else if (typeof arguments[1] === 'function') {
       callback = arguments[1];
     } else {
       throw new Error('Missing Callback');
     }
 
-    if(!byteSize) {
+    if (!byteSize) {
       byteSize = defaultByteSize;
     }
 
     return crypto.randomBytes(byteSize, (err, salt) => {
-      if(err) {
+      if (err) {
         return callback(err);
       } else {
         return callback(null, salt.toString('base64'));
@@ -225,8 +225,8 @@ UserSchema.methods = {
    * @api public
    */
   encryptPassword(password, callback) {
-    if(!password || !this.salt) {
-      if(!callback) {
+    if (!password || !this.salt) {
+      if (!callback) {
         return null;
       } else {
         return callback('Missing password or salt');
@@ -237,13 +237,13 @@ UserSchema.methods = {
     const defaultKeyLength = 64;
     const salt = new Buffer(this.salt, 'base64');
 
-    if(!callback) {
+    if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
         .toString('base64');
     }
 
     return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {
-      if(err) {
+      if (err) {
         return callback(err);
       } else {
         return callback(null, key.toString('base64'));
