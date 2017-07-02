@@ -204,13 +204,14 @@ UserSchema.methods = {
     const defaultIterations = 10000;
     const defaultKeyLength = 64;
     const salt = new Buffer(this.salt, 'base64');
+    const digest = 'sha512';
 
     if (!callback) {
-      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
+      return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, digest)
         .toString('base64');
     }
 
-    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {
+    return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, digest, (err, key) => {
       if (err) {
         return callback(err);
       } else {
