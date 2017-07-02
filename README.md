@@ -1,3 +1,4 @@
+<a href="https://codebeat.co/projects/github-com-jrogatis-rogatis-eti-br-master"><img alt="codebeat badge" src="https://codebeat.co/badges/cb16e0c8-69b6-4a96-a9ca-8b2a4c032d77" /></a>
 # rogatis-eti-br
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.1.0.
