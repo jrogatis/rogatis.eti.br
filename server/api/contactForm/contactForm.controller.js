@@ -37,7 +37,7 @@ function handleSendEmail(res) {
       subject: 'Your contact with Jean', // REQUIRED.
       message: res.message
     }, err => {
-      if(err) {
+      if (err) {
         // handle error
         console.log(err);
         res.send('There was an error sending the email');

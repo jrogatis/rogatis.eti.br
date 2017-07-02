@@ -39,7 +39,7 @@ const sitemap = res => {
       let map = sm.createSitemap(basicMap);
       posts.map(post => map.add({ url: `/${post.slug}` }));
       map.toXML((err, xml) => {
-        if(!err) {
+        if (!err) {
           console.log(err, xml);
         }
       });

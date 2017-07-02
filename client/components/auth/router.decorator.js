@@ -5,14 +5,14 @@ export function routerDecorator($rootScope, $location, Auth) {
   // Redirect to login if route requires auth and the user is not logged in, or doesn't have required role
 
   $rootScope.$on('$routeChangeStart', (event, next) => {
-    if(!next.authenticate) {
+    if (!next.authenticate) {
       return;
     }
 
-    if(angular.isString(next.authenticate)) {
+    if (angular.isString(next.authenticate)) {
       Auth.hasRole(next.authenticate)
         .then(has => {
-          if(has) {
+          if (has) {
             return;
           }
           event.preventDefault();
@@ -24,7 +24,7 @@ export function routerDecorator($rootScope, $location, Auth) {
     } else {
       Auth.isLoggedIn()
         .then(is => {
-          if(is) {
+          if (is) {
             return;
           }
 

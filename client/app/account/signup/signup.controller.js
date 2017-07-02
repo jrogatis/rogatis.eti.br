@@ -13,7 +13,7 @@ export default class SignupController {
   register(form) {
     this.submitted = true;
 
-    if(form.$valid) {
+    if (form.$valid) {
       return this.Auth.createUser({
         name: this.user.name,
         email: this.user.email,

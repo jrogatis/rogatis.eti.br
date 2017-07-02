@@ -89,7 +89,7 @@ export class EditorController {
     this.addOrSave = 'Save';
     this.post = this.listPosts[index];
     this.observerPost = jsonpatch.observe(this.post);
-    if(this.post.slug === '' || angular.isUndefined(this.post.slug)) {
+    if (this.post.slug === '' || angular.isUndefined(this.post.slug)) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
     const postUrl = `/post/${this.post.slug}`;
@@ -100,14 +100,14 @@ export class EditorController {
       })
       .catch(err => {
         this.$log.error('error on loadForEdition', err);
-        if(err.status === 500 || err.status === 404) {
+        if (err.status === 500 || err.status === 404) {
           this.handlePageInfoAdd();
         }
       });
   }
 
   handleSubmit(ev) {
-    if(this.addOrSave !== 'Save') {
+    if (this.addOrSave !== 'Save') {
       this.handlePostAdd(ev);
     } else {
       this.handlePostUpdate(ev);
@@ -172,10 +172,10 @@ export class EditorController {
   }
 
   handlePostAdd(ev) {
-    if(this.post.slug === '' || angular.isUndefined(this.post.slug)) {
+    if (this.post.slug === '' || angular.isUndefined(this.post.slug)) {
       this.post.slug = this.Slug.slugify(this.post.title);
     }
-    if(angular.isUndefined(this.post.active)) this.post.active = false;
+    if (angular.isUndefined(this.post.active)) this.post.active = false;
     this.$http.post('/api/posts', this.post)
       .then(() => {
         this.handlePageInfoAdd();

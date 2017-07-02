@@ -16,7 +16,7 @@ import Posts from './posts.model';
 const respondWithResult = (res, statusCode) => {
   statusCode = statusCode || 200;
   return entity => {
-    if(entity) {
+    if (entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
@@ -33,7 +33,7 @@ const patchUpdates = patches => entity => {
 };
 
 const removeEntity = res => entity => {
-  if(entity) {
+  if (entity) {
     return entity.remove()
       .then(() => {
         res.status(204).end();
@@ -43,7 +43,7 @@ const removeEntity = res => entity => {
 
 
 const handleEntityNotFound = res => entity => {
-  if(!entity) {
+  if (!entity) {
     res.status(404).end();
     return null;
   }
@@ -90,7 +90,7 @@ export const create = (req, res) => Posts
 
 // Upserts the given Posts in the DB at the specified ID
 export const upsert = (req, res) => {
-  if(req.body._id) {
+  if (req.body._id) {
     delete req.body._id;
   }
   return Posts.findOneAndUpdate(
@@ -103,7 +103,7 @@ export const upsert = (req, res) => {
 
 // Updates an existing Posts in the DB
 export const patch = (req, res) => {
-  if(req.body._id) {
+  if (req.body._id) {
     delete req.body._id;
   }
   return Posts.findById(req.params.id).exec()

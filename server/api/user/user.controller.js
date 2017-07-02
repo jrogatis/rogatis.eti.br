@@ -16,7 +16,7 @@ const handleError = (res, statusCode) => {
 
 
 const handleEntityNotFound = res => entity => {
-  if(!entity) {
+  if (!entity) {
     res.status(404).end();
     return null;
   }
@@ -70,7 +70,7 @@ export const show = (req, res, next) => {
   const userId = req.params.id;
   return User.findById(userId).exec()
     .then(user => {
-      if(!user) {
+      if (!user) {
         return res.status(404).end();
       }
       res.json(user.profile);
@@ -97,7 +97,7 @@ export const changePassword = (req, res) => {
 
   return User.findById(userId).exec()
     .then(user => {
-      if(user.authenticate(oldPass)) {
+      if (user.authenticate(oldPass)) {
         user.password = newPass;
         return user.save()
           .then(() => res.status(204).end())
@@ -130,7 +130,7 @@ export const me = (req, res, next) => {
   return User.findOne({ _id: userId }, '-salt -password')
     .exec()
     .then(user => { // don't ever give out the password or salt
-      if(!user) {
+      if (!user) {
         return res.status(401).end();
       }
       res.json(user);

@@ -35,16 +35,16 @@ export class EditorProjectController {
     this.addOrSave = 'Save';
     this.project = this.listProjects[index];
     this.observer = jsonpatch.observe(this.project);
-    if(this.project.slug === '' || angular.isUndefined(this.project.slug)) {
+    if (this.project.slug === '' || angular.isUndefined(this.project.slug)) {
       this.project.slug = this.Slug.slugify(this.project.title);
     }
-    if(this.project.hasDesc === '' || angular.isUndefined(this.project.hasDesc)) {
+    if (this.project.hasDesc === '' || angular.isUndefined(this.project.hasDesc)) {
       this.project.hasDesc = false;
     }
   }
 
   handleSubmit(ev) {
-    if(this.addOrSave !== 'Save') {
+    if (this.addOrSave !== 'Save') {
       this.handleAdd();
     } else {
       this.handleSave(ev);
@@ -58,7 +58,7 @@ export class EditorProjectController {
     this.$log.debug(patches);
     this.$http.patch(`/api/projects/${this.project._id}`, patches)
       .then(res => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           this.showDialogSaveOk(ev);
         }
       })
@@ -69,7 +69,7 @@ export class EditorProjectController {
     this.$http.post('/api/projects', this.project)
       .then(res => {
         this.$log.debug(res);
-        if(res.status === 201) {
+        if (res.status === 201) {
           this.showDialogSaveOk(ev);
         }
       })

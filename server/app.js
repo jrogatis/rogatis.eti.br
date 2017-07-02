@@ -2,6 +2,8 @@
  * Main application file
  */
 
+/*eslint angular/log: 0*/
+
 'use strict';
 
 import express from 'express';

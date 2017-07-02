@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 
-export function Modal($rootScope, $uibModal) {
+export  const Modal = ($rootScope, $uibModal) => {
   /**
    * Opens a modal
    * @param  {Object} scope      - an object to be merged with modal's scope
@@ -10,7 +10,7 @@ export function Modal($rootScope, $uibModal) {
    * @return {Object}            - the instance $uibModal.open() returns
    */
   const openModal = (scope = {}, modalClass = 'modal-default') => {
-    var modalScope = $rootScope.$new();
+    const modalScope = $rootScope.$new();
 
     angular.extend(modalScope, scope);
 
