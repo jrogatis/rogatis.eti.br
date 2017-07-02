@@ -1,0 +1,41 @@
+{
+  "name": "rogatis.eti.br.dist",
+  "scripts": {},
+  "env": {
+    "ANALYSE_PACK": {
+      "required": true
+    },
+    "aws_access_key_id": {
+      "required": true
+    },
+    "aws_secret_access_key": {
+      "required": true
+    },
+    "GMAIL_SECRET": {
+      "required": true
+    },
+    "GMAIL_USER": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "NODE_MODULES_CACHE": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

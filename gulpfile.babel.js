@@ -381,6 +381,7 @@ gulp.task('copy:extras', () => gulp.src([
   `${clientPath}/.htaccess`,
   `${clientPath}/android-icon-192x192.png`,
   `${clientPath}/manifest.json`,
+  `${clientPath}/app.json`,
 ], {
   dot: true
 })
