@@ -13,16 +13,15 @@ OfflinePluginRuntime.install();
 export class AboutController {
 
   /*@ngInject*/
-  constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $window, $log, $document) {
+  constructor($http, $scope, $animate, ngMeta, $location, $window, $log, $document) {
     this.$http = $http;
     this.$scope = $scope;
-    this.socket = socket;
     this.$log = $log;
     this.ngMeta = ngMeta;
-    this.$mdDialog = $mdDialog;
     this.$location = $location;
     this.$window = $window;
     this.$document = $document;
+    this.teste = 30;
     this.listPics = [
       { imgUrl: '../../assets/images/picsAbout9100.jpg' },
       { imgUrl: '../../assets/images/picsAbout98f8.jpg' },
@@ -40,7 +39,7 @@ export class AboutController {
         growOnHover: true,
         type: 'discreteBarChart',
         height: 550,
-        width: angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth,
+        width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
         showYAxis: true,
         color: d => d.color,
         margin: {
@@ -120,8 +119,8 @@ export class AboutController {
   }
 
   leftMargin() {
-    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
-    //console.log(innerSize);
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+
     if (innerSize < 599) {
       return 45;
     } else {
@@ -130,7 +129,7 @@ export class AboutController {
   }
 
   resized() {
-    const innerSize = angular.element(this.$document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();
     this.api.update();
