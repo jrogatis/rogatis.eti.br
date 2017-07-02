@@ -3,25 +3,9 @@
 import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import {handleEntityNotFound, handleError } from '../utils/utils';
 
-const validationError = (res, statusCode) => {
-  statusCode = statusCode || 422;
-  return err => res.status(statusCode).json(err);
-};
-
-const handleError = (res, statusCode) => {
-  statusCode = statusCode || 500;
-  return err => res.status(statusCode).send(err);
-};
-
-
-const handleEntityNotFound = res => entity => {
-  if (!entity) {
-    res.status(404).end();
-    return null;
-  }
-  return entity;
-};
+const validationError = (res, statusCode = 422) => err => res.status(statusCode).json(err);
 
 /**
  * Get list of users
