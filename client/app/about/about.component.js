@@ -39,7 +39,7 @@ export class AboutController {
         growOnHover: true,
         type: 'discreteBarChart',
         height: 550,
-        width: angular.element(document.getElementById('aboutContainer'))[0].clientWidth,
+        width: angular.element(document.getElementById('aboutContainer')).clientWidth,
         showYAxis: true,
         color: d => d.color,
         margin: {
@@ -119,7 +119,7 @@ export class AboutController {
   }
 
   leftMargin() {
-    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
 
     if (innerSize < 599) {
       return 45;
@@ -129,7 +129,7 @@ export class AboutController {
   }
 
   resized() {
-    const innerSize = angular.element(document.getElementById('aboutContainer'))[0].clientWidth;
+    const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();
     this.api.update();
