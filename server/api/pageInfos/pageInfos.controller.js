@@ -14,7 +14,7 @@
 import PageInfos from './pageInfos.model';
 
 import {
-  respondWithResult, upsertEntity, destroyEntity,
+  respondWithResult, upsertEntity, destroyEntity, createEntity,
   handleEntityNotFound, handleError, patchEntity, showEntity,
 } from '../utils/utils';
 
@@ -34,9 +34,7 @@ export const showByUrl = (req, res) => PageInfos.findOne({pageUrl: req.params.id
 export const show = (req, res) => showEntity(req, res, PageInfos);
 
 // Creates a new pagesInfo in the DB
-export const create = (req, res) => PageInfos.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+export const create = (req, res) => createEntity(req, res, PageInfos);
 
 // Upserts the given pageInfos in the DB at the specified ID
 export const upsert = (req, res) => upsertEntity(req, res, PageInfos);

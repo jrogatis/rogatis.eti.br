@@ -26,7 +26,7 @@ mailer.extend(app, {
 app.set('views', `${__dirname}/`);//path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-function handleSendEmail(res) {
+const handleSendEmail = (res) => {
   console.log('path', __dirname);
   app.mailer.send({
     template: 'email',
@@ -45,10 +45,10 @@ function handleSendEmail(res) {
       }
       res.send('Email Sent');
     });
-}
+};
 
 // Creates a new ContactForm in the DB
-export function create(req, res) {
+export const create = (req, res) => {
   return ContactForm.create(req.body)
     .then(handleSendEmail(res));
-}
+};
