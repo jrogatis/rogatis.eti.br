@@ -13,7 +13,10 @@
 
 import PageInfos from './pageInfos.model';
 
-import { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError } from '../utils/utils';
+import {
+  respondWithResult, removeEntity,
+  handleEntityNotFound, handleError, patchEntity, showEntity,
+} from '../utils/utils';
 
 // Gets a list of pagesInfos
 export function index(req, res) {
@@ -32,12 +35,7 @@ export function showByUrl(req, res) {
 
 
 // Gets a single pagesInfo from the DB
-export function show(req, res) {
-  return PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const show = (req, res) => showEntity(req, res, PageInfos);
 
 // Creates a new pagesInfo in the DB
 export function create(req, res) {
@@ -59,21 +57,10 @@ export function upsert(req, res) {
 }
 
 // Updates an existing pageInfos in the DB
-export function patch(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const patch = (req, res) => patchEntity(req, res, PageInfos);
 
 // Deletes a pageInfos from the DB
-export function destroy(req, res) {
-  return PageInfos.findById(req.params.id).exec()
+export const destroy = (req, res) => PageInfos.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
-}

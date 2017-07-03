@@ -54,4 +54,14 @@ const patchEntity = (req, res, Entity) => {
     .catch(handleError(res));
 };
 
-export { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError, patchEntity };
+const showEntity = (req, res, Entity) => Entity.findById(req.params.id).exec()
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
+
+
+export {
+  respondWithResult, patchUpdates, removeEntity,
+  handleEntityNotFound, handleError, patchEntity,
+  showEntity
+};

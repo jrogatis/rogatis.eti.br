@@ -10,7 +10,7 @@
 
 'use strict';
 import Posts from './posts.model';
-import { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError, patchEntity } from '../utils/utils';
+import { respondWithResult, removeEntity, handleEntityNotFound, handleError, patchEntity } from '../utils/utils';
 
 // Gets a list of Posts
 export const index = (req, res) => Posts
