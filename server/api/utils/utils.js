@@ -73,8 +73,14 @@ const upsertEntity = (req, res, Entity) => {
     .catch(handleError(res));
 };
 
+const createEntity = (req, res, Entity) =>
+  Entity.create(req.body)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+
+
 export {
   respondWithResult, patchUpdates, removeEntity,
   handleEntityNotFound, handleError, patchEntity,
-  showEntity, destroyEntity, upsertEntity
+  showEntity, destroyEntity, upsertEntity, createEntity
 };

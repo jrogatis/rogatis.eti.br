@@ -10,7 +10,11 @@
 
 'use strict';
 import Posts from './posts.model';
-import { respondWithResult, handleEntityNotFound, handleError, patchEntity, destroyEntity } from '../utils/utils';
+import {
+  createEntity,
+  respondWithResult, handleEntityNotFound,
+  handleError, patchEntity, destroyEntity
+} from '../utils/utils';
 
 // Gets a list of Posts
 export const index = (req, res) => Posts
@@ -33,14 +37,7 @@ export const show = (req, res) => Posts
   });
 
 // Creates a new Posts in the DB
-export const create = (req, res) => Posts
-  .create(req.body)
-  .then(respondWithResult(res, 201))
-  .catch(err => {
-    console.log(err);
-    handleError(res);
-  }
-);
+export const create = (req, res) => createEntity(req, res, Posts);
 
 // Upserts the given Posts in the DB at the specified ID
 export const upsert = (req, res) => {

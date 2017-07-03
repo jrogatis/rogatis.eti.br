@@ -54,9 +54,7 @@ export const show = (req, res, next) => {
   const userId = req.params.id;
   return User.findById(userId).exec()
     .then(user => {
-      if (!user) {
-        return res.status(404).end();
-      }
+      if (!user) return res.status(404).end();
       res.json(user.profile);
     })
     .catch(err => next(err));

@@ -11,7 +11,7 @@
 'use strict';
 import Project from './projects.model';
 import {
-  respondWithResult, upsertEntity,
+  respondWithResult, upsertEntity, createEntity,
   destroyEntity, handleEntityNotFound, handleError, patchEntity,
 } from '../utils/utils';
 
@@ -36,11 +36,7 @@ export const show = (req, res) => Project
   });
 
 // Creates a new Project in the DB
-export const create = (req, res) =>
-  Project.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
-
+export const create = (req, res) => createEntity(req, res, Project);
 
 // Upserts the given Project in the DB at the specified ID
 export const upsert = (req, res) => upsertEntity(req, res, Project);
