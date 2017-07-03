@@ -12,7 +12,7 @@
 import Project from './projects.model';
 import {
   respondWithResult, upsertEntity, createEntity,
-  destroyEntity, handleEntityNotFound, handleError, patchEntity,
+  destroyEntity, showEntitySlug, handleError, patchEntity,
 } from '../utils/utils';
 
 // Gets a list of Project
@@ -24,17 +24,7 @@ export const index = (req, res) =>
     .catch(handleError(res));
 
 // Gets a single Project from the DB from id or from slug...
-export const show = (req, res) => Project
-  .findById(req.params.id).exec()
-  .then(handleEntityNotFound(res))
-  .then(respondWithResult(res))
-  .catch(() => {
-    Project.findOne({slug: req.params.id}).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-  });
-
+export const show = (req, res) => showEntitySlug(req, res, Project);
 // Creates a new Project in the DB
 export const create = (req, res) => createEntity(req, res, Project);
 

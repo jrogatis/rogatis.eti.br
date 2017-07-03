@@ -78,9 +78,19 @@ const createEntity = (req, res, Entity) =>
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 
+const showEntitySlug = (req, res, Entity) => Entity
+  .findById(req.params.id).exec()
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(() => {
+    Entity.findOne({ slug: req.params.id }).exec()
+      .then(handleEntityNotFound(res))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+  });
 
 export {
   respondWithResult, patchUpdates, removeEntity,
   handleEntityNotFound, handleError, patchEntity,
-  showEntity, destroyEntity, upsertEntity, createEntity
+  showEntity, destroyEntity, upsertEntity, createEntity, showEntitySlug,
 };

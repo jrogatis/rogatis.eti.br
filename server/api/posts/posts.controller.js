@@ -12,8 +12,8 @@
 import Posts from './posts.model';
 import {
   createEntity,
-  respondWithResult, handleEntityNotFound,
-  handleError, patchEntity, destroyEntity
+  respondWithResult, showEntitySlug,
+  handleError, patchEntity, destroyEntity, upsertEntity
 } from '../utils/utils';
 
 // Gets a list of Posts
@@ -25,32 +25,12 @@ export const index = (req, res) => Posts
     .catch(handleError(res));
 
 // Gets a single Posts from the DB from id or from slug...
-export const show = (req, res) => Posts
-  .findById(req.params.id).exec()
-  .then(handleEntityNotFound(res))
-  .then(respondWithResult(res))
-  .catch(() => {
-    Posts.findOne({slug: req.params.id}).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-  });
-
+export const show = (req, res) => showEntitySlug(req, res, Posts);
 // Creates a new Posts in the DB
 export const create = (req, res) => createEntity(req, res, Posts);
 
 // Upserts the given Posts in the DB at the specified ID
-export const upsert = (req, res) => {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return Posts.findOneAndUpdate(
-    { _id: req.params.id }, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true }
-  )
-    .exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-};
+export const upsert = (res, req) => upsertEntity(req, res, Posts);
 
 // Updates an existing Posts in the DB
 export const patch = (req, res) => patchEntity(req, res, Posts);
