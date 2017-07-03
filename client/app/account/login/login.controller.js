@@ -9,7 +9,6 @@ export default class LoginController {
   }
 
   login(loginForm) {
-    console.log('this.user.email', this.user.email, this.user.password);
     this.submitted = true;
     if (loginForm.$valid) {
       this.Auth.login({ email: this.user.email, password: this.user.password })

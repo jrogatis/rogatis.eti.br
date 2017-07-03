@@ -11,117 +11,36 @@
 
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
 import PageInfos from './pageInfos.model';
 
-function respondWithResult(res, statusCode) {
-  statusCode = statusCode || 200;
-  return function(entity) {
-    if (entity) {
-      return res.status(statusCode).json(entity);
-    }
-    return null;
-  };
-}
-
-function patchUpdates(patches) {
-  return function(entity) {
-    try {
-      jsonpatch.apply(entity, patches, /*validate*/ true);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-    return entity.save();
-  };
-}
-
-function removeEntity(res) {
-  return function(entity) {
-    if (entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
-    }
-  };
-}
-
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if (!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
-
-function handleError(res, statusCode) {
-  statusCode = statusCode || 500;
-  return function(err) {
-    res.status(statusCode).send(err);
-  };
-}
+import {
+  respondWithResult, upsertEntity, destroyEntity, createEntity,
+  handleEntityNotFound, handleError, patchEntity, showEntity,
+} from '../utils/utils';
 
 // Gets a list of pagesInfos
-export function index(req, res) {
-  return PageInfos.find().exec()
+export const index = (req, res) => PageInfos.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
 
 // Gets a single pagesInfo from the DB
-export function showByUrl(req, res) {
-  return PageInfos.findOne({pageUrl: req.params.id}).exec()
+export const showByUrl = (req, res) => PageInfos.findOne({pageUrl: req.params.id}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
 
 
 // Gets a single pagesInfo from the DB
-export function show(req, res) {
-  return PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const show = (req, res) => showEntity(req, res, PageInfos);
 
 // Creates a new pagesInfo in the DB
-export function create(req, res) {
-  console.log(req.body);
-  return PageInfos.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
-}
+export const create = (req, res) => createEntity(req, res, PageInfos);
 
 // Upserts the given pageInfos in the DB at the specified ID
-export function upsert(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return PageInfos.findOneAndUpdate({_id: req.params.id}, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
-
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const upsert = (req, res) => upsertEntity(req, res, PageInfos);
 
 // Updates an existing pageInfos in the DB
-export function patch(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const patch = (req, res) => patchEntity(req, res, PageInfos);
 
 // Deletes a pageInfos from the DB
-export function destroy(req, res) {
-  return PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
-}
+export const destroy = (req, res) => destroyEntity(req, res, PageInfos);
