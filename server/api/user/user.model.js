@@ -171,9 +171,7 @@ UserSchema.methods = {
       throw new Error('Missing Callback');
     }
 
-    if (!byteSize) {
-      byteSize = defaultByteSize;
-    }
+    if (!byteSize) byteSize = defaultByteSize;
 
     return crypto.randomBytes(byteSize, (err, salt) => {
       if (err) {
