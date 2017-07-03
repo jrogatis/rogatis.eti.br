@@ -59,9 +59,13 @@ const showEntity = (req, res, Entity) => Entity.findById(req.params.id).exec()
   .then(respondWithResult(res))
   .catch(handleError(res));
 
+const destroyEntity = (req, res, Entity) => Entity.findById(req.params.id).exec()
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 
 export {
   respondWithResult, patchUpdates, removeEntity,
   handleEntityNotFound, handleError, patchEntity,
-  showEntity
+  showEntity, destroyEntity
 };

@@ -12,7 +12,7 @@
 import Project from './projects.model';
 import {
   respondWithResult,
-  removeEntity, handleEntityNotFound, handleError, patchEntity,
+  destroyEntity, handleEntityNotFound, handleError, patchEntity,
 } from '../utils/utils';
 
 // Gets a list of Project
@@ -60,9 +60,5 @@ export const upsert = (req, res) => {
 export const patch = (req, res) => patchEntity(req, res, Project);
 
 // Deletes a Project from the DB
-export const destroy = (req, res) =>
-  Project.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+export const destroy = (req, res) => destroyEntity(req, res, Project);
 

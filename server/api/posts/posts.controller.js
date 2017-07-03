@@ -10,7 +10,7 @@
 
 'use strict';
 import Posts from './posts.model';
-import { respondWithResult, removeEntity, handleEntityNotFound, handleError, patchEntity } from '../utils/utils';
+import { respondWithResult, handleEntityNotFound, handleError, patchEntity, destroyEntity } from '../utils/utils';
 
 // Gets a list of Posts
 export const index = (req, res) => Posts
@@ -59,8 +59,5 @@ export const upsert = (req, res) => {
 export const patch = (req, res) => patchEntity(req, res, Posts);
 
 // Deletes a Posts from the DB
-export const destroy = (req, res) => Posts.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+export const destroy = (req, res) => destroyEntity(req, res, Posts);
 
