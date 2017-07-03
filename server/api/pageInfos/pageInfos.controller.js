@@ -14,7 +14,7 @@
 import PageInfos from './pageInfos.model';
 
 import {
-  respondWithResult, removeEntity,
+  respondWithResult, removeEntity, upsertEntity,
   handleEntityNotFound, handleError, patchEntity, showEntity,
 } from '../utils/utils';
 
@@ -46,15 +46,7 @@ export function create(req, res) {
 }
 
 // Upserts the given pageInfos in the DB at the specified ID
-export function upsert(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return PageInfos.findOneAndUpdate({_id: req.params.id}, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
-
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+export const upsert = (req, res) => upsertEntity(req, res, PageInfos);
 
 // Updates an existing pageInfos in the DB
 export const patch = (req, res) => patchEntity(req, res, PageInfos);

@@ -11,7 +11,7 @@
 'use strict';
 import Project from './projects.model';
 import {
-  respondWithResult,
+  respondWithResult, upsertEntity,
   destroyEntity, handleEntityNotFound, handleError, patchEntity,
 } from '../utils/utils';
 
@@ -43,18 +43,7 @@ export const create = (req, res) =>
 
 
 // Upserts the given Project in the DB at the specified ID
-export const upsert = (req, res) => {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return Project.findOneAndUpdate(
-    { _id: req.params.id }, req.body,
-    { upsert: true, setDefaultsOnInsert: true, runValidators: true }
-  )
-    .exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-};
+export const upsert = (req, res) => upsertEntity(req, res, Project);
 
 // Updates an existing Project in the DB
 export const patch = (req, res) => patchEntity(req, res, Project);
