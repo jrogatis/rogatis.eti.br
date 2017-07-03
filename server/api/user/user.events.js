@@ -18,7 +18,7 @@ const events = {
 };
 
 // Register the event emitter to the model events
-for(let e in events) {
+for (let e in events) {
   let event = events[e];
   User.schema.post(e, emitEvent(event));
 }

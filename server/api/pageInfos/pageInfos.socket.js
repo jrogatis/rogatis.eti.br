@@ -11,7 +11,7 @@ const events = ['save', 'remove'];
 
 export const register = socket => {
   // Bind model events to socket events
-  for(let i = 0, eventsLength = events.length; i < eventsLength; i++) {
+  for (let i = 0, eventsLength = events.length; i < eventsLength; i++) {
     const event = events[i];
     const listener = createListener(`pageInfos:${event}`, socket);
 

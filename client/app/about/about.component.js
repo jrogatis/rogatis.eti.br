@@ -10,6 +10,8 @@ import d3 from 'd3';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 OfflinePluginRuntime.install();
 
+const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
+
 export class AboutController {
 
   /*@ngInject*/
@@ -39,7 +41,7 @@ export class AboutController {
         growOnHover: true,
         type: 'discreteBarChart',
         height: 550,
-        width: angular.element(document.getElementById('aboutContainer')).clientWidth,
+        width: innerSize,
         showYAxis: true,
         color: d => d.color,
         margin: {
@@ -119,7 +121,7 @@ export class AboutController {
   }
 
   leftMargin() {
-    const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
+  
 
     if (innerSize < 599) {
       return 45;
@@ -129,7 +131,6 @@ export class AboutController {
   }
 
   resized() {
-    const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
     this.graphOptions.chart.width = innerSize;
     this.graphOptions.chart.margin.left = this.leftMargin();
     this.api.update();
