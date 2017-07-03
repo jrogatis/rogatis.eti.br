@@ -1,9 +1,7 @@
 import jsonpatch from 'fast-json-patch';
 
 const respondWithResult = (res, statusCode = 200) => entity => {
-  if (entity) {
-    return res.status(statusCode).json(entity);
-  }
+  if (entity) return res.status(statusCode).json(entity);
   return null;
 };
 

@@ -34,12 +34,9 @@ export const showByUrl = (req, res) => PageInfos.findOne({pageUrl: req.params.id
 export const show = (req, res) => showEntity(req, res, PageInfos);
 
 // Creates a new pagesInfo in the DB
-export function create(req, res) {
-  console.log(req.body);
-  return PageInfos.create(req.body)
+export const create = (req, res) => PageInfos.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
-}
 
 // Upserts the given pageInfos in the DB at the specified ID
 export const upsert = (req, res) => upsertEntity(req, res, PageInfos);
