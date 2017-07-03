@@ -14,24 +14,20 @@
 import PageInfos from './pageInfos.model';
 
 import {
-  respondWithResult, removeEntity, upsertEntity,
+  respondWithResult, upsertEntity, destroyEntity,
   handleEntityNotFound, handleError, patchEntity, showEntity,
 } from '../utils/utils';
 
 // Gets a list of pagesInfos
-export function index(req, res) {
-  return PageInfos.find().exec()
+export const index = (req, res) => PageInfos.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
 
 // Gets a single pagesInfo from the DB
-export function showByUrl(req, res) {
-  return PageInfos.findOne({pageUrl: req.params.id}).exec()
+export const showByUrl = (req, res) => PageInfos.findOne({pageUrl: req.params.id}).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
-}
 
 
 // Gets a single pagesInfo from the DB
@@ -52,7 +48,4 @@ export const upsert = (req, res) => upsertEntity(req, res, PageInfos);
 export const patch = (req, res) => patchEntity(req, res, PageInfos);
 
 // Deletes a pageInfos from the DB
-export const destroy = (req, res) => PageInfos.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+export const destroy = (req, res) => destroyEntity(req, res, PageInfos);
