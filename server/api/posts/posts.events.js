@@ -12,10 +12,7 @@ const PostsEvents = new EventEmitter();
 PostsEvents.setMaxListeners(0);
 
 // Model events
-const events = {
-  save: 'save',
-  remove: 'remove'
-};
+const events = { save: 'save', remove: 'remove' };
 
 // Register the event emitter to the model events
 for (let e in events) {

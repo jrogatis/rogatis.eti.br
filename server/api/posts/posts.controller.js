@@ -10,7 +10,7 @@
 
 'use strict';
 import Posts from './posts.model';
-import { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError } from '../utils/utils';
+import { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError, patchEntity } from '../utils/utils';
 
 // Gets a list of Posts
 export const index = (req, res) => Posts
@@ -56,21 +56,11 @@ export const upsert = (req, res) => {
 };
 
 // Updates an existing Posts in the DB
-export const patch = (req, res) => {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return Posts.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-};
+export const patch = (req, res) => patchEntity(req, res, Posts);
 
 // Deletes a Posts from the DB
-export const destroy = (req, res) => {
-  return Posts.findById(req.params.id).exec()
+export const destroy = (req, res) => Posts.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
-};
+

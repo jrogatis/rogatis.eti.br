@@ -42,4 +42,16 @@ const handleError = (res, statusCode = 500) => err => {
 };
 
 
-export { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError };
+// Updates an existing Project in the DB
+const patchEntity = (req, res, Entity) => {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  return Entity.findById(req.params.id).exec()
+    .then(handleEntityNotFound(res))
+    .then(patchUpdates(req.body))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+};
+
+export { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError, patchEntity };

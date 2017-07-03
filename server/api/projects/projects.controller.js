@@ -10,7 +10,10 @@
 
 'use strict';
 import Project from './projects.model';
-import { respondWithResult, patchUpdates, removeEntity, handleEntityNotFound, handleError } from '../utils/utils';
+import {
+  respondWithResult,
+  removeEntity, handleEntityNotFound, handleError, patchEntity,
+} from '../utils/utils';
 
 // Gets a list of Project
 export const index = (req, res) =>
@@ -54,16 +57,7 @@ export const upsert = (req, res) => {
 };
 
 // Updates an existing Project in the DB
-export const patch = (req, res) => {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return Project.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-};
+export const patch = (req, res) => patchEntity(req, res, Project);
 
 // Deletes a Project from the DB
 export const destroy = (req, res) =>
