@@ -13,7 +13,6 @@ OfflinePluginRuntime.install();
 const innerSize = angular.element(document.getElementById('aboutContainer')).clientWidth;
 
 export class AboutController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, ngMeta, $location, $window, $log, $document) {
     this.$http = $http;
@@ -121,13 +120,7 @@ export class AboutController {
   }
 
   leftMargin() {
-  
-
-    if (innerSize < 599) {
-      return 45;
-    } else {
-      return 63;
-    }
+    return innerSize < 599 ? 45 : 63;
   }
 
   resized() {

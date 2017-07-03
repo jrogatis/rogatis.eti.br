@@ -26,29 +26,27 @@ mailer.extend(app, {
 app.set('views', `${__dirname}/`);//path.resolve( __dirname, '/'));
 app.set('view engine', 'pug');
 
-const handleSendEmail = (res) => {
+const handleSendEmail = res => {
   console.log('path', __dirname);
   app.mailer.send({
     template: 'email',
     bcc: 'jrogatis@metaconexao.com.br'
   },
-    {
-      to: res.email,
-      subject: 'Your contact with Jean', // REQUIRED.
-      message: res.message
-    }, err => {
-      if (err) {
-        // handle error
-        console.log(err);
-        res.send('There was an error sending the email');
-        return;
-      }
-      res.send('Email Sent');
-    });
+  {
+    to: res.email,
+    subject: 'Your contact with Jean', // REQUIRED.
+    message: res.message
+  }, err => {
+    if (err) {
+      // handle error
+      console.log(err);
+      res.send('There was an error sending the email');
+      return;
+    }
+    res.send('Email Sent');
+  });
 };
 
 // Creates a new ContactForm in the DB
-export const create = (req, res) => {
-  return ContactForm.create(req.body)
-    .then(handleSendEmail(res));
-};
+export const create = (req, res) => ContactForm.create(req.body)
+  .then(handleSendEmail(res));

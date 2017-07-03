@@ -7,7 +7,6 @@ import ngAria from 'angular-aria';
 import angularGrid from 'angulargrid';
 
 export class PortfolioController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location) {
     this.$http = $http;
@@ -31,7 +30,8 @@ export class PortfolioController {
         this.socket.syncUpdates('projects', this.listProjects);
       });
   }
-  }
+}
+
 export default angular.module('rogatisEtiBrApp.portfolio', [ngRoute, ngMdIcons, ngMessages, ngAria, angularGrid, 'ngMeta'])
   .config(routing)
   .component('portfolio', {

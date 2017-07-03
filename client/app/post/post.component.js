@@ -7,7 +7,6 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 
 export class PostController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket, $routeParams, $location, ngMeta) {
     this.$http = $http;

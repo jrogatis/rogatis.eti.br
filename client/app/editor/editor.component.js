@@ -3,14 +3,12 @@ const ngRoute = require('angular-route');
 import routing from './editor.routes';
 import textAngular from 'textangular';
 import jsonpatch from 'fast-json-patch';
-//import _ from 'lodash';
 import ui from 'angular-ui-tinymce';
 import slugifier from 'wb-angular-slugify';
 
 const sanit = require('textangular/dist/textAngular-sanitize.min');
 
 export class EditorController {
-
   /*@ngInject*/
   constructor($http, $scope, socket, $mdDialog, $location, Slug, $log, $document) {
     this.$http = $http;
@@ -31,7 +29,7 @@ export class EditorController {
   $onInit() {
     this.loadPosts();
     this.$scope.tinymceOptions = {
-      onChange: e => {
+      onChange: () => {
         // put logic here for keypress and cut/paste changes
       },
       selector: 'textarea',
@@ -151,11 +149,11 @@ export class EditorController {
       .then(
         // const postSlug = `/post/${this.post.slug}`
         this.$http.get(`/api/pageInfos/pageUrl/${encodeURIComponent(`/post/${this.post.slug}`)}`)
-        .then(res => {
-          this.pageInfo = res.data;
-          this.observerPageInfo = jsonpatch.observe(this.pageInfo);
-        })
-        .catch(err => this.$log.error('error on handlePageInfoAdd no get do pageurl', err))
+          .then(res => {
+            this.pageInfo = res.data;
+            this.observerPageInfo = jsonpatch.observe(this.pageInfo);
+          })
+          .catch(err => this.$log.error('error on handlePageInfoAdd no get do pageurl', err))
       )
       .catch(err => this.$log.error('error on handlePageInfoAdd', err));
   }
@@ -211,9 +209,9 @@ export class EditorController {
           clickOutsideToClose: false,
           fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
-        .then(answer => {
-          this.post.postImage = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
-        });
+          .then(answer => {
+            this.post.postImage = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
+          });
       });
   }
 

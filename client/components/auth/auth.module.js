@@ -22,9 +22,9 @@ export default angular.module('camperFullStackProjectsApp.auth', [
   ngCookies,
   ngRoute
 ])
-.factory('authInterceptor', authInterceptor)
-.run(routerDecorator)
-.factory('Auth', AuthService)
-.factory('User', UserResource)
-.config(['$httpProvider', addInterceptor])
-.name;
+  .factory('authInterceptor', authInterceptor)
+  .run(routerDecorator)
+  .factory('Auth', AuthService)
+  .factory('User', UserResource)
+  .config(['$httpProvider', addInterceptor])
+  .name;

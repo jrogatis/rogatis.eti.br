@@ -6,7 +6,6 @@ import ngMessages from 'angular-messages';
 import ngAria from 'angular-aria';
 
 export class ContactController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket, $document) {
     this.$http = $http;

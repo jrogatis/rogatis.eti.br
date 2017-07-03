@@ -7,7 +7,6 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 
 export class BlogController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket, ngMeta, $location, $sce) {
     this.$http = $http;
@@ -34,10 +33,8 @@ export class BlogController {
   }
 
   deliberatelyTrustDangerousSnippet(postHtml) {
-    //console.log(postHtml);
     return this.$sce.trustAsHtml(postHtml);
   }
-
 }
 
 export default angular.module('rogatisEtiBrApp.blog', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta'])

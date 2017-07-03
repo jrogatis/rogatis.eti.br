@@ -159,27 +159,25 @@ UserSchema.methods = {
    * @return {String}
    * @api public
    */
-  makeSalt(byteSize, callback) {
+  makeSalt(byteSize, cb) {
     const defaultByteSize = 16;
-
-    if (typeof arguments[0] === 'function') {
-      callback = arguments[0];
+    const cba = cb;
+    if (typeof byteSize === 'function') {
+      cb = byteSize;
       byteSize = defaultByteSize;
-    } else if (typeof arguments[1] === 'function') {
-      callback = arguments[1];
+    } else if (typeof cb === 'function') {
+      cb = cba;
     } else {
       throw new Error('Missing Callback');
     }
 
-    if (!byteSize) {
-      byteSize = defaultByteSize;
-    }
+    if (!byteSize) byteSize = defaultByteSize;
 
     return crypto.randomBytes(byteSize, (err, salt) => {
       if (err) {
-        return callback(err);
+        return cb(err);
       } else {
-        return callback(null, salt.toString('base64'));
+        return cb(null, salt.toString('base64'));
       }
     });
   },

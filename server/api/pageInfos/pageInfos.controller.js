@@ -20,15 +20,14 @@ import {
 
 // Gets a list of pagesInfos
 export const index = (req, res) => PageInfos.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 
 // Gets a single pagesInfo from the DB
 export const showByUrl = (req, res) => PageInfos.findOne({pageUrl: req.params.id}).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 
 // Gets a single pagesInfo from the DB
 export const show = (req, res) => showEntity(req, res, PageInfos);

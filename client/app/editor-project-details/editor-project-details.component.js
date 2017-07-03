@@ -7,7 +7,6 @@ import ngMessages from 'angular-messages';
 import textAngular from 'textangular';
 
 export class EditorProjectDetailsController {
-
   /*@ngInject*/
   constructor($http, $scope, $mdDialog, Slug, $log, $document) {
     this.$http = $http;
@@ -148,9 +147,9 @@ export class EditorProjectDetailsController {
           clickOutsideToClose: false,
           fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
-      .then(answer => {
-        this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
-      });
+          .then(answer => {
+            this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
+          });
       });
   }
 

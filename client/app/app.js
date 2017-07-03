@@ -39,18 +39,18 @@ angular.module('rogatisEtiBrApp', [ngCookies, ngResource, ngSanitize, 'btford.so
   uiBootstrap, _Auth, navbar, socialShare, footer, main, contact, portfolio, blog, post, editor, gallery, editorProject,
   about, editorProjectDetails, projectDetails, constants, socket, util, 'ngMeta', projectCard
 ])
-.config(routeConfig, logProvider)
-.run(($rootScope, $location, Auth) => {
-  'ngInject';
-  // Redirect to login if route requires auth and you're not logged in
-  $rootScope.$on('$stateChangeStart', (event, next) => {
-    Auth.isLoggedIn(loggedIn => {
-      if (next.authenticate && !loggedIn) {
-        $location.path('/login');
-      }
+  .config(routeConfig, logProvider)
+  .run(($rootScope, $location, Auth) => {
+    'ngInject';
+    // Redirect to login if route requires auth and you're not logged in
+    $rootScope.$on('$stateChangeStart', (event, next) => {
+      Auth.isLoggedIn(loggedIn => {
+        if (next.authenticate && !loggedIn) {
+          $location.path('/login');
+        }
+      });
     });
   });
-});
 
 angular.element(document)
   .ready(() => {
