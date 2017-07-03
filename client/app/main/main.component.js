@@ -4,7 +4,6 @@ import routing from './main.routes';
 import angularGrid from 'angulargrid';
 
 export class MainController {
-
   /*@ngInject*/
   constructor($http, $scope, socket, ngMeta, $location) {
     this.$http = $http;

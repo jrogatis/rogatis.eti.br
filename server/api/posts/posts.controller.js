@@ -18,11 +18,11 @@ import {
 
 // Gets a list of Posts
 export const index = (req, res) => Posts
-    .find()
-    .sort([['date', 'descending']])
-    .exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .find()
+  .sort([['date', 'descending']])
+  .exec()
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 
 // Gets a single Posts from the DB from id or from slug...
 export const show = (req, res) => showEntitySlug(req, res, Posts);

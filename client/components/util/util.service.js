@@ -10,12 +10,12 @@ export function UtilService($window) {
 
   const Util = {
 
-      /**
-       * Return a callback or noop function
-       *
-       * @param  {Function|*} cb - a 'potential' function
-       * @return {Function}
-       */
+    /**
+     * Return a callback or noop function
+     *
+     * @param  {Function|*} cb - a 'potential' function
+     * @return {Function}
+     */
     safeCb(cb) {
       return angular.isFunction(cb) ? cb : angular.noop;
     },

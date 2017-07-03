@@ -11,7 +11,6 @@ import ngImageDimensions from 'angular-image-dimensions';
 
 
 export class GalleryController {
-
   /*@ngInject*/
   constructor($http, $scope, $animate, $mdDialog, socket, Upload, angularGridInstance, $log) {
     this.$http = $http;
@@ -38,9 +37,9 @@ export class GalleryController {
 
   loadImages() {
     this.$http.get('/api/imageGallery')
-    .then(response => {
-      this.listImages = response.data;
-    });
+      .then(response => {
+        this.listImages = response.data;
+      });
   }
   onFileSelect(files) {
     const filename = files.name;
@@ -63,15 +62,15 @@ export class GalleryController {
           method: 'POST',
           file: files
         })
-        .progress(evt => {
-          this.determinateValue = parseInt(100.0 * evt.loaded / evt.total, 10);
-        })
-        .then(() => {
-          // file is uploaded successfully
-          this.determinateValue = 0;
-          this.loadImages();
-        })
-        .catch(err => this.$log.error('erroooo', err));
+          .progress(evt => {
+            this.determinateValue = parseInt(100.0 * evt.loaded / evt.total, 10);
+          })
+          .then(() => {
+            // file is uploaded successfully
+            this.determinateValue = 0;
+            this.loadImages();
+          })
+          .catch(err => this.$log.error('erroooo', err));
       })
       .catch((data, status) => {
         // called asynchronously if an error occurs

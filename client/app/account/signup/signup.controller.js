@@ -3,7 +3,6 @@
 import angular from 'angular';
 
 export default class SignupController {
-
   /*@ngInject*/
   constructor(Auth, $location) {
     this.Auth = Auth;

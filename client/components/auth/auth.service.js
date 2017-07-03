@@ -190,7 +190,6 @@ export const AuthService = ($location, $http, $cookies, $q, appConfig, Util, Use
      * @return {Bool}
      */
     isAdminSync() {
-     
       return Auth.hasRoleSync('admin');
     },
 

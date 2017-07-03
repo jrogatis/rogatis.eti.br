@@ -7,7 +7,6 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 
 export class ProjectDetails {
-
   /*@ngInject*/
   constructor(
     $http, $scope, $animate,

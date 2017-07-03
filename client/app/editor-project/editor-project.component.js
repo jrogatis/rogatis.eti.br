@@ -6,7 +6,6 @@ import ngMaterial from 'angular-material';
 import ngMessages from 'angular-messages';
 
 export class EditorProjectController {
-
   /*@ngInject*/
   constructor($http, $scope, $mdDialog, Slug, $log, $document) {
     this.$http = $http;
@@ -103,9 +102,9 @@ export class EditorProjectController {
           clickOutsideToClose: false,
           fullscreen: this.$scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
-      .then(answer => {
-        this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
-      });
+          .then(answer => {
+            this.project.imgUrl = `https://s3.amazonaws.com/rogatis/${this.imagesList[answer]}`;
+          });
       });
   }
 

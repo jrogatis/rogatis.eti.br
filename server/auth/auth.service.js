@@ -30,13 +30,21 @@ export const isAuthenticated = () => compose()
       .then(user => {
         if (!user) {
           return res.status(401)
-          .end();
+            .end();
         }
         req.user = user;
         next();
       })
       .catch(err => next(err));
   });
+
+const meetsRequirements = (req, res, next, roleRequired) => {
+  if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
+    return next();
+  } else {
+    return res.status(403).send('Forbidden');
+  }
+};
 
 /**
  * Checks if the user role meets the minimum requirements of the route
@@ -48,13 +56,7 @@ export const hasRole = roleRequired => {
 
   return compose()
     .use(isAuthenticated())
-    .use(function meetsRequirements(req, res, next) {
-      if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
-        return next();
-      } else {
-        return res.status(403).send('Forbidden');
-      }
-    });
+    .use((req, res, next) => meetsRequirements(req, res, next, roleRequired));
 };
 
 /**

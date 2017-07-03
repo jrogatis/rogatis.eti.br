@@ -34,17 +34,16 @@ export class SocialShareComponent {
           $http.post('https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyB_G-qM_alqi-KRwuQBLagjFXJkwVGERa4', {
             longUrl: $location.absUrl()
           })
-          .success(data => {
-            that.pageInfo.shortUrl = data.id;
-          })
-          .error(data => {
-            this.$log.error('error get short url', data);
-          });
+            .success(data => {
+              that.pageInfo.shortUrl = data.id;
+            })
+            .error(data => {
+              this.$log.error('error get short url', data);
+            });
         })
         .catch(err => this.$log.error('error on get page info at social share component', err));
     });
   }
-
 }
 
 export default angular.module('directives.socialShare', [angularAria, ngAnimate, angularMaterial, angularMessages, socialShare])

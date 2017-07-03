@@ -9,4 +9,4 @@ export default angular.module('directives.footer', [])
     template: require('./footer.pug'),
     controller: FooterComponent
   })
-   .name;
+  .name;

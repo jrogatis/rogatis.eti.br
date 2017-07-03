@@ -44,8 +44,8 @@ exports.signing = (req, res) => {
     {
       success_action_status: '201'
     },
-      ['starts-with', '$Content-Type', request.type],
-      ['content-length-range', 2048, 10485760], //min and max
+    ['starts-with', '$Content-Type', request.type],
+    ['content-length-range', 2048, 10485760], //min and max
     ]
   };
 
