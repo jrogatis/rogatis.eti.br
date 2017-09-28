@@ -164,7 +164,7 @@ module.exports = function makeWebpackConfig(options) {
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [{
-          loader: 'css?sourceMap!postcss'
+          loader: 'css-loader?sourceMap!postcss'
         }]
       })
     }, {
