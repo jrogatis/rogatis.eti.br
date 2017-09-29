@@ -19,7 +19,7 @@ function onConnect(socket) {
   // require('../api/thing/thing.socket').register(socket);
 }
 
-export default function(socketio) {
+export default socketio => {
   // socket.io (v1.x.x) is powered by debug.
   // In order to see all the debug output, set DEBUG (in server/config/local.env.js) to including the desired scope.
   //
@@ -40,7 +40,7 @@ export default function(socketio) {
 
     socket.connectedAt = new Date();
 
-    socket.log = function(...data) {
+    socket.log = (...data) => {
       console.log(`SocketIO ${socket.nsp.name} [${socket.address}]`, ...data);
     };
 
@@ -54,4 +54,4 @@ export default function(socketio) {
     onConnect(socket);
     socket.log('CONNECTED');
   });
-}
+};
