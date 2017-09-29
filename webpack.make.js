@@ -9,6 +9,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const path = require('path');
 const OfflinePlugin = require('offline-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const pkgJson = require('./package.json');
 
 
 module.exports = function makeWebpackConfig(options) {
@@ -242,12 +243,8 @@ module.exports = function makeWebpackConfig(options) {
       // Minify all javascript, switch loaders to minimizing mode
       new webpack.optimize.UglifyJsPlugin({
         mangle: false,
-        output: {
-          comments: false
-        },
-        compress: {
-          warnings: false
-        }
+        output: {comments: false },
+        compress: { warnings: false }
       }),
 
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
@@ -269,12 +266,14 @@ module.exports = function makeWebpackConfig(options) {
   }
 
   if (DEV) {
+    console.log('no env', pkgJson.version);
     config.plugins.push(
       // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
       // Define free global variables
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: '"development"'
+          NODE_ENV: '"development"',
+          VER: pkgJson.version,
         }
       }),
     );
