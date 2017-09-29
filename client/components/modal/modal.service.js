@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 
-export  const Modal = ($rootScope, $uibModal) => {
+export const Modal = ($rootScope, $uibModal) => {
   /**
    * Opens a modal
    * @param  {Object} scope      - an object to be merged with modal's scope
@@ -19,18 +19,16 @@ export  const Modal = ($rootScope, $uibModal) => {
       windowClass: modalClass,
       scope: modalScope
     });
-  }
+  };
 
   // Public API here
   return {
 
-    imageGalleryList(index = angular.noop): {
-      var args = Array.prototype.slice.call(arguments);
-      var name = args.shift();
+    imageGalleryList: (index = angular.noop, ...args) => {
+      // const args = Array.prototype.slice.call(...args);
+      const name = args.shift();
 
-      return function() {
-
-      }
+      return () => { };
     },
 
     /* Confirmation modals */
@@ -47,10 +45,10 @@ export  const Modal = ($rootScope, $uibModal) => {
          * @param  {String} name   - name or info to show on modal
          * @param  {All}           - any additional args are passed straight to del callback
          */
-        return function() {
-          var args = Array.prototype.slice.call(arguments);
-          var name = args.shift();
-          var deleteModal;
+        return () => {
+          const args = Array.prototype.slice.call(...args);
+          const name = args.shift();
+          let deleteModal;
 
           deleteModal = openModal({
             modal: {
@@ -73,14 +71,13 @@ export  const Modal = ($rootScope, $uibModal) => {
             }
           }, 'modal-danger');
 
-          deleteModal.result.then(function(event) {
-            del.apply(event, args);
-          });
+          deleteModal.result.then(event => del.apply(event, args)
+          );
         };
       }
     }
   };
-}
+};
 
 export default angular.module('rogatisEtiBrApp.Modal', [])
   .factory('Modal', Modal)
