@@ -89,7 +89,7 @@ const whenServerReady = cb => {
       serverReady = true;
       cb();
     }),
-    100);
+  100);
 };
 
 /********************
@@ -148,21 +148,21 @@ gulp.task('inject', cb => {
 });
 
 gulp.task('inject:scss', () => gulp.src(paths.client.mainStyle)
-    .pipe(plugins.inject(
-      gulp.src(_.union(paths.client.styles, [`!${paths.client.mainStyle}`]), {
-        read: false
-      })
+  .pipe(plugins.inject(
+    gulp.src(_.union(paths.client.styles, [`!${paths.client.mainStyle}`]), {
+      read: false
+    })
       .pipe(plugins.sort()), {
-        transform: filepath => {
-          let newPath = filepath
-            .replace(`/${clientPath}/app/`, '')
-            .replace(`/${clientPath}/components/`, '../components/')
-            .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
-            .replace('.scss', '');
-          return `@import '${newPath}';`;
-        }
-      }))
-    .pipe(gulp.dest(`${clientPath}/app`))
+      transform: filepath => {
+        let newPath = filepath
+          .replace(`/${clientPath}/app/`, '')
+          .replace(`/${clientPath}/components/`, '../components/')
+          .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
+          .replace('.scss', '');
+        return `@import '${newPath}';`;
+      }
+    }))
+  .pipe(gulp.dest(`${clientPath}/app`))
 );
 
 gulp.task('webpack:dev', () => {
@@ -190,31 +190,31 @@ gulp.task('webpack:dist', () => {
 });
 
 gulp.task('styles', () => gulp.src(paths.client.mainStyle)
-    .pipe(styles())
-    .pipe(gulp.dest('.tmp/app'))
+  .pipe(styles())
+  .pipe(gulp.dest('.tmp/app'))
 );
 
 gulp.task('transpile:server', () => gulp.src(_.union(paths.server.scripts, paths.server.json))
-    .pipe(transpileServer())
-    .pipe(gulp.dest(`${paths.dist}/${serverPath}`))
+  .pipe(transpileServer())
+  .pipe(gulp.dest(`${paths.dist}/${serverPath}`))
 );
 
 gulp.task('lint:scripts', cb => runSequence(['lint:scripts:client', 'lint:scripts:server'], cb));
 
 gulp.task('lint:scripts:client', () => gulp.src(_.union(
-      paths.client.scripts,
-      _.map(paths.client.test, blob => `!${blob}`)
-    ))
-    .pipe(lintClientScripts())
+  paths.client.scripts,
+  _.map(paths.client.test, blob => `!${blob}`)
+))
+  .pipe(lintClientScripts())
 );
 
-gulp.task('lint:scripts:server', () => gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => '!' + blob)))
-    .pipe(lintServerScripts())
+gulp.task('lint:scripts:server', () => gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => `!${  blob}`)))
+  .pipe(lintServerScripts())
 );
 
 gulp.task('jscs', () => gulp.src(_.union(paths.client.scripts, paths.server.scripts))
-    .pipe(plugins.jscs())
-    .pipe(plugins.jscs.reporter())
+  .pipe(plugins.jscs())
+  .pipe(plugins.jscs.reporter())
 );
 
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {
@@ -223,7 +223,7 @@ gulp.task('clean:tmp', () => del(['.tmp/**/*'], {
 
 gulp.task('start:client', cb => {
   whenServerReady(() => {
-    open('http://localhost:' + config.browserSyncPort);
+    open(`http://localhost:${  config.browserSyncPort}`);
     cb();
   });
 });
@@ -340,39 +340,39 @@ gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**
 }));
 
 gulp.task('build:images', () => gulp.src(paths.client.images)
-    .pipe(plugins.imagemin([
-      plugins.imagemin.optipng({
-        optimizationLevel: 5
-      }),
-      plugins.imagemin.jpegtran({
-        progressive: true
-      }),
-      plugins.imagemin.gifsicle({
-        interlaced: true
-      }),
-      plugins.imagemin.svgo({
-        plugins: [{
-          removeViewBox: false
-        }]
-      })
-    ], [{
-      verbose: true,
-    }
-    ]))
-    .pipe(plugins.rev())
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/images`))
-    .pipe(plugins.rev.manifest(`${paths.dist}/${paths.client.revManifest}`, {
-      base: `${paths.dist}/${clientPath}/assets`,
-      merge: true
-    }))
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
+  .pipe(plugins.imagemin([
+    plugins.imagemin.optipng({
+      optimizationLevel: 5
+    }),
+    plugins.imagemin.jpegtran({
+      progressive: true
+    }),
+    plugins.imagemin.gifsicle({
+      interlaced: true
+    }),
+    plugins.imagemin.svgo({
+      plugins: [{
+        removeViewBox: false
+      }]
+    })
+  ], [{
+    verbose: true,
+  }
+  ]))
+  .pipe(plugins.rev())
+  .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/images`))
+  .pipe(plugins.rev.manifest(`${paths.dist}/${paths.client.revManifest}`, {
+    base: `${paths.dist}/${clientPath}/assets`,
+    merge: true
+  }))
+  .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
 );
 
 gulp.task('revReplaceWebpack', () => gulp.src('dist/client/app.*.js')
-    .pipe(plugins.revReplace({
-      manifest: gulp.src(`${paths.dist}/${paths.client.revManifest}`)
-    }))
-    .pipe(gulp.dest('dist/client'))
+  .pipe(plugins.revReplace({
+    manifest: gulp.src(`${paths.dist}/${paths.client.revManifest}`)
+  }))
+  .pipe(gulp.dest('dist/client'))
 );
 
 gulp.task('copy:extras', () => gulp.src([
@@ -384,7 +384,7 @@ gulp.task('copy:extras', () => gulp.src([
 ], {
   dot: true
 })
-.pipe(gulp.dest(`${paths.dist}/${clientPath}`))
+  .pipe(gulp.dest(`${paths.dist}/${clientPath}`))
 );
 
 /**
@@ -407,17 +407,17 @@ function flatten() {
 }
 
 gulp.task('copy:fonts:dev', () => gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
-    .pipe(flatten())
-    .pipe(gulp.dest(`${clientPath}/assets/fonts`))
+  .pipe(flatten())
+  .pipe(gulp.dest(`${clientPath}/assets/fonts`))
 );
 
 gulp.task('copy:fonts:dist', () => gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
-    .pipe(flatten())
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`))
+  .pipe(flatten())
+  .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`))
 );
 
 gulp.task('copy:assets', () => gulp.src([paths.client.assets, `!${paths.client.images}`])
-    .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
+  .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`))
 );
 
 gulp.task('copy:server', () => gulp.src(['package.json'], { cwdbase: true })
