@@ -81,7 +81,10 @@ export class GalleryController {
 }
 
 
-export default angular.module('rogatisEtiBrApp.gallery', [ngRoute, ngMdIcons, ngMessages, ngAria, angularGrid, ngFileUpload, ngMaterial, 'ngImageDimensions'])
+export default angular.module('rogatisEtiBrApp.gallery',
+  [ngRoute,
+    ngMdIcons,
+    ngMessages, ngAria, angularGrid, ngFileUpload, ngMaterial, 'ngImageDimensions'])
   .config(routing)
   .component('gallery', {
     template: require('./gallery.pug'),

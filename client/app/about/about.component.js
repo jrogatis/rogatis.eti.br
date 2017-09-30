@@ -70,12 +70,7 @@ export class AboutController {
         yDomain: null,
         api: this.api,
         legend: {
-          margin: {
-            top: 5,
-            right: 200,
-            bottom: 5,
-            left: 0
-          }
+          margin: { top: 5, right: 200, bottom: 5, left: 0 }
         }
       },
       styles: {
@@ -135,7 +130,8 @@ export class AboutController {
   }
 }
 
-export default angular.module('rogatisEtiBrApp.about', [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta', nvd3])
+export default angular.module('rogatisEtiBrApp.about',
+  [ngRoute, ngMdIcons, ngMessages, ngAria, ngMaterial, 'ngMeta', nvd3])
   .config(routing)
   .component('about', {
     template: require('./about.pug'),
