@@ -13,6 +13,8 @@ div#footer(layout="row" flex="100" layout-align="center bottom").animated.fadeIn
         a(href='/blog') blog
         a(href='/contact') contact
       div(flex="33" hide-xs layout="row" layout-align="end end")
+        div
+          p  ver: {{$ctrl.verNumber}}
         div.fb-like(data-href="http://www.rogatis.eti.br" 
           data-layout="button_count" 
           data-action="like" 
