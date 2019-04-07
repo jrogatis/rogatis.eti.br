@@ -1,0 +1,47 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - shrink-ray > debug:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:hawk:20160119':
+    - goo.gl > request > hawk:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:hoek:20180212':
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > boom > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > sntp > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > hawk > cryptiles > boom > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > boom > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > sntp > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+    - shrink-ray > node-zopfli > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:http-signature:20150122':
+    - goo.gl > request > http-signature:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:mime:20170907':
+    - express-mailer > nodemailer > mailcomposer > mime:
+        patched: '2019-04-07T02:33:50.848Z'
+    - goo.gl > request > form-data > mime:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:ms:20170412':
+    - shrink-ray > debug > ms:
+        patched: '2019-04-07T02:33:50.848Z'
+    - socketio-jwt > jsonwebtoken > ms:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:request:20160119':
+    - goo.gl > request:
+        patched: '2019-04-07T02:33:50.848Z'
+  'npm:tunnel-agent:20170305':
+    - goo.gl > request > tunnel-agent:
+        patched: '2019-04-07T02:33:50.848Z'
