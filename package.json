@@ -36,7 +36,7 @@
     "bluebird": "^3.3.3",
     "body-parser": "^1.13.3",
     "bootstrap": "~3.3.7",
-    "bootstrap-sass": "~3.3.7",
+    "bootstrap-sass": "~3.4.0",
     "composable-middleware": "^0.3.0",
     "compression": "^1.6.2",
     "connect-mongo": "^1.2.1",
