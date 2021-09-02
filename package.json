@@ -78,7 +78,8 @@
     "textangular": "^1.5.12",
     "tinymce": "^4.6.7",
     "wb-angular-slugify": "^1.2.0",
-    "webpack-assets-manifest": "^1.0.0"
+    "webpack-assets-manifest": "^1.0.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.6.6",
@@ -154,7 +155,10 @@
   },
   "scripts": {
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update",
-    "start": "node server"
+    "start": "node server",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
-  "private": true
+  "private": true,
+  "snyk": true
 }
