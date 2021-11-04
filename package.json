@@ -76,7 +76,7 @@
     "socketio-jwt": "^4.2.0",
     "sprint-js": "~0.1.0",
     "textangular": "^1.5.12",
-    "tinymce": "^4.6.7",
+    "tinymce": "^5.10.0",
     "wb-angular-slugify": "^1.2.0",
     "webpack-assets-manifest": "^1.0.0"
   },
