@@ -63,7 +63,7 @@
     "ng-meta": "^1.0.2",
     "ng-quill": "^3.1.0",
     "offline-plugin": "^4.8.4",
-    "passport": "^0.4.0",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.4",
     "pug-html-loader": "^1.1.5",
