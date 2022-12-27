@@ -48,7 +48,7 @@
     "express-jwt": "^5.1.0",
     "express-mailer": "^0.3.1",
     "express-session": "^1.11.3",
-    "fast-json-patch": "^2.0.3",
+    "fast-json-patch": "^3.1.1",
     "font-awesome": ">=4.1.0",
     "goo.gl": "^0.1.4",
     "heroku-ssl-redirect": "0.0.4",
