@@ -45,7 +45,7 @@
     "d3": "^3.5.16",
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
-    "express-jwt": "^5.1.0",
+    "express-jwt": "^8.0.0",
     "express-mailer": "^0.3.1",
     "express-session": "^1.11.3",
     "fast-json-patch": "^2.0.3",
